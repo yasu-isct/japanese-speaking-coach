@@ -89,6 +89,7 @@ tests/                    # test sentences, format checker, review prompt, test 
 docs/design.md            # design overview
 docs/decisions.md         # decision log (why each design choice was made)
 tools/package_skill.py    # builds the upload zip
+app/jsc_live/             # local app: real-time Japanese subtitles with furigana (see app/README.md)
 ```
 
 ### How it was tested
@@ -103,7 +104,8 @@ Known limits: the "users" in tests are simulated; native-speaker review and real
 ### Roadmap
 
 1. **This repo (phase 1)** — the Skill.
-2. Phase 2 — real-time Japanese subtitles with furigana, reusing this output format.
+2. **Prototype done** — real-time Japanese subtitles with furigana from the microphone or system audio, running locally on the GPU (faster-whisper + kotoba-whisper, MeCab readings). See [`app/README.md`](app/README.md).
+3. Next — suggestions for what to say next, based on the live transcript.
 
 ---
 

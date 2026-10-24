@@ -1,0 +1,11 @@
+# jsc_live: real-time Japanese subtitles with furigana (tested on Windows 11, Python 3.11, RTX 5060 Laptop)
+faster-whisper==1.2.1        # Whisper inference on CTranslate2
+ctranslate2==4.8.3
+numpy>=1.26
+SoundCard==0.4.6             # microphone + WASAPI loopback (system audio) capture
+fugashi==1.5.2               # MeCab binding for morphological analysis
+unidic-lite==1.0.8           # dictionary for fugashi (readings)
+
+# NVIDIA GPU (CUDA 12) runtime libraries; skip these to run on CPU (much slower)
+nvidia-cublas-cu12
+nvidia-cudnn-cu12==9.*
