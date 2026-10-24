@@ -4,6 +4,7 @@
     python -m jsc_live --source mic             # subtitles for the microphone
     python -m jsc_live --source file --file a.wav --realtime
     python -m jsc_live --list-devices
+    python -m jsc_live --source mic --suggest --partner 上司   # + reply suggestions (needs .env)
 
 Threads: the audio/ASR worker produces (kind, utterance_id, segments) events;
 the tkinter window (main thread) consumes them. With --no-window the events
@@ -33,7 +34,7 @@ def build_source(args):
     return audio.WavFileSource(args.file, realtime=args.realtime)
 
 
-def worker(args, events: queue.Queue, stop: threading.Event) -> None:
+def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, holder: dict | None = None) -> None:
     from .asr import Transcriber
     from .segmenter import Segmenter
 
@@ -45,6 +46,14 @@ def worker(args, events: queue.Queue, stop: threading.Event) -> None:
         transcriber = Transcriber(args.model, device=args.device_type)
         transcriber.warm_up()
         furigana = Furigana(args.furigana)
+        manager = None
+        if suggester is not None:
+            from .live_suggest import SuggestionManager
+
+            manager = SuggestionManager(events, suggester, furigana)
+            if holder is not None:
+                holder["manager"] = manager
+            log(args, f"[suggest] model={suggester.model} partner={suggester.partner or '-'} log={manager.log.path}")
         source = build_source(args)
         segmenter = Segmenter(end_silence=args.end_silence)
         status(f"聞き取り中：{source.name}")
@@ -69,10 +78,14 @@ def worker(args, events: queue.Queue, stop: threading.Event) -> None:
                     log(args, f"[final #{event.utterance_id}] {result.audio_seconds:.1f}s audio, "
                               f"{result.seconds * 1000:.0f} ms  {furigana.to_bracket(result.text)}")
                 events.put((event.kind, event.utterance_id, furigana.annotate(result.text)))
+                if manager and event.kind == "final":
+                    manager.submit(event.utterance_id, result.text, result.seconds * 1000)
         for event in segmenter.flush():
             result = transcriber.transcribe(event.audio, final=True)
             log(args, f"[final #{event.utterance_id}] {furigana.to_bracket(result.text)}")
             events.put(("final", event.utterance_id, furigana.annotate(result.text)))
+            if manager:
+                manager.submit(event.utterance_id, result.text, result.seconds * 1000)
         log(args, "[done]")
     except Exception as exc:  # surface errors in the window, not only the console
         status(f"エラー: {exc}")
@@ -103,6 +116,9 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--no-window", action="store_true", help="print subtitles to the console only")
     p.add_argument("--font-size", type=int, default=22)
     p.add_argument("--list-devices", action="store_true")
+    p.add_argument("--suggest", action="store_true", help="show 3 reply suggestions (API settings in .env)")
+    p.add_argument("--partner", help="who you are talking to, e.g. 上司 / 老师 / 店员 / 朋友 (helps politeness)")
+    p.add_argument("--suggest-timeout", type=float, default=3.0, help="seconds before a suggestion counts as late")
     args = p.parse_args(argv)
 
     if hasattr(sys.stdout, "reconfigure"):
@@ -113,18 +129,31 @@ def main(argv: list[str] | None = None) -> None:
         print(list_devices())
         return
 
+    suggester = None
+    if args.suggest:
+        from .suggest import Suggester
+
+        suggester = Suggester(partner=args.partner)  # fails fast if .env is incomplete
+    holder: dict = {}
+
+    def suggestion_drawn(uid, payload, timed_out):
+        if holder.get("manager"):
+            holder["manager"].rendered(uid, payload, timed_out)
+
     events: queue.Queue = queue.Queue()
     stop = threading.Event()
-    thread = threading.Thread(target=worker, args=(args, events, stop), daemon=True)
+    thread = threading.Thread(target=worker, args=(args, events, stop, suggester, holder), daemon=True)
     thread.start()
 
     if args.no_window:
         try:
             while thread.is_alive() or not events.empty():
                 try:
-                    kind, _, _ = events.get(timeout=0.2)
+                    kind, uid, payload = events.get(timeout=0.2)
                 except queue.Empty:
                     continue
+                if kind == "suggest" and payload["state"] in ("done", "error"):
+                    suggestion_drawn(uid, payload, False)  # nothing to draw: render time ~0
                 if kind == "end":
                     break
         except KeyboardInterrupt:
@@ -133,7 +162,8 @@ def main(argv: list[str] | None = None) -> None:
 
     from .overlay import SubtitleWindow
 
-    window = SubtitleWindow(events, font_size=args.font_size)
+    window = SubtitleWindow(events, font_size=args.font_size, suggestion_timeout=args.suggest_timeout,
+                            on_suggestion_drawn=suggestion_drawn)
     try:
         window.run()
     finally:
