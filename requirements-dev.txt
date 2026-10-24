@@ -1,0 +1,5 @@
+# CPU-only dependencies for python -m unittest discover -s tests.
+# Keep the ASR, audio-device and CUDA runtime dependencies in app/requirements.txt.
+numpy>=1.26
+fugashi==1.5.2
+unidic-lite==1.0.8
