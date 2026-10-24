@@ -46,8 +46,18 @@ class CheckEntryTests(unittest.TestCase):
         self.assertTrue(any("3 sentences" in e for e in res.errors))
 
     def test_missing_reading(self):
-        res = cf.check_entry("#x", GOOD.replace("家(いえ)", "家"))
+        res = cf.check_entry("#x", GOOD.replace("鎌倉(かまくら)", "鎌倉", 1))
         self.assertTrue(any("without reading" in e for e in res.errors))
+
+    def test_basic_kanji_need_no_reading(self):
+        # 家 and 行 are N5–N4 kanji: the default furigana level leaves them bare.
+        bare = GOOD.replace("家(いえ)", "家").replace("行(い)って", "行って")
+        self.assertEqual(cf.check_entry("#x", bare).errors, [])
+
+    def test_basic_kanji_list_loaded(self):
+        self.assertGreater(len(cf.BASIC_KANJI), 200)
+        self.assertIn("学", cf.BASIC_KANJI)
+        self.assertNotIn("鎌", cf.BASIC_KANJI)
 
     def test_japanese_mu(self):
         bad = GOOD.replace("要点：「してた」是「していた」的口语缩约。", "要点：無")

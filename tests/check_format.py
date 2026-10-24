@@ -58,11 +58,33 @@ def to_spoken(text: str) -> str:
     return re.sub(r"[\s、。！？!?【】「」…〜]", "", RUBY.sub(r"\2", text))
 
 
-def missing_readings(japanese: str) -> list[str]:
-    """Kanji left over after removing every annotated word (heuristic)."""
+def load_basic_kanji() -> set[str]:
+    """N5–N4 kanji from skill/references/basic_kanji.md (the default furigana level skips these)."""
+    path = ROOT / "skill" / "references" / "basic_kanji.md"
+    if not path.exists():
+        return set()
+    text = path.read_text(encoding="utf-8")
+    chars: set[str] = set()
+    for level in ("N5", "N4"):
+        m = re.search(rf"^## {level}\n(.+)$", text, re.M)
+        if m:
+            chars.update(KANJI.findall(m.group(1)))
+    return chars
+
+
+BASIC_KANJI = load_basic_kanji()
+
+
+def missing_readings(japanese: str, basic: set[str] = BASIC_KANJI) -> list[str]:
+    """Non-basic kanji left over after removing every annotated word (heuristic).
+
+    Under the default furigana level, words made only of N5–N4 kanji need no
+    reading, so only kanji outside that set are reported. Special readings
+    (今日, 一人 ...) cannot be detected this way and are left to review.
+    """
     leftover = RUBY.sub("", japanese)
     leftover = re.sub(r"[〇]", "", leftover)  # 〇〇さん placeholder
-    return KANJI.findall(leftover)
+    return [k for k in KANJI.findall(leftover) if k not in basic]
 
 
 def check_entry(name: str, body: str, source: str | None = None) -> Result:
@@ -139,8 +161,10 @@ def check_entry(name: str, body: str, source: str | None = None) -> Result:
         if style == "カジュアル" and "⚠" in arrow and starred:
             err("カジュアル has ⚠ but is also ⭐")
         n = count_sentences(strip_readings(text))
-        if n > 2:
-            err(f"{style}: {n} sentences (max 2)")
+        # Mode B self-introductions may give a longer polite version (SKILL.md B).
+        limit = 5 if (mode_b and style == "丁寧") else 2
+        if n > limit:
+            err(f"{style}: {n} sentences (max {limit})")
         if missing := missing_readings(text):
             err(f"{style}: kanji without reading: {''.join(missing)}")
         if "てお願" in strip_readings(text):
