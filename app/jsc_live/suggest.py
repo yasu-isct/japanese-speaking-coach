@@ -56,6 +56,9 @@ LIVE_MODE = """
 5. 「对方刚说」是对方这一次连续说的话，可能有好几行：语音识别按停顿切开，有的行只是半句。把这几行当成一段完整的话来理解，回应这一段的主要内容（最后若有问题，优先回应那个问题），不要只针对其中某一行或半句。
    「上文」是更早的对话，只用来理解语境和判断对象；上文里的问题已经过去了，不要再回答。
 6. 回复是学生自己的话，不要照抄或重复对方刚说的句子。
+7. **接话方式看语境**（本应用中代替 A 模式「句尾加一个反问」那一条）：
+   - 对方在讲自己的经历、感想、在分享（包括一段话还没讲完、故事还在继续）时，三条回复都只用**附和、共感的陈述句**，如「それは恥ずかしいですね」「わかります、私もそういうことあります」「へえ、すごいですね」「おいしそうですね」。这时**任何一条都不要出现问句**（不以「か」「？」结尾，也不要「どうでしたか」「〜ましたか」这类追问）：对方自己会讲下去，学生只需要表示在听、有共鸣。
+   - 只有对方明确向学生提问，或话题明显告一段落、需要学生把话接过来时，才可以在句尾反问。
 """
 
 
@@ -151,9 +154,11 @@ def parse_line(line: str) -> Reply | str | None:
     filled = [c for c in rest if c and c != "⭐"]
     warn = any("⚠" in c for c in filled)
     filled = [c for c in filled if "⚠" not in c]
-    if len(filled) < 2:
+    if not filled:
         return None
-    return Reply(style=head, star=star, text=strip_ruby(filled[0]), meaning=filled[1], warn=warn)
+    # A missing Chinese meaning still leaves a usable reply; show it without one.
+    meaning = filled[1] if len(filled) > 1 else ""
+    return Reply(style=head, star=star, text=strip_ruby(filled[0]), meaning=meaning, warn=warn)
 
 
 class Suggester:

@@ -72,6 +72,11 @@ class ParseTest(unittest.TestCase):
         r = parse_line("カジュアル|うん、わかった。|嗯，知道了。|⚠ 对此对象不要用")
         self.assertEqual((r.text, r.meaning, r.warn), ("うん、わかった。", "嗯，知道了。", True))
 
+    def test_missing_meaning_keeps_the_reply(self):
+        r = parse_line("丁寧||それはいい経験ですね。|")
+        self.assertEqual((r.text, r.meaning), ("それはいい経験ですね。", ""))
+        self.assertIsNone(parse_line("丁寧|⭐||"))
+
     def test_reason_with_colon(self):
         self.assertEqual(parse_line("理由：对方用了「マジ」。"), "对方用了「マジ」。")
         self.assertEqual(parse_line("推荐理由: 对方用了です。"), "对方用了です。")

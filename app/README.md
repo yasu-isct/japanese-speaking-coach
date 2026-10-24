@@ -124,6 +124,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | `--turn-gap 0.8` | 对方停下来后再等几秒才出建议（在 0.6 秒分句停顿之外）；调小更快，调大更不容易把一段话切开 |
 | `--history 5` | 字幕区保留几句 |
 | `--font-size 16` | 字号（也可以在窗口上用滚轮调） |
+| `--save-audio` | 把每句的音频和识别结果存到 `logs/audio/`（只在本机，不提交），用来改进识别 |
 | `--device 名称` | 指定麦克风/扬声器，名称用 `--list-devices` 查 |
 | `--furigana graded/all/none` | 分级注音（默认，N5–N4 汉字不注）/ 全部注音 / 不注音 |
 | `--no-partial` | 只显示说完的句子 |

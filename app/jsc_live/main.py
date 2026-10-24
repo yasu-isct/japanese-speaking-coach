@@ -34,6 +34,34 @@ def build_source(args):
     return audio.WavFileSource(args.file, realtime=args.realtime)
 
 
+class ClipSaver:
+    """--save-audio: keep each finished sentence as a WAV plus its transcript (logs/audio/, git-ignored).
+
+    Real recordings are what the recognizer gets wrong; saving them lets settings and
+    models be compared offline on exactly the speech that failed.
+    """
+
+    def __init__(self) -> None:
+        from pathlib import Path
+
+        self.dir = Path(__file__).resolve().parents[2] / "logs" / "audio" / time.strftime("%Y%m%d-%H%M%S")
+        self.dir.mkdir(parents=True, exist_ok=True)
+
+    def save(self, uid: int, audio, text: str) -> None:
+        import wave
+
+        import numpy as np
+
+        pcm = (np.clip(audio, -1, 1) * 32767).astype(np.int16)
+        with wave.open(str(self.dir / f"{uid:04d}.wav"), "wb") as wf:
+            wf.setnchannels(1)
+            wf.setsampwidth(2)
+            wf.setframerate(16000)
+            wf.writeframes(pcm.tobytes())
+        with (self.dir / "transcripts.tsv").open("a", encoding="utf-8") as f:
+            f.write(f"{uid:04d}.wav\t{text}\n")
+
+
 def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, holder: dict | None = None) -> None:
     from .asr import Transcriber
     from .segmenter import Segmenter
@@ -55,6 +83,9 @@ def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, hol
             if holder is not None:
                 holder["manager"] = manager
             log(args, f"[suggest] model={suggester.model} partner={suggester.partner or '-'} log={manager.log.path}")
+        saver = ClipSaver() if getattr(args, "save_audio", False) else None
+        if saver:
+            log(args, f"[save-audio] {saver.dir}")
         source = build_source(args)
         segmenter = Segmenter(end_silence=args.end_silence)
         status(f"聞き取り中：{source.name}")
@@ -79,6 +110,8 @@ def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, hol
                     last_partial_at = time.perf_counter()
                 else:
                     result = transcriber.transcribe(event.audio, final=True)
+                    if saver:
+                        saver.save(event.utterance_id, event.audio, result.text)
                     log(args, f"[final #{event.utterance_id}] {result.audio_seconds:.1f}s audio, "
                               f"{result.seconds * 1000:.0f} ms  {furigana.to_bracket(result.text)}")
                 events.put((event.kind, event.utterance_id, furigana.annotate(result.text)))
@@ -126,6 +159,8 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--turn-gap", type=float, default=0.8,
                    help="extra quiet seconds after a sentence before the turn is answered (on top of --end-silence)")
     p.add_argument("--history", type=int, default=5, help="finished subtitle lines kept on screen")
+    p.add_argument("--save-audio", action="store_true",
+                   help="save each sentence as WAV + transcript under logs/audio/ (local only, for ASR comparison)")
     args = p.parse_args(argv)
 
     if hasattr(sys.stdout, "reconfigure"):
