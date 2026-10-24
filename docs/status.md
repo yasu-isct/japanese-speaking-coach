@@ -7,7 +7,7 @@
 | 1 | 20 句测试句，回复建议格式全部稳定 | ✅ 达成 | v6 整体回归：格式 20/20、⭐ 20/20、⚠ 20/20，日语硬性问题 0（`tests/sample_dialogues.md` 第 7 轮） |
 | 2 | 至少 6 个情景能完整走完一轮陪练 | ✅ 达成 | 8/8 情景走完并正常收尾；v6 下重跑的 4 个全部在 8 轮内结束（`tests/roleplay_2026-10-24.md`） |
 | 3 | 2–3 个朋友试用并收集反馈 | ⏳ 待你执行 | 需要真人。试用指南和反馈表已备好：`docs/trial_guide.md`；安装包：`python tools/package_skill.py` → `dist/japanese-speaking-coach.zip` |
-| 4 | 发布到 GitHub，README 含安装方法和效果截图 | 🟡 大部分完成 | README（英/日/中）含安装与 Anki 导出说明；本地 Git 已初始化并提交。**未做**：创建 GitHub 仓库并推送（需要你确认）、效果截图/GIF（需要在 Claude 里实际运行后截图） |
+| 4 | 发布到 GitHub，README 含安装方法和效果截图 | 🟡 只差截图 | 已发布到公开仓库 yasu-isct/japanese-speaking-coach（MIT）；README（英/日/中）含安装与 Anki 导出说明。**未做**：效果截图/GIF（需要在 Claude 里实际运行后截图） |
 
 ## 已完成的产出
 
@@ -22,7 +22,7 @@
 
 1. **朋友试用（标准 3）**：把 zip 和 `docs/trial_guide.md` 发给 2–3 个朋友，反馈存到 `tests/feedback/`。最好有一位日语母语者帮忙看日语——目前日语正确性只经过模型审查。
 2. **截图/GIF（标准 4）**：在 Claude 里装好 Skill，各截一张 A 模式回复建议、C 模式陪练、D 模式复盘的图，放到 `docs/images/`，替换 README 顶部的「coming soon」。
-3. **推送到 GitHub（标准 4）**：确认仓库名（建议 `japanese-speaking-coach`）、公开/私有、许可证（建议 MIT）后推送。
+3. **推送到 GitHub（标准 4）**：已完成——公开仓库 `yasu-isct/japanese-speaking-coach`，MIT 许可证。
 4. **用真实句子替换测试句**：CLAUDE.md 要求「20 句真实对话测试句」，现在是起草的覆盖性样本，试用时收集的真实句子可以替换进去。
 
 ## 已知的小问题（下一轮改进）

@@ -158,3 +158,9 @@ Ankiの「ファイル → 読み込む」で `cards.txt` を取り込みます�
 还能用中文说「我想说……」转成日语、在 8 个生活情景里陪练（便利店、打工面试、医院、找房子、求职面试等），练完输入「复盘」获得纠错和可导入 Anki 的生词卡。
 
 安装方法见上方 [Install](#install)；设计思路见 `docs/design.md`，每个设计决策的理由见 `docs/decisions.md`。
+
+---
+
+## License
+
+[MIT](LICENSE) © 2026 CHEN YI AN
