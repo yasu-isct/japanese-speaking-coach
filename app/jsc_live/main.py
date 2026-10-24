@@ -134,7 +134,10 @@ def main(argv: list[str] | None = None) -> None:
     if args.suggest:
         from .suggest import Suggester
 
-        suggester = Suggester(partner=args.partner)  # fails fast if .env is incomplete
+        try:
+            suggester = Suggester(partner=args.partner)
+        except RuntimeError as exc:  # no .env: keep the subtitles, skip suggestions
+            print(f"[suggest] disabled: {exc}", flush=True)
     holder: dict = {}
 
     def suggestion_drawn(uid, payload, timed_out):

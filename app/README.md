@@ -1,6 +1,98 @@
-# jsc_live — 实时日语字幕（带假名）
+# jsc_live — 实时日语字幕 + 接话建议
 
-麦克风或电脑正在播放的声音 → 实时日语识别 → 带假名注音的置顶字幕窗。全部在本机运行，不联网、不需要 API Key。
+开着它和日本人说话（或看日语视频）时，屏幕下方会出现一个小窗口：
+
+- **上半部分是字幕**：对方说的日语，难的汉字上面标假名；
+- **下半部分是「怎么接话」**：对方每说完一句，大约 2 秒内给出 3 种可以直接念出来的回复：
+  - 丁寧：礼貌版，对上司、老师、店员说；
+  - カジュアル：朋友版；
+  - かんたん：紧张时的保底版。
+  
+  标 ⭐ 的是推荐的那条；标 ⚠ 的表示「这条别对这个人说」。
+
+![运行截图](../docs/images/live-suggest.png)
+
+## 怎么用
+
+### 第一次使用前（只做一次）
+
+1. 确认装过依赖（已经装好的话跳过）：在 Anaconda Prompt 里运行
+   ```
+   conda activate jsc
+   pip install -r D:\ClaudeProject\japanese-speaking-coach\app\requirements.txt
+   ```
+2. 想要「接话建议」的话，在 `japanese-speaking-coach` 文件夹里放一个名字**正好叫 `.env`** 的文件（不是 `.env.txt`。记事本保存时要把「保存类型」选成「所有文件」），内容是三行：
+   ```
+   LLM_API_KEY=你的 DeepSeek key
+   LLM_BASE_URL=https://api.deepseek.com
+   LLM_MODEL=deepseek-flash
+   ```
+   不放这个文件也能用字幕，只是没有建议。
+
+### 每次使用
+
+**双击 `japanese-speaking-coach` 文件夹里的 `jsc-live.bat`。**
+
+默认是「给电脑正在播放的声音配字幕 + 建议」，适合看视频、网课、视频通话。
+
+第一次启动要等十几秒加载识别模型，窗口里会显示「モデル読み込み中…」，出现「聞き取り中」就可以开始了。
+
+想识别**麦克风**（面对面说话）时，在 PowerShell 里运行：
+
+```powershell
+D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest
+```
+
+知道对方是谁时，可以告诉它，⭐ 会更准：
+
+```powershell
+D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --partner 上司
+```
+
+`--partner` 后面可以写 上司 / 老师 / 店员 / 朋友 等。
+
+### 窗口操作
+
+- 拖动：移动窗口
+- 鼠标滚轮：调字号
+- 右键或 Esc：退出
+- 白字是说完的句子，灰字是正在说、还没说完的句子（说完会更正）。
+- 建议区显示「…」：正在生成。
+- 显示「タイムアウト」：3 秒内没生成出来；之后再到的建议会标「遅延」。
+
+### 没反应怎么办
+
+- **直接打 `python ...` 没反应**：那个 `python` 是 Windows 自带的占位程序，不是装好依赖的 Python。请用上面的 `jsc-live.bat`。
+- **双击后黑窗口一闪就关**：一般是出错了。脚本出错时会停住等你按键，把那段报错截图给我。
+- **字幕出来了但没有建议**：检查 `.env` 的文件名和三行内容。
+
+## 请你帮忙做的测试：真人说话 / 真实视频
+
+我目前只用电脑合成的声音测试过。下一步该改什么，要看真人说话时好不好用。
+
+**做法**：
+
+1. 双击 `jsc-live.bat`，放一段日语视频（日剧、YouTube 的日常对话都行），看 3–5 分钟。
+2. 用上面麦克风那条命令，自己对着麦克风说，或者请朋友说，3–5 分钟。
+
+**留意这几点**（记下印象最深的 2–3 个例子就够）：
+
+1. **字幕**：说完一句后多久出来？有没有一句被切成两半、或两句粘在一起？错字多不多？
+2. **建议出来得快不快**：大多在 3 秒内吗？「タイムアウト」/「遅延」多吗？
+3. **建议能不能用**：⭐ 那条你敢直接说出口吗？有没有不自然、或礼貌程度不对的？
+4. **跟不跟得上**：对方连着说好几句时，建议是不是总慢一拍、来不及看？
+5. **最想先改的一件事**是什么？
+
+**做完后**告诉我两样东西：
+
+- 上面几点的印象；
+- `japanese-speaking-coach\logs\` 里最新那个 `live-…jsonl` 文件。里面记录了每句识别出的文字、建议和耗时。因为有你说过的话，它不会被提交到 GitHub，我只在你电脑上读。
+
+---
+
+## 给开发者看的部分
+
+### 处理流程
 
 ```
 音频采集 (soundcard: 麦克风 / WASAPI 回采)
@@ -8,98 +100,45 @@
   → 识别 (faster-whisper + kotoba-whisper-v2.0，GPU float16)
   → 注音 (MeCab/fugashi + UniDic 读音，按 N5–N4 基础汉字表分级)
   → 字幕窗 (tkinter Canvas 手动排 ruby)
+  → 接话建议 (OpenAI 兼容 API，规则复用 skill/SKILL.md 的 A 模式；后台线程，不阻塞字幕)
 ```
 
-## 安装
+- 识别在本机显卡上跑，音频不出电脑。接话建议要联网，只发送文字：识别出的这句、前 3 句和 `--partner`。
+- DeepSeek 默认关闭「思考」模式（开着首字要多等约 2 秒）；用别的服务时，可以在 `.env` 加一行 `LLM_EXTRA_BODY={...}`（JSON，原样并入请求）。
+- 每句耗时分三段记录在 `logs/live-*.jsonl`：识别、API 往返、渲染。控制台也会打印 `[suggest #n] asr … | api … | render …`。
 
-```bash
-conda activate jsc
-pip install -r app/requirements.txt
-```
+### 全部参数
 
-第一次运行会自动下载识别模型（约 1.5 GB，存到 Hugging Face 缓存）。
-
-## 使用
-
-在 `app` 目录下运行：
-
-```bash
-python -m jsc_live --source loopback
-```
+直接用 Python 运行时：先 `conda activate jsc`，再在 `app` 目录下运行 `python -m jsc_live …`。`jsc-live.bat` 会把参数原样传过去。
 
 | 参数 | 说明 |
 |---|---|
-| `--source loopback` | 默认。字幕显示电脑正在播放的声音（视频、网课、通话） |
-| `--source mic` | 字幕显示麦克风的声音 |
+| `--source loopback` | 电脑正在播放的声音（不写参数时的默认） |
+| `--source mic` | 麦克风 |
 | `--source file --file a.wav --realtime` | 用 WAV 文件模拟实时输入 |
+| `--suggest` | 打开接话建议（需要 `.env`） |
+| `--partner 上司` | 对方是谁，影响 ⭐ 和 ⚠ |
+| `--suggest-timeout 3` | 几秒没到算超时 |
 | `--device 名称` | 指定麦克风/扬声器，名称用 `--list-devices` 查 |
 | `--furigana graded/all/none` | 分级注音（默认，N5–N4 汉字不注）/ 全部注音 / 不注音 |
-| `--no-partial` | 只显示说完的句子，不显示边说边出的灰色字幕 |
+| `--no-partial` | 只显示说完的句子 |
 | `--no-window` | 不开窗口，只在控制台输出 |
 | `--end-silence 0.6` | 停顿多少秒算一句话结束 |
 
-字幕窗：拖动移动位置，滚轮调字号，右键或 Esc 退出。白字是说完的句子，灰字是正在说的句子。
-
-## 接话建议（第二阶段第一刀）
-
-字幕下方显示 3 条可以直接念的回复（丁寧 / カジュアル / かんたん，⭐ = 推荐），规则来自 `skill/SKILL.md` 的 A 模式。需要一个 OpenAI 兼容的 API（例如 DeepSeek），在项目根目录建 `.env`：
-
-```
-LLM_API_KEY=你的key
-LLM_BASE_URL=https://api.deepseek.com
-LLM_MODEL=模型名
-```
-
-注意：Windows 记事本保存时可能自动加 `.txt`，文件名必须正好是 `.env`。DeepSeek 默认会关闭「思考」模式（开着首字要多等约 2 秒）；用其它服务时可以加一行 `LLM_EXTRA_BODY={...}`（JSON，原样并入请求）。
-
-```bash
-python -m jsc_live --source mic --suggest --partner 上司
-```
-
-- `--partner`：对方是谁（上司 / 老师 / 店员 / 朋友 …），影响 ⭐ 和 ⚠；不写时按对方的说法判断。
-- `--suggest-timeout 3`：几秒没到算超时。超时显示「タイムアウト」，之后到达的建议仍会显示并标「遅延」。
-- 发送给 API 的只有文字：识别出的这句 + 前 3 句 + 对象标记。不发音频。
-- 每句的耗时写在 `logs/live-*.jsonl`（不提交 Git），控制台也会打印一行 `[suggest #n] asr … | api … | render …`。
-
-## 真人测试（请你来做）
-
-目的：看「对真人说话 / 真实视频」时字幕和建议是否能用。结果决定下一刀做什么，在这之前不加新功能。
-
-**启动**（在 `app` 目录，`conda activate jsc` 之后）：
-
-```bash
-python -m jsc_live --source mic --suggest
-```
-
-```bash
-python -m jsc_live --source loopback --suggest
-```
-
-第一条：你自己对着麦克风说（或请朋友说）。第二条：放一段日语视频（日剧、YouTube 的日常对话、网课都可以）。各跑 3–5 分钟即可。
-
-**看什么**（记下印象最深的 2–3 个例子就够，不用全记）：
-
-1. **字幕**：说完一句后多久出来？有没有一句被切成两半、或两句粘在一起？错字多不多？
-2. **建议出现的时间**：大多在 3 秒内吗？「タイムアウト」/「遅延」出现得多吗？
-3. **建议能不能念**：⭐ 那条你敢直接说出口吗？有没有明显不自然或礼貌程度不对的？
-4. **跟不跟得上**：对方连续说好几句时，建议是不是总是落后、来不及看？
-5. **最想先改的一件事**是什么？
-
-结束后把 `logs/` 里最新的 `live-*.jsonl` 的路径告诉我（里面有你说过的话，所以不提交 Git，我只在本地读），再加上面 5 条的印象。
-
-## 实测（RTX 5060 Laptop 8 GB）
+### 实测（RTX 5060 Laptop 8 GB，合成语音）
 
 | 测试 | 结果 |
 |---|---|
 | 一句话说完到字幕出现 | 约 0.6 秒停顿判定 + 0.22–0.29 秒识别 |
-| 20.8 秒、5 句的对话 | 5 句分句正确；识别错误 1 处（十時 → 届き，TTS 合成音） |
-| 系统音频回采 | 与文件输入结果一致 |
-| 接话建议（deepseek-flash，10 句 TTS） | 识别中位数 258 ms；API 往返中位数 1620 ms（首字 793 ms）；渲染 79 ms；字幕→建议显示中位数 1.69 s，最大 1.84 s（`tests/live_suggest/`） |
+| 20.8 秒、5 句的对话 | 5 句分句正确；识别错误 1 处（十時 → 届き） |
+| 系统声音回采 | 与文件输入结果一致 |
+| 接话建议（deepseek-flash，10 句） | 字幕出现 → 建议显示：中位数 1.69 s，最大 1.84 s；其中 API 往返中位数 1.62 s（首字 0.79 s），渲染 79 ms（`tests/live_suggest/`） |
 
-单元测试：`python -m unittest discover -s tests`（分句、注音对齐、分级规则，不需要显卡）。
+单元测试：在 `japanese-speaking-coach` 目录下运行 `python -m unittest discover -s tests`，不需要显卡和网络。
 
-## 已知限制
+### 已知限制
 
-- 能量 VAD 遇到背景音乐、多人同时说话时分句会不准。
-- 识别模型偶尔会把读音相近的词认错；注音跟随识别结果，认错的词注音也会是错词的读音。
-- 只在 Windows 上测试过（回采依赖 WASAPI）。
+- 有背景音乐、多人同时说话时，分句会不准。
+- 识别偶尔会把读音相近的词认错；注音跟着识别结果走，认错的词，注音也是错词的读音。
+- ⭐ 偶尔不按规则选；上文有时会串到下一句的建议里（详见 `docs/decisions.md` D-012）。
+- 只在 Windows 上测试过（系统声音回采依赖 WASAPI）。
