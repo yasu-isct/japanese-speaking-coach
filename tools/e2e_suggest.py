@@ -35,6 +35,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "app"))
 
+from jsc_live.asr import DEFAULT_MODEL  # noqa: E402
 from jsc_live.audio import SAMPLE_RATE, WavFileSource  # noqa: E402
 from jsc_live.main import worker  # noqa: E402
 from jsc_live.overlay import SubtitleWindow  # noqa: E402
@@ -169,7 +170,7 @@ def main() -> None:
     build_wav(synthesize(SCENARIOS[cli.scenario], cli.voice), cli.gap, cli.inner_gap, demo)
     suggester = Suggester()
     args = argparse.Namespace(source="file", file=str(demo), realtime=True, device=None,
-                              model="kotoba-tech/kotoba-whisper-v2.0-faster", device_type="auto",
+                              model=DEFAULT_MODEL, device_type="auto",
                               furigana="graded", end_silence=0.6, no_partial=False, turn_gap=0.8)
     events: queue.Queue = queue.Queue()
     stop = threading.Event()

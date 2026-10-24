@@ -37,7 +37,7 @@
 
 默认是「给电脑正在播放的声音配字幕 + 建议」，适合看视频、网课、视频通话。
 
-第一次启动要等十几秒加载识别模型，窗口里会显示「モデル読み込み中…」，出现「聞き取り中」就可以开始了。
+第一次启动要等十几秒加载识别模型（没下载过的话会先自动下载约 1.5 GB），窗口里会显示「モデル読み込み中…」，出现「聞き取り中」就可以开始了。
 
 想识别**麦克风**（面对面说话）时，在 PowerShell 里运行：
 
@@ -99,7 +99,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 ```
 音频采集 (soundcard: 麦克风 / WASAPI 回采)
   → 分句 (能量 VAD，自适应噪声底)
-  → 识别 (faster-whisper + kotoba-whisper-v2.0，GPU float16)
+  → 识别 (faster-whisper + Whisper large-v3-turbo，GPU float16；可用 --model 换回 kotoba-whisper-v2.0)
   → 注音 (MeCab/fugashi + UniDic 读音，按 N5–N4 基础汉字表分级)
   → 字幕窗 (tkinter Canvas 手动排 ruby)
   → 接话建议 (OpenAI 兼容 API，规则复用 skill/SKILL.md 的 A 模式；后台线程，不阻塞字幕)

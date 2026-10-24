@@ -1,7 +1,11 @@
-"""Japanese speech recognition with faster-whisper (CTranslate2) and kotoba-whisper.
+"""Japanese speech recognition with faster-whisper (CTranslate2).
 
-kotoba-whisper is Whisper large-v3 distilled on the ReazonSpeech Japanese corpus:
-similar accuracy to large-v3 on Japanese at a fraction of the decoding cost.
+Default model: Whisper large-v3-turbo (CTranslate2 build). On real video audio
+recorded with --save-audio it made fewer errors than kotoba-whisper-v2.0
+(CER 13.9% vs 16.5%) at about the same speed, and was equal on clean
+synthesized speech (3.6% vs 3.7%); see docs/decisions.md D-015.
+kotoba-whisper (large-v3 distilled on Japanese ReazonSpeech) remains available
+with --model kotoba-tech/kotoba-whisper-v2.0-faster.
 """
 
 from __future__ import annotations
@@ -13,7 +17,7 @@ import numpy as np
 
 from .cuda_setup import register_cuda_dlls
 
-DEFAULT_MODEL = "kotoba-tech/kotoba-whisper-v2.0-faster"
+DEFAULT_MODEL = "large-v3-turbo"  # faster-whisper alias for mobiuslabsgmbh/faster-whisper-large-v3-turbo
 
 
 @dataclass
