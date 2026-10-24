@@ -50,6 +50,8 @@ LLM_BASE_URL=https://api.deepseek.com
 LLM_MODEL=模型名
 ```
 
+注意：Windows 记事本保存时可能自动加 `.txt`，文件名必须正好是 `.env`。DeepSeek 默认会关闭「思考」模式（开着首字要多等约 2 秒）；用其它服务时可以加一行 `LLM_EXTRA_BODY={...}`（JSON，原样并入请求）。
+
 ```bash
 python -m jsc_live --source mic --suggest --partner 上司
 ```
@@ -92,6 +94,7 @@ python -m jsc_live --source loopback --suggest
 | 一句话说完到字幕出现 | 约 0.6 秒停顿判定 + 0.22–0.29 秒识别 |
 | 20.8 秒、5 句的对话 | 5 句分句正确；识别错误 1 处（十時 → 届き，TTS 合成音） |
 | 系统音频回采 | 与文件输入结果一致 |
+| 接话建议（deepseek-flash，10 句 TTS） | 识别中位数 258 ms；API 往返中位数 1620 ms（首字 793 ms）；渲染 79 ms；字幕→建议显示中位数 1.69 s，最大 1.84 s（`tests/live_suggest/`） |
 
 单元测试：`python -m unittest discover -s tests`（分句、注音对齐、分级规则，不需要显卡）。
 

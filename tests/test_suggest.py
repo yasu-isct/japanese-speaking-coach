@@ -66,6 +66,10 @@ class ParseTest(unittest.TestCase):
         self.assertIsNone(parse_line("## 回复建议"))
         self.assertIsNone(parse_line(""))
 
+    def test_reason_with_colon(self):
+        self.assertEqual(parse_line("理由：对方用了「マジ」。"), "对方用了「マジ」。")
+        self.assertEqual(parse_line("推荐理由: 对方用了です。"), "对方用了です。")
+
     def test_ruby_removed(self):
         self.assertEqual(strip_ruby("資料(しりょう)をまとめます"), "資料をまとめます")
 
@@ -84,6 +88,27 @@ class SuggestTest(unittest.TestCase):
         self.assertIn("上司", result.reason)
         self.assertIsNotNone(result.first_token_ms)
         self.assertIn("（对方是上司）", s.sent[1]["content"])
+
+    def test_out_of_order_lines_are_sorted(self):
+        lines = GOOD.splitlines()
+        result = fake_suggester(["\n".join([lines[1], lines[2], lines[0], lines[3]])]).suggest("x", [])
+        self.assertTrue(result.complete)
+        self.assertEqual([r.style for r in result.replies], ["丁寧", "カジュアル", "かんたん"])
+
+    def test_deepseek_thinking_off_by_default(self):
+        s = Suggester(env={**ENV, "LLM_BASE_URL": "https://api.deepseek.com"})
+        self.assertEqual(s.extra_body, {"thinking": {"type": "disabled"}})
+        self.assertEqual(Suggester(env=ENV).extra_body, {})
+
+    def test_missing_star_cell_and_star_from_reason(self):
+        raw = ("丁寧||明日は予定があるので、また今度お願いします。|我明天有安排。|\n"
+               "カジュアル|明日はちょっと無理かも。|明天可能不太行。|\n"
+               "かんたん|ごめん、明日は無理。|抱歉，明天不行。|\n"
+               "理由|对方用普通体邀约，用カジュアル最自然。")
+        result = fake_suggester([raw]).suggest("ご飯いかない", [])
+        self.assertTrue(result.complete)
+        self.assertEqual(result.replies[1].text, "明日はちょっと無理かも。")
+        self.assertTrue(result.replies[1].star)
 
     def test_malformed_reply_is_an_error(self):
         result = fake_suggester(["丁寧||はい。|好的。|\n"]).suggest("x", [])

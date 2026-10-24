@@ -6,3 +6,4 @@ dist/
 .venv/
 logs/
 tests/asr_eval/audio/
+.env.*

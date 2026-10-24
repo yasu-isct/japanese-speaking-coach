@@ -15,6 +15,9 @@ optional partner label (上司 / 店员 / 朋友 ...). Never audio, never user d
 The API is any OpenAI-compatible chat completions endpoint (DeepSeek, etc.),
 configured in .env at the project root:
     LLM_API_KEY=...   LLM_BASE_URL=https://api.deepseek.com   LLM_MODEL=...
+    LLM_EXTRA_BODY={"thinking": {"type": "disabled"}}   (optional, JSON merged into the request)
+Thinking/reasoning modes are turned off by default for DeepSeek: on deepseek-flash
+they delay the first visible token by ~2 s and can use up max_tokens before any reply.
 Only the standard library is used (urllib), so no SDK dependency is needed.
 """
 
@@ -48,9 +51,10 @@ LIVE_MODE = """
 理由|<推荐理由，一句话>
 ```
 2. 日语回复**不加注音括号**（应用会自己加注音）。
-3. 本应用**没有记忆和过往对话**：通用规则 4 的第 1、2 步不适用，学生的个人事实一律用【】占位。
+3. 本应用**没有记忆和过往对话**：通用规则 4 的第 1、2 步不适用。学生的个人事实（名字、来日本多久、学校、公司、专业、爱好、经历等）**每一处都必须写成【】**，如「日本に来て【半年】です」；不写【】就等于编造。
 4. 输入来自语音识别，可能有错字；按最可能的意思回复，不要指出错字。
-5. 「上文」是这句话之前的几句，只用来理解语境和判断对象；只回复「对方刚说」这一句。
+5. 「上文」是这句话之前的几句，只用来理解语境和判断对象。三条回复必须回应「对方刚说」的这一句；上文里的问题已经过去了，不要再回答。
+6. 回复是学生自己的话，不要照抄或重复对方刚说的句子。
 """
 
 
@@ -74,7 +78,7 @@ class Suggestion:
 
     @property
     def complete(self) -> bool:
-        return [r.style for r in self.replies] == list(STYLES) and sum(r.star for r in self.replies) == 1
+        return sorted(r.style for r in self.replies) == sorted(STYLES) and sum(r.star for r in self.replies) == 1
 
 
 def load_env(path: Path = ROOT / ".env") -> dict[str, str]:
@@ -86,7 +90,7 @@ def load_env(path: Path = ROOT / ".env") -> dict[str, str]:
             if line and not line.startswith("#") and "=" in line:
                 key, value = line.split("=", 1)
                 values[key.strip()] = value.strip().strip('"').strip("'")
-    for key in ("LLM_API_KEY", "LLM_BASE_URL", "LLM_MODEL"):
+    for key in ("LLM_API_KEY", "LLM_BASE_URL", "LLM_MODEL", "LLM_EXTRA_BODY"):
         if os.environ.get(key):
             values[key] = os.environ[key]
     return values
@@ -126,10 +130,14 @@ def parse_line(line: str) -> Reply | str | None:
     line = line.strip().strip("`").strip()
     if not line:
         return None
+    reason = re.match(r"^(?:推荐)?理由\s*[|｜:：]\s*(.+)$", line)
+    if reason:
+        return reason.group(1).strip()
     cells = [c.strip() for c in line.split("|")]
     head = cells[0].lstrip("0123456789. ").replace("⭐", "")
-    if head == "理由" and len(cells) >= 2:
-        return "|".join(cells[1:]).strip()
+    if head in STYLES and len(cells) >= 3 and cells[1] not in ("", "⭐"):
+        # The model sometimes drops the empty star cell: style|reply|meaning|...
+        cells = [cells[0], ""] + cells[1:]
     if head in STYLES and len(cells) >= 4:
         return Reply(
             style=head,
@@ -150,6 +158,12 @@ class Suggester:
         self.api_key = env["LLM_API_KEY"]
         self.url = env["LLM_BASE_URL"].rstrip("/") + "/chat/completions"
         self.model = env["LLM_MODEL"]
+        if env.get("LLM_EXTRA_BODY"):
+            self.extra_body = json.loads(env["LLM_EXTRA_BODY"])
+        elif "deepseek.com" in self.url:
+            self.extra_body = {"thinking": {"type": "disabled"}}
+        else:
+            self.extra_body = {}
         self.partner = partner
         self.timeout = timeout
         self.system_prompt = build_system_prompt()
@@ -161,6 +175,7 @@ class Suggester:
             "stream": True,
             "temperature": 0.3,
             "max_tokens": 400,
+            **self.extra_body,
         }).encode("utf-8")
         request = urllib.request.Request(self.url, data=body, method="POST", headers={
             "Content-Type": "application/json",
@@ -181,6 +196,15 @@ class Suggester:
                     piece = (choices[0].get("delta") or {}).get("content")
                     if piece:
                         yield piece
+
+    def warm_up(self) -> None:
+        """Send the system prompt once so the provider's prefix cache is hot for the first sentence."""
+        try:
+            for _ in self._stream([{"role": "system", "content": self.system_prompt},
+                                   {"role": "user", "content": "对方刚说：はい。"}]):
+                break
+        except Exception:
+            pass  # a failed warm-up only costs latency on the first sentence
 
     def suggest(self, sentence: str, context: list[str],
                 on_update: Callable[[Suggestion], None] | None = None) -> Suggestion:
@@ -209,6 +233,7 @@ class Suggester:
         except Exception as exc:  # network errors, timeouts, bad JSON
             result.error = f"{type(exc).__name__}: {exc}"
         result.api_ms = (time.perf_counter() - start) * 1000
+        infer_star(result)
         if result.error is None and not result.complete:
             result.error = "incomplete or malformed reply"
         return result
@@ -217,12 +242,22 @@ class Suggester:
     def _accept(result: Suggestion, line: str) -> bool:
         parsed = parse_line(line)
         if isinstance(parsed, Reply) and parsed.style not in [r.style for r in result.replies]:
+            # The model sometimes writes the lines out of order; always show 丁寧 / カジュアル / かんたん.
             result.replies.append(parsed)
+            result.replies.sort(key=lambda r: STYLES.index(r.style))
             return True
         if isinstance(parsed, str):
             result.reason = parsed
             return True
         return False
+
+
+def infer_star(result: Suggestion) -> None:
+    """If no reply is starred but the reason names exactly one style, star that one."""
+    if result.replies and not any(r.star for r in result.replies):
+        named = [r for r in result.replies if r.style in result.reason]
+        if len(named) == 1:
+            named[0].star = True
 
 
 def strip_ruby(text: str) -> str:

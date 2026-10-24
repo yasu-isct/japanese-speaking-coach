@@ -51,6 +51,7 @@ def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, hol
             from .live_suggest import SuggestionManager
 
             manager = SuggestionManager(events, suggester, furigana)
+            threading.Thread(target=suggester.warm_up, daemon=True).start()
             if holder is not None:
                 holder["manager"] = manager
             log(args, f"[suggest] model={suggester.model} partner={suggester.partner or '-'} log={manager.log.path}")
