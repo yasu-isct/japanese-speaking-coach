@@ -45,7 +45,9 @@ class Segmenter:
         max_utterance: float = 12.0,     # force a final result after this long (s)
         partial_interval: float = 0.8,   # how often to emit partial audio (s)
         min_utterance: float = 0.3,      # drop blips shorter than this (s)
+        cut_search: float = 4.0,         # at max_utterance, look back this far for a quiet cut point (s)
     ) -> None:
+        self.cut_search_blocks = int(round(cut_search / BLOCK_SECONDS))
         self.start_margin_db = start_margin_db
         self.min_speech_db = min_speech_db
         self.start_frames = start_frames
@@ -102,19 +104,41 @@ class Segmenter:
         self.quiet_run = 0 if loud else self.quiet_run + 1
         total = sum(len(b) for b in self.buffer)
 
-        if self.quiet_run >= self.end_blocks or total >= self.max_samples:
+        if self.quiet_run >= self.end_blocks:
+            # Trim most of the trailing silence; keep a little for natural endings.
             audio = self._buffered()
-            if self.quiet_run >= self.end_blocks:
-                # Trim most of the trailing silence; keep a little for natural endings.
-                keep = len(audio) - (self.quiet_run - 5) * len(block)
-                audio = audio[:max(keep, 0)]
+            keep = len(audio) - (self.quiet_run - 5) * len(block)
+            audio = audio[:max(keep, 0)]
             if len(audio) >= self.min_samples:
                 events.append(SegmentEvent("final", audio, self.utterance_id))
             self.reset()
+        elif total >= self.max_samples:
+            events.append(self._cut_long_utterance())
         elif self.since_partial >= self.partial_samples:
             self.since_partial = 0
             events.append(SegmentEvent("partial", self._buffered(), self.utterance_id))
         return events
+
+    def _cut_long_utterance(self) -> SegmentEvent:
+        """Someone has talked for max_utterance without a 0.6 s pause: split at the quietest moment.
+
+        Cutting exactly at the limit used to split words in half, and a clip that starts
+        with half a word can make Whisper invent a stock phrase for the whole clip
+        (「ご視聴ありがとうございました」 for 12 s of real speech). So look back over the
+        last ``cut_search`` seconds for the quietest 150 ms (a breath between phrases),
+        finish the utterance there and carry the rest over into the next one.
+        """
+        levels = np.array([rms_db(b) for b in self.buffer])
+        smooth = np.convolve(levels, np.ones(5) / 5, mode="same")
+        last = len(self.buffer) - 3                      # keep a few blocks for the next utterance
+        first = max(1, len(self.buffer) - self.cut_search_blocks)
+        cut = first + int(np.argmin(smooth[first:last])) if last > first else len(self.buffer)
+        event = SegmentEvent("final", np.concatenate(self.buffer[:cut]), self.utterance_id)
+        self.buffer = self.buffer[cut:]
+        self.utterance_id += 1                           # still active: the speaker goes on
+        self.since_partial = sum(len(b) for b in self.buffer)
+        self.quiet_run = 0
+        return event
 
     def flush(self) -> list[SegmentEvent]:
         """Close an open utterance (end of stream)."""

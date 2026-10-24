@@ -2,6 +2,7 @@
 
     python tools/compare_asr.py logs/audio/20261024-233227
     python tools/compare_asr.py logs/audio/* --models kotoba-tech/kotoba-whisper-v2.0-faster large-v3-turbo
+    python tools/compare_asr.py logs/audio/20261024-234557 --resegment   # re-cut with the current Segmenter
 
 Each folder holds NNNN.wav + transcripts.tsv (what the app showed) and, optionally,
 references.tsv (what was really said, written by a person). With references the
@@ -28,7 +29,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "app"))
 
-from jsc_live.audio import WavFileSource  # noqa: E402
+import numpy as np  # noqa: E402
+
+from jsc_live.asr import LEAD_SILENCE  # noqa: E402
+from jsc_live.audio import BLOCK_SIZE, SAMPLE_RATE, WavFileSource  # noqa: E402
+from jsc_live.segmenter import Segmenter  # noqa: E402
 from jsc_live.cuda_setup import register_cuda_dlls  # noqa: E402
 
 PUNCT = set("。、，,．.？?！!…「」『』（）()・〜~　 ")
@@ -60,9 +65,29 @@ def read_tsv(path: Path) -> dict[str, str]:
     return rows
 
 
+def resegment(clips: list[dict]) -> list[dict]:
+    """Join the clips of each folder and let the current Segmenter cut them again."""
+    out = []
+    for folder in dict.fromkeys(c["folder"] for c in clips):
+        stream = np.concatenate([np.zeros(SAMPLE_RATE // 2, np.float32)]
+                                + [c["audio"] for c in clips if c["folder"] == folder]
+                                + [np.zeros(SAMPLE_RATE, np.float32)])
+        seg = Segmenter()
+        events = []
+        for i in range(0, len(stream), BLOCK_SIZE):
+            events += [e for e in seg.feed(stream[i:i + BLOCK_SIZE]) if e.kind == "final"]
+        events += seg.flush()
+        out += [{"folder": folder, "name": f"re{e.utterance_id:03d} ({len(e.audio) / SAMPLE_RATE:.1f}s)",
+                 "audio": e.audio, "ref": None, "shown": ""} for e in events]
+    return out
+
+
 def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("folders", nargs="+", type=Path)
+    p.add_argument("--resegment", action="store_true",
+                   help="join each folder's clips back into one stream and cut it again with the current Segmenter "
+                        "(to test segmentation changes; references are not used then)")
     p.add_argument("--models", nargs="+",
                    default=["kotoba-tech/kotoba-whisper-v2.0-faster", "large-v3-turbo"])
     args = p.parse_args()
@@ -77,6 +102,8 @@ def main() -> None:
         for wav in sorted(folder.glob("*.wav")):
             clips.append({"folder": folder.name, "name": wav.name, "audio": WavFileSource(str(wav), tail_silence=0).load(),
                           "ref": refs.get(wav.name), "shown": shown.get(wav.name, "")})
+    if args.resegment:
+        clips = resegment(clips)
     print(f"{len(clips)} clips, {sum(c['ref'] is not None for c in clips)} with references\n")
 
     summary = []
@@ -91,7 +118,8 @@ def main() -> None:
             for c in clips:
                 prompt = previous if setting == "prompt" else None
                 start = time.perf_counter()
-                segments, _ = model.transcribe(c["audio"], language="ja", beam_size=5, vad_filter=False,
+                audio = np.concatenate([np.zeros(int(LEAD_SILENCE * 16000), np.float32), c["audio"]])
+                segments, _ = model.transcribe(audio, language="ja", beam_size=5, vad_filter=False,
                                                condition_on_previous_text=False, without_timestamps=True,
                                                initial_prompt=prompt)
                 text = "".join(s.text for s in segments).strip()

@@ -102,6 +102,10 @@ class SubtitleWindow:
 
     # --- window dragging -------------------------------------------------
     def _start_drag(self, event) -> None:
+        hit = self.canvas.find_overlapping(event.x, event.y, event.x, event.y)
+        if any("close" in self.canvas.gettags(item) for item in hit):
+            self.close()
+            return
         self._drag_origin = (event.x_root - self.root.winfo_x(), event.y_root - self.root.winfo_y())
 
     def _drag(self, event) -> None:
@@ -265,6 +269,9 @@ class SubtitleWindow:
             y += 6
         if self.suggestion:
             y = self._draw_suggestion(y, pad, max_w)
+        # Close button: the window has no title bar, so give it a visible way out.
+        c.create_rectangle(self.width - 30, 0, self.width, 26, fill=SEPARATOR, outline="", tags="close")
+        c.create_text(self.width - 15, 13, text="✕", font=self.meaning_font, fill=FG_FINAL, tags="close")
         height = max(y + pad - 6, self.ruby_h + self.base_h + 2 * pad)
         c.configure(height=height)
         self.root.geometry(f"{self.width}x{int(height)}+{self.left}+{self.bottom - int(height)}")

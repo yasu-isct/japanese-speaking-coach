@@ -18,6 +18,10 @@ import numpy as np
 from .cuda_setup import register_cuda_dlls
 
 DEFAULT_MODEL = "large-v3-turbo"  # faster-whisper alias for mobiuslabsgmbh/faster-whisper-large-v3-turbo
+# Silence put in front of every clip. Without it, a clip that starts right on a word made
+# large-v3-turbo replace 12 s of real speech with 「ご視聴ありがとうございました」; 0.3 s fixed
+# all 20 clips of a real recording, while 0.5-1.0 s made it drop the start of another clip.
+LEAD_SILENCE = 0.3
 
 
 @dataclass
@@ -50,8 +54,9 @@ class Transcriber:
 
     def transcribe(self, audio: np.ndarray, final: bool = True) -> AsrResult:
         start = time.perf_counter()
+        padded = np.concatenate([np.zeros(int(LEAD_SILENCE * 16000), np.float32), audio])
         segments, _ = self.model.transcribe(
-            audio,
+            padded,
             language="ja",
             task="transcribe",
             beam_size=5 if final else 1,       # partial results favour speed
