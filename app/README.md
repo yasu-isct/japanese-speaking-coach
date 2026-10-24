@@ -3,12 +3,14 @@
 开着它和日本人说话（或看日语视频）时，屏幕下方会出现一个小窗口：
 
 - **上半部分是字幕**：对方说的日语，难的汉字上面标假名；
-- **下半部分是「怎么接话」**：对方每说完一句，大约 2 秒内给出 3 种可以直接念出来的回复：
+- **下半部分是「怎么接话」**：对方说完一段话、停下来之后，大约 2.5 秒内给出 3 种可以直接念出来的回复：
   - 丁寧：礼貌版，对上司、老师、店员说；
   - カジュアル：朋友版；
   - かんたん：紧张时的保底版。
   
   标 ⭐ 的是推荐的那条；标 ⚠ 的表示「这条别对这个人说」。
+
+  对方连续说好几句时，建议会等他停下来，再针对这一整段给出；中途不会每句都刷新。字幕区保留最近 5 句，可以回看。
 
 ![运行截图](../docs/images/live-suggest.png)
 
@@ -56,7 +58,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 - 拖动：移动窗口
 - 鼠标滚轮：调字号
 - 右键或 Esc：退出
-- 白字是说完的句子，灰字是正在说、还没说完的句子（说完会更正）。
+- 白字是说完的句子（保留最近 5 句），灰字是正在说、还没说完的句子（说完会更正）。
 - 建议区显示「…」：正在生成。
 - 显示「タイムアウト」：3 秒内没生成出来；之后再到的建议会标「遅延」。
 
@@ -119,6 +121,9 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | `--suggest` | 打开接话建议（需要 `.env`） |
 | `--partner 上司` | 对方是谁，影响 ⭐ 和 ⚠ |
 | `--suggest-timeout 3` | 几秒没到算超时 |
+| `--turn-gap 0.8` | 对方停下来后再等几秒才出建议（在 0.6 秒分句停顿之外）；调小更快，调大更不容易把一段话切开 |
+| `--history 5` | 字幕区保留几句 |
+| `--font-size 16` | 字号（也可以在窗口上用滚轮调） |
 | `--device 名称` | 指定麦克风/扬声器，名称用 `--list-devices` 查 |
 | `--furigana graded/all/none` | 分级注音（默认，N5–N4 汉字不注）/ 全部注音 / 不注音 |
 | `--no-partial` | 只显示说完的句子 |
@@ -132,7 +137,8 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | 一句话说完到字幕出现 | 约 0.6 秒停顿判定 + 0.22–0.29 秒识别 |
 | 20.8 秒、5 句的对话 | 5 句分句正确；识别错误 1 处（十時 → 届き） |
 | 系统声音回采 | 与文件输入结果一致 |
-| 接话建议（deepseek-flash，10 句） | 字幕出现 → 建议显示：中位数 1.69 s，最大 1.84 s；其中 API 往返中位数 1.62 s（首字 0.79 s），渲染 79 ms（`tests/live_suggest/`） |
+| 接话建议，一问一答 10 句（deepseek-flash） | 最后一句字幕 → 建议显示：中位数 2.43 s，最大 2.63 s；其中等待停顿 0.82 s、API 往返 1.55 s（首字 0.85 s）、渲染 72 ms（`tests/live_suggest/e2e-dialogue-*`） |
+| 接话建议，独白 3 段 11 个片段 | 只请求 3 次，每次回应整段；2.49 / 2.65 / 3.09 s（`tests/live_suggest/e2e-monologue-*`） |
 
 单元测试：在 `japanese-speaking-coach` 目录下运行 `python -m unittest discover -s tests`，不需要显卡和网络。
 

@@ -40,8 +40,8 @@ def enable_dpi_awareness() -> None:
 
 
 class SubtitleWindow:
-    def __init__(self, events: "queue.Queue[tuple[str, int, list[Segment]]]", font_size: int = 22,
-                 width: int = 1100, history: int = 2, alpha: float = 0.88,
+    def __init__(self, events: "queue.Queue[tuple[str, int, list[Segment]]]", font_size: int = 16,
+                 width: int = 900, history: int = 5, alpha: float = 0.88,
                  suggestion_timeout: float = 3.0, on_suggestion_drawn=None) -> None:
         self.events = events
         self.suggestion_timeout = suggestion_timeout

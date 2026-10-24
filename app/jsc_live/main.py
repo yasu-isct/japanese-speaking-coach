@@ -50,7 +50,7 @@ def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, hol
         if suggester is not None:
             from .live_suggest import SuggestionManager
 
-            manager = SuggestionManager(events, suggester, furigana)
+            manager = SuggestionManager(events, suggester, furigana, turn_gap=args.turn_gap)
             threading.Thread(target=suggester.warm_up, daemon=True).start()
             if holder is not None:
                 holder["manager"] = manager
@@ -65,7 +65,10 @@ def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, hol
         for block in source.blocks():
             if stop.is_set():
                 break
-            for event in segmenter.feed(block):
+            events_out = segmenter.feed(block)
+            if manager:
+                manager.set_speaking(segmenter.active)
+            for event in events_out:
                 if event.kind == "partial":
                     if args.no_partial:
                         continue
@@ -115,11 +118,14 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--end-silence", type=float, default=0.6, help="pause (s) that ends a sentence")
     p.add_argument("--no-partial", action="store_true", help="only show finished sentences")
     p.add_argument("--no-window", action="store_true", help="print subtitles to the console only")
-    p.add_argument("--font-size", type=int, default=22)
+    p.add_argument("--font-size", type=int, default=16)
     p.add_argument("--list-devices", action="store_true")
     p.add_argument("--suggest", action="store_true", help="show 3 reply suggestions (API settings in .env)")
     p.add_argument("--partner", help="who you are talking to, e.g. 上司 / 老师 / 店员 / 朋友 (helps politeness)")
     p.add_argument("--suggest-timeout", type=float, default=3.0, help="seconds before a suggestion counts as late")
+    p.add_argument("--turn-gap", type=float, default=0.8,
+                   help="extra quiet seconds after a sentence before the turn is answered (on top of --end-silence)")
+    p.add_argument("--history", type=int, default=5, help="finished subtitle lines kept on screen")
     args = p.parse_args(argv)
 
     if hasattr(sys.stdout, "reconfigure"):
@@ -166,7 +172,8 @@ def main(argv: list[str] | None = None) -> None:
 
     from .overlay import SubtitleWindow
 
-    window = SubtitleWindow(events, font_size=args.font_size, suggestion_timeout=args.suggest_timeout,
+    window = SubtitleWindow(events, font_size=args.font_size, history=args.history,
+                            suggestion_timeout=args.suggest_timeout,
                             on_suggestion_drawn=suggestion_drawn)
     try:
         window.run()

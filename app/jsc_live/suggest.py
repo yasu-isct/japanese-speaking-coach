@@ -53,7 +53,8 @@ LIVE_MODE = """
 2. 日语回复**不加注音括号**（应用会自己加注音）。
 3. 本应用**没有记忆和过往对话**：通用规则 4 的第 1、2 步不适用。学生的个人事实（名字、来日本多久、学校、公司、专业、爱好、经历等）**每一处都必须写成【】**，如「日本に来て【半年】です」；不写【】就等于编造。
 4. 输入来自语音识别，可能有错字；按最可能的意思回复，不要指出错字。
-5. 「上文」是这句话之前的几句，只用来理解语境和判断对象。三条回复必须回应「对方刚说」的这一句；上文里的问题已经过去了，不要再回答。
+5. 「对方刚说」是对方这一次连续说的话，可能有好几行：语音识别按停顿切开，有的行只是半句。把这几行当成一段完整的话来理解，回应这一段的主要内容（最后若有问题，优先回应那个问题），不要只针对其中某一行或半句。
+   「上文」是更早的对话，只用来理解语境和判断对象；上文里的问题已经过去了，不要再回答。
 6. 回复是学生自己的话，不要照抄或重复对方刚说的句子。
 """
 
@@ -72,6 +73,7 @@ class Suggestion:
     replies: list[Reply] = field(default_factory=list)
     reason: str = ""
     raw: str = ""
+    star_inferred: bool = False           # the model gave no ⭐; it was filled in by infer_star
     first_token_ms: float | None = None   # request sent -> first content token
     api_ms: float | None = None           # request sent -> last token (API round trip)
     error: str | None = None
@@ -114,14 +116,19 @@ def build_system_prompt() -> str:
     return "\n\n".join(parts)
 
 
-def build_user_message(sentence: str, context: list[str], partner: str | None) -> str:
+def build_user_message(sentence: str | list[str], context: list[str], partner: str | None) -> str:
+    """``sentence`` is one sentence, or all sentences of the other person's latest turn."""
     lines = []
     if partner:
         lines.append(f"（对方是{partner}）")
     if context:
         lines.append("上文：")
         lines += [f"- {c}" for c in context]
-    lines.append(f"对方刚说：{sentence}")
+    if isinstance(sentence, list) and len(sentence) > 1:
+        lines.append("对方刚说（连续的一段话）：")
+        lines += [f"- {s}" for s in sentence]
+    else:
+        lines.append(f"对方刚说：{sentence[0] if isinstance(sentence, list) else sentence}")
     return "\n".join(lines)
 
 
@@ -135,18 +142,18 @@ def parse_line(line: str) -> Reply | str | None:
         return reason.group(1).strip()
     cells = [c.strip() for c in line.split("|")]
     head = cells[0].lstrip("0123456789. ").replace("⭐", "")
-    if head in STYLES and len(cells) >= 3 and cells[1] not in ("", "⭐"):
-        # The model sometimes drops the empty star cell: style|reply|meaning|...
-        cells = [cells[0], ""] + cells[1:]
-    if head in STYLES and len(cells) >= 4:
-        return Reply(
-            style=head,
-            star="⭐" in cells[1] or "⭐" in cells[0],
-            text=strip_ruby(cells[2]),
-            meaning=cells[3],
-            warn=len(cells) > 4 and "⚠" in cells[4],
-        )
-    return None
+    if head not in STYLES:
+        return None
+    # Expected: style|⭐ or empty|reply|meaning|⚠ or empty. The model sometimes drops
+    # the empty star cell or adds extra empty cells, so read the non-empty cells in order.
+    rest = cells[1:]
+    star = "⭐" in cells[0] or (bool(rest) and rest[0] == "⭐")
+    filled = [c for c in rest if c and c != "⭐"]
+    warn = any("⚠" in c for c in filled)
+    filled = [c for c in filled if "⚠" not in c]
+    if len(filled) < 2:
+        return None
+    return Reply(style=head, star=star, text=strip_ruby(filled[0]), meaning=filled[1], warn=warn)
 
 
 class Suggester:
@@ -206,7 +213,7 @@ class Suggester:
         except Exception:
             pass  # a failed warm-up only costs latency on the first sentence
 
-    def suggest(self, sentence: str, context: list[str],
+    def suggest(self, sentence: str | list[str], context: list[str],
                 on_update: Callable[[Suggestion], None] | None = None) -> Suggestion:
         """Stream a suggestion; ``on_update`` is called each time a line completes."""
         result = Suggestion()
@@ -253,11 +260,19 @@ class Suggester:
 
 
 def infer_star(result: Suggestion) -> None:
-    """If no reply is starred but the reason names exactly one style, star that one."""
+    """Make sure exactly one reply is starred when the model forgot the ⭐.
+
+    First choice: the one style the reason names. Otherwise 丁寧, which is the
+    Skill's own fallback (⭐ rule 5: when unsure, polite is the safe choice).
+    """
     if result.replies and not any(r.star for r in result.replies):
+        result.star_inferred = True
         named = [r for r in result.replies if r.style in result.reason]
+        polite = [r for r in result.replies if r.style == "丁寧"]
         if len(named) == 1:
             named[0].star = True
+        elif polite:
+            polite[0].star = True
 
 
 def strip_ruby(text: str) -> str:

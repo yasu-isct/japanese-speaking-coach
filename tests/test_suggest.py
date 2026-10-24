@@ -66,6 +66,12 @@ class ParseTest(unittest.TestCase):
         self.assertIsNone(parse_line("## 回复建议"))
         self.assertIsNone(parse_line(""))
 
+    def test_extra_empty_cell(self):
+        r = parse_line("丁寧||それは大変でしたね。||那真是够呛呢。|")
+        self.assertEqual((r.text, r.meaning, r.star, r.warn), ("それは大変でしたね。", "那真是够呛呢。", False, False))
+        r = parse_line("カジュアル|うん、わかった。|嗯，知道了。|⚠ 对此对象不要用")
+        self.assertEqual((r.text, r.meaning, r.warn), ("うん、わかった。", "嗯，知道了。", True))
+
     def test_reason_with_colon(self):
         self.assertEqual(parse_line("理由：对方用了「マジ」。"), "对方用了「マジ」。")
         self.assertEqual(parse_line("推荐理由: 对方用了です。"), "对方用了です。")
@@ -122,6 +128,70 @@ class SuggestTest(unittest.TestCase):
     def test_missing_settings(self):
         with self.assertRaises(RuntimeError):
             Suggester(env={"LLM_API_KEY": "x"})
+
+
+class TurnTest(unittest.TestCase):
+    def test_turn_waits_for_pause_and_groups_sentences(self):
+        from jsc_live.live_suggest import TurnBuffer
+
+        tb = TurnBuffer(turn_gap=0.8)
+        tb.add(1, "今回のテーマは恥ずかしい思い出です", 250, now=10.0)
+        self.assertFalse(tb.ready(10.5))           # pause too short so far
+        tb.set_speaking(True, now=0)                      # the speaker goes on
+        self.assertFalse(tb.ready(11.0))
+        tb.add(2, "そうですね私", 250, now=12.0)  # half a sentence...
+        tb.set_speaking(True, now=0)
+        tb.add(3, "恥ずかしかった思い出がたくさんあるんです", 250, now=14.0)
+        tb.set_speaking(False, now=14.0)
+        self.assertFalse(tb.ready(14.5))
+        self.assertTrue(tb.ready(14.8))
+        turn, overflow = tb.take()
+        self.assertEqual([s["uid"] for s in turn], [1, 2, 3])
+        self.assertEqual(overflow, [])
+        self.assertFalse(tb.ready(20.0))           # nothing left
+
+    def test_sentence_still_in_recognition_is_not_cut_off(self):
+        from jsc_live.live_suggest import TurnBuffer
+
+        tb = TurnBuffer(turn_gap=0.8)
+        tb.add(1, "今回のテーマは恥ずかしかった思い出です", 250, now=7.9)
+        tb.set_speaking(True, now=8.0)
+        tb.set_speaking(False, now=10.0)   # next sentence closed by the segmenter...
+        self.assertFalse(tb.ready(10.1))   # ...but still being transcribed: not the end of the turn
+        tb.add(2, "そうですね、私", 220, now=10.3)
+        tb.set_speaking(True, now=10.4)
+        self.assertFalse(tb.ready(12.0))
+        tb.set_speaking(False, now=15.0)
+        tb.add(3, "恥ずかしかった思い出がたくさんあるんです", 250, now=15.25)
+        self.assertFalse(tb.ready(15.9))
+        self.assertTrue(tb.ready(16.05))
+        self.assertEqual([s["uid"] for s in tb.take()[0]], [1, 2, 3])
+
+    def test_long_turn_keeps_the_last_sentences(self):
+        from jsc_live.live_suggest import TurnBuffer
+
+        tb = TurnBuffer(turn_gap=0.8, max_sentences=3)
+        for i in range(5):
+            tb.add(i, f"s{i}", 0, now=float(i))
+        turn, overflow = tb.take()
+        self.assertEqual([s["text"] for s in turn], ["s2", "s3", "s4"])
+        self.assertEqual([s["text"] for s in overflow], ["s0", "s1"])
+
+    def test_user_message_for_a_turn(self):
+        msg = build_user_message(["今日はその中で", "海外旅行の時の思い出を紹介したいと思います"], ["恥ずかしい思い出"], None)
+        self.assertIn("对方刚说（连续的一段话）：\n- 今日はその中で\n- 海外旅行の時の思い出を紹介したいと思います", msg)
+        self.assertTrue(msg.startswith("上文：\n- 恥ずかしい思い出"))
+        self.assertEqual(build_user_message(["大丈夫？"], [], None), "对方刚说：大丈夫？")
+
+    def test_missing_star_defaults_to_polite(self):
+        raw = ("丁寧||そうなんですね。|这样啊。|\n"
+               "カジュアル||そうなんだ。|这样啊。|\n"
+               "かんたん||はい。|嗯。|\n"
+               "理由|顺着话头回应即可。")
+        result = fake_suggester([raw]).suggest("それで", [])
+        self.assertTrue(result.complete)
+        self.assertTrue(result.star_inferred)
+        self.assertTrue(result.replies[0].star)
 
 
 class EnvTest(unittest.TestCase):
