@@ -180,13 +180,13 @@ class Suggester:
         self.timeout = timeout
         self.system_prompt = build_system_prompt()
 
-    def _stream(self, messages: list[dict]) -> Iterator[str]:
+    def _stream(self, messages: list[dict], max_tokens: int = 400) -> Iterator[str]:
         body = json.dumps({
             "model": self.model,
             "messages": messages,
             "stream": True,
             "temperature": 0.3,
-            "max_tokens": 400,
+            "max_tokens": max_tokens,
             **self.extra_body,
         }).encode("utf-8")
         request = urllib.request.Request(self.url, data=body, method="POST", headers={
@@ -208,6 +208,11 @@ class Suggester:
                     piece = (choices[0].get("delta") or {}).get("content")
                     if piece:
                         yield piece
+
+    def ask(self, system: str, user: str, max_tokens: int = 120) -> str:
+        """One short non-suggestion question (used by the word lookup); returns the whole answer."""
+        return "".join(self._stream([{"role": "system", "content": system},
+                                     {"role": "user", "content": user}], max_tokens=max_tokens))
 
     def warm_up(self) -> None:
         """Send the system prompt once so the provider's prefix cache is hot for the first sentence."""

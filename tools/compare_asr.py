@@ -1,6 +1,6 @@
-"""Compare recognition models / settings on real recordings saved with --save-audio.
+"""Compare recognition models / settings on real recordings (logs/sessions/*/clips, or old logs/audio/*).
 
-    python tools/compare_asr.py logs/audio/20261024-233227
+    python tools/compare_asr.py logs/sessions/20261025-101500/clips
     python tools/compare_asr.py logs/audio/* --models kotoba-tech/kotoba-whisper-v2.0-faster large-v3-turbo
     python tools/compare_asr.py logs/audio/20261024-234557 --resegment   # re-cut with the current Segmenter
 

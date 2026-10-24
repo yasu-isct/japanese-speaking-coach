@@ -5,7 +5,11 @@ each segment is measured with the base font, its reading is centred above it
 in a smaller font, and lines wrap at the window width.
 
 The window shows the last few finished sentences plus the current partial one
-(greyed). Drag to move, mouse wheel to resize the text, Esc / right-click to quit.
+(greyed). Drag to move, mouse wheel to resize the text (Ctrl + wheel: opacity).
+
+A toolbar row at the top: 「● 录音中」 while the run is archived; opacity − / +;
+历史 (show/hide the history window); three display modes — 收起 (toolbar only),
+字幕 (subtitles only), 完整 (subtitles + suggestions) — and ✕ to quit.
 
 With reply suggestions on, a second area under the subtitles shows "…" while
 the API is working, the three replies (⭐ = recommended) as they stream in,
@@ -27,6 +31,11 @@ FG_RUBY = "#ffd479"
 FG_MEANING = "#8fa3b8"
 FG_WARN = "#ff8a65"
 SEPARATOR = "#2c333b"
+BUTTON = "#262c33"
+BUTTON_ACTIVE = "#3d5a78"
+FG_REC = "#ff5c5c"
+TOOLBAR_H = 26
+MODES = ("collapsed", "subtitles", "full")
 
 
 def enable_dpi_awareness() -> None:
@@ -42,8 +51,14 @@ def enable_dpi_awareness() -> None:
 class SubtitleWindow:
     def __init__(self, events: "queue.Queue[tuple[str, int, list[Segment]]]", font_size: int = 16,
                  width: int = 900, history: int = 5, alpha: float = 0.88,
-                 suggestion_timeout: float = 3.0, on_suggestion_drawn=None) -> None:
+                 suggestion_timeout: float = 3.0, on_suggestion_drawn=None, history_window=None,
+                 mode: str = "full") -> None:
         self.events = events
+        self.alpha = alpha
+        self.mode = mode
+        self.recording = False
+        self.history_factory = history_window   # callable(root, family) -> HistoryWindow, or None
+        self.history_window = None
         self.suggestion_timeout = suggestion_timeout
         self.on_suggestion_drawn = on_suggestion_drawn  # callback(uid, payload, timed_out)
         self.suggestion: dict | None = None  # {"uid", "payload", "timed_out", "reported"}
@@ -73,12 +88,36 @@ class SubtitleWindow:
         self.canvas.bind("<ButtonPress-1>", self._start_drag)
         self.canvas.bind("<B1-Motion>", self._drag)
         self.canvas.bind("<MouseWheel>", lambda e: self.set_font_size(self.font_size + (1 if e.delta > 0 else -1)))
+        self.canvas.bind("<Control-MouseWheel>", lambda e: self.set_alpha(self.alpha + (0.1 if e.delta > 0 else -0.1)))
         self.canvas.bind("<Button-3>", lambda e: self.close())
         self.root.bind("<Escape>", lambda e: self.close())
         self.closed = False
         self.status = "準備中…（モデル読み込み）"
+        if self.history_factory:
+            self.history_window = self.history_factory(self.root, self.family)
         self.redraw()
         self.root.after(50, self._poll)
+
+    def set_alpha(self, alpha: float) -> None:
+        self.alpha = round(max(0.3, min(alpha, 1.0)), 2)
+        self.root.attributes("-alpha", self.alpha)
+
+    def set_mode(self, mode: str) -> None:
+        self.mode = mode
+        self.redraw()
+
+    def _press(self, name: str) -> None:
+        if name == "close":
+            self.close()
+        elif name in MODES:
+            self.set_mode(name)
+        elif name == "alpha-":
+            self.set_alpha(self.alpha - 0.1)
+        elif name == "alpha+":
+            self.set_alpha(self.alpha + 0.1)
+        elif name == "history" and self.history_window:
+            self.history_window.toggle()
+            self.redraw()
 
     def _pick_family(self) -> str:
         families = set(tkfont.families(self.root))
@@ -97,14 +136,16 @@ class SubtitleWindow:
         self.sugg_font = tkfont.Font(family=self.family, size=small)
         self.sugg_ruby_font = tkfont.Font(family=self.family, size=max(7, small // 2))
         self.meaning_font = tkfont.Font(family=self.family, size=max(9, round(self.font_size * 0.55)))
+        self.toolbar_font = tkfont.Font(family=self.family, size=9)
         if hasattr(self, "closed"):
             self.redraw()
 
     # --- window dragging -------------------------------------------------
     def _start_drag(self, event) -> None:
         hit = self.canvas.find_overlapping(event.x, event.y, event.x, event.y)
-        if any("close" in self.canvas.gettags(item) for item in hit):
-            self.close()
+        buttons = [t[4:] for item in hit for t in self.canvas.gettags(item) if t.startswith("btn:")]
+        if buttons:
+            self._press(buttons[0])
             return
         self._drag_origin = (event.x_root - self.root.winfo_x(), event.y_root - self.root.winfo_y())
 
@@ -131,7 +172,11 @@ class SubtitleWindow:
                     if segments:
                         self.lines.append((uid, segments))
                         self.lines = self.lines[-self.history:]
+                        if self.history_window:
+                            self.history_window.add("".join(s.text for s in segments))
                     self.status = ""
+                elif kind == "session":
+                    self.recording = True
                 elif kind == "suggest":
                     self._on_suggest(uid, segments)
         except queue.Empty:
@@ -244,12 +289,36 @@ class SubtitleWindow:
             merged_rows.append(merged)
         return merged_rows
 
+    def _draw_toolbar(self) -> None:
+        c = self.canvas
+        if self.recording:
+            c.create_text(10, TOOLBAR_H / 2, text="● 录音中", font=self.toolbar_font, fill=FG_REC, anchor="w")
+        buttons = [("alpha-", "透明 −", False), ("alpha+", "透明 +", False),
+                   ("history", "历史", bool(self.history_window and self.history_window.visible)),
+                   ("collapsed", "收起", self.mode == "collapsed"), ("subtitles", "字幕", self.mode == "subtitles"),
+                   ("full", "完整", self.mode == "full"), ("close", "✕", False)]
+        if not self.history_window:
+            buttons = [b for b in buttons if b[0] != "history"]
+        x = self.width
+        for name, label, active in reversed(buttons):
+            w = self.toolbar_font.measure(label) + 16
+            x -= w
+            c.create_rectangle(x, 0, x + w - 2, TOOLBAR_H - 2, fill=BUTTON_ACTIVE if active else BUTTON,
+                               outline="", tags=f"btn:{name}")
+            c.create_text(x + (w - 2) / 2, TOOLBAR_H / 2 - 1, text=label, font=self.toolbar_font,
+                          fill=FG_FINAL, tags=f"btn:{name}")
+
     def redraw(self) -> None:
         c = self.canvas
         c.delete("all")
         pad = 16
         max_w = self.width - 2 * pad
-        y = pad
+        self._draw_toolbar()
+        if self.mode == "collapsed":
+            c.configure(height=TOOLBAR_H)
+            self.root.geometry(f"{self.width}x{TOOLBAR_H}+{self.left}+{self.bottom - TOOLBAR_H}")
+            return
+        y = TOOLBAR_H + 6
         blocks = [(segs, FG_FINAL) for _, segs in self.lines]
         if self.partial:
             blocks.append((self.partial[1], FG_PARTIAL))
@@ -267,12 +336,9 @@ class SubtitleWindow:
                     x += w
                 y += self.ruby_h + self.base_h + 4
             y += 6
-        if self.suggestion:
+        if self.suggestion and self.mode == "full":
             y = self._draw_suggestion(y, pad, max_w)
-        # Close button: the window has no title bar, so give it a visible way out.
-        c.create_rectangle(self.width - 30, 0, self.width, 26, fill=SEPARATOR, outline="", tags="close")
-        c.create_text(self.width - 15, 13, text="✕", font=self.meaning_font, fill=FG_FINAL, tags="close")
-        height = max(y + pad - 6, self.ruby_h + self.base_h + 2 * pad)
+        height = max(y + pad - 6, TOOLBAR_H + self.ruby_h + self.base_h + pad)
         c.configure(height=height)
         self.root.geometry(f"{self.width}x{int(height)}+{self.left}+{self.bottom - int(height)}")
 

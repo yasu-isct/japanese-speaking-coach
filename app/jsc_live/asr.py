@@ -1,7 +1,7 @@
 """Japanese speech recognition with faster-whisper (CTranslate2).
 
 Default model: Whisper large-v3-turbo (CTranslate2 build). On real video audio
-recorded with --save-audio it made fewer errors than kotoba-whisper-v2.0
+recorded from a real video it made fewer errors than kotoba-whisper-v2.0
 (CER 13.9% vs 16.5%) at about the same speed, and was equal on clean
 synthesized speech (3.6% vs 3.7%); see docs/decisions.md D-015.
 kotoba-whisper (large-v3 distilled on Japanese ReazonSpeech) remains available

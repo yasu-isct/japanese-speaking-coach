@@ -34,34 +34,6 @@ def build_source(args):
     return audio.WavFileSource(args.file, realtime=args.realtime)
 
 
-class ClipSaver:
-    """--save-audio: keep each finished sentence as a WAV plus its transcript (logs/audio/, git-ignored).
-
-    Real recordings are what the recognizer gets wrong; saving them lets settings and
-    models be compared offline on exactly the speech that failed.
-    """
-
-    def __init__(self) -> None:
-        from pathlib import Path
-
-        self.dir = Path(__file__).resolve().parents[2] / "logs" / "audio" / time.strftime("%Y%m%d-%H%M%S")
-        self.dir.mkdir(parents=True, exist_ok=True)
-
-    def save(self, uid: int, audio, text: str) -> None:
-        import wave
-
-        import numpy as np
-
-        pcm = (np.clip(audio, -1, 1) * 32767).astype(np.int16)
-        with wave.open(str(self.dir / f"{uid:04d}.wav"), "wb") as wf:
-            wf.setnchannels(1)
-            wf.setsampwidth(2)
-            wf.setframerate(16000)
-            wf.writeframes(pcm.tobytes())
-        with (self.dir / "transcripts.tsv").open("a", encoding="utf-8") as f:
-            f.write(f"{uid:04d}.wav\t{text}\n")
-
-
 def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, holder: dict | None = None) -> None:
     from .asr import Transcriber
     from .segmenter import Segmenter
@@ -69,24 +41,31 @@ def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, hol
     def status(text: str) -> None:
         events.put(("status", 0, [Segment(text)]))
 
+    session = None
     try:
         status("モデル読み込み中…")
         transcriber = Transcriber(args.model, device=args.device_type)
         transcriber.warm_up()
         furigana = Furigana(args.furigana)
+        source = build_source(args)
+        if not getattr(args, "no_record", False):
+            from .session import Session
+
+            session = Session(source.name, transcriber.model_name, getattr(args, "partner", None))
+            events.put(("session", 0, {"dir": str(session.dir)}))
+            if holder is not None:
+                holder["session"] = session
+            log(args, f"[record] {session.dir}")
         manager = None
         if suggester is not None:
-            from .live_suggest import SuggestionManager
+            from .live_suggest import SuggestionManager, TimingLog
 
-            manager = SuggestionManager(events, suggester, furigana, turn_gap=args.turn_gap)
+            log_file = TimingLog(session.suggestions_path) if session else None
+            manager = SuggestionManager(events, suggester, furigana, turn_gap=args.turn_gap, log=log_file)
             threading.Thread(target=suggester.warm_up, daemon=True).start()
             if holder is not None:
                 holder["manager"] = manager
             log(args, f"[suggest] model={suggester.model} partner={suggester.partner or '-'} log={manager.log.path}")
-        saver = ClipSaver() if getattr(args, "save_audio", False) else None
-        if saver:
-            log(args, f"[save-audio] {saver.dir}")
-        source = build_source(args)
         segmenter = Segmenter(end_silence=args.end_silence)
         status(f"聞き取り中：{source.name}")
         log(args, f"[ready] model={transcriber.model_name} device={transcriber.device}/{transcriber.compute_type} "
@@ -96,6 +75,8 @@ def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, hol
         for block in source.blocks():
             if stop.is_set():
                 break
+            if session:
+                session.write_audio(block)
             events_out = segmenter.feed(block)
             if manager:
                 manager.set_speaking(segmenter.active)
@@ -110,8 +91,8 @@ def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, hol
                     last_partial_at = time.perf_counter()
                 else:
                     result = transcriber.transcribe(event.audio, final=True)
-                    if saver:
-                        saver.save(event.utterance_id, event.audio, result.text)
+                    if session:
+                        session.add_sentence(event.utterance_id, event.audio, result.text)
                     log(args, f"[final #{event.utterance_id}] {result.audio_seconds:.1f}s audio, "
                               f"{result.seconds * 1000:.0f} ms  {furigana.to_bracket(result.text)}")
                 events.put((event.kind, event.utterance_id, furigana.annotate(result.text)))
@@ -119,6 +100,8 @@ def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, hol
                     manager.submit(event.utterance_id, result.text, result.seconds * 1000)
         for event in segmenter.flush():
             result = transcriber.transcribe(event.audio, final=True)
+            if session:
+                session.add_sentence(event.utterance_id, event.audio, result.text)
             log(args, f"[final #{event.utterance_id}] {furigana.to_bracket(result.text)}")
             events.put(("final", event.utterance_id, furigana.annotate(result.text)))
             if manager:
@@ -128,6 +111,8 @@ def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, hol
         status(f"エラー: {exc}")
         raise
     finally:
+        if session:
+            session.close()
         events.put(("end", 0, []))
 
 
@@ -159,8 +144,9 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--turn-gap", type=float, default=0.8,
                    help="extra quiet seconds after a sentence before the turn is answered (on top of --end-silence)")
     p.add_argument("--history", type=int, default=5, help="finished subtitle lines kept on screen")
-    p.add_argument("--save-audio", action="store_true",
-                   help="save each sentence as WAV + transcript under logs/audio/ (local only, for ASR comparison)")
+    p.add_argument("--no-history", action="store_true", help="do not open the history window")
+    p.add_argument("--no-record", action="store_true",
+                   help="do not archive this run (by default audio + transcript go to logs/sessions/, local only)")
     args = p.parse_args(argv)
 
     if hasattr(sys.stdout, "reconfigure"):
@@ -205,15 +191,34 @@ def main(argv: list[str] | None = None) -> None:
             stop.set()
         return
 
+    from .history import HistoryWindow, Lookup
     from .overlay import SubtitleWindow
+
+    # The word lookup asks the same API as the suggestions; it works even without --suggest.
+    lookup_client = suggester
+    if lookup_client is None:
+        try:
+            from .suggest import Suggester
+
+            lookup_client = Suggester()
+        except RuntimeError:
+            lookup_client = None
+    lookup = Lookup(lookup_client)
+    history_furigana = Furigana("all")
+
+    def make_history(root, family):
+        return HistoryWindow(root, history_furigana, lookup, family)
 
     window = SubtitleWindow(events, font_size=args.font_size, history=args.history,
                             suggestion_timeout=args.suggest_timeout,
-                            on_suggestion_drawn=suggestion_drawn)
+                            on_suggestion_drawn=suggestion_drawn,
+                            history_window=None if args.no_history else make_history,
+                            mode="full" if suggester else "subtitles")
     try:
         window.run()
     finally:
         stop.set()
+        thread.join(timeout=5)  # let the worker close the session archive (meta.json, index.tsv)
 
 
 if __name__ == "__main__":
