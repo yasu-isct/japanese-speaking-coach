@@ -288,7 +288,7 @@
 
 ## D-015 识别模型改为 Whisper large-v3-turbo（第三次真人测试，2026-10-24）
 
-**背景**：作者反馈真实视频里识别仍有错误。第三次测试开了 `--save-audio`，存下 2 句真实音频（各 12 秒，`logs/audio/20261024-233227/`，不提交）。正确文本由我根据上下文和前两次测试的识别结果推定（`references.tsv`），**待作者核对**。作者电脑里的 Buzz 有 `large-v3-turbo.pt`，但那是 PyTorch 格式；转换需要装 PyTorch（约 2.5 GB），比直接下载同一模型的 CTranslate2 版本（1.5 GB，作者已同意下载）还大，所以选了后者。
+**背景**：作者反馈真实视频里识别仍有错误。第三次测试开了 `--save-audio`，存下 2 句真实音频（各 12 秒，`logs/audio/20261024-233227/`，不提交）。正确文本由我根据上下文和前两次测试的识别结果推定（`references.tsv`），**作者已核对无误**。作者电脑里的 Buzz 有 `large-v3-turbo.pt`，但那是 PyTorch 格式；转换需要装 PyTorch（约 2.5 GB），比直接下载同一模型的 CTranslate2 版本（1.5 GB，作者已同意下载）还大，所以选了后者。
 
 **对比**（`tools/compare_asr.py`、`tools/eval_asr.py`）：
 
