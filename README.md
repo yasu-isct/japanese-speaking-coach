@@ -96,7 +96,7 @@ app/jsc_live/             # local app: real-time Japanese subtitles with furigan
 
 - **20 test sentences** (shop clerks, workplace, friends, edge cases) with an expected ⭐ for each; scored by `tests/check_format.py` plus a blind review of the Japanese by a stronger model (`tests/review_prompt.md`).
 - **Role-play**: each scene was run with two independent agents — the coach (this skill) and a simulated N3 student with planted mistakes — to check that tips fire on real mistakes only and that scenes finish.
-- Unit tests for the scripts: `python -m unittest discover -s tests`.
+- CPU unit tests: install `requirements-dev.txt`, then run `python -m unittest discover -s tests`. See [development and packaging instructions](docs/development.md).
 - Every rule change and its reason is recorded in `docs/decisions.md`.
 
 Known limits: the "users" in tests are simulated; native-speaker review and real learner trials are still in progress.
