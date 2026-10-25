@@ -25,7 +25,7 @@ class SessionTest(unittest.TestCase):
             s.add_sentence(1, np.zeros(16000, np.float32), "お疲れ様です。")
             s.write_audio(np.zeros(16000, np.float32))
             s.add_sentence(2, np.zeros(8000, np.float32), "今日はもう上がりですか。")
-            s.add_sentence(3, np.zeros(4000, np.float32), "你念的时候", language="zh")
+            s.add_sentence(3, np.zeros(4000, np.float32), "这是一句中文", language="zh")
             s.add_sentence(4, np.zeros(4000, np.float32), "", dropped="noise phrase")
             s.close()
             s.close()                                  # closing twice is harmless
@@ -36,9 +36,9 @@ class SessionTest(unittest.TestCase):
                              ["0001.wav", "0002.wav", "0003.wav", "0004.wav", "transcripts.tsv"])
             self.assertEqual((s.dir / "clips" / "transcripts.tsv").read_text(encoding="utf-8"),
                              "0001.wav\tお疲れ様です。\tja\t\n0002.wav\t今日はもう上がりですか。\tja\t\n"
-                             "0003.wav\t你念的时候\tzh\t\n0004.wav\t\tja\tnoise phrase\n")
+                             "0003.wav\t这是一句中文\tzh\t\n0004.wav\t\tja\tnoise phrase\n")
             self.assertEqual((s.dir / "transcript.txt").read_text(encoding="utf-8").splitlines(),
-                             ["[00:02] お疲れ様です。", "[00:03] 今日はもう上がりですか。", "[00:03] [中] 你念的时候"])
+                             ["[00:02] お疲れ様です。", "[00:03] 今日はもう上がりですか。", "[00:03] [中] 这是一句中文"])
             meta = json.loads((s.dir / "meta.json").read_text(encoding="utf-8"))
             self.assertEqual((meta["sentences"], meta["partner"]), (3, "上司"))   # the dropped one is not counted
             index = (root / "index.tsv").read_text(encoding="utf-8").splitlines()
