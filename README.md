@@ -6,8 +6,10 @@ A Claude Skill that helps Chinese-speaking learners (JLPT N4–N2) living in Jap
 
 [English](#english) ・ [日本語](#日本語) ・ [中文简介](#中文简介)
 
-> 📷 Screenshots / demo GIF: *coming soon* — see `docs/` for sample outputs in the meantime.
-> スクリーンショット・デモGIFは準備中です。
+![Live subtitles with furigana and three reply suggestions](docs/images/live-subtitle-suggest.png)
+
+> Phase 2 (`app/jsc_live`): live Japanese subtitles with furigana and reply suggestions on the GPU. Screens are from TTS audio, no personal data — see [`docs/showcase-ja.md`](docs/showcase-ja.md) (日本語の一枚説明) and [`docs/images/`](docs/images/README.md), including a 26 s [demo video](docs/images/live-demo.webm).
+> 画面はすべて TTS 音声による再生・個人情報なし。
 
 ---
 
@@ -104,8 +106,8 @@ Known limits: the "users" in tests are simulated; native-speaker review and real
 ### Roadmap
 
 1. **This repo (phase 1)** — the Skill.
-2. **Prototype done** — real-time Japanese subtitles with furigana from the microphone or system audio, running locally on the GPU (faster-whisper + kotoba-whisper, MeCab readings). See [`app/README.md`](app/README.md).
-3. Next — suggestions for what to say next, based on the live transcript.
+2. **Phase 2, working** — real-time Japanese subtitles with furigana (faster-whisper large-v3-turbo on the GPU, MeCab readings), reply suggestions after each turn (DeepSeek, rules read from the Skill), a history window with word lookup, and an optional session recording. Last subtitle → suggestions p50 2.46 s on 10 TTS sentences. See [`app/README.md`](app/README.md) and [`docs/status.md`](docs/status.md).
+3. Next — fewer missing ⭐ picks, replies grounded in the learner's profile and past sessions, a third-party trial.
 
 ---
 

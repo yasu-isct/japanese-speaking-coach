@@ -12,7 +12,7 @@ real-time speed through the full app path:
 Outputs (in tests/live_suggest/):
 - e2e-<timestamp>.jsonl  per-sentence log: recognized text, replies, asr / api / render ms
 - e2e-<timestamp>.md     the same as a table plus latency percentiles
-- docs/images/live-suggest.png  screenshot of the window once suggestion number --shot-at is drawn
+- logs/e2e-suggest.png  screenshot of the window once suggestion number --shot-at is drawn (local only)
 """
 
 from __future__ import annotations
@@ -162,7 +162,7 @@ def main() -> None:
     p.add_argument("--gap", type=float, default=3.5, help="pause between turns (s)")
     p.add_argument("--inner-gap", type=float, default=0.75, help="pause between pieces of one turn (s)")
     p.add_argument("--shot-at", type=int, default=2, help="screenshot when this many suggestions have been drawn")
-    p.add_argument("--screenshot", type=Path, default=ROOT / "docs" / "images" / "live-suggest.png")
+    p.add_argument("--screenshot", type=Path, default=ROOT / "logs" / "e2e-suggest.png")
     cli = p.parse_args()
     sys.stdout.reconfigure(encoding="utf-8")
 

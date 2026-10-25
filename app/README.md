@@ -16,7 +16,7 @@
 
 想留下这次的录音和字幕复习时，用「录音版」启动，会**存档**（录音 + 字幕 + 建议）。
 
-![运行截图](../docs/images/live-window.png)
+![运行截图](../docs/images/live-subtitle-suggest.png)
 
 ## 怎么用
 

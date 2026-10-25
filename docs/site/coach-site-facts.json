@@ -1,0 +1,82 @@
+{
+  "_note": "Hand-off for the coach entry in the site's src/content/works.ts (same field names). Media files are docs/images/*.png at app commit 3ba4bea, captured 2026-10-25 from TTS audio (no personal data); copy them to public/media/coach/ unchanged. Numbers: tests/live_suggest/showcase-20261025-1825.json.",
+  "status": {
+    "ja": "開発中（第2段階：字幕＋返答候補が動作）",
+    "zh": "开发中（第二阶段：字幕＋接话建议已能运行）",
+    "en": "In development (phase 2: subtitles + reply suggestions working)"
+  },
+  "tagline": {
+    "ja": "会話の最中に「聞き取る・返す・覚える」を支える日本語コーチ——GPU のリアルタイム字幕と、Skill の規則で作る返答候補",
+    "zh": "在对话中支撑\"听懂、接上、记住\"的日语教练——GPU 实时字幕＋按 Skill 规则生成的接话建议",
+    "en": "A Japanese conversation coach for the moment you are mid-conversation — GPU real-time subtitles plus reply suggestions built from the Skill's rules"
+  },
+  "number": {
+    "value": "2.46 s · 0.26 s · 78 tests",
+    "label": {
+      "ja": "最後の字幕から返答候補まで p50 2.46 秒（p95 2.90）、音声認識 p50 0.26 秒（RTX 5060、TTS 10 文）、単体テスト 78 件",
+      "zh": "最后一句字幕到接话建议 p50 2.46 秒（p95 2.90），语音识别 p50 0.26 秒（RTX 5060，TTS 10 句），单元测试 78 个",
+      "en": "last subtitle to reply suggestions p50 2.46 s (p95 2.90), speech recognition p50 0.26 s (RTX 5060, 10 TTS sentences), 78 unit tests"
+    },
+    "href": "https://github.com/yasu-isct/japanese-speaking-coach/blob/main/docs/showcase-ja.md"
+  },
+  "verification": {
+    "ja": "数字は TTS 音声で同じパイプラインを通して測定。作者本人が実際の動画と 89 分のオンライン授業で使い、出た問題を設計記録 D-013〜D-020 で直した。第三者の試用と母語話者のレビューはまだ——未検証と書く。",
+    "zh": "数字是让 TTS 语音走同一条流水线测得的。作者本人在真实视频和一节 89 分钟的线上课里用过，暴露的问题按设计记录 D-013〜D-020 修正。第三方试用和母语者审阅还没做——如实标未验证。",
+    "en": "Numbers come from TTS audio run through the same pipeline. The author used it on real videos and an 89-minute online class and fixed what broke (decision records D-013–D-020). No third-party trial or native review yet — stated as unverified."
+  },
+  "change": {
+    "ja": "2 文の録音だけで認識モデルを替え、後で 1 文まるごと捏造する失敗を見つけた。次は少数の結果で決めず、保存した実音声で再生して確かめてから変える。",
+    "zh": "只凭 2 句录音就换了识别模型，后来才发现它会把一整段话编成套话。下次不凭少量结果下结论，先用保存的真实录音重放确认再改。",
+    "en": "I switched the recognition model on just two recorded sentences and only later found it could replace a whole sentence with a stock phrase. Next time: replay saved real audio before changing anything."
+  },
+  "points": [
+    { "ja": "字幕を読む——難しい漢字にだけふりがな", "zh": "看字幕——只给难的汉字注假名", "en": "Read the subtitles — furigana only on the hard kanji" },
+    { "ja": "⭐ の返答をそのまま口に出す", "zh": "把 ⭐ 那条回复直接说出口", "en": "Say the ⭐ reply out loud as it is" },
+    { "ja": "履歴で単語を選び、読みと意味を確かめる", "zh": "在历史里选中单词，确认读音和意思", "en": "Pick a word in the history to check its reading and meaning" }
+  ],
+  "media": [
+    {
+      "src": "/media/coach/live-subtitle-suggest.png",
+      "width": 900,
+      "height": 565,
+      "label": { "ja": "01 / 字幕と返答候補", "zh": "01 / 字幕与接话建议", "en": "01 / Subtitles and replies" },
+      "alt": {
+        "ja": "字幕ウィンドウ：ふりがな付きの日本語字幕 3 文と、丁寧・カジュアル・かんたんの返答候補（⭐ 一つ、カジュアルに ⚠）",
+        "zh": "字幕窗：三句带假名的日语字幕，以及丁寧・カジュアル・かんたん三条回复（一个 ⭐，カジュアル带 ⚠）",
+        "en": "Subtitle window: three Japanese subtitle lines with furigana and three replies — polite, casual, simplest — one ⭐ and a ⚠ on casual"
+      },
+      "caption": "TTS 音声による再生・個人情報なし（2026-10-25、commit 3ba4bea）"
+    },
+    {
+      "src": "/media/coach/live-history-lookup.png",
+      "width": 424,
+      "height": 1007,
+      "label": { "ja": "02 / 履歴と単語", "zh": "02 / 历史与查词", "en": "02 / History and lookup" },
+      "alt": {
+        "ja": "字幕履歴ウィンドウ：「可能」を選ぶと読み【かのう】と文脈上の意味が出る",
+        "zh": "字幕历史窗：选中「可能」后显示读音【かのう】和这句话里的意思",
+        "en": "History window: selecting 可能 shows its reading (かのう) and its meaning in this sentence"
+      },
+      "caption": "TTS 音声による再生・個人情報なし（2026-10-25、commit 3ba4bea）"
+    },
+    {
+      "src": "/media/coach/live-archive.png",
+      "width": 1262,
+      "height": 711,
+      "label": { "ja": "03 / 録音の保存", "zh": "03 / 录音存档", "en": "03 / Session archive" },
+      "alt": {
+        "ja": "録音版を閉じたあとに開く保存フォルダ：clips、meta、stream、suggestions、transcript（ナビゲーション欄は塗りつぶし）",
+        "zh": "录音版关闭后自动打开的存档文件夹：clips、meta、stream、suggestions、transcript（导航栏已涂掉）",
+        "en": "Session folder opened after the recording version closes: clips, meta, stream, suggestions, transcript (navigation pane blanked)"
+      },
+      "caption": "TTS 音声による再生・個人情報なし。左のナビゲーション欄は個人情報のため塗りつぶし（2026-10-25）"
+    }
+  ],
+  "demo_video": {
+    "src": "/media/coach/live-demo.webm",
+    "width": 900,
+    "height": 760,
+    "seconds": 26,
+    "caption": "TTS 音声による再生・個人情報なし。無音、背景は無地の板（2026-10-25、commit 3ba4bea）"
+  }
+}

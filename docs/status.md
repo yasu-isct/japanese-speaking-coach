@@ -66,6 +66,24 @@
 | 启动脚本：普通版 / 录音版 | ✅ `jsc-live.bat` 不录音，`jsc-live-录音.bat` 录音并在结束后打开存档文件夹（D-020） |
 | 视频通话实测 | ⏳ 等你执行 |
 
+## 第二阶段的数字（2026-10-25，从日志计算）
+
+条件：TTS（Windows Haruka）念 `tests/sample_dialogues.md` 的 10 句，`--source file --realtime`，建议、历史、存档全开，个人资料为 `profile.example.md` 的占位版；应用代码 `3ba4bea`。来源 `tests/live_suggest/showcase-20261025-1825.json`（`tools/capture_showcase.py`）。
+
+| 项目 | p50 | p95 | n |
+|---|---|---|---|
+| 识别耗时（每句最后一段） | 258 ms | 333 ms | 10 |
+| API 往返 | 1565 ms | 1986 ms | 10 |
+| API 首字 | 741 ms | 1196 ms | 10 |
+| 渲染 | 71 ms | 102 ms | 10 |
+| 最后一句字幕 → 建议画完 | 2461 ms | 2899 ms | 10 |
+
+- 说完第一句话到第一条字幕出现：814 ms（0.6 s 停顿判定 + 识别 + 绘制）。
+- 识别模型 `large-v3-turbo`（faster-whisper，CUDA float16）；API 模型 `deepseek-flash`（关闭思考）；GPU：NVIDIA GeForce RTX 5060 Laptop GPU。
+- 单元测试 78 个；设计决策记录 D-001〜D-020，共 20 条。
+- 只是一次 10 句的 TTS 运行，不是真人语音的数字。真人使用（作者本人的视频、89 分钟线上课）的观察见 D-013〜D-019。
+- 画面素材：`docs/images/`（说明见其中的 README.md）；一页说明：`docs/showcase-ja.md`。
+
 ## 路线图：保留的开发目标
 
 | 目标 | 现状 | 下一步 |
