@@ -1,7 +1,8 @@
 @echo off
-rem Start the live subtitle window with the jsc conda environment.
-rem   Double-click        = subtitles + reply suggestions for audio the PC is playing
-rem   jsc-live.bat --source mic --suggest    = for your microphone
+rem Normal version: subtitles + reply suggestions, NOT recorded.
+rem   Double-click                              = audio the PC is playing (videos, online classes, calls)
+rem   jsc-live.bat --source mic --suggest       = your microphone
+rem To record the session, use jsc-live-Â¼Òô.bat instead.
 rem Any arguments are passed to "python -m jsc_live" (see app\README.md).
 setlocal
 set "PY=%USERPROFILE%\anaconda3\envs\jsc\python.exe"
@@ -12,8 +13,8 @@ if not exist "%PY%" (
 )
 cd /d "%~dp0app"
 if "%~1"=="" (
-  "%PY%" -m jsc_live --source loopback --suggest
+  "%PY%" -m jsc_live --source loopback --suggest --no-record
 ) else (
-  "%PY%" -m jsc_live %*
+  "%PY%" -m jsc_live %* --no-record
 )
 if errorlevel 1 pause

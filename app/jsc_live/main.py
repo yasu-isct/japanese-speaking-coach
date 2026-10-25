@@ -44,7 +44,8 @@ def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, hol
     session = None
     try:
         status("モデル読み込み中…")
-        transcriber = Transcriber(args.model, device=args.device_type)
+        transcriber = Transcriber(args.model, device=args.device_type,
+                                  languages=("ja", "zh") if getattr(args, "mixed_chinese", False) else ("ja",))
         transcriber.warm_up()
         furigana = Furigana(args.furigana)
         source = build_source(args)
@@ -151,6 +152,8 @@ def main(argv: list[str] | None = None) -> None:
                    help="extra quiet seconds after a sentence before the turn is answered (on top of --end-silence)")
     p.add_argument("--history", type=int, default=5, help="finished subtitle lines kept on screen")
     p.add_argument("--no-history", action="store_true", help="do not open the history window")
+    p.add_argument("--mixed-chinese", action="store_true",
+                   help="(shelved) detect Chinese sentences too and show them in grey without suggestions")
     p.add_argument("--no-record", action="store_true",
                    help="do not archive this run (by default audio + transcript go to logs/sessions/, local only)")
     args = p.parse_args(argv)

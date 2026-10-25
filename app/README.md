@@ -14,7 +14,7 @@
 
 旁边还有一个**字幕历史**窗口：这次用到现在的所有字幕都在里面，可以往回翻；用鼠标选中一个词，下面马上显示读音，约 1 秒后显示这个词在这句话里的中文意思。
 
-每次使用都会**自动存档**（录音 + 字幕 + 建议），方便以后复习。
+想留下这次的录音和字幕复习时，用「录音版」启动，会**存档**（录音 + 字幕 + 建议）。
 
 ![运行截图](../docs/images/live-window.png)
 
@@ -41,13 +41,18 @@
 
 ### 每次使用
 
-**双击 `japanese-speaking-coach` 文件夹里的 `jsc-live.bat`。**
+`japanese-speaking-coach` 文件夹里有两个启动脚本，双击即可：
 
-默认是「给电脑正在播放的声音配字幕 + 建议」，适合看视频、网课、视频通话。
+| 脚本 | 用途 |
+|---|---|
+| `jsc-live.bat` | **普通版**：字幕 + 建议，**不录音** |
+| `jsc-live-录音.bat` | **录音版**：同上，另外把这次的录音、字幕、建议存档；关闭窗口后自动打开这次的存档文件夹 |
+
+两个都默认「给电脑正在播放的声音配字幕 + 建议」，适合看视频、网课、视频通话。
 
 第一次启动要等十几秒加载识别模型（没下载过的话会先自动下载约 1.5 GB），窗口里会显示「モデル読み込み中…」，出现「聞き取り中」就可以开始了。
 
-想识别**麦克风**（面对面说话）时，在 PowerShell 里运行：
+想识别**麦克风**（面对面说话）时，在 PowerShell 里运行（要录音就把 `jsc-live.bat` 换成 `jsc-live-录音.bat`）：
 
 ```powershell
 D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest
@@ -75,9 +80,8 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | ✕ | 退出（右键、Esc 也可以） |
 
 - 拖动：移动窗口；鼠标滚轮：调字号。
-- 左上角「● 录音中」：这次使用正在存档（见下面「存档」）。
+- 左上角「● 录音中」：用录音版启动时显示，表示这次正在存档（见下面「存档」）。
 - 白字是说完的日语句子（保留最近 5 句）；浅灰色是正在说、还没说完的句子（说完会更正）。
-- 中文的句子显示为灰色、不注音，也不会出接话建议（适合中日混着说的课和通话）。
 - 「ご視聴ありがとうございました」这类视频片尾套话，多半是杂音被识别模型「编」出来的，程序会直接丢掉不显示。
 - 建议区显示「…」：正在生成。
 - 显示「タイムアウト」：3 秒内没生成出来；之后再到的建议会标「遅延」。
@@ -91,7 +95,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 
 ### 存档
 
-每次使用都会在 `japanese-speaking-coach\logs\sessions\` 下新建一个以日期时间命名的文件夹：
+用 `jsc-live-录音.bat` 启动时，会在 `japanese-speaking-coach\logs\sessions\` 下新建一个以日期时间命名的文件夹（普通版 `jsc-live.bat` 不存档）：
 
 | 文件 | 内容 |
 |---|---|
@@ -101,7 +105,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | `suggestions.jsonl` | 每次的建议和耗时（开了建议时） |
 | `meta.json` | 来源、模型、开始结束时间、句数 |
 
-`logs\sessions\index.tsv` 是总目录，每次使用一行（日期、分钟数、句数、文件夹名）。存档只在你电脑上，不会提交到 GitHub。视频通话时录下的是对方的声音，最好让对方知道；不想存档时加 `--no-record`。
+`logs\sessions\index.tsv` 是总目录，每次使用一行（日期、分钟数、句数、文件夹名）。存档只在你电脑上，不会提交到 GitHub。视频通话时录下的是对方的声音，最好让对方知道。
 
 ### 没反应怎么办
 
@@ -152,7 +156,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 
 ### 全部参数
 
-直接用 Python 运行时：先 `conda activate jsc`，再在 `app` 目录下运行 `python -m jsc_live …`。`jsc-live.bat` 会把参数原样传过去。
+直接用 Python 运行时：先 `conda activate jsc`，再在 `app` 目录下运行 `python -m jsc_live …`（直接运行时默认存档）。两个 `.bat` 会把参数原样传过去，`jsc-live.bat` 还会自动加上 `--no-record`。
 
 | 参数 | 说明 |
 |---|---|
@@ -165,7 +169,8 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | `--turn-gap 0.8` | 对方停下来后再等几秒才出建议（在 0.6 秒分句停顿之外）；调小更快，调大更不容易把一段话切开 |
 | `--history 5` | 字幕区保留几句 |
 | `--font-size 16` | 字号（也可以在窗口上用滚轮调） |
-| `--no-record` | 这次不存档（默认每次都存到 `logs/sessions/`） |
+| `--no-record` | 不存档（`jsc-live.bat` 自动加上；直接用 Python 运行时默认存档） |
+| `--mixed-chinese` | （暂时搁置）同时识别中文句子，灰色显示、不出建议，每句慢约 0.2 秒 |
 | `--no-history` | 不打开字幕历史窗口 |
 | `--device 名称` | 指定麦克风/扬声器，名称用 `--list-devices` 查 |
 | `--furigana graded/all/none` | 分级注音（默认，N5–N4 汉字不注）/ 全部注音 / 不注音 |
