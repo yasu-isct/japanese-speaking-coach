@@ -1,8 +1,8 @@
-# 开发与检查
+# Development and Checks
 
-## 单元测试（CPU）
+## Unit Tests (CPU)
 
-在仓库根目录，用 Python 3.12 建立独立环境。Windows PowerShell：
+At the repository root, create an isolated environment with Python 3.12. In Windows PowerShell:
 
 ```powershell
 python -m venv .venv
@@ -10,7 +10,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m unittest discover -s tests
 ```
 
-macOS / Linux：
+On macOS / Linux:
 
 ```bash
 python3.12 -m venv .venv
@@ -18,19 +18,19 @@ python3.12 -m venv .venv
 .venv/bin/python -m unittest discover -s tests
 ```
 
-`requirements-dev.txt` 只安装 NumPy（分句、重采样测试）和 fugashi + unidic-lite（注音测试）。导出 Anki、格式检查和打包工具只用 Python 标准库。测试不需要显卡、麦克风、音频设备或 API Key，不下载语音识别模型；不要为测试安装 `app/requirements.txt` 中的完整应用依赖。
+`requirements-dev.txt` installs only NumPy (for sentence-splitting and resampling tests) and fugashi + unidic-lite (for furigana tests). Anki export, format checks, and the packaging tool use only the Python standard library. The tests do not require a GPU, microphone, audio device, or API key, and do not download speech recognition models. Do not install the full application dependencies from `app/requirements.txt` to run the tests.
 
-当前 `tests/test_live.py` 只检查 CPU 逻辑，没有 GPU 或语音识别模型测试。已有的 `skipUnless` 只在缺少 fugashi 时跳过 `FuriganaTest` 的 5 个注音测试，其余测试继续执行。CI 安装完整的开发依赖后运行所有单元测试。
+Currently, `tests/test_live.py` tests only CPU logic; it includes no GPU or speech recognition model tests. The existing `skipUnless` skips only the five furigana tests in `FuriganaTest` when fugashi is missing; all other tests still run. CI installs the full development dependencies and then runs all unit tests.
 
-## 生成 Skill 上传包
+## Build the Skill Upload Package
 
-在仓库根目录运行（使用上述环境中的 Python 也可以）：
+Run the following at the repository root (you can also use Python from the environment above):
 
 ```bash
 python tools/package_skill.py
 ```
 
-工具没有命令行参数，输出路径固定为 `dist/japanese-speaking-coach.zip`，重复执行会重新生成该文件。它递归读取 `skill/`，只排除 `__pycache__/` 和 `.pyc`，不会读取 `app/`、`tests/` 或 `docs/`。目前包内应只有以下 6 个发布文件：
+The tool takes no command-line arguments. Its output path is fixed at `dist/japanese-speaking-coach.zip`, and each run regenerates that file. It reads `skill/` recursively, excluding only `__pycache__/` and `.pyc`, and does not read `app/`, `tests/`, or `docs/`. The package should currently contain only these six release files:
 
 ```text
 japanese-speaking-coach/LICENSE.txt
@@ -41,11 +41,11 @@ japanese-speaking-coach/references/scenarios.md
 japanese-speaking-coach/scripts/export_anki.py
 ```
 
-上传前可用标准库列出包内文件：
+Before uploading, you can use the standard library to list the files in the package:
 
 ```bash
 python -m zipfile -l dist/japanese-speaking-coach.zip
 python -m zipfile -t dist/japanese-speaking-coach.zip
 ```
 
-`skill/` 是发布目录，请只放需要随 Skill 分发的文件。日志、录音、模型和凭证不要放进该目录；打包工具并不会自动过滤这些文件。
+`skill/` is the release directory, so include only files that need to be distributed with the Skill. Do not put logs, recordings, models, or credentials in this directory; the packaging tool does not automatically filter them out.
