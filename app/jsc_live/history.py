@@ -91,6 +91,7 @@ class HistoryWindow:
         scroll.pack(side="right", fill="y")
         self.text.pack(side="left", fill="both", expand=True)
         self.text.tag_configure("time", foreground=FG_TIME, font=small)
+        self.text.tag_configure("other", foreground="#8b97a3")  # Chinese lines in grey, like the subtitles
         # Read-only but still selectable: swallow every key that would edit the text.
         self.text.bind("<Key>", lambda e: None if (e.state & 0x4 and e.keysym.lower() in ("c", "a")) else "break")
         self.text.bind("<ButtonRelease-1>", self._on_select)
@@ -100,10 +101,10 @@ class HistoryWindow:
         self.top.after(100, self._poll)
 
     # --- content -----------------------------------------------------------
-    def add(self, sentence: str) -> None:
+    def add(self, sentence: str, other_language: bool = False) -> None:
         at_bottom = self.text.yview()[1] > 0.98
         self.text.insert("end", time.strftime("%H:%M:%S") + "  ", "time")
-        self.text.insert("end", sentence + "\n")
+        self.text.insert("end", sentence + "\n", "other" if other_language else ())
         if at_bottom:  # follow new lines unless the user scrolled up to read
             self.text.see("end")
 

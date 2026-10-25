@@ -27,6 +27,7 @@ from .furigana import Segment
 BG = "#111418"
 FG_FINAL = "#f5f5f5"
 FG_PARTIAL = "#9aa4ae"
+FG_OTHER_LANG = "#7d8a96"   # Chinese (non-Japanese) subtitles: grey, no furigana"
 FG_RUBY = "#ffd479"
 FG_MEANING = "#8fa3b8"
 FG_WARN = "#ff8a65"
@@ -63,7 +64,7 @@ class SubtitleWindow:
         self.on_suggestion_drawn = on_suggestion_drawn  # callback(uid, payload, timed_out)
         self.suggestion: dict | None = None  # {"uid", "payload", "timed_out", "reported"}
         self.history = history
-        self.lines: list[tuple[int, list[Segment]]] = []   # finished sentences
+        self.lines: list[tuple[int, list[Segment], str]] = []   # finished sentences: (uid, segments, colour)
         self.partial: tuple[int, list[Segment]] | None = None
 
         enable_dpi_awareness()
@@ -166,14 +167,15 @@ class SubtitleWindow:
                     self.status = "".join(s.text for s in segments)
                 elif kind == "partial":
                     self.partial = (uid, segments)
-                elif kind == "final":
+                elif kind in ("final", "final_other"):
                     if self.partial and self.partial[0] == uid:
                         self.partial = None
                     if segments:
-                        self.lines.append((uid, segments))
+                        other = kind == "final_other"
+                        self.lines.append((uid, segments, FG_OTHER_LANG if other else FG_FINAL))
                         self.lines = self.lines[-self.history:]
                         if self.history_window:
-                            self.history_window.add("".join(s.text for s in segments))
+                            self.history_window.add("".join(s.text for s in segments), other_language=other)
                     self.status = ""
                 elif kind == "session":
                     self.recording = True
@@ -319,7 +321,7 @@ class SubtitleWindow:
             self.root.geometry(f"{self.width}x{TOOLBAR_H}+{self.left}+{self.bottom - TOOLBAR_H}")
             return
         y = TOOLBAR_H + 6
-        blocks = [(segs, FG_FINAL) for _, segs in self.lines]
+        blocks = [(segs, color) for _, segs, color in self.lines]
         if self.partial:
             blocks.append((self.partial[1], FG_PARTIAL))
         if not blocks and self.status:

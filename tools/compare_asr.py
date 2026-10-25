@@ -60,7 +60,7 @@ def read_tsv(path: Path) -> dict[str, str]:
     rows = {}
     for line in path.read_text(encoding="utf-8").splitlines():
         if "\t" in line:
-            name, text = line.split("\t", 1)
+            name, text = line.split("\t")[:2]  # later columns: language, dropped
             rows[name] = text
     return rows
 

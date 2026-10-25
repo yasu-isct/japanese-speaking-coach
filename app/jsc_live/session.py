@@ -7,7 +7,7 @@
         stream.wav               everything that was heard, 16 kHz mono
         transcript.txt           [mm:ss] sentence   (human-readable)
         clips/NNNN.wav           each finished sentence's audio
-        clips/transcripts.tsv    NNNN.wav<TAB>text  (tools/compare_asr.py reads this folder)
+        clips/transcripts.tsv    NNNN.wav<TAB>text<TAB>language<TAB>dropped  (tools/compare_asr.py reads this folder)
         suggestions.jsonl        per turn: replies + asr / api / render ms (when --suggest is on)
 
 Everything stays under logs/, which is git-ignored. Recordings of a call contain the
@@ -65,16 +65,23 @@ class Session:
                 self._stream.writeframes(_pcm(block))
                 self.samples += len(block)
 
-    def add_sentence(self, uid: int, audio: np.ndarray, text: str) -> None:
-        """A finished sentence: save its clip and add it to the transcript."""
+    def add_sentence(self, uid: int, audio: np.ndarray, text: str, language: str = "ja", dropped: str = "") -> None:
+        """A finished sentence: save its clip and add it to the transcript.
+
+        Dropped sentences (noise phrases) keep their clip and a tsv row, so the filter can be
+        checked later, but do not appear in transcript.txt.
+        """
         start = max(0.0, (self.samples - len(audio)) / SAMPLE_RATE)
         name = f"{uid:04d}.wav"
         with _open_wav(self.dir / "clips" / name) as wf:
             wf.writeframes(_pcm(audio))
         with (self.dir / "clips" / "transcripts.tsv").open("a", encoding="utf-8") as f:
-            f.write(f"{name}\t{text}\n")
+            f.write(f"{name}\t{text}\t{language}\t{dropped}\n")
+        if dropped:
+            return
+        mark = "" if language == "ja" else "[中] " if language == "zh" else f"[{language}] "
         with (self.dir / "transcript.txt").open("a", encoding="utf-8") as f:
-            f.write(f"[{int(start // 60):02d}:{int(start % 60):02d}] {text}\n")
+            f.write(f"[{int(start // 60):02d}:{int(start % 60):02d}] {mark}{text}\n")
         self.sentences += 1
 
     def close(self) -> None:

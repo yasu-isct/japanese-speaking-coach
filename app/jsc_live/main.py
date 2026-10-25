@@ -71,6 +71,24 @@ def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, hol
         log(args, f"[ready] model={transcriber.model_name} device={transcriber.device}/{transcriber.compute_type} "
                   f"source={source.name}")
 
+        def finish(uid: int, audio) -> None:
+            """A sentence is complete: recognize it, show it, archive it, maybe ask for suggestions."""
+            result = transcriber.transcribe(audio, final=True)
+            if session:
+                session.add_sentence(uid, audio, result.text, result.language, result.dropped)
+            if result.dropped:  # noise turned into a stock phrase: clear the partial line, show nothing
+                log(args, f"[dropped #{uid}] {result.dropped}")
+                events.put(("final", uid, []))
+                return
+            log(args, f"[final #{uid}] {result.language} {result.audio_seconds:.1f}s audio, "
+                      f"{result.seconds * 1000:.0f} ms  {furigana.to_bracket(result.text) if result.language == 'ja' else result.text}")
+            if result.language == "ja":
+                events.put(("final", uid, furigana.annotate(result.text)))
+                if manager:
+                    manager.submit(uid, result.text, result.seconds * 1000)
+            else:  # Chinese (or another non-Japanese language): plain grey subtitle, no furigana, no suggestion
+                events.put(("final_other", uid, [Segment(result.text)] if result.text else []))
+
         last_partial_at = 0.0
         for block in source.blocks():
             if stop.is_set():
@@ -89,23 +107,11 @@ def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, hol
                         continue
                     result = transcriber.transcribe(event.audio, final=False)
                     last_partial_at = time.perf_counter()
+                    events.put(("partial", event.utterance_id, furigana.annotate(result.text)))
                 else:
-                    result = transcriber.transcribe(event.audio, final=True)
-                    if session:
-                        session.add_sentence(event.utterance_id, event.audio, result.text)
-                    log(args, f"[final #{event.utterance_id}] {result.audio_seconds:.1f}s audio, "
-                              f"{result.seconds * 1000:.0f} ms  {furigana.to_bracket(result.text)}")
-                events.put((event.kind, event.utterance_id, furigana.annotate(result.text)))
-                if manager and event.kind == "final":
-                    manager.submit(event.utterance_id, result.text, result.seconds * 1000)
+                    finish(event.utterance_id, event.audio)
         for event in segmenter.flush():
-            result = transcriber.transcribe(event.audio, final=True)
-            if session:
-                session.add_sentence(event.utterance_id, event.audio, result.text)
-            log(args, f"[final #{event.utterance_id}] {furigana.to_bracket(result.text)}")
-            events.put(("final", event.utterance_id, furigana.annotate(result.text)))
-            if manager:
-                manager.submit(event.utterance_id, result.text, result.seconds * 1000)
+            finish(event.utterance_id, event.audio)
         log(args, "[done]")
     except Exception as exc:  # surface errors in the window, not only the console
         status(f"エラー: {exc}")
