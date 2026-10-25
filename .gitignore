@@ -7,3 +7,4 @@ dist/
 logs/
 tests/asr_eval/audio/
 .env.*
+profile.md

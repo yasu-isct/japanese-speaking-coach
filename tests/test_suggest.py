@@ -51,6 +51,28 @@ class PromptTest(unittest.TestCase):
         self.assertEqual(build_user_message("大丈夫？", [], None), "对方刚说：大丈夫？")
 
 
+class ProfileTest(unittest.TestCase):
+    def test_profile_is_appended_last_without_hint_lines(self):
+        import tempfile
+
+        from jsc_live.suggest import load_profile
+
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "profile.md"
+            path.write_text("# 我的个人资料\n> 说明行会被忽略\n- 来日本：一年半\n", encoding="utf-8")
+            profile = load_profile(path)
+            self.assertEqual(load_profile(Path(d) / "missing.md"), "")
+        self.assertEqual(profile, "# 我的个人资料\n- 来日本：一年半")
+        prompt = build_system_prompt(profile)
+        self.assertTrue(prompt.endswith("- 来日本：一年半"))
+        self.assertIn("资料里有的：直接用", prompt)
+        self.assertNotIn("学生的个人资料", build_system_prompt(""))
+
+    def test_suggester_takes_an_explicit_profile(self):
+        self.assertIn("一年半", Suggester(env=ENV, profile="- 来日本：一年半").system_prompt)
+        self.assertNotIn("学生的个人资料", Suggester(env=ENV, profile="").system_prompt)
+
+
 class ParseTest(unittest.TestCase):
     def test_reply_line(self):
         r = parse_line("カジュアル||うん、わかった。|嗯，知道了。|⚠")

@@ -36,6 +36,7 @@ from typing import Callable, Iterator
 ROOT = Path(__file__).resolve().parents[2]
 SKILL = ROOT / "skill" / "SKILL.md"
 POLITENESS = ROOT / "skill" / "references" / "politeness.md"
+PROFILE = ROOT / "profile.md"   # the learner's own facts; git-ignored, template in profile.example.md
 STYLES = ("丁寧", "カジュアル", "かんたん")
 
 LIVE_MODE = """
@@ -107,7 +108,26 @@ def _section(text: str, start: str, end: str | None) -> str:
     return text[i:j].strip()
 
 
-def build_system_prompt() -> str:
+PROFILE_RULES = """
+## 学生的个人资料（学生本人写的，优先于上面「一律用【】占位」那一条）
+回复需要学生自己的事实时（名字、来日本多久、学校、专业、打工、爱好、经历等）：
+- 资料里有的：直接用，**不加【】**，推荐理由里简短写一句「用了你的个人资料：……」。
+- 资料里没有的：仍然用【】占位，不要编造，也不要从资料里推测出资料没写的事实。
+- 对方没问到个人的事时，不要为了用资料而硬塞个人信息。
+- 资料是**学生本人**的信息。回复里称呼对方时，绝不能用资料里的名字（那是学生自己）；不知道对方名字就用「〇〇さん」或不称呼。
+资料如下：
+"""
+
+
+def load_profile(path: Path = PROFILE) -> str:
+    """The learner's profile text without comment lines (lines starting with '>' are hints in the template)."""
+    if not path.exists():
+        return ""
+    lines = [l for l in path.read_text(encoding="utf-8-sig").splitlines() if not l.lstrip().startswith(">")]
+    return "\n".join(lines).strip()
+
+
+def build_system_prompt(profile: str = "") -> str:
     skill = SKILL.read_text(encoding="utf-8")
     # Role + common rules + mode A (without the frontmatter and modes B-D).
     parts = [
@@ -116,6 +136,10 @@ def build_system_prompt() -> str:
         "# references/politeness.md\n" + POLITENESS.read_text(encoding="utf-8"),
         LIVE_MODE.strip(),
     ]
+    # The profile goes last and never changes during a run, so the provider's prompt cache
+    # still covers the whole system prompt: it costs almost no extra latency (D-018).
+    if profile:
+        parts.append(PROFILE_RULES.strip() + "\n" + profile)
     return "\n\n".join(parts)
 
 
@@ -162,7 +186,8 @@ def parse_line(line: str) -> Reply | str | None:
 
 
 class Suggester:
-    def __init__(self, partner: str | None = None, timeout: float = 10.0, env: dict[str, str] | None = None) -> None:
+    def __init__(self, partner: str | None = None, timeout: float = 10.0, env: dict[str, str] | None = None,
+                 profile: str | None = None) -> None:
         env = env if env is not None else load_env()
         missing = [k for k in ("LLM_API_KEY", "LLM_BASE_URL", "LLM_MODEL") if not env.get(k)]
         if missing:
@@ -178,7 +203,8 @@ class Suggester:
             self.extra_body = {}
         self.partner = partner
         self.timeout = timeout
-        self.system_prompt = build_system_prompt()
+        self.profile = load_profile() if profile is None else profile
+        self.system_prompt = build_system_prompt(self.profile)
 
     def _stream(self, messages: list[dict], max_tokens: int = 400) -> Iterator[str]:
         body = json.dumps({
