@@ -140,6 +140,8 @@ class MaterialControlTest(unittest.TestCase):
         view.controller = self.controller
         view.results = queue.Queue()
         view.busy = False
+        view.cancel = threading.Event()
+        view.progress, view.progress_row, view.cancel_button = Mock(), Mock(), Mock()
         view.actions = [Mock(), Mock()]
         view.top, view.status, view.folder = Mock(), Mock(), Mock()
         with patch("jsc_live.material_view.threading.Thread") as worker:

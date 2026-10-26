@@ -2,7 +2,9 @@
 from __future__ import annotations
 from pathlib import Path
 import threading
+from contextlib import contextmanager
 from .settings import remember_materials, remember_semantic, load_settings
+from .index_task import check_cancel
 
 
 class MaterialsController:
@@ -18,6 +20,18 @@ class MaterialsController:
         saved = load_settings(settings_path).get("semantic_model_directory")
         saved = Path(saved) if isinstance(saved, str) and Path(saved).is_absolute() else None
         self.model_directory = Path(model_directory or active or saved or self.model_home)
+
+    @contextmanager
+    def _operation(self, cancel):
+        while True:
+            check_cancel(cancel)
+            if self._reload_lock.acquire(timeout=.1):
+                break
+        try:
+            check_cancel(cancel)
+            yield
+        finally:
+            self._reload_lock.release()
 
     def model_info(self) -> dict:
         from .semantic_materials import ASSETS
@@ -39,7 +53,7 @@ class MaterialsController:
         from .semantic_materials import SemanticEncoder, SemanticMaterialsStore, SemanticUnavailable
 
         notify = progress or (lambda message: None)
-        with self._reload_lock:
+        with self._operation(cancel):
             _cancelled(cancel)
             current = self.client.materials
             selected = Path(directory).expanduser().absolute() if directory is not None else self.model_directory
@@ -52,12 +66,13 @@ class MaterialsController:
                     encoder = active if reuse else SemanticEncoder(selected)
                     _cancelled(cancel)
                     store = SemanticMaterialsStore(current.root, encoder=encoder, limits=current.limits,
-                                                   tokenizer=current._tokenizer)
+                                                   tokenizer=current._tokenizer, progress=notify, cancel=cancel)
                 except SemanticUnavailable as exc:
                     raise ValueError(str(exc) + " 当前资料和查找方式已保留。") from None
             else:
                 notify("正在切回关键词查找…")
-                store = MaterialsStore(current.root, limits=current.limits, tokenizer=current._tokenizer)
+                store = MaterialsStore(current.root, limits=current.limits, tokenizer=current._tokenizer,
+                                       progress=notify, cancel=cancel)
             _cancelled(cancel)
             if (any(store.diagnostics.get(key) for key in ("unsafe_root", "root_read_error", "directory_read_error"))
                     or (store.diagnostics.get("missing_root") and current.chunks)):
@@ -86,6 +101,8 @@ class MaterialsController:
                       ("invalid_utf8", "file_read_error", "file_changed", "file_size_or_type_limit", "unsafe_path", "total_chars_limit"))
         limited = any(diagnostics.get(key) for key in ("index_limit_reached", "scan_limit_reached", "depth_limit_reached"))
         message = f"已读取 {diagnostics.get('indexed_files', 0)} 个文件。"
+        if diagnostics.get("partial_files"):
+            message += f" 其中{diagnostics['partial_files']}个文件只读取了前一部分。"
         if diagnostics.get("semantic_enabled"):
             message += (" 本地语义查找暂不可用，已回到关键词查找。" if store.semantic_failed.is_set() else
                         " 已开启本地多语言查找，支持不同说法；相关片段不一定包含答案。")
@@ -103,18 +120,19 @@ class MaterialsController:
         return {"root": str(store.root), "files": diagnostics.get("indexed_files", 0),
                 "chunks": len(store.chunks), "message": message, "issues": issues}
 
-    def reload(self, folder: str | Path | None = None) -> dict:
+    def reload(self, folder: str | Path | None = None, *, progress=None, cancel=None) -> dict:
         """Run from a background worker. Existing suggestions retain old sources."""
-        with self._reload_lock:
+        with self._operation(cancel):
             selected = Path(folder).expanduser().absolute() if folder is not None else self.client.materials.root
             try:
-                store = self.client.materials.rebuild(selected)
+                store = self.client.materials.rebuild(selected, progress=progress, cancel=cancel)
             except RuntimeError:
                 raise ValueError("本地资料索引暂不可用，已保留原资料。请重试，或重启后使用关键词查找。") from None
             if any(store.diagnostics.get(key) for key in ("missing_root", "unsafe_root", "root_read_error")):
                 raise ValueError("这个文件夹无法读取，已保留原资料。请选择实际存在的文件夹。")
             if store.diagnostics.get("directory_read_error") and not store.chunks:
                 raise ValueError("没有权限读取这个文件夹，已保留原资料。")
+            check_cancel(cancel)
             self.client.replace_materials(store)
             result = self.current()
             result["message"] += " 下一次建议会使用更新后的资料；当前回答保留原出处。"

@@ -31,13 +31,14 @@ class MaterialsWindow:
         self.model_window = None
         self.results = queue.Queue()
         self.busy = False
+        self.cancel = threading.Event()
         self._last_sources = ([], [], None)
         self.actions = []
         self.top = tk.Toplevel(master)
         self.top.title("资料与本轮出处")
         self.top.geometry("780x600")
         self.top.minsize(520, 400)
-        self.top.protocol("WM_DELETE_WINDOW", self.top.withdraw)
+        self.top.protocol("WM_DELETE_WINDOW", self._close)
         header = ttk.Frame(self.top, padding=12)
         header.pack(fill="x")
         self.folder = ttk.Label(header, text=f"当前资料文件夹：{materials_root}", wraplength=720)
@@ -55,6 +56,11 @@ class MaterialsWindow:
                 self.actions.append(button)
         self.status = ttk.Label(header, wraplength=720)
         self.status.pack(anchor="w", pady=(8, 0))
+        self.progress_row = ttk.Frame(header)
+        self.progress = ttk.Progressbar(self.progress_row, mode="indeterminate")
+        self.progress.pack(side="left", fill="x", expand=True, padx=(0, 8))
+        self.cancel_button = ttk.Button(self.progress_row, text="取消读取", command=self._cancel, state="disabled")
+        self.cancel_button.pack(side="right")
         self.top.bind("<Configure>", self._resize)
         body = ttk.Frame(self.top)
         body.pack(fill="both", expand=True)
@@ -77,7 +83,7 @@ class MaterialsWindow:
     def _resize(self, event):
         if event.widget is self.top:
             for label in (self.folder, self.disclosure, self.status):
-                label.configure(wraplength=max(200, event.width - 24))
+                label.configure(wraplength=max(200, event.width - 32))
 
     def _choose(self):
         if not self.busy:
@@ -98,24 +104,48 @@ class MaterialsWindow:
         if self.controller is None or self.busy:
             return
         self.busy = True
+        self.cancel.clear()
         for action in self.actions:
             action.configure(state="disabled")
         self.status.configure(text="正在本机读取资料，当前对话继续使用原资料…")
+        self.progress_row.pack(fill="x", before=self.status, pady=(6, 0))
+        self.progress.start(15)
+        self.cancel_button.configure(state="normal")
         threading.Thread(target=self._load, args=(folder,), daemon=True).start()
 
     def _load(self, folder):
+        notify = lambda message: self.results.put(("progress", message))
         try:
-            self.results.put((True, self.controller.reload(folder)))
+            self.results.put((True, self.controller.reload(folder, progress=notify, cancel=self.cancel)))
         except ValueError as exc:
             self.results.put((False, str(exc)))
         except OSError:
             self.results.put((False, "这个文件夹无法读取，已保留原资料。请检查路径、权限，或选择其它文件夹。"))
+        except Exception:
+            self.results.put((False, "读取未完成，当前对话继续使用原资料。请重试或选择其它文件夹。"))
+
+    def _cancel(self):
+        self.cancel.set()
+        self.cancel_button.configure(state="disabled")
+        self.status.configure(text="正在取消，当前对话继续使用原资料…")
+
+    def _close(self):
+        if self.busy:
+            self._cancel()
+        self.top.withdraw()
 
     def _poll(self):
         try:
             while True:
                 ok, result = self.results.get_nowait()
+                if ok == "progress":
+                    if not self.cancel.is_set():
+                        self.status.configure(text=result)
+                    continue
                 self.busy = False
+                self.progress.stop()
+                self.progress_row.pack_forget()
+                self.cancel_button.configure(state="disabled")
                 for action in self.actions:
                     action.configure(state="normal")
                 if ok:

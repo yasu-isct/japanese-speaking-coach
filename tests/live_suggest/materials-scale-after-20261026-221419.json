@@ -1,0 +1,219 @@
+{
+  "provenance": "100 synthetic files, 16 paragraphs per file. Identifier queries test capacity, not natural language answer quality.",
+  "api_calls": 0,
+  "private_data_read": false,
+  "network_calls": 0,
+  "mode": "keywords",
+  "generated_input": {
+    "files": 100,
+    "paragraphs": 1600,
+    "characters": 198000,
+    "sha256": {
+      "lesson-001.md": "8e9782d55771981aab3119ae88f69ecac9defe17ecbd02807a95fbd489d148c9",
+      "lesson-002.md": "31cf84f8473e15d8759b847ff4933ab9d2dcf9d3db078fe8d0e94af53461f275",
+      "lesson-003.md": "c59efddfee703e4328583c28e5e081302cdf58279bae50c48932795660b56f7c",
+      "lesson-004.md": "02bc579d0f74c4cadf18db0faf702245da432526be1db94d13e2a9de6ac697b6",
+      "lesson-005.md": "961d9a22b5e38ec88f09a0971a0accc72d28d8710c3d5cce5d4e3514b2ac6e74",
+      "lesson-006.md": "1f181e87ec53ef2caefed3102f63900ed95f14f4d183d7f59549922707d8fe9c",
+      "lesson-007.md": "6ed7f8ce56a3f97043d3d62d3ac386eea279751ee7aad70800339e435ac9361e",
+      "lesson-008.md": "8f6647617c0e6a092cce98cebefc160fc663ee79b577cf7d2119d2b1d359ceaf",
+      "lesson-009.md": "736efbd5e3ce79749ed24c4f2a7ee937f62966bde93c7c4ba1d88289eb572ec2",
+      "lesson-010.md": "0a8ccc9888d60cba879dac9e3dea48a9e42be3163ad348b34cb95633f0ba9f9c",
+      "lesson-011.md": "680ad31229e9bcf11bfd72bd09f596bdac6b513077b6eaed0836f7a145213451",
+      "lesson-012.md": "cb7a30b2187ff814c6ca8136a8b82bde8b02c10ea0612287c702de26021bcfe0",
+      "lesson-013.md": "50b99688709acc5c48c7df62bd5bebf17960019ea7c9b15e17063b883add15f6",
+      "lesson-014.md": "4c3a37c47a69e875944bd8025a14ea37aa8f502d316602709dbd442add3eed1c",
+      "lesson-015.md": "8eacba73e5b43ab07a5c8e16b522f5b60a9e4af120e38a8496eac6b6ffd84ed4",
+      "lesson-016.md": "720d71b8bd0fa9f200e7d711a7ffd37a6b494ac1611fc3c7e0a804dbd8f0fb6e",
+      "lesson-017.md": "86aec5c88646c407fc3a2274988472277bb71e0e5aa193c66eae907e4f195c10",
+      "lesson-018.md": "0dada5914f015482fb6f38c6e34027c58c77bbc382c30168fc3f5c67e778ca39",
+      "lesson-019.md": "74608a524f16eb5dce6e4c5a2a73017e784da45202457780a98d6d1f43a1dd2f",
+      "lesson-020.md": "d5c9f7d94b0e8f104a5ac53df2f7f11064e6d2f5017658b30052cd6d748ae543",
+      "lesson-021.md": "1313a2117b51a1c54c3181f8fa68285353f63cbbf5edcbde250c14c86e6ed6db",
+      "lesson-022.md": "1137583e2b36e162fa562f84246d6ebe8cffb32e16744f4f8dfc708576c027c0",
+      "lesson-023.md": "35dcdf77288066a2bfdb0659e0e62444cf0ad86d2cba2479d06ecb3ea6d08078",
+      "lesson-024.md": "1e574e1bf2f9cca6df1cd1da3ad356384382e7006f6b9ffe3e552ffc3e3c9e3f",
+      "lesson-025.md": "db12f13dd6312e5dd54d3483cf69e1422839806a1be4802e93dcff40610d776f",
+      "lesson-026.md": "b487da7bc2ec3d0926911706591508720f8fa4cab1b2e94314331dc481fce14f",
+      "lesson-027.md": "0d63aa46c7341a14d7949ac68dd93f9b3b65fb8fbbcb79376afa2780ac7adef0",
+      "lesson-028.md": "e850b6c9ebb90368389fdd952120a5e1f28d41dfeed8f2f9c11c0972c1c2b802",
+      "lesson-029.md": "ce33a0764863f2956fea722a28ef29769111766e7ddeb804cfca5aff9a6275bd",
+      "lesson-030.md": "f36e2880d8202699c65554005cfac8560de86421ef437cc18ad60552f895a5a1",
+      "lesson-031.md": "bd7a8ac0c8811c8faa04eeac43e6e05127eafc566ced3d817ae25b803bd8a89b",
+      "lesson-032.md": "d2849233f9215c2d7603e15b7be1e0a2246a9154c83dc061491afb911babf421",
+      "lesson-033.md": "6195d56ab05f33fb3c318e52a38cb534aee9cedfbe3eae45584b874883d024ef",
+      "lesson-034.md": "c8207fd42e0fa9a88e6620266217fee4bbe7b2a0585aa17c8d9e977ffe570797",
+      "lesson-035.md": "59e37fa5f0de8652c08348dad6e52faa0bf1409d57c5f748fcd729e26c8e3c58",
+      "lesson-036.md": "1cef5a8d1edafd5f1915154e1a46a3e611b175ea924d065aa333ad7bf7510869",
+      "lesson-037.md": "3fc1208e1323220fbd584482cc3fd6e8686bf0fb38409d35dc4f8d92280224d4",
+      "lesson-038.md": "f60654278795d1269ce6047377fdcc664b4d90f73d457c0cd016952f030ce5ca",
+      "lesson-039.md": "0af8a60c145b2a40cb47f8fc0fca4f6d6da0ff426e12c86764e39160a980d5de",
+      "lesson-040.md": "2589eeea31ddaa284f8a0f962bc4db43942542df95f081bdcbaa16134f5ec12e",
+      "lesson-041.md": "ab3a5b488f702cf1842a63a09ae6c4c5363e4fd84e5c776ea059e6e1f846d3f0",
+      "lesson-042.md": "591c6b042beb25049523544d7c18a5203a7c475b0818db375f8991b4cb614597",
+      "lesson-043.md": "b3ce30db6ea9587d8d445ba9bd73ee43778f51315e54311e74b24d7d0f7c6784",
+      "lesson-044.md": "b9dfa9b044ee7fc7344baf491c5860eb27f384aad0d66df7665707a15b0ae1bc",
+      "lesson-045.md": "94cc2abfc1e8f29912fb44f41330ec414769341322ffdcef79e579569c1fa984",
+      "lesson-046.md": "0d0012ddd51198a7724e8289e6adc5e99f0876100fa6a5ec36ea5795683d9d0a",
+      "lesson-047.md": "a64d543139d4571bc143d4bbcc56ae2b5099e1267c66c18fc7b5c3fd3dab52ee",
+      "lesson-048.md": "a5bc6812ff4326635be7ffd02a570158fd84b51992f8098a6fbd49cb61adc73c",
+      "lesson-049.md": "e593291552dc67b3fde13a128eed67ca89e676630c2d88057c345783611e1096",
+      "lesson-050.md": "e64654598dbce2fb4bfd644bc0e78b6e8ff745062396ad5d02d0eead0a6acb30",
+      "lesson-051.md": "c173efe137b9902b6db342f49035b5b5578aa419dc91e57eec08a87bd11dba3f",
+      "lesson-052.md": "af294046b0ee9cf41c0bd94f67e191b7431816663ee5a85f80b3d20a8525aaf3",
+      "lesson-053.md": "5a793cd4394236bbe2a9b23e7dfe888ab2698aa54317759c6bd059f2e42d6787",
+      "lesson-054.md": "af2dfc97d664556812e7583a4c5ffb5c585bc6c717f61f5e303b6be76a71290c",
+      "lesson-055.md": "d931b7aca4618dbac42b36a10d32013a34aa9597a6c4e8d0630e6f7807bc0eb0",
+      "lesson-056.md": "ea074ccca67c9e26109f1f36bd0ac4812b65ccf674eab1577c9883d403c241e1",
+      "lesson-057.md": "c4b4b41ba621f2d861d2e732674a6726e81047970ebc2eb7f6061010e485aa7f",
+      "lesson-058.md": "ce621e90251fe79fafdc165cf0491f5e21e923ee533604c7f429bd9017ab1470",
+      "lesson-059.md": "da13faa1379aba985347429b641f6558a655de533f5d3d21deceb89956c73c34",
+      "lesson-060.md": "ee3b2166a5e021adb423b5290ddfd317d3a4cca96e12b6b0c5f93d251b1ddac3",
+      "lesson-061.md": "4da8505b4a4b86a5d29a1085c3c9ff024dde95fe3182818bfc1bafff0c2d2e30",
+      "lesson-062.md": "bb6de2a8f03a0ae2c313ad5aca93c4e27a3540e5f1f4ef88f96de37c4bc60831",
+      "lesson-063.md": "d571128d3876d2d0a659df3f6002465621d1e1193a1dbbd46de2735e31a69419",
+      "lesson-064.md": "6feb1e569654c1499bdea0e5a6bdcfb1b7fff95fb8ea8a686191feaabeea6e30",
+      "lesson-065.md": "13596643a57d26416f1ce5136a4fe690218aab6e07e05f82638c86b627688914",
+      "lesson-066.md": "06e70119ec6ca1472986c0a718d4e291acb604ae282933e9a1ebcb7a1d371e6b",
+      "lesson-067.md": "34fe35ef82a503b08087134a2dd21ded88fe7d4548e5165b2754a27961a210f6",
+      "lesson-068.md": "eb85d9eb30389a1671c48f3a22a48a922975d435e3a1266aab1293503f618b07",
+      "lesson-069.md": "6a22f24f78ce1ab1975877e10e19a827fbe0be1097e77f25c6c15501b503410e",
+      "lesson-070.md": "9fa057a26d51ea20e4bdba94ee12a22dbd5fe32219801fdb4545e244c9113542",
+      "lesson-071.md": "6a50325ecfeb160535f8beedc52cb34e7e93537667f8c2d6af1cb8bbd3e2e061",
+      "lesson-072.md": "f97fcb1f9ca50155ef882b7713d9bf9b0d212741581023d845e62a0a79257744",
+      "lesson-073.md": "c4f5abc6faa55f6ff4c7dfb71428c7f5b4aecf5d443d54f9d8f6d1170aec64df",
+      "lesson-074.md": "7cc3c573aad2b1b4a2f64af735270788ef6f7486247883bb54c430624df73237",
+      "lesson-075.md": "678307b0844853a1195ae95f49c3c172edde72a3c40a5857501cda95aaa9df53",
+      "lesson-076.md": "acabf1c229d925b90f500a075e37a2d42ce4d068c0d09d4ac92c0291a24ded18",
+      "lesson-077.md": "2da33186e11e59cdfccde5e27aefcd2f5cec1b2f525e808403efb1cce0da72e8",
+      "lesson-078.md": "0d6e86170e9c3d6ae24b936aa6b6efc5be2a05e2fee7ee0c7a9545325d0ef7c7",
+      "lesson-079.md": "e161e8198ad718811427e63315abda6614ff9d5a3c9c185f773b81f2bbd014af",
+      "lesson-080.md": "6c3485c88193e703c6b819af944067a1d68fe36bed9c54e2172b610c762113a4",
+      "lesson-081.md": "38cf3db41ae64e3b299fe9a97fe7cf98edb27507482f9004c899bcb379f59a4e",
+      "lesson-082.md": "3670e681bf63039b90129b020b91bcce77a41c87eb2efaa41c5cb063e7e6fc22",
+      "lesson-083.md": "16967bac852b5bf29401de1243367b03499783d472d7c059063037baf2b7ecd0",
+      "lesson-084.md": "1dc2d68269f3c91dba1deb1ce825a0adb8607e1fd3b99865400f4c1908d922ec",
+      "lesson-085.md": "472c01382b0529b55596cdd72cac903612d72e8d3734877dc2afbfcfdb0bb846",
+      "lesson-086.md": "50a3b80b4889a2e1cbe650431cc96ba54c9fa63517e21964b50e1fba87361739",
+      "lesson-087.md": "fa340ae4df902370a62db4217d66571d5661bd0dd20bb9b1e2a582d233849cd1",
+      "lesson-088.md": "b9d6375c422c260d8f8cfc396b6c0dc81f4b749ae0982b3050a8242073152c60",
+      "lesson-089.md": "d39ace6a439c37047f7b72d8071db0968846b5d3928e7aca727071d366a77e91",
+      "lesson-090.md": "fcaac1eedf2375e835104fcaedfd5d253ffa4fd1161aced350900b0f1e5e6ecd",
+      "lesson-091.md": "35037d60473155a2bed8aa0ad09d53d2ef1c756facc6d38a0d346a10ba6087bc",
+      "lesson-092.md": "652b335df137fb2e2abe31a343a2e90a7a58e1817de33b7b2b0856b1f9a6120f",
+      "lesson-093.md": "023b1041b7c325451b551c7a258e880d93cab7535b0471c582367d4f6a2063b0",
+      "lesson-094.md": "663abe89e93f9289a7d32bb088dbf6b4f6e060eb21aade4b94ec9643a65f945c",
+      "lesson-095.md": "80f67bf04b54f42747807d30b9044cd5f437a87cdc55796d9ce2390e8bbc911a",
+      "lesson-096.md": "ce5cf053b46d9732b762869ae10438a7242bf6d2589829a4727a696ceb2da754",
+      "lesson-097.md": "e2fd035ba2d1785404232176747da51f830fa77a4ec72974120dc8ac4809b3f7",
+      "lesson-098.md": "cbdffafe54495d4642d322157481dbaa1fb581666a42d9c815a887ee8163f87b",
+      "lesson-099.md": "44e7e56ef43215dc9c1cefc0db27c40b7143a503bfb54463dcb48f672d4652f6",
+      "lesson-100.md": "ecc813f58823d1ea614bb502894096bfd7cde2d57eb6ff134854d64156bb79d4"
+    }
+  },
+  "diagnostics": {
+    "scanned_entries": 100,
+    "files_considered": 100,
+    "indexed_files": 100,
+    "indexed_chars": 198000,
+    "indexed_chunks": 1600
+  },
+  "final_marker_files_indexed": 100,
+  "index_ms": 540.4923000605777,
+  "memory_before": {
+    "working_set": 22982656,
+    "private": 13451264,
+    "peak_working_set": 22982656
+  },
+  "memory_after": {
+    "working_set": 44421120,
+    "private": 35684352,
+    "peak_working_set": 44421120
+  },
+  "search_p50_ms": 0.32539997482672334,
+  "search_p95_ms": 0.6441000150516629,
+  "identifier_query_coverage": 10,
+  "identifier_queries": 10,
+  "rows": [
+    {
+      "query": "fixture001section16",
+      "expected_file": "lesson-001.md",
+      "covered": true,
+      "selected_source_ids": [
+        "material-3e025e60d083d72eae312f06"
+      ]
+    },
+    {
+      "query": "fixture010section16",
+      "expected_file": "lesson-010.md",
+      "covered": true,
+      "selected_source_ids": [
+        "material-37d9899d8b3034959b1b13a2"
+      ]
+    },
+    {
+      "query": "fixture020section16",
+      "expected_file": "lesson-020.md",
+      "covered": true,
+      "selected_source_ids": [
+        "material-0bea95d5119523cbe8c4c7da"
+      ]
+    },
+    {
+      "query": "fixture030section16",
+      "expected_file": "lesson-030.md",
+      "covered": true,
+      "selected_source_ids": [
+        "material-7d6160b4414532b2db0eeb0d"
+      ]
+    },
+    {
+      "query": "fixture040section16",
+      "expected_file": "lesson-040.md",
+      "covered": true,
+      "selected_source_ids": [
+        "material-2ef6d6397066692354d66b2e"
+      ]
+    },
+    {
+      "query": "fixture050section16",
+      "expected_file": "lesson-050.md",
+      "covered": true,
+      "selected_source_ids": [
+        "material-0d11492579727859982ffad5"
+      ]
+    },
+    {
+      "query": "fixture060section16",
+      "expected_file": "lesson-060.md",
+      "covered": true,
+      "selected_source_ids": [
+        "material-27d25822495f96fae48d3be3"
+      ]
+    },
+    {
+      "query": "fixture070section16",
+      "expected_file": "lesson-070.md",
+      "covered": true,
+      "selected_source_ids": [
+        "material-bd89256a71e884c94e31e898"
+      ]
+    },
+    {
+      "query": "fixture080section16",
+      "expected_file": "lesson-080.md",
+      "covered": true,
+      "selected_source_ids": [
+        "material-1cb5ee6b5dc0905589a11bc6"
+      ]
+    },
+    {
+      "query": "fixture100section16",
+      "expected_file": "lesson-100.md",
+      "covered": true,
+      "selected_source_ids": [
+        "material-d9dedbb7c53d653ad419c5eb"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "decision": "D-034",
+  "api_calls": 0,
+  "private_data_read": false,
+  "real_user_settings_changed": false,
+  "tests": {
+    "run": 289,
+    "pass": 288,
+    "skip": 1
+  },
+  "captures": {
+    "scale-before-20261026-220915": {
+      "method": "PrintWindow owned HWND",
+      "width": 820,
+      "height": 600,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "input": "Fixed public 100-file library; worker paused at initial progress for layout capture, not a timing measurement",
+      "sha256": "0bc3b975d4b556b4fda954c1f39df49795ca8ff2a28511b37db1d14090b7eb39"
+    },
+    "scale-after-20261026-221641": {
+      "method": "PrintWindow owned HWND",
+      "width": 820,
+      "height": 600,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "input": "Fixed public 100-file library; worker paused at initial progress for layout capture, not a timing measurement",
+      "sha256": "dfc6812e52a9fa76d4f7e3b8e8e8ea16ec44e2744738e141124e4c99dc2994d2"
+    },
+    "scale-narrow-after-20261026-221644": {
+      "method": "PrintWindow owned HWND",
+      "width": 520,
+      "height": 540,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "input": "Fixed public 100-file library; worker paused at initial progress for layout capture, not a timing measurement",
+      "sha256": "845b6463b742a5a176d90c33866b415d80e7367b1cce7339e3962585391ce9e9"
+    },
+    "scale-cancelled-20261026-221646": {
+      "method": "PrintWindow owned HWND",
+      "width": 820,
+      "height": 600,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "input": "Fixed public 100-file library; worker paused at initial progress for layout capture, not a timing measurement",
+      "sha256": "03bdcd7025d0f508788c7f8ee73921acd842d0bb4ce9bf08f25bd9c64fbb8cab"
+    },
+    "scale-narrow-final-20261026-222004": {
+      "method": "PrintWindow owned HWND",
+      "width": 520,
+      "height": 540,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "input": "Fixed public 100-file library; worker paused at initial progress for layout capture, not a timing measurement",
+      "sha256": "2e32e5d932165bffc00477ae1875275080b04d9ecb5a7e8c6009cb94fbc6838e"
+    },
+    "scale-final-20261026-222055": {
+      "method": "PrintWindow owned HWND",
+      "width": 820,
+      "height": 600,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "input": "Fixed public 100-file library; worker paused at initial progress for layout capture, not a timing measurement",
+      "sha256": "d43a8994fe7c4019907abdc1b7e78740a80f955646f3b0f40a2201e18a9e64a2"
+    }
+  },
+  "artifacts": [
+    "materials-scale-after-20261026-221419.json",
+    "materials-scale-before-20261026-220805.json",
+    "materials-scale-cancel-20261026-221635.json",
+    "materials-scale-semantic-after-20261026-221443.json",
+    "materials-scale-semantic-before-20261026-220810.json"
+  ],
+  "limits": [
+    "Synthetic capacity identifiers, not natural-language answer accuracy.",
+    "Single machine and single index timing per mode.",
+    "No ASR, new generation, visible-latency or real-speaker evidence.",
+    "Startup still loads synchronously."
+  ]
+}

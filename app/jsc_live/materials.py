@@ -21,6 +21,7 @@ from itertools import islice
 from pathlib import Path
 from types import MappingProxyType
 from typing import Callable, Iterable, Mapping
+from .index_task import announce, check_cancel
 
 
 def default_materials_root() -> Path:
@@ -32,11 +33,12 @@ def default_materials_root() -> Path:
 
 @dataclass(frozen=True)
 class MaterialsLimits:
-    max_files: int = 64
+    max_files: int = 128
     max_file_bytes: int = 65536
     max_document_bytes: int = 10 * 1024 * 1024
-    max_total_chars: int = 100000
-    max_chunks: int = 256
+    max_document_chars: int = 100000
+    max_total_chars: int = 400000
+    max_chunks: int = 2048
     max_chunk_chars: int = 700
     max_results: int = 4
     max_result_chars: int = 1800
@@ -215,13 +217,14 @@ class MaterialsStore:
     """
 
     def __init__(self, root: str | Path | None = None, *, limits: MaterialsLimits | None = None,
-                 tokenizer: Callable[[str], Iterable[str]] = tokenize) -> None:
+                 tokenizer: Callable[[str], Iterable[str]] = tokenize, progress=None, cancel=None) -> None:
         self.root = Path(root) if root is not None else default_materials_root()
         self.limits = limits or MaterialsLimits()
         self._tokenizer = tokenizer
         counts: Counter[str] = Counter()
         chunks: list[MaterialChunk] = []
         document_issues: list[dict] = []
+        announce(progress, "正在查看资料文件夹…", cancel)
         try:
             if not self.root.exists():
                 counts["missing_root"] += 1
@@ -229,12 +232,18 @@ class MaterialsStore:
                 counts["unsafe_root"] += 1
             else:
                 resolved_root = self.root.resolve(strict=True)
-                for path in self._paths(resolved_root, counts):
+                paths = list(self._paths(resolved_root, counts, cancel=cancel))
+                total_files = min(len(paths), self.limits.max_files)
+                for path in paths:
+                    check_cancel(cancel)
                     if counts["files_considered"] >= self.limits.max_files or len(chunks) >= self.limits.max_chunks:
-                        counts["index_limit_reached"] += 1
+                        counts["index_limit_reached"] = 1
+                        document_issues.append({"path": "资料文件夹", "message":
+                            f"达到{self.limits.max_files}个文件或{self.limits.max_chunks}个片段的容量上限，后续文件未读取。请按主题分开放置。"})
                         break
                     counts["files_considered"] += 1
                     relative = path.relative_to(resolved_root).as_posix()
+                    announce(progress, f"正在读取 {counts['files_considered']}/{total_files} 个文件：{relative}", cancel)
                     if path.suffix.casefold() in (".docx", ".pdf"):
                         from .document_text import DocumentError, extract_docx
 
@@ -245,13 +254,14 @@ class MaterialsStore:
                         try:
                             if path.suffix.casefold() == ".pdf":
                                 from .pdf_text import extract_pdf
-                                sections, notices = extract_pdf(raw, max_chars=self.limits.max_total_chars)
+                                sections, notices = extract_pdf(raw, max_chars=min(self.limits.max_document_chars, self.limits.max_total_chars), cancel=cancel)
                             else:
-                                sections, notices = extract_docx(raw, max_chars=self.limits.max_total_chars)
+                                sections, notices = extract_docx(raw, max_chars=min(self.limits.max_document_chars, self.limits.max_total_chars))
                         except DocumentError as exc:
                             counts["document_read_error"] += 1
                             document_issues.append({"path": relative, "message": str(exc)})
                             continue
+                        check_cancel(cancel)
                         document_issues.extend({"path": relative, "message": notice} for notice in notices)
                         if not sections:
                             counts["document_without_text"] += 1
@@ -273,36 +283,51 @@ class MaterialsStore:
                         "profile.md", "basic-info.md") else "unverified"
                     counts["indexed_files"] += 1
                     counts["indexed_chars"] += size
+                    partial = False
                     for block, heading, location in blocks:
                         for part, (start, end, body) in enumerate(_chunk_parts(block, self.limits.max_chunk_chars)):
+                            check_cancel(cancel)
+                            if len(chunks) >= self.limits.max_chunks:
+                                counts["index_limit_reached"] = 1
+                                counts["partial_files"] += 1
+                                document_issues.append({"path": relative, "message":
+                                    f"达到{self.limits.max_chunks}片段上限，此文件仅载入前一部分。请拆分资料文件夹后重新读取。"})
+                                partial = True
+                                break
                             identity_parts = [relative, start, end, part, heading, body]
                             if location:
                                 identity_parts.append(location)
                             identity = json.dumps(identity_parts, ensure_ascii=False)
                             source_id = "material-" + hashlib.sha256(identity.encode("utf-8")).hexdigest()[:24]
                             chunks.append(MaterialChunk(source_id, relative, start, end, body, heading, hint, location=location))
-                            if len(chunks) >= self.limits.max_chunks:
-                                break
-                        if len(chunks) >= self.limits.max_chunks:
+                        if partial:
                             break
         except (OSError, RuntimeError):
             counts["root_read_error"] += 1
         self.chunks = tuple(chunks)
         self.document_issues = tuple(MappingProxyType(issue) for issue in document_issues)
         self.diagnostics: Mapping[str, int] = MappingProxyType(dict(counts, indexed_chunks=len(chunks)))
-        self._terms = tuple(Counter(tokenizer(chunk.heading + "\n" + chunk.text)) for chunk in self.chunks)
-        self._body_terms = tuple(frozenset(tokenizer(chunk.text)) for chunk in self.chunks)
+        terms, body_terms = [], []
+        for index, chunk in enumerate(self.chunks):
+            check_cancel(cancel)
+            if index % 32 == 0:
+                announce(progress, f"正在准备关键词查找：{index}/{len(self.chunks)} 个片段…", cancel)
+            terms.append(Counter(tokenizer(chunk.heading + "\n" + chunk.text)))
+            body_terms.append(frozenset(tokenizer(chunk.text)))
+        self._terms, self._body_terms = tuple(terms), tuple(body_terms)
         self._lengths = tuple(sum(terms.values()) for terms in self._terms)
         self._average_length = sum(self._lengths) / len(self._lengths) if self._lengths else 1.0
         self._document_frequency = Counter(term for terms in self._terms for term in terms)
+        check_cancel(cancel)
 
-    def rebuild(self, root):
+    def rebuild(self, root, *, progress=None, cancel=None):
         """Create a new snapshot with the same limits and retrieval configuration."""
-        return MaterialsStore(root, limits=self.limits, tokenizer=self._tokenizer)
+        return MaterialsStore(root, limits=self.limits, tokenizer=self._tokenizer, progress=progress, cancel=cancel)
 
-    def _paths(self, root: Path, counts: Counter) -> Iterable[Path]:
+    def _paths(self, root: Path, counts: Counter, *, cancel=None) -> Iterable[Path]:
         pending = [(root, 0)]
         while pending and counts["scanned_entries"] < self.limits.max_scan_entries:
+            check_cancel(cancel)
             folder, depth = pending.pop()
             try:
                 if _is_link(folder) or not _inside(folder.resolve(strict=True), root):
@@ -311,6 +336,7 @@ class MaterialsStore:
                 entries = []
                 with os.scandir(folder) as scan:
                     for entry in scan:
+                        check_cancel(cancel)
                         if counts["scanned_entries"] >= self.limits.max_scan_entries:
                             counts["scan_limit_reached"] += 1
                             break

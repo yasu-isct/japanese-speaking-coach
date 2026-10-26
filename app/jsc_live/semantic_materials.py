@@ -12,6 +12,7 @@ import threading
 from types import MappingProxyType
 
 from .materials import MaterialHit, MaterialsStore
+from .index_task import announce, check_cancel
 
 MODEL_REPO = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 MODEL_REVISION = "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
@@ -137,20 +138,31 @@ class SemanticEncoder:
 class SemanticMaterialsStore(MaterialsStore):
     def __init__(self, root=None, *, encoder, **kwargs):
         super().__init__(root, **kwargs)
+        progress, cancel = kwargs.get("progress"), kwargs.get("cancel")
         self.encoder = encoder
         self.semantic_failed = threading.Event()
         views, owners = [], []
         for index, chunk in enumerate(self.chunks):
+            check_cancel(cancel)
             pieces = encoder.windows(chunk.heading, chunk.text)
             views.extend(pieces)
             owners.extend([index] * len(pieces))
-        self._vectors = encoder.encode(views)
+        import numpy as np
+        vectors = []
+        for offset in range(0, len(views), 4):
+            check_cancel(cancel)
+            if offset % 16 == 0:
+                announce(progress, f"正在准备多语言查找：{offset}/{len(views)}…", cancel)
+            vectors.append(encoder.encode(views[offset:offset + 4]))
+        check_cancel(cancel)
+        self._vectors = np.concatenate(vectors) if vectors else encoder.encode([])
         self._owners = tuple(owners)
         self._chunk_ids = {chunk.source_id: i for i, chunk in enumerate(self.chunks)}
         self.diagnostics = MappingProxyType(dict(self.diagnostics, semantic_enabled=1, semantic_windows=len(views)))
 
-    def rebuild(self, root):
-        return SemanticMaterialsStore(root, encoder=self.encoder, limits=self.limits, tokenizer=self._tokenizer)
+    def rebuild(self, root, *, progress=None, cancel=None):
+        return SemanticMaterialsStore(root, encoder=self.encoder, limits=self.limits, tokenizer=self._tokenizer,
+                                      progress=progress, cancel=cancel)
 
     def explain(self, query: str) -> dict:
         hits = self.search(query)
