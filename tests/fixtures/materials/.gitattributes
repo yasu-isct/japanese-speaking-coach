@@ -1,0 +1,3 @@
+# Keep frozen fixture byte hashes stable on Windows checkouts.
+general/** text eol=lf
+profile-regression-v2/** text eol=lf

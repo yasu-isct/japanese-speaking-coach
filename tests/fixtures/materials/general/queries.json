@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "description": "公开虚构的通用外部文档检索诊断；课程、会议、设备手册、学习文章。",
+  "baseline_profile": "course.md",
+  "cases": [
+    {"id": 1, "query": "自然言語処理の授業では、どの形式で提出しますか？", "topic": "课程说明・日语", "relevant": [{"path": "course.md", "start": 6, "end": 6}], "forbidden": []},
+    {"id": 2, "query": "自然语言处理课的作业截止是什么时候？", "topic": "课程截止・中文", "relevant": [{"path": "course.md", "start": 5, "end": 5}], "forbidden": []},
+    {"id": 3, "query": "レビュー会議に参加する前に、何を用意しますか？", "topic": "会议事前准备・日语", "relevant": [{"path": "meeting.md", "start": 4, "end": 4}], "forbidden": []},
+    {"id": 4, "query": "会议链接失效时在哪里找新链接？", "topic": "会议入口・中文", "relevant": [{"path": "meeting.md", "start": 6, "end": 6}], "forbidden": []},
+    {"id": 5, "query": "録音機の赤いランプが点滅したら、どうすればいいですか？", "topic": "手册故障提示・日语", "relevant": [{"path": "manual.md", "start": 5, "end": 5}], "forbidden": []},
+    {"id": 6, "query": "录音设备录满以后应该怎样处理？", "topic": "手册步骤・中文", "relevant": [{"path": "manual.md", "start": 6, "end": 6}], "forbidden": []},
+    {"id": 7, "query": "この記事で、間隔を空けて復習する利点は何と説明されていますか？", "topic": "文章解释・日语", "relevant": [{"path": "article.md", "start": 3, "end": 3}], "forbidden": []},
+    {"id": 8, "query": "复习的间隔应该是多少分钟？", "topic": "文章未给出具体分钟数", "relevant": [], "forbidden": [], "forbid_all_sources": true},
+    {"id": 9, "query": "活动场馆附近的停车费是多少？", "topic": "文档中没有场馆或停车资料", "relevant": [], "forbidden": [], "forbid_all_sources": true},
+    {"id": 10, "query": "このカメラのレンズは交換できますか？", "topic": "文档中没有相机说明", "relevant": [], "forbidden": [], "forbid_all_sources": true}
+  ]
+}

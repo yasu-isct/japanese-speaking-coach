@@ -3,7 +3,7 @@
 开着它和日本人说话（或看日语视频）时，屏幕下方会出现一个小窗口：
 
 - **上半部分是字幕**：对方说的日语，难的汉字上面标假名；
-- **下半部分是「怎么接话」**：对方说完一段话、停下来之后，大约 2.5 秒内给出 3 种可以直接念出来的回复：
+- **下半部分是「怎么接话」**：对方说完一段话、停下来之后，给出 3 种回复；有【字段】时先填写再说：
   - 丁寧：礼貌版，对上司、老师、店员说；
   - カジュアル：朋友版；
   - かんたん：紧张时的保底版。
@@ -34,12 +34,29 @@
    LLM_MODEL=deepseek-flash
    ```
    不放这个文件也能用字幕，只是没有建议。
-3. 想让建议用上你自己的信息（名字、来日本多久、学校、打工……），把 `profile.example.md` 复制一份，改名为 `profile.md`，照着填。
-   - 不填的话，建议里涉及你个人的地方应留出字段，比如「日本に来て【期間】です」。先把【期間】换成自己的真实情况再说；括号不是已经填好的答案。
-   - 模板里带「（例）」的行、空白和「未填写」不会当作你的事实。填好时请删掉「（例）」。
-   - 是否有卡、有没有空、工作是否做完也属于个人情况。模型仍可能漏留空或答非所问，尤其要核对这些状态。
-   - `profile.md` 不会提交到 GitHub，但开着建议时，它的内容会随每次请求发给 DeepSeek，只写你愿意发出去的内容。
-   - 资料区迁移与按问题查找相关片段正在开发，目前仍读取这一份文件。
+3. 想让回答参考课程笔记、文章、工作文档或个人背景，可以先建立外部资料文件夹：
+   ```powershell
+   .\jsc-live.bat --init-materials
+   ```
+   命令会显示文件夹位置，默认在 `%LOCALAPPDATA%\JapaneseSpeakingCoach\materials`，和代码分开。把 UTF-8 的 `.md` / `.txt` 文件放进去即可；一个主题一段、加清楚的标题更容易查到，修改后重启应用。
+   - 不放资料也能用字幕和接话建议；需要补充的具体情况应留成【字段】，请先填写再说。
+   - 开启建议后，软件会在本机找相关片段，**把命中的片段随问题发给 API**。只放愿意发送的资料；不会自动扫描你的课堂存档。
+   - 回答用了资料时，理由会显示文件名与行号；点工具栏「资料」可查看本轮实际发送的片段。检索命中和模型声明引用会分别标记。
+   - 检索和模型都可能漏掉信息或引用不当；这是参考回答，仍需结合当前谈话判断。
+
+有自己的资料文件夹时：
+
+```powershell
+.\jsc-live.bat --materials "D:\我的资料\日语课"
+```
+
+从旧版 `profile.md` 导入时：
+
+```powershell
+.\jsc-live.bat --import-profile .\profile.md
+```
+
+这一步只复制到外部资料区，完成后退出；原文件保留，目标同名文件已存在就停止，不会覆盖。正常启动已不自动读取仓库里的 `profile.md`。个人背景只是资料的一种，也可以直接放入课程说明、会议笔记或操作手册。
 
 ### 每次使用
 
@@ -76,6 +93,8 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 |---|---|
 | 透明 − / 透明 + | 调透明度（也可以按住 Ctrl 滚鼠标滚轮） |
 | 历史 | 打开 / 关闭字幕历史窗口 |
+| 资料 | 查看本轮发给 API 的参考片段和回答声明引用的出处 |
+| 收起中文 / 展开中文 | 收起或显示中文意思与理由；⚠ 警告一直保留 |
 | 收起 | 只留这一排按钮，字幕和建议都不显示 |
 | 字幕 | 只显示字幕，不显示建议 |
 | 完整 | 字幕 + 建议 |
@@ -117,7 +136,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 
 ## 请你帮忙做的测试：真人说话 / 真实视频
 
-我目前只用电脑合成的声音测试过。下一步该改什么，要看真人说话时好不好用。
+字幕已有课堂和真实录音测试；本轮外部资料问答与界面调整使用虚构文档、文字和合成语音验证，还需要实际通话体验确认。
 
 **做法**：
 
@@ -152,7 +171,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
   → 接话建议 (OpenAI 兼容 API，规则复用 skill/SKILL.md 的 A 模式；后台线程，不阻塞字幕)
 ```
 
-- 识别在本机显卡上跑，音频不出电脑。接话建议要联网，发送文字：识别出的这一段、之前的几句、`--partner`，以及已填写的 `profile.md` 内容。
+- 识别在本机显卡上跑，音频不出电脑。接话建议要联网，发送文字：识别出的这一段、之前的几句、`--partner`，以及从外部资料区检索出的相关片段。
 - DeepSeek 默认关闭「思考」模式（开着首字要多等约 2 秒）；用别的服务时，可以在 `.env` 加一行 `LLM_EXTRA_BODY={...}`（JSON，原样并入请求）。
 - 每句耗时分三段记录在 `logs/live-*.jsonl`：识别、API 往返、渲染。控制台也会打印 `[suggest #n] asr … | api … | render …`。
 
@@ -167,6 +186,9 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | `--source file --file a.wav --realtime` | 用 WAV 文件模拟实时输入 |
 | `--suggest` | 打开接话建议（需要 `.env`） |
 | `--partner 上司` | 对方是谁，影响 ⭐ 和 ⚠ |
+| `--materials 文件夹` | 指定外部参考资料区；不指定就用用户数据目录 |
+| `--init-materials` | 建立资料区并显示路径，然后退出，不调用 API |
+| `--import-profile 文件` | 把明确指定的旧资料复制到资料区，保留原文件且不覆盖目标，然后退出 |
 | `--suggest-timeout 3` | 几秒没到算超时 |
 | `--turn-gap 0.8` | 对方停下来后再等几秒才出建议（在 0.6 秒分句停顿之外）；调小更快，调大更不容易把一段话切开 |
 | `--history 5` | 字幕区保留几句 |
@@ -190,7 +212,11 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | 接话建议，一问一答 10 句（deepseek-flash） | 最后一句字幕 → 建议显示：中位数 2.43 s，最大 2.63 s；其中等待停顿 0.82 s、API 往返 1.55 s（首字 0.85 s）、渲染 72 ms（`tests/live_suggest/e2e-dialogue-*`） |
 | 接话建议，独白 3 段 11 个片段 | 只请求 3 次，每次回应整段；2.49 / 2.65 / 3.09 s（`tests/live_suggest/e2e-monologue-*`） |
 
-单元测试：在 `japanese-speaking-coach` 目录下运行 `python -m unittest discover -s tests`，不需要显卡和网络。
+单元测试：在 `japanese-speaking-coach` 目录下运行 `python -m unittest discover -s tests`，不需要显卡和网络。2026-10-26 本轮共166项：165通过，1项因系统不允许创建符号链接而跳过，另有链接属性和越界路径测试通过。
+
+开发评测默认在后台隐藏窗口，避免挡住正在使用的其它软件。`tools/e2e_suggest.py` 和 `tools/benchmark_overlay.py` 只在显式加 `--show-window` 时显示测试窗；Windows 下该窗口会鼠标穿透、不抢焦点。后台的 Canvas 完成耗时不是实际可见显示延迟，两种结果会分别标记。截图还须显式指定输出路径；提前结束的运行会标记未完成并返回非零退出码。
+
+通用资料链路的公开合成语音检查：`python tools/e2e_suggest.py --scenario references --materials tests/fixtures/materials/general/data`。这会使用四份虚构文档，不读取使用者的默认资料区。
 
 ### 已知限制
 

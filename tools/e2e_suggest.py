@@ -7,12 +7,17 @@ Sentences are synthesized with a built-in Windows voice, joined into one WAV
 (short pauses inside a turn, long pauses between turns) and played at
 real-time speed through the full app path:
 
-    WAV -> Segmenter -> Transcriber -> subtitle -> SuggestionManager (API) -> window
+    WAV -> Segmenter -> Transcriber -> subtitle -> SuggestionManager (API) -> hidden Tk Canvas
+
+Default Tk windows remain hidden. --show-window explicitly enables a Windows
+click-through, non-activating preview. Hidden Canvas completion is not visible
+display latency. Screenshots require both --show-window and --screenshot PATH;
+--no-screenshot remains available for compatibility.
 
 Outputs (in tests/live_suggest/):
 - e2e-<timestamp>.jsonl  per-sentence log: recognized text, replies, asr / api / render ms
 - e2e-<timestamp>.md     the same as a table plus latency percentiles
-- logs/e2e-suggest.png  screenshot of the window once suggestion number --shot-at is drawn (local only)
+- --screenshot PATH    optional explicit screenshot once --shot-at is drawn (local only)
 """
 
 from __future__ import annotations
@@ -41,11 +46,19 @@ from jsc_live.audio import SAMPLE_RATE, WavFileSource  # noqa: E402
 from jsc_live.main import worker  # noqa: E402
 from jsc_live.overlay import SubtitleWindow  # noqa: E402
 from jsc_live.suggest import Suggester, load_profile  # noqa: E402
+from test_window import create_test_window  # noqa: E402
 
 AUDIO_DIR = ROOT / "tests" / "asr_eval" / "audio"
 OUT_DIR = ROOT / "tests" / "live_suggest"
 # Each scenario is a list of turns; each turn is a list of (id, text) pieces.
 SCENARIOS = {
+    # Public fictional reference documents in tests/fixtures/materials/general/data.
+    "references": [
+        [("r01", "自然言語処理の授業では、どの形式で提出しますか？")],
+        [("r02", "レビュー会議に参加する前に、何を用意しますか？")],
+        [("r03", "録音機の赤いランプが点滅したら、どうすればいいですか？")],
+        [("r04", "間隔を空けて復習する利点は何ですか？")],
+    ],
     # From tests/sample_dialogues.md: shop clerk, workplace, friends. One sentence per turn.
     "dialogue": [[("t01", "ポイントカードはお持ちですか？")], [("t02", "お箸おつけしますか？")],
                  [("t03", "こちら温めますか？")], [("t05", "来週の飲み会、来られそうですか？")],
@@ -111,6 +124,8 @@ def build_wav(turns: list[list[Path]], gap: float, inner_gap: float, path: Path)
 
 
 def screenshot(root, out: Path) -> None:
+    if getattr(root, "_jsc_test_window_mode", None) != "passive" or not root.winfo_viewable():
+        raise RuntimeError("Screenshots require an explicit visible passive test window")
     root.update()
     x, y, w, h = root.winfo_rootx(), root.winfo_rooty(), root.winfo_width(), root.winfo_height()
     ps = ("Add-Type -AssemblyName System.Drawing; "
@@ -119,19 +134,25 @@ def screenshot(root, out: Path) -> None:
     subprocess.run(["powershell", "-NoProfile", "-c", ps], check=True)
 
 
-def summarize(log_path: Path, md_path: Path, model: str, gap: float, scenario: str, inner_gap: float) -> None:
+def summarize(log_path: Path, md_path: Path, model: str, gap: float, scenario: str, inner_gap: float,
+              *, completed: bool = True, expected_turns: int | None = None, show_window: bool = False) -> None:
     rows = [json.loads(line) for line in log_path.read_text(encoding="utf-8").splitlines() if line.strip()]
     rows.sort(key=lambda r: r["utterance_id"])
 
     def fmt(v):
         return f"{v:.0f}" if isinstance(v, (int, float)) else "-"
 
+    render_label = "可见窗口 Canvas 完成" if show_window else "隐藏 Canvas 完成"
+    shown_label = "字幕→" + render_label
     lines = [f"# 接话建议端到端测试（{time.strftime('%Y-%m-%d %H:%M')}）", "",
              f"- 场景：`{scenario}`；模型：`{model}`；语音：Windows TTS；一段话内停顿 {inner_gap} s，"
              f"段与段之间停顿 {gap} s；对象标记：无",
              f"- 原始日志：`{log_path.name}`（每段话一行 JSON，含模型原始输出）",
-             f"- 建议请求次数：{len(rows)}；字幕句数：{sum(len(r.get('sentences', [1])) for r in rows)}", "",
-             "| 段 | 这段话的字幕（按停顿切开） | ⭐ 建议 | 识别 ms | 等待停顿 ms | API ms（首字） | 渲染 ms | 最后一句字幕→建议 ms | 状态 |",
+             f"- 建议请求次数：{len(rows)}；字幕句数：{sum(len(r.get('sentences', [1])) for r in rows)}",
+             "- 测量模式：" + ("显式可见被动窗口（鼠标穿透、不激活）；记录 Canvas 完成回调，未测屏幕像素呈现时刻。" if show_window else
+                                  "后台隐藏 Tk；记录隐藏 Canvas 完成耗时，不是可见显示延迟，不能据此验收实际屏幕显示速度。"),
+             f"- 运行状态：{'完整' if completed else '未完成，不能作为整轮验收'}；预定段数：{expected_turns if expected_turns is not None else '未记录'}", "",
+             f"| 段 | 这段话的字幕（按停顿切开） | ⭐ 建议 | 识别 ms | 等待停顿 ms | API ms（首字） | {render_label} ms | {shown_label} ms | 状态 |",
              "|---|---|---|---|---|---|---|---|---|"]
     for i, r in enumerate(rows, 1):
         star = next((f"{x['style']}：{x['text']}" for x in r.get("replies", []) if x.get("star")), "")
@@ -144,7 +165,7 @@ def summarize(log_path: Path, md_path: Path, model: str, gap: float, scenario: s
                      f"{fmt(r.get('render_ms'))} | {fmt(r.get('shown_after_ms'))} | {r.get('status')} |")
     lines.append("")
     for key, label in [("asr_ms", "识别"), ("turn_wait_ms", "等待停顿"), ("first_token_ms", "API 首字"), ("api_ms", "API 往返"),
-                       ("render_ms", "渲染"), ("shown_after_ms", "字幕→建议显示")]:
+                       ("render_ms", render_label), ("shown_after_ms", shown_label)]:
         vals = sorted(r[key] for r in rows if isinstance(r.get(key), (int, float)))
         if vals:
             p90 = vals[min(len(vals) - 1, round(0.9 * (len(vals) - 1)))]
@@ -152,27 +173,36 @@ def summarize(log_path: Path, md_path: Path, model: str, gap: float, scenario: s
             lines.append(f"- {label}：中位数 {statistics.median(vals):.0f} ms，p90 {p90:.0f} ms，p95 {p95:.0f} ms，"
                          f"最大 {vals[-1]:.0f} ms（n={len(vals)}）")
     within = sum(1 for r in rows if isinstance(r.get("shown_after_ms"), (int, float)) and r["shown_after_ms"] <= 3000)
-    lines.append(f"- 3 秒内显示：{within}/{len(rows)}")
+    lines.append(f"- 3 秒内{render_label}：{within}/{len(rows)}")
     md_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines))
 
 
-def main() -> None:
+def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--voice", default="Haruka")
     p.add_argument("--scenario", choices=sorted(SCENARIOS), default="dialogue")
     p.add_argument("--gap", type=float, default=3.5, help="pause between turns (s)")
     p.add_argument("--inner-gap", type=float, default=0.75, help="pause between pieces of one turn (s)")
     p.add_argument("--shot-at", type=int, default=2, help="screenshot when this many suggestions have been drawn")
-    p.add_argument("--screenshot", type=Path, default=ROOT / "logs" / "e2e-suggest.png")
-    p.add_argument("--profile", type=Path, help="explicit test profile; default: empty, never read private profile.md")
-    p.add_argument("--no-screenshot", action="store_true", help="measure the rendered window without capturing the screen")
+    p.add_argument("--screenshot", type=Path, help="optional screenshot destination; requires --show-window")
+    source = p.add_mutually_exclusive_group()
+    source.add_argument("--profile", type=Path, help="explicit test profile; default: empty, never read private profile.md")
+    source.add_argument("--materials", type=Path, help="explicit test materials folder; never discover the default user folder")
+    p.add_argument("--show-window", action="store_true", help="explicit Windows passive preview; default stays hidden")
+    p.add_argument("--no-screenshot", action="store_true", help="disable screenshots even with --show-window")
     cli = p.parse_args()
+    if cli.screenshot and not cli.show_window and not cli.no_screenshot:
+        p.error("--screenshot requires --show-window")
     sys.stdout.reconfigure(encoding="utf-8")
 
     demo = Path(tempfile.gettempdir()) / "jsc_e2e_suggest.wav"
     build_wav(synthesize(SCENARIOS[cli.scenario], cli.voice), cli.gap, cli.inner_gap, demo)
-    suggester = Suggester(profile=load_profile(cli.profile) if cli.profile else "")
+    if cli.materials is not None:
+        from jsc_live.materials import MaterialsStore
+        suggester = Suggester(materials=MaterialsStore(cli.materials))
+    else:
+        suggester = Suggester(profile=load_profile(cli.profile) if cli.profile else "")
     args = argparse.Namespace(source="file", file=str(demo), realtime=True, device=None,
                               model=DEFAULT_MODEL, device_type="auto",
                               furigana="graded", end_silence=0.6, no_partial=False, turn_gap=0.8)
@@ -186,13 +216,13 @@ def main() -> None:
         manager = holder["manager"]
         manager.rendered(uid, payload, timed_out)
         drawn_count[0] += 1
-        if not cli.no_screenshot and drawn_count[0] == cli.shot_at:
+        if cli.show_window and cli.screenshot and not cli.no_screenshot and drawn_count[0] == cli.shot_at:
             cli.screenshot.parent.mkdir(parents=True, exist_ok=True)
             screenshot(window.root, cli.screenshot.resolve())
 
     thread = threading.Thread(target=worker, args=(args, events, stop, suggester, holder), daemon=True)
+    window = create_test_window(SubtitleWindow, events, alpha=1.0, on_suggestion_drawn=drawn, show=cli.show_window)
     thread.start()
-    window = SubtitleWindow(events, alpha=1.0, on_suggestion_drawn=drawn)
 
     def check_done():
         manager = holder.get("manager")
@@ -202,17 +232,28 @@ def main() -> None:
         else:
             window.root.after(500, check_done)
 
-    window.root.after(500, check_done)
-    window.run()
-    stop.set()
+    try:
+        window.root.after(500, check_done)
+        window.run()
+    finally:
+        stop.set()
+        if not window.closed:
+            window.close()
+        # Preserve the footer and never accept a partial run as complete.
+        thread.join(timeout=5)
 
     log_path = holder["manager"].log.path
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     stamp = log_path.parent.name if log_path.name == "suggestions.jsonl" else log_path.stem.replace("live-", "")
     saved = OUT_DIR / f"e2e-{cli.scenario}-{stamp}.jsonl"
     shutil.copy(log_path, saved)
-    summarize(saved, OUT_DIR / f"e2e-{cli.scenario}-{stamp}.md", suggester.model, cli.gap, cli.scenario, cli.inner_gap)
+    count = sum(bool(line.strip()) for line in saved.read_text(encoding="utf-8").splitlines())
+    expected = len(SCENARIOS[cli.scenario])
+    completed = finished.is_set() and count == expected
+    summarize(saved, OUT_DIR / f"e2e-{cli.scenario}-{stamp}.md", suggester.model, cli.gap, cli.scenario, cli.inner_gap,
+              completed=completed, expected_turns=expected, show_window=cli.show_window)
+    return 0 if completed else 2
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

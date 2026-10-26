@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "frozen_at": "2026-10-26T17:01:28.283444+09:00",
+  "description": "Frozen before retrieval changes; public fictional general-document diagnostic only",
+  "sha256": {
+    "queries.json": "106131ad3c16bf7bdae342a951b36a913fe868b68ac05943011c30cf1957bb7a",
+    "data/article.md": "a92f0574d95e665cd845043e3506eb9ecafbe7558702c9bf6d157b196795627b",
+    "data/course.md": "9866e300a1fab1daac3c12c9a4ffdf2b4fe6cdae375e56ef23cc5e4ff569d90d",
+    "data/manual.md": "862a6c1fa9280fbfcb96d736376773c5b3320450d6116048051dde4ff83f3932",
+    "data/meeting.md": "b145ed435e60ec7ef1ff51561e288ee73b9db0c202f400b53fe9eba4768defd0"
+  }
+}

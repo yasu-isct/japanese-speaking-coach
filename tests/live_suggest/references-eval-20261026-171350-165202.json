@@ -1,0 +1,685 @@
+{
+  "purpose": "Six-case public integration demonstration; no semantic accuracy score",
+  "started_at": "2026-10-26T17:13:50.165202+09:00",
+  "fixture_manifest": {
+    "version": 1,
+    "frozen_at": "2026-10-26T17:01:28.283444+09:00",
+    "description": "Frozen before retrieval changes; public fictional general-document diagnostic only",
+    "sha256": {
+      "queries.json": "106131ad3c16bf7bdae342a951b36a913fe868b68ac05943011c30cf1957bb7a",
+      "data/article.md": "a92f0574d95e665cd845043e3506eb9ecafbe7558702c9bf6d157b196795627b",
+      "data/course.md": "9866e300a1fab1daac3c12c9a4ffdf2b4fe6cdae375e56ef23cc5e4ff569d90d",
+      "data/manual.md": "862a6c1fa9280fbfcb96d736376773c5b3320450d6116048051dde4ff83f3932",
+      "data/meeting.md": "b145ed435e60ec7ef1ff51561e288ee73b9db0c202f400b53fe9eba4768defd0"
+    }
+  },
+  "selected_case_ids": [
+    1,
+    3,
+    4,
+    5,
+    7,
+    9
+  ],
+  "baseline_revision": "2fa3014",
+  "baseline_source_sha256": "de2e5f7fca023e718756b7a6e8850af59a7927f9c1516af6a3f4a41787c8511a",
+  "source_sha256": {
+    "app/jsc_live/suggest.py": "0f7598784d07307c14256dec29a331da71191102b0c6609c4e09d6a6c3e461e9",
+    "app/jsc_live/materials.py": "a6a984efaa7449ed18d1c85f1c3f31328f98c9adb85a0fc2e463094ce635b330",
+    "tools/eval_reference_answers.py": "7f8fb42003f3260ea95119991771ea4295d66ac94b46d62aa93dc83fd528bc26"
+  },
+  "max_requests": 14,
+  "results": [
+    {
+      "case": {
+        "id": 1,
+        "query": "自然言語処理の授業では、どの形式で提出しますか？",
+        "topic": "课程说明・日语",
+        "relevant": [
+          {
+            "path": "course.md",
+            "start": 6,
+            "end": 6
+          }
+        ],
+        "forbidden": []
+      },
+      "variant": "no_documents_baseline",
+      "raw": "推荐|丁寧\n丁寧|レポート形式で提出します。|用报告的形式提交。|\nカジュアル|レポートで出すよ。|用报告交。|⚠ 对此对象不要用\nかんたん|レポートで出します。|用报告提交。|\n理由：对方用了「〜ますか」的丁寧语，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "レポート形式で提出します。",
+          "meaning": "用报告的形式提交。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "レポートで出すよ。",
+          "meaning": "用报告交。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "レポートで出します。",
+          "meaning": "用报告提交。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用了「〜ますか」的丁寧语，按同等礼貌程度回答。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1548.3551999786869,
+      "sources": [],
+      "model_declared_citations": [],
+      "retrieval_ms": null
+    },
+    {
+      "case": {
+        "id": 1,
+        "query": "自然言語処理の授業では、どの形式で提出しますか？",
+        "topic": "课程说明・日语",
+        "relevant": [
+          {
+            "path": "course.md",
+            "start": 6,
+            "end": 6
+          }
+        ],
+        "forbidden": []
+      },
+      "variant": "retrieval",
+      "raw": "推荐|丁寧\n丁寧|PDFで提出するそうです。|听说要交PDF。\nカジュアル|PDFで出すらしいよ。|听说要交PDF。　⚠ 对此对象不要用\nかんたん|PDFだそうです。|听说是PDF。\n理由|对方用「ますか」礼貌提问，按同等礼貌程度回答；课程说明写了提交形式是PDF[S1]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "PDFで提出するそうです。",
+          "meaning": "听说要交PDF。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "PDFで出すらしいよ。",
+          "meaning": "听说要交PDF。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "PDFだそうです。",
+          "meaning": "听说是PDF。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用「ますか」礼貌提问，按同等礼貌程度回答；课程说明写了提交形式是PDF[course.md:6]。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1429.2305000126362,
+      "sources": [
+        {
+          "source_id": "material-7ff1bee742ed06973aeede83",
+          "relative_path": "course.md",
+          "start_line": 6,
+          "end_line": 6,
+          "text": "- 提出形式：分析結果をPDFにまとめて提出する。",
+          "heading": "自然言語処理・授業案内",
+          "owner_hint": "unverified",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-2cc11aa50cfab5142ddf7575",
+          "relative_path": "course.md",
+          "start_line": 3,
+          "end_line": 3,
+          "text": "対象：文章を単語や形態素に分ける処理を学ぶ入門授業。",
+          "heading": "自然言語処理・授業案内",
+          "owner_hint": "unverified",
+          "id": "S2"
+        }
+      ],
+      "model_declared_citations": [
+        "material-7ff1bee742ed06973aeede83"
+      ],
+      "retrieval_ms": 0.32680004369467497
+    },
+    {
+      "case": {
+        "id": 3,
+        "query": "レビュー会議に参加する前に、何を用意しますか？",
+        "topic": "会议事前准备・日语",
+        "relevant": [
+          {
+            "path": "meeting.md",
+            "start": 4,
+            "end": 4
+          }
+        ],
+        "forbidden": []
+      },
+      "variant": "no_documents_baseline",
+      "raw": "推荐|丁寧\n丁寧|資料を一通り読んで、質問があればメモしておきます。|我会把资料通读一遍，有问题就记下来。|\nカジュアル|資料ざっと読んで、気になったとこメモしとく。|资料大概看一遍，在意的地方先记下来。|⚠ 对此对象不要用\nかんたん|資料を読みます。|我读资料。|\n理由：对方用了「〜ますか」，按同等礼貌程度用丁寧回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "資料を一通り読んで、質問があればメモしておきます。",
+          "meaning": "我会把资料通读一遍，有问题就记下来。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "資料ざっと読んで、気になったとこメモしとく。",
+          "meaning": "资料大概看一遍，在意的地方先记下来。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "資料を読みます。",
+          "meaning": "我读资料。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用了「〜ますか」，按同等礼貌程度用丁寧回答。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1985.015399986878,
+      "sources": [],
+      "model_declared_citations": [],
+      "retrieval_ms": null
+    },
+    {
+      "case": {
+        "id": 3,
+        "query": "レビュー会議に参加する前に、何を用意しますか？",
+        "topic": "会议事前准备・日语",
+        "relevant": [
+          {
+            "path": "meeting.md",
+            "start": 4,
+            "end": 4
+          }
+        ],
+        "forbidden": []
+      },
+      "variant": "retrieval",
+      "raw": "推荐|丁寧\n丁寧|提案書と直近の利用統計を用意します。|准备提案书和最近的利用统计。|\nカジュアル|提案書と直近の利用統計を用意するよ。|准备提案书和最近的利用统计。　⚠ 对此对象不要用\nかんたん|提案書などを用意します。|准备提案书等资料。|\n理由|对方用「〜ますか」礼貌提问，按同等礼貌程度回答；准备内容见会议通知[S2]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "提案書と直近の利用統計を用意します。",
+          "meaning": "准备提案书和最近的利用统计。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "提案書と直近の利用統計を用意するよ。",
+          "meaning": "准备提案书和最近的利用统计。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "提案書などを用意します。",
+          "meaning": "准备提案书等资料。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用「〜ますか」礼貌提问，按同等礼貌程度回答；准备内容见会议通知[meeting.md:4]。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1601.7742999829352,
+      "sources": [
+        {
+          "source_id": "material-1fa067f0f6dc5ad51c27ed14",
+          "relative_path": "meeting.md",
+          "start_line": 5,
+          "end_line": 5,
+          "text": "- 参加者：開発担当とデザイン担当。",
+          "heading": "製品レビュー会議の案内",
+          "owner_hint": "unverified",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-1a169af29ada669b05cdad6f",
+          "relative_path": "meeting.md",
+          "start_line": 4,
+          "end_line": 4,
+          "text": "- 事前準備：会議までに、提案書と直近の利用統計を用意する。",
+          "heading": "製品レビュー会議の案内",
+          "owner_hint": "unverified",
+          "id": "S2"
+        }
+      ],
+      "model_declared_citations": [
+        "material-1a169af29ada669b05cdad6f"
+      ],
+      "retrieval_ms": 0.29610004276037216
+    },
+    {
+      "case": {
+        "id": 4,
+        "query": "会议链接失效时在哪里找新链接？",
+        "topic": "会议入口・中文",
+        "relevant": [
+          {
+            "path": "meeting.md",
+            "start": 6,
+            "end": 6
+          }
+        ],
+        "forbidden": []
+      },
+      "variant": "no_documents_baseline",
+      "raw": "推荐|丁寧\n丁寧|会議(かいぎ)のリンクが切(き)れたら、どこで新(あたら)しいリンクを探(さが)せばいいですか？|会议链接失效的话，在哪里找新链接好呢？|\nカジュアル|リンク切(き)れたら、どこで新(あたら)しいの探(さが)すの？|链接失效的话，在哪找新的？|⚠ 对此对象不要用\nかんたん|どこで探(さが)しますか？|在哪里找呢？\n理由|对方用です/ます体提问，按同等礼貌程度回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "会議のリンクが切れたら、どこで新しいリンクを探せばいいですか？",
+          "meaning": "会议链接失效的话，在哪里找新链接好呢？",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "リンク切れたら、どこで新しいの探すの？",
+          "meaning": "链接失效的话，在哪找新的？",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "どこで探しますか？",
+          "meaning": "在哪里找呢？",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用です/ます体提问，按同等礼貌程度回答最稳妥。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1715.7066999934614,
+      "sources": [],
+      "model_declared_citations": [],
+      "retrieval_ms": null
+    },
+    {
+      "case": {
+        "id": 4,
+        "query": "会议链接失效时在哪里找新链接？",
+        "topic": "会议入口・中文",
+        "relevant": [
+          {
+            "path": "meeting.md",
+            "start": 6,
+            "end": 6
+          }
+        ],
+        "forbidden": []
+      },
+      "variant": "retrieval",
+      "raw": "推荐|丁寧\n丁寧|チームのナレッジベースの「毎週レビュー」ページで新しいリンクを確認してください。|请在团队知识库的「每周评审」页面确认新链接。|\nカジュアル|チームのナレッジベースの「毎週レビュー」ページで新しいリンク見てね。|在团队知识库的「每周评审」页面看新链接哦。|⚠ 对此对象不要用\nかんたん|「毎週レビュー」のページを見てください。|请看「每周评审」页面。|\n理由|对方用です/ます提问，按同等礼貌程度回答；新链接位置见资料[S1]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "チームのナレッジベースの「毎週レビュー」ページで新しいリンクを確認してください。",
+          "meaning": "请在团队知识库的「每周评审」页面确认新链接。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "チームのナレッジベースの「毎週レビュー」ページで新しいリンク見てね。",
+          "meaning": "在团队知识库的「每周评审」页面看新链接哦。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "「毎週レビュー」のページを見てください。",
+          "meaning": "请看「每周评审」页面。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用です/ます提问，按同等礼貌程度回答；新链接位置见资料[meeting.md:6]。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1690.839600050822,
+      "sources": [
+        {
+          "source_id": "material-2c80b66e659ed73de5b4b466",
+          "relative_path": "meeting.md",
+          "start_line": 6,
+          "end_line": 6,
+          "text": "- 会议链接失效：在团队知识库的「每周评审」页获取新链接。",
+          "heading": "製品レビュー会議の案内",
+          "owner_hint": "unverified",
+          "id": "S1"
+        }
+      ],
+      "model_declared_citations": [
+        "material-2c80b66e659ed73de5b4b466"
+      ],
+      "retrieval_ms": 0.2598999999463558
+    },
+    {
+      "case": {
+        "id": 5,
+        "query": "録音機の赤いランプが点滅したら、どうすればいいですか？",
+        "topic": "手册故障提示・日语",
+        "relevant": [
+          {
+            "path": "manual.md",
+            "start": 5,
+            "end": 5
+          }
+        ],
+        "forbidden": []
+      },
+      "variant": "no_documents_baseline",
+      "raw": "推荐|丁寧\n丁寧|赤いランプが点滅したら、録音が始まったという意味だと思います。|我想红灯闪烁就是表示开始录音了。|\nカジュアル|赤いランプが点滅したら、録音が始まったってことだと思うよ。|红灯闪的话，应该是表示开始录音了。|⚠ 对此对象不要用\nかんたん|録音が始まったという意味だと思います。|我想是表示开始录音了。|\n理由|对方用了「〜ですか」，按同等礼貌程度用丁寧回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "赤いランプが点滅したら、録音が始まったという意味だと思います。",
+          "meaning": "我想红灯闪烁就是表示开始录音了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "赤いランプが点滅したら、録音が始まったってことだと思うよ。",
+          "meaning": "红灯闪的话，应该是表示开始录音了。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "録音が始まったという意味だと思います。",
+          "meaning": "我想是表示开始录音了。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用了「〜ですか」，按同等礼貌程度用丁寧回答。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1703.2214000355452,
+      "sources": [],
+      "model_declared_citations": [],
+      "retrieval_ms": null
+    },
+    {
+      "case": {
+        "id": 5,
+        "query": "録音機の赤いランプが点滅したら、どうすればいいですか？",
+        "topic": "手册故障提示・日语",
+        "relevant": [
+          {
+            "path": "manual.md",
+            "start": 5,
+            "end": 5
+          }
+        ],
+        "forbidden": []
+      },
+      "variant": "retrieval",
+      "raw": "推荐|丁寧\n丁寧|録音を止めて、充電してください。|请停止录音，然后充电。|\nカジュアル|録音止めて、充電して。|停掉录音，去充电。|\nかんたん|録音を止めて、充電してください。|请停止录音并充电。|\n理由|对方用「〜ですか」礼貌提问，按同等礼貌回答；手册写明红灯闪烁是电量不足，需停止录音并充电[S1]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "録音を止めて、充電してください。",
+          "meaning": "请停止录音，然后充电。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "録音止めて、充電して。",
+          "meaning": "停掉录音，去充电。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "録音を止めて、充電してください。",
+          "meaning": "请停止录音并充电。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用「〜ですか」礼貌提问，按同等礼貌回答；手册写明红灯闪烁是电量不足，需停止录音并充电[manual.md:5]。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1510.1540999021381,
+      "sources": [
+        {
+          "source_id": "material-850d820e19d9c963f1e8ed9a",
+          "relative_path": "manual.md",
+          "start_line": 5,
+          "end_line": 5,
+          "text": "- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。",
+          "heading": "録音機・录音设备の操作マニュアル",
+          "owner_hint": "unverified",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-3f06fb4ea57c568e2829c4e0",
+          "relative_path": "manual.md",
+          "start_line": 4,
+          "end_line": 4,
+          "text": "- 青いランプ：録音中。",
+          "heading": "録音機・录音设备の操作マニュアル",
+          "owner_hint": "unverified",
+          "id": "S2"
+        }
+      ],
+      "model_declared_citations": [
+        "material-850d820e19d9c963f1e8ed9a"
+      ],
+      "retrieval_ms": 0.33650000113993883
+    },
+    {
+      "case": {
+        "id": 7,
+        "query": "この記事で、間隔を空けて復習する利点は何と説明されていますか？",
+        "topic": "文章解释・日语",
+        "relevant": [
+          {
+            "path": "article.md",
+            "start": 3,
+            "end": 3
+          }
+        ],
+        "forbidden": []
+      },
+      "variant": "no_documents_baseline",
+      "raw": "推荐|丁寧\n丁寧|「忘れかけた頃に復習すると、記憶が長く残る」と説明されています。|说明是「在快要忘记的时候复习，记忆会保留得更久」。|\nカジュアル|「忘れかけた頃に復習すると記憶が長く残る」って書いてあるよ。|上面写着「快忘记时复习，记忆能留得更久」。|⚠ 对此对象不要用\nかんたん|忘れかけた頃に復習するといい、と書いてあります。|上面写着最好在快忘记时复习。|\n理由：对方用「〜されていますか」的丁寧问法，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "「忘れかけた頃に復習すると、記憶が長く残る」と説明されています。",
+          "meaning": "说明是「在快要忘记的时候复习，记忆会保留得更久」。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "「忘れかけた頃に復習すると記憶が長く残る」って書いてあるよ。",
+          "meaning": "上面写着「快忘记时复习，记忆能留得更久」。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "忘れかけた頃に復習するといい、と書いてあります。",
+          "meaning": "上面写着最好在快忘记时复习。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用「〜されていますか」的丁寧问法，按同等礼貌程度回答。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1767.80399994459,
+      "sources": [],
+      "model_declared_citations": [],
+      "retrieval_ms": null
+    },
+    {
+      "case": {
+        "id": 7,
+        "query": "この記事で、間隔を空けて復習する利点は何と説明されていますか？",
+        "topic": "文章解释・日语",
+        "relevant": [
+          {
+            "path": "article.md",
+            "start": 3,
+            "end": 3
+          }
+        ],
+        "forbidden": []
+      },
+      "variant": "retrieval",
+      "raw": "推荐|丁寧\n丁寧|忘れかけた内容を思い出す練習になり、長く覚えやすくなる点です。|是能练习回忆快要忘记的内容，从而更容易长期记住这一点。|\nカジュアル|忘れかけた内容を思い出す練習になって、長く覚えやすくなるって。|文章说，这能练习回忆快要忘记的内容，从而更容易长期记住。　⚠ 对此对象不要用\nかんたん|忘れかけた内容を思い出す練習になるそうです。|据说是能练习回忆快要忘记的内容。|\n理由|对方用「〜ですか」礼貌提问，按同等礼貌程度回答[S1]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "忘れかけた内容を思い出す練習になり、長く覚えやすくなる点です。",
+          "meaning": "是能练习回忆快要忘记的内容，从而更容易长期记住这一点。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "忘れかけた内容を思い出す練習になって、長く覚えやすくなるって。",
+          "meaning": "文章说，这能练习回忆快要忘记的内容，从而更容易长期记住。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "忘れかけた内容を思い出す練習になるそうです。",
+          "meaning": "据说是能练习回忆快要忘记的内容。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用「〜ですか」礼貌提问，按同等礼貌程度回答[article.md:3]。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1926.2289999751374,
+      "sources": [
+        {
+          "source_id": "material-8cd413926774b463c32ed432",
+          "relative_path": "article.md",
+          "start_line": 3,
+          "end_line": 3,
+          "text": "間隔を空けて復習すると、忘れかけた内容を思い出す練習になり、長く覚えやすくなる。",
+          "heading": "学習記事：復習の間隔",
+          "owner_hint": "unverified",
+          "id": "S1"
+        }
+      ],
+      "model_declared_citations": [
+        "material-8cd413926774b463c32ed432"
+      ],
+      "retrieval_ms": 0.3053999971598387
+    },
+    {
+      "case": {
+        "id": 9,
+        "query": "活动场馆附近的停车费是多少？",
+        "topic": "文档中没有场馆或停车资料",
+        "relevant": [],
+        "forbidden": [],
+        "forbid_all_sources": true
+      },
+      "variant": "no_documents_baseline",
+      "raw": "推荐|丁寧\n丁寧|調べてみますね。少々お待ちください。|我查一下，请稍等。|\nカジュアル|調べてみるね。ちょっと待ってて。|我查查看，稍等一下。|⚠ 对此对象不要用\nかんたん|確認しますね。|我确认一下。|\n理由|对方用です/ます礼貌提问，按同等礼貌程度回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "調べてみますね。少々お待ちください。",
+          "meaning": "我查一下，请稍等。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "調べてみるね。ちょっと待ってて。",
+          "meaning": "我查查看，稍等一下。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "確認しますね。",
+          "meaning": "我确认一下。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用です/ます礼貌提问，按同等礼貌程度回答最稳妥。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1507.632999913767,
+      "sources": [],
+      "model_declared_citations": [],
+      "retrieval_ms": null
+    },
+    {
+      "case": {
+        "id": 9,
+        "query": "活动场馆附近的停车费是多少？",
+        "topic": "文档中没有场馆或停车资料",
+        "relevant": [],
+        "forbidden": [],
+        "forbid_all_sources": true
+      },
+      "variant": "retrieval",
+      "raw": "推荐|丁寧\n丁寧|調(しら)べてみますね。少々(しょうしょう)お待(ま)ちください。|我查一下，请稍等。|\nカジュアル|調べてみるね。ちょっと待ってて。|我查一下，稍等一下。|\nかんたん|調(しら)べますね。|我查一下。|\n理由|对方用です/ます礼貌提问，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "調べてみますね。少々お待ちください。",
+          "meaning": "我查一下，请稍等。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "調べてみるね。ちょっと待ってて。",
+          "meaning": "我查一下，稍等一下。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "調べますね。",
+          "meaning": "我查一下。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用です/ます礼貌提问，按同等礼貌程度回答。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1837.7114000031725,
+      "sources": [],
+      "model_declared_citations": [],
+      "retrieval_ms": 0.1732999226078391
+    }
+  ],
+  "completed": true,
+  "requests_sent": 14
+}

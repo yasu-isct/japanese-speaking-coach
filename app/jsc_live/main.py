@@ -14,6 +14,7 @@ are printed to the console instead.
 from __future__ import annotations
 
 import argparse
+from pathlib import Path
 import queue
 import sys
 import threading
@@ -109,6 +110,8 @@ def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, hol
                     result = transcriber.transcribe(event.audio, final=False)
                     last_partial_at = time.perf_counter()
                     events.put(("partial", event.utterance_id, furigana.annotate(result.text)))
+                    if manager and result.text:
+                        manager.prefetch(result.text)
                 else:
                     finish(event.utterance_id, event.audio)
         for event in segmenter.flush():
@@ -147,6 +150,9 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--list-devices", action="store_true")
     p.add_argument("--suggest", action="store_true", help="show 3 reply suggestions (API settings in .env)")
     p.add_argument("--partner", help="who you are talking to, e.g. 上司 / 老师 / 店员 / 朋友 (helps politeness)")
+    p.add_argument("--materials", type=Path, help="external folder of UTF-8 .md/.txt reference documents")
+    p.add_argument("--init-materials", action="store_true", help="create the materials folder and exit; no API call")
+    p.add_argument("--import-profile", type=Path, help="copy an old profile to external materials without overwriting, then exit")
     p.add_argument("--suggest-timeout", type=float, default=3.0, help="seconds before a suggestion counts as late")
     p.add_argument("--turn-gap", type=float, default=0.8,
                    help="extra quiet seconds after a sentence before the turn is answered (on top of --end-silence)")
@@ -160,6 +166,16 @@ def main(argv: list[str] | None = None) -> None:
 
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
+    if args.init_materials or args.import_profile:
+        from .material_setup import prepare_materials
+
+        try:
+            destination = prepare_materials(args.materials, args.import_profile)
+        except (OSError, ValueError) as exc:
+            p.error(str(exc))
+        print(f"资料文件夹：{destination}\n可放入课程笔记、文章或工作文档（UTF-8 .md/.txt）。\n"
+              "开启建议后，检索命中的片段会发给 API；原资料保留，不会自动上传全部文件。")
+        return
     if args.list_devices:
         from .audio import list_devices
 
@@ -169,9 +185,15 @@ def main(argv: list[str] | None = None) -> None:
     suggester = None
     if args.suggest:
         from .suggest import Suggester
+        from .materials import MaterialsStore
 
         try:
-            suggester = Suggester(partner=args.partner)
+            suggester = Suggester(partner=args.partner, materials=MaterialsStore(args.materials))
+            print(f"[资料] {suggester.materials.root}（{len(suggester.materials.chunks)} 个片段）；"
+                  "本轮查到的相关片段会随问题发给 API。", flush=True)
+            if args.materials is None and (Path(__file__).resolve().parents[2] / "profile.md").is_file():
+                print("[资料] 检测到旧 profile.md；需要使用时运行 jsc-live.bat --import-profile profile.md。"
+                      "原文件会保留，不自动读取或覆盖。", flush=True)
         except RuntimeError as exc:  # no .env: keep the subtitles, skip suggestions
             print(f"[suggest] disabled: {exc}", flush=True)
     holder: dict = {}
@@ -209,7 +231,7 @@ def main(argv: list[str] | None = None) -> None:
         try:
             from .suggest import Suggester
 
-            lookup_client = Suggester()
+            lookup_client = Suggester(profile="")  # dictionary lookup does not need external documents
         except RuntimeError:
             lookup_client = None
     lookup = Lookup(lookup_client)
@@ -222,6 +244,7 @@ def main(argv: list[str] | None = None) -> None:
                             suggestion_timeout=args.suggest_timeout,
                             on_suggestion_drawn=suggestion_drawn,
                             history_window=None if args.no_history else make_history,
+                            materials_root=str(suggester.materials.root) if suggester and suggester.materials is not None else None,
                             mode="full" if suggester else "subtitles")
     try:
         window.run()

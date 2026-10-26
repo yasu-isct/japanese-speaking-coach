@@ -124,6 +124,16 @@ class SuggestionManager:
         if text:
             with self.lock:
                 self.turns.add(uid, text, asr_ms, time.perf_counter())
+            self.prefetch()
+
+    def prefetch(self, partial: str = "") -> None:
+        """Retrieve on the audio worker during speech / turn waiting, never on Tk."""
+        with self.lock:
+            texts = [item["text"] for item in self.turns.pending]
+        if partial:
+            texts.append(partial)
+        if texts:
+            self.suggester.prefetch(texts[-self.turns.max_sentences:])
 
     def set_speaking(self, speaking: bool) -> None:
         """Called by the worker for every audio block: is someone talking right now?"""
@@ -159,6 +169,7 @@ class SuggestionManager:
             "segments": self.furigana.annotate(r.text),
         } for r in s.replies]
         return {"state": state, "replies": replies, "reason": s.reason, "error": s.error,
+                "sources": s.sources, "cited_source_ids": s.cited_source_ids,
                 "queued_at": time.perf_counter()}
 
     def _run(self, uid: int, text: list[str], context: list[str]) -> None:
@@ -171,6 +182,9 @@ class SuggestionManager:
         self.log.update(uid, api_ms=round(s.api_ms, 1),
                         first_token_ms=round(s.first_token_ms, 1) if s.first_token_ms else None,
                         replies=[asdict(r) for r in s.replies], reason=s.reason, raw=s.raw, error=s.error,
+                        sources=s.sources, cited_source_ids=s.cited_source_ids,
+                        retrieval_ms=round(s.retrieval_ms, 3) if s.retrieval_ms is not None else None,
+                        retrieval_cached=s.retrieval_cached,
                         star_inferred=s.star_inferred)
         payload = self._payload(state, s)
         if uid == self.latest:
