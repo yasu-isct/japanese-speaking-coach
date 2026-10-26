@@ -1,5 +1,4 @@
 *.json text eol=lf
-queries.json -text
 *.md text eol=lf
-data/*.txt -text
+data/*.txt text eol=lf
 data/*.docx binary

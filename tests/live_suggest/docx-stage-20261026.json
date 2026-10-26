@@ -78,5 +78,11 @@
     "No Word layout/rendering or human review.",
     "PDF and complex DOCX structures are not supported.",
     "No new visible latency measurement."
-  ]
+  ],
+  "lf_reproduction": {
+    "result": "docx-materials-verified-20261026-214440.json",
+    "unchanged_source_payloads": 10,
+    "correct_target_locations": 10,
+    "note": "Original runs used Windows CRLF in the disclaimer and queries; these text fixtures are now frozen as LF. DOCX bytes unchanged. Original raw evidence retained."
+  }
 }

@@ -1,0 +1,385 @@
+{
+  "label": "verified",
+  "generated_at": "2026-10-26T21:44:40.069420",
+  "corpus": "tests/fixtures/materials/documents/data",
+  "mode": "semantic",
+  "provenance": "Synthetic public test documents; no API, no people, not answer accuracy.",
+  "sha256": {
+    "course.docx": "2dcd30af100362576688572af7be1e717d3893c8b98dadaea5f2a9e64bfb25ad",
+    "readme.txt": "4ee3cb08d139cc7ab4b8d39032968705a2a1ed70929d2effb2ec859697a4b5b3",
+    "workshop.docx": "e803172236bbe9e00aef8ff4c2cf1f666d257c98be06f07d4ff257a81e4dbe4f"
+  },
+  "diagnostics": {
+    "scanned_entries": 3,
+    "files_considered": 3,
+    "indexed_files": 3,
+    "indexed_chars": 397,
+    "indexed_chunks": 17,
+    "semantic_enabled": 1,
+    "semantic_windows": 17
+  },
+  "build_ms": 1215.2491000015289,
+  "search_p50_ms": 2.881999942474067,
+  "search_p95_ms": 4.015899961814284,
+  "coverage": 10,
+  "total": 10,
+  "rows": [
+    {
+      "id": "submission",
+      "query": "録音課題はいつ、どの形式で提出しますか？",
+      "path": "course.docx",
+      "location": "第2段",
+      "needles": [
+        "金曜日",
+        "MP3"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-7a70d9e6b5f423a44798ce7f",
+          "relative_path": "course.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "録音課題は金曜日の午後六時までに、学習サイトからMP3形式で提出します。",
+          "heading": "架空の公開講座：提出案内",
+          "owner_hint": "unverified",
+          "location": "第2段"
+        },
+        {
+          "source_id": "material-6cf9a18f158cf96cc8320b28",
+          "relative_path": "course.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "録音は一人三分以内です。二人で発表する場合も、一人につき三分までです。",
+          "heading": "架空の公開講座：提出案内",
+          "owner_hint": "unverified",
+          "location": "第3段"
+        },
+        {
+          "source_id": "material-596bc994a36604355b0cc8fc",
+          "relative_path": "course.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "録音機 | 当日中に返却。予約は前日の正午までです。",
+          "heading": "架空の公開講座：提出案内 / 機材の貸出 / 機材 | 貸出条件",
+          "owner_hint": "unverified",
+          "location": "表1・第3行"
+        }
+      ]
+    },
+    {
+      "id": "duration",
+      "query": "録音は一人何分以内ですか？",
+      "path": "course.docx",
+      "location": "第3段",
+      "needles": [
+        "三分"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-6cf9a18f158cf96cc8320b28",
+          "relative_path": "course.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "録音は一人三分以内です。二人で発表する場合も、一人につき三分までです。",
+          "heading": "架空の公開講座：提出案内",
+          "owner_hint": "unverified",
+          "location": "第3段"
+        },
+        {
+          "source_id": "material-7a70d9e6b5f423a44798ce7f",
+          "relative_path": "course.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "録音課題は金曜日の午後六時までに、学習サイトからMP3形式で提出します。",
+          "heading": "架空の公開講座：提出案内",
+          "owner_hint": "unverified",
+          "location": "第2段"
+        },
+        {
+          "source_id": "material-596bc994a36604355b0cc8fc",
+          "relative_path": "course.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "録音機 | 当日中に返却。予約は前日の正午までです。",
+          "heading": "架空の公開講座：提出案内 / 機材の貸出 / 機材 | 貸出条件",
+          "owner_hint": "unverified",
+          "location": "表1・第3行"
+        }
+      ]
+    },
+    {
+      "id": "absence",
+      "query": "欠席連絡はどうしますか？",
+      "path": "course.docx",
+      "location": "第5段",
+      "needles": [
+        "二時間前",
+        "電話は不要"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-af5c84a262d06d2125766cd1",
+          "relative_path": "course.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "欠席連絡",
+          "heading": "架空の公開講座：提出案内 / 欠席連絡",
+          "owner_hint": "unverified",
+          "location": "第4段"
+        },
+        {
+          "source_id": "material-466e9f1fb0939f32a5037a83",
+          "relative_path": "course.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "欠席する場合は、授業開始の二時間前までに学習サイトの連絡欄へ書いてください。電話は不要です。",
+          "heading": "架空の公開講座：提出案内 / 欠席連絡",
+          "owner_hint": "unverified",
+          "location": "第5段"
+        }
+      ]
+    },
+    {
+      "id": "microphone",
+      "query": "マイクの貸出条件を教えてください。",
+      "path": "course.docx",
+      "location": "表1・第2行",
+      "needles": [
+        "一週間",
+        "一階"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-0c8717fece72a3bd8357869b",
+          "relative_path": "course.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "マイク | 一週間、無料。返却先は一階の受付です。",
+          "heading": "架空の公開講座：提出案内 / 機材の貸出 / 機材 | 貸出条件",
+          "owner_hint": "unverified",
+          "location": "表1・第2行"
+        },
+        {
+          "source_id": "material-51e9e90450d577b52ad5b9cb",
+          "relative_path": "course.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "機材 | 貸出条件",
+          "heading": "架空の公開講座：提出案内 / 機材の貸出",
+          "owner_hint": "unverified",
+          "location": "表1・第1行"
+        }
+      ]
+    },
+    {
+      "id": "recorder",
+      "query": "録音機の予約はいつまでですか？",
+      "path": "course.docx",
+      "location": "表1・第3行",
+      "needles": [
+        "前日の正午"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-596bc994a36604355b0cc8fc",
+          "relative_path": "course.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "録音機 | 当日中に返却。予約は前日の正午までです。",
+          "heading": "架空の公開講座：提出案内 / 機材の貸出 / 機材 | 貸出条件",
+          "owner_hint": "unverified",
+          "location": "表1・第3行"
+        },
+        {
+          "source_id": "material-7a70d9e6b5f423a44798ce7f",
+          "relative_path": "course.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "録音課題は金曜日の午後六時までに、学習サイトからMP3形式で提出します。",
+          "heading": "架空の公開講座：提出案内",
+          "owner_hint": "unverified",
+          "location": "第2段"
+        },
+        {
+          "source_id": "material-6cf9a18f158cf96cc8320b28",
+          "relative_path": "course.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "録音は一人三分以内です。二人で発表する場合も、一人につき三分までです。",
+          "heading": "架空の公開講座：提出案内",
+          "owner_hint": "unverified",
+          "location": "第3段"
+        }
+      ]
+    },
+    {
+      "id": "clay",
+      "query": "粘土体験はいつ始まりますか？",
+      "path": "workshop.docx",
+      "location": "第2段",
+      "needles": [
+        "土曜日",
+        "午前十時"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-b13cd4f0c6f2cc8192f6d6bb",
+          "relative_path": "workshop.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "粘土体験は毎週土曜日、午前十時から始まります。所要時間は九十分です。",
+          "heading": "架空の工作教室・参加案内",
+          "owner_hint": "unverified",
+          "location": "第2段"
+        },
+        {
+          "source_id": "material-69f58ba20a784207c986b056",
+          "relative_path": "workshop.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "完成した作品は乾燥のため三日間預かります。受取は水曜日以降、午後一時から五時までです。",
+          "heading": "架空の工作教室・参加案内 / 作品の受取",
+          "owner_hint": "unverified",
+          "location": "第5段"
+        }
+      ]
+    },
+    {
+      "id": "clothes",
+      "query": "参加者は何を用意しますか？",
+      "path": "workshop.docx",
+      "location": "第3段",
+      "needles": [
+        "汚れてもよい服",
+        "エプロン"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-58149376cb62bdfc66382530",
+          "relative_path": "workshop.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "参加者は汚れてもよい服で来てください。道具とエプロンはこちらで用意します。",
+          "heading": "架空の工作教室・参加案内",
+          "owner_hint": "unverified",
+          "location": "第3段"
+        },
+        {
+          "source_id": "material-09722da186fa4c620211c916",
+          "relative_path": "workshop.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "作品の受取",
+          "heading": "架空の工作教室・参加案内 / 作品の受取",
+          "owner_hint": "unverified",
+          "location": "第4段"
+        },
+        {
+          "source_id": "material-0c8717fece72a3bd8357869b",
+          "relative_path": "course.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "マイク | 一週間、無料。返却先は一階の受付です。",
+          "heading": "架空の公開講座：提出案内 / 機材の貸出 / 機材 | 貸出条件",
+          "owner_hint": "unverified",
+          "location": "表1・第2行"
+        }
+      ]
+    },
+    {
+      "id": "pickup",
+      "query": "完成した作品はいつ受け取れますか？",
+      "path": "workshop.docx",
+      "location": "第5段",
+      "needles": [
+        "水曜日以降",
+        "午後一時"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-69f58ba20a784207c986b056",
+          "relative_path": "workshop.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "完成した作品は乾燥のため三日間預かります。受取は水曜日以降、午後一時から五時までです。",
+          "heading": "架空の工作教室・参加案内 / 作品の受取",
+          "owner_hint": "unverified",
+          "location": "第5段"
+        }
+      ]
+    },
+    {
+      "id": "cancel",
+      "query": "预约取消规则是什么？",
+      "path": "workshop.docx",
+      "location": "第7段",
+      "needles": [
+        "前一天晚上八点",
+        "不退还材料费"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-5140bb546bebe8f9b69655d2",
+          "relative_path": "workshop.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "预约取消请在前一天晚上八点前通过预约网站办理；当天取消不退还材料费。",
+          "heading": "架空の工作教室・参加案内 / 取消规则",
+          "owner_hint": "unverified",
+          "location": "第7段"
+        },
+        {
+          "source_id": "material-0b00ac509caf5cb8d9002cab",
+          "relative_path": "workshop.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "取消规则",
+          "heading": "架空の工作教室・参加案内 / 取消规则",
+          "owner_hint": "unverified",
+          "location": "第6段"
+        }
+      ]
+    },
+    {
+      "id": "cross_language",
+      "query": "予約をキャンセルするにはどうしますか？",
+      "path": "workshop.docx",
+      "location": "第7段",
+      "needles": [
+        "前一天晚上八点"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-5140bb546bebe8f9b69655d2",
+          "relative_path": "workshop.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "预约取消请在前一天晚上八点前通过预约网站办理；当天取消不退还材料费。",
+          "heading": "架空の工作教室・参加案内 / 取消规则",
+          "owner_hint": "unverified",
+          "location": "第7段"
+        }
+      ]
+    }
+  ]
+}

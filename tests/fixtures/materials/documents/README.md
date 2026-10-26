@@ -14,3 +14,5 @@ Run from the repository root:
 python tools/eval_docx_materials.py --label keywords
 python tools/eval_docx_materials.py --label semantic --semantic-model "<prepared model directory>"
 ```
+
+Reproducibility: text inputs were normalized from CRLF to LF after the original Windows runs; DOCX bytes did not change. A separate local run verified all 10 source payloads and target positions unchanged. The original results retain their original hashes; `docx-materials-verified-20261026-214440.json` records the LF fixture.
