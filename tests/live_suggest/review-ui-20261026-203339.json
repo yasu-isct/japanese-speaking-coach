@@ -1,0 +1,104 @@
+{
+  "kind": "public synthetic archive, offscreen UI",
+  "api_calls": 0,
+  "private_archives_read": false,
+  "live_latency_measured": false,
+  "counts": [
+    2,
+    2,
+    2
+  ],
+  "export_with_poll_ms": 60.49,
+  "captures": [
+    {
+      "state": "list",
+      "method": "PrintWindow owned HWND",
+      "width": 780,
+      "height": 570,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "bounds": [
+        4640,
+        2600,
+        5442,
+        3226
+      ],
+      "virtual_right": 3640,
+      "virtual_bottom": 1600,
+      "foreground_unchanged": true,
+      "controls_fit": true
+    },
+    {
+      "state": "selected",
+      "method": "PrintWindow owned HWND",
+      "width": 780,
+      "height": 570,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "bounds": [
+        4640,
+        2600,
+        5442,
+        3226
+      ],
+      "virtual_right": 3640,
+      "virtual_bottom": 1600,
+      "foreground_unchanged": true,
+      "controls_fit": true
+    },
+    {
+      "state": "exported",
+      "method": "PrintWindow owned HWND",
+      "width": 780,
+      "height": 570,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "bounds": [
+        4640,
+        2600,
+        5442,
+        3226
+      ],
+      "virtual_right": 3640,
+      "virtual_bottom": 1600,
+      "foreground_unchanged": true,
+      "controls_fit": true
+    },
+    {
+      "state": "narrow",
+      "method": "PrintWindow owned HWND",
+      "width": 620,
+      "height": 460,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "bounds": [
+        4640,
+        2600,
+        5282,
+        3116
+      ],
+      "virtual_right": 3640,
+      "virtual_bottom": 1600,
+      "foreground_unchanged": true,
+      "controls_fit": true
+    }
+  ],
+  "inputs_unchanged": true,
+  "baseline_commit": "3693f0d",
+  "input": "tests/fixtures/session_review",
+  "image": "docs/images/live-review-picker.png",
+  "image_sha256": "f1cc5b73339efbcbd7f4c0716f7aed33f0d699c99d25c4a74b48a658c47284cd",
+  "source_sha256": {
+    "app/jsc_live/review_control.py": "6a161e9017304bc49eac3acb9efb851aeac7f9b5452b719bf4aa7c3ec78930aa",
+    "app/jsc_live/review_view.py": "89dbaa0395359992736a8ceb1c0c80267c4bc85148bd63a3f1b6101143b30a76",
+    "app/jsc_live/overlay.py": "18fdc648def7bb32af3fa1fc9476a60bcf57ee31dbcf8efaa39c03c84ea3c068",
+    "app/jsc_live/main.py": "c9f6232a6ecfd97119a9da1ca635952e39b7bd1abfa28fbc43230dd7a5e1bfe3"
+  },
+  "tests": {
+    "total": 219,
+    "passed": 218,
+    "skipped": 1
+  },
+  "baseline_toolbar": "logs/showcase/20261026-202802-001591/references-1.png",
+  "current_toolbar": "logs/showcase/20261026-203321-024759/references-1.png"
+}

@@ -67,14 +67,15 @@
 
 ### 每次使用
 
-`japanese-speaking-coach` 文件夹里有两个启动脚本，双击即可：
+`japanese-speaking-coach` 文件夹里有三个启动脚本，双击即可：
 
 | 脚本 | 用途 |
 |---|---|
 | `jsc-live.bat` | **普通版**：字幕 + 建议，**不录音** |
 | `jsc-live-录音.bat` | **录音版**：同上，另外把这次的录音、字幕、建议存档；关闭窗口后自动打开这次的存档文件夹 |
+| `jsc-review.bat` | **课后复盘**：选择旧存档，生成复盘页和 Anki 卡片；无需启动录音、识别或 API |
 
-两个都默认「给电脑正在播放的声音配字幕 + 建议」，适合看视频、网课、视频通话。
+前两个都默认「给电脑正在播放的声音配字幕 + 建议」，适合看视频、网课、视频通话。
 
 第一次启动要等十几秒加载识别模型（没下载过的话会先自动下载约 1.5 GB），窗口里会显示「モデル読み込み中…」，出现「聞き取り中」就可以开始了。
 
@@ -139,7 +140,11 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 
 ### 课后复盘和 Anki 卡片
 
-在仓库根目录运行下面的命令，把最后的文件夹换成要复习的那次存档（使用完整路径）：
+双击 **`jsc-review.bat`**，或在字幕窗点 **「复盘」**。选中一次存档，点 **「生成复盘页和卡片」**；完成后再点「打开复盘页」或「打开输出文件夹」。生成期间可以继续看字幕，程序不会自动弹浏览器或文件夹。
+
+列表显示最近200次存档的时间、分钟数和字幕数；更早的或其它位置的存档，用「选择其它存档文件夹…」。没有结束时间的存档可能仍在录音，可以导出当前已有内容。旧存档缺少分钟数时会显示横线，仍可使用。
+
+也可以在仓库根目录运行命令，把文件夹换成要复习的那次存档（使用完整路径）：
 
 ```powershell
 .\jsc-live.bat --review-session "D:\ClaudeProject\japanese-speaking-coach\logs\sessions\20261026-171615"
@@ -214,6 +219,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | `--init-materials` | 建立资料区并显示路径，然后退出，不调用 API |
 | `--import-profile 文件` | 把明确指定的旧资料复制到资料区，保留原文件且不覆盖目标，然后退出 |
 | `--review-session 存档文件夹` | 只在本机生成复盘页和 Anki 文件，完成后退出 |
+| `--review-window` | 只打开复盘窗口，不启动录音、识别或 API |
 | `--review-output 新文件夹` | 自选复盘输出位置，不覆盖已有文件夹 |
 | `--anki-layout basic / fields` | 默认 Basic 双面卡；fields 用四字段自建笔记类型 |
 | `--suggest-timeout 3` | 几秒没到算超时 |
@@ -239,7 +245,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | 接话建议，一问一答 10 句（deepseek-flash） | 最后一句字幕 → 建议显示：中位数 2.43 s，最大 2.63 s；其中等待停顿 0.82 s、API 往返 1.55 s（首字 0.85 s）、渲染 72 ms（`tests/live_suggest/e2e-dialogue-*`） |
 | 接话建议，独白 3 段 11 个片段 | 只请求 3 次，每次回应整段；2.49 / 2.65 / 3.09 s（`tests/live_suggest/e2e-monologue-*`） |
 
-单元测试：在 `japanese-speaking-coach` 目录下运行 `python -m unittest discover -s tests`，不需要显卡和网络。2026-10-26 本轮共208项：207通过，1项因系统不允许创建符号链接而跳过，另有链接属性和越界路径测试通过。
+单元测试：在 `japanese-speaking-coach` 目录下运行 `python -m unittest discover -s tests`，不需要显卡和网络。2026-10-26 本轮共219项：218通过，1项因系统不允许创建符号链接而跳过，另有链接属性和越界路径测试通过。
 
 开发评测默认在后台隐藏窗口，避免挡住正在使用的其它软件。`tools/e2e_suggest.py` 和 `tools/benchmark_overlay.py` 只在显式加 `--show-window` 时显示测试窗；Windows 下该窗口会鼠标穿透、不抢焦点。后台的 Canvas 完成耗时不是实际可见显示延迟，两种结果会分别标记。截图还须显式指定输出路径；提前结束的运行会标记未完成并返回非零退出码。
 

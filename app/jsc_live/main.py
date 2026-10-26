@@ -154,6 +154,7 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--init-materials", action="store_true", help="create the materials folder and exit; no API call")
     p.add_argument("--import-profile", type=Path, help="copy an old profile to external materials without overwriting, then exit")
     p.add_argument("--review-session", type=Path, help="export a local session review and Anki cards, then exit without API/audio")
+    p.add_argument("--review-window", action="store_true", help="open only the local archive picker; no live audio or API startup")
     p.add_argument("--review-output", type=Path, help="new output folder for --review-session (never overwrites)")
     p.add_argument("--anki-layout", choices=["basic", "fields"], default="basic",
                    help="Anki card layout: Basic front/back (default) or four custom fields")
@@ -172,6 +173,13 @@ def main(argv: list[str] | None = None) -> None:
         sys.stdout.reconfigure(encoding="utf-8")
     if args.review_output is not None and args.review_session is None:
         p.error("--review-output 请与 --review-session 一起使用。")
+    if args.review_window:
+        if args.review_session or args.init_materials or args.import_profile:
+            p.error("复盘窗口与命令导出、资料导入请分开运行。")
+        from .review_view import run_review_window
+
+        run_review_window()
+        return
     if args.review_session is not None:
         if args.init_materials or args.import_profile:
             p.error("复盘和资料导入请分开执行。")

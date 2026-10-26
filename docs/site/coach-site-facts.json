@@ -1,5 +1,5 @@
 {
-  "_note": "Updated 2026-10-26 through D-027. New reference screenshots replay the frozen 4-turn TTS output through app ed12b8f offscreen; they do not measure new latency. Earlier media and video remain explicitly dated 2026-10-25. Sources: docs/showcase-ja.md and tests/live_suggest/showcase-replay-20261026-200255.json. Local only; not deployed. D-027 adds folder selection and live refresh; materials window renders a public TTS source snapshot.",
+  "_note": "Updated 2026-10-26 through D-028. New reference screenshots replay the frozen 4-turn TTS output through app ed12b8f offscreen; they do not measure new latency. Earlier media and video remain explicitly dated 2026-10-25. Sources: docs/showcase-ja.md and tests/live_suggest/showcase-replay-20261026-200255.json. Local only; not deployed. D-027 adds folder selection and live refresh; materials window renders a public TTS source snapshot. D-028 adds a local archive picker and independent review launcher; review screenshot uses a public synthetic archive without audio.",
   "status": {
     "ja": "開発中：外部資料による返答とローカル復習を追加",
     "zh": "开发中：已增加外部资料回答和本地复盘",
@@ -11,11 +11,11 @@
     "en": "A Japanese conversation coach for the moment you are mid-conversation — GPU real-time subtitles plus reply suggestions built from the Skill's rules"
   },
   "number": {
-    "value": "5/5 citations · 208 checks",
+    "value": "5/5 citations · 219 checks",
     "label": {
-      "ja": "資料あり5問で有効な引用5/5（小規模デモ）、単体テスト208件中207成功・1件権限スキップ",
-      "zh": "5个有资料问题均有有效出处（小样本演示）；208项检查，207通过、1项权限跳过",
-      "en": "Valid citations on 5/5 document-backed demo questions; 208 checks, 207 pass and one permission-related skip"
+      "ja": "資料あり5問で有効な引用5/5（小規模デモ）、単体テスト219件中218成功・1件権限スキップ",
+      "zh": "5个有资料问题均有有效出处（小样本演示）；219项检查，218通过、1项权限跳过",
+      "en": "Valid citations on 5/5 document-backed demo questions; 219 checks, 218 pass and one permission-related skip"
     },
     "href": "https://github.com/yasu-isct/japanese-speaking-coach/blob/main/docs/showcase-ja.md"
   },
@@ -59,6 +59,11 @@
       "ja": "資料フォルダーを画面で選び、再起動せず読み直す",
       "zh": "在窗口选择资料文件夹，无需重启即可重新读取",
       "en": "Choose a materials folder in the UI and reload it without restarting"
+    },
+    {
+      "ja": "会話を一覧から選び、音声認識を起動せず課後に復習する",
+      "zh": "在列表选择存档，课后独立启动复盘",
+      "en": "Choose an archive and review after class without starting live transcription"
     }
   ],
   "media": [
@@ -125,6 +130,22 @@
         "en": "Session folder opened after the recording version closes: clips, meta, stream, suggestions, transcript (navigation pane blanked)"
       },
       "caption": "TTS 音声による再生・個人情報なし。左のナビゲーション欄は個人情報のため塗りつぶし（2026-10-25）"
+    },
+    {
+      "src": "/media/coach/live-review-picker.png",
+      "width": 780,
+      "height": 570,
+      "label": {
+        "ja": "アーカイブから復習",
+        "zh": "从存档复盘",
+        "en": "Archive review"
+      },
+      "alt": {
+        "ja": "架空の会話から2字幕・2回答・2カードを書き出した復習ウィンドウ",
+        "zh": "虚构会话生成2条字幕、2轮建议和2张卡片的复盘窗口",
+        "en": "Review picker exporting two subtitles, two reply turns and two cards from a fictional archive"
+      },
+      "caption": "公開架空データ・音声なし・画面外描画（2026-10-26、D-028）；APIや速度の再測定ではない"
     }
   ],
   "demo_video": {

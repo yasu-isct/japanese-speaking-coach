@@ -63,6 +63,7 @@ class SubtitleWindow:
         self.materials_root = materials_root
         self.materials_controller = materials_controller
         self.materials_window = None
+        self.review_window = None
         self.recording = False
         self.history_factory = history_window   # callable(root, family) -> HistoryWindow, or None
         self.history_window = None
@@ -129,6 +130,12 @@ class SubtitleWindow:
         elif name == "meanings":
             self.show_meanings = not self.show_meanings
             self.redraw()
+        elif name == "review":
+            from .review_view import ReviewWindow
+
+            if self.review_window is None:
+                self.review_window = ReviewWindow(self.root, self.family)
+            self.review_window.show()
         elif name == "sources" and self.materials_root is not None:
             from .material_view import MaterialsWindow
 
@@ -332,7 +339,7 @@ class SubtitleWindow:
         if getattr(self, "materials_root", None) is not None:
             c.create_text(110 if self.recording else 10, TOOLBAR_H / 2, text="资料片段会发给 API",
                           font=self.toolbar_font, fill=FG_MEANING, anchor="w")
-        buttons = [("alpha-", "透明 −", False), ("alpha+", "透明 +", False),
+        buttons = [("alpha-", "透明 −", False), ("alpha+", "透明 +", False), ("review", "复盘", False),
                    ("history", "历史", bool(self.history_window and self.history_window.visible)),
                    ("meanings", "收起中文" if self.show_meanings else "展开中文", self.show_meanings),
                    ("collapsed", "收起", self.mode == "collapsed"), ("subtitles", "字幕", self.mode == "subtitles"),
