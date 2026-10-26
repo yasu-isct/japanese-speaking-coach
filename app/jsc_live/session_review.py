@@ -222,7 +222,8 @@ def _turn_html(turn: dict, index: int, sentence_ids: set[int]) -> str:
             result.append(_paragraph("生成时的资料文件夹：" + _string(turn["materials_root"]), "muted"))
         for source in sources:
             label = "回答引用" if source.get("source_id") in cited else "本轮发送"
-            location = f"{_string(source.get('relative_path'))}:{source.get('start_line', '?')}–{source.get('end_line', '?')}"
+            from .materials import source_location
+            location = source_location(source)
             result.append(_paragraph(f"{label} · {location}", "muted"))
             result.append(f'<pre>{escape(_string(source.get("text")))}</pre>')
         result.append("</details>")

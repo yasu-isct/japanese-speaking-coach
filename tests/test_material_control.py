@@ -159,7 +159,7 @@ class MaterialControlTest(unittest.TestCase):
         view.folder, view.status, view.text, view.top = Mock(), Mock(), Mock(), Mock()
         self.controller.reload(self.second)
         view.show([], [], snapshot_root=str(self.first))
-        text = view.text.insert.call_args.args[1]
+        text = "".join(call.args[1] for call in view.text.insert.call_args_list)
         self.assertIn(str(self.first), text)
         self.assertEqual(view.materials_root, str(self.second))
 

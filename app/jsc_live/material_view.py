@@ -6,18 +6,20 @@ import tkinter as tk
 from tkinter import ttk, filedialog
 import queue
 import threading
+from .materials import source_location
 
 
 def source_text(root: str, sources: list[dict], cited_ids: list[str]) -> str:
-    lines = [f"这条回答使用的资料文件夹：{root}" if root else "本轮参考片段", "",
-             "下面是点击“资料”时这条建议发送给 API 的片段。新建议出现后，再点“资料”可刷新。",
-             "“回答引用”表示模型声明使用，不代表已经核实。", ""]
+    lines = [f"这条回答使用的资料文件夹：{root}" if root else "本轮参考片段", ""]
     if not sources:
-        lines += ["这轮没有查到相关片段。", "可在资料文件夹放入 UTF-8 的 .md / .txt 文件，修改后点“重新读取资料”。"]
+        lines += ["这轮没有查到相关片段。", "可放入 UTF-8 的 .md / .txt 或 .docx 文件，修改后点“重新读取资料”。"]
     for source in sources:
         label = "回答引用" if source["source_id"] in cited_ids else "本轮发送"
-        lines += [f"{label} · {source['relative_path']} · 第{source['start_line']}–{source['end_line']}行",
+        lines += [f"{label} · {source_location(source)}",
                   source.get("heading", ""), source["text"], ""]
+    if sources:
+        lines += ["以上是这条建议发送给 API 的片段。新建议出现后，再点“资料”刷新。",
+                  "“回答引用”是模型标出的出处，请结合原文使用。"]
     return "\n".join(lines)
 
 
@@ -29,6 +31,7 @@ class MaterialsWindow:
         self.model_window = None
         self.results = queue.Queue()
         self.busy = False
+        self._last_sources = ([], [], None)
         self.actions = []
         self.top = tk.Toplevel(master)
         self.top.title("资料与本轮出处")
@@ -119,6 +122,8 @@ class MaterialsWindow:
                     self.materials_root = result["root"]
                     self.folder.configure(text=f"当前资料文件夹：{self.materials_root}")
                     self.status.configure(text=result["message"])
+                    if hasattr(self, "_last_sources"):
+                        self._render_sources()
                 else:
                     self.status.configure(text=result)
         except queue.Empty:
@@ -130,10 +135,22 @@ class MaterialsWindow:
 
     def show(self, sources: list[dict], cited_ids: list[str], snapshot_root: str | None = None) -> None:
         self._show_current()
-        self.text.configure(state="normal")
-        self.text.delete("1.0", "end")
-        old_root = snapshot_root if snapshot_root and snapshot_root != self.materials_root else ""
-        self.text.insert("1.0", source_text(old_root, sources, cited_ids))
-        self.text.configure(state="disabled")
+        self._last_sources = (sources, cited_ids, snapshot_root)
+        self._render_sources()
         self.top.deiconify()
         self.top.lift()
+
+    def _render_sources(self):
+        sources, cited_ids, snapshot_root = self._last_sources
+        self.text.configure(state="normal")
+        self.text.delete("1.0", "end")
+        if self.controller is not None:
+            issues = self.controller.current().get("issues", [])
+            if issues:
+                self.text.insert("end", "当前资料文件夹的读取提示（不随问题发送）：\n"
+                                 + "\n".join(f"• {issue['path']}：{issue['message']}" for issue in issues) + "\n\n")
+        old_root = snapshot_root if snapshot_root and snapshot_root != self.materials_root else ""
+        self.text.insert("end", source_text(old_root, sources, cited_ids))
+        self.text.insert("end", "\n\n支持md/txt和Word正文、简单表格；docx出处按段落/表格行标记。\n"
+                         "图片、页眉页脚、批注与文本框不参与查找。PDF暂请转成文字。")
+        self.text.configure(state="disabled")

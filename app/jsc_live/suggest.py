@@ -250,7 +250,8 @@ def resolve_citations(reason: str, sources: list[dict]) -> tuple[str, list[str]]
             return "[出处未匹配]"
         if source["source_id"] not in cited:
             cited.append(source["source_id"])
-        return f"[{source['relative_path']}:{source['start_line']}]"
+        from .materials import source_location
+        return f"[{source_location(source, short=True)}]"
 
     return re.sub(r"\[(S[1-9][0-9]*)\]", replace, reason), cited
 

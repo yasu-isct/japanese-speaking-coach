@@ -55,7 +55,7 @@ D-031已增加窗口入口：普通启动后点“资料→多语言查找…”
 python tools/eval_semantic_materials.py --model-dir logs/goal/models/multilingual-minilm
 ```
 
-这条命令只读固定公开语料、只在本机检索，不调用API。付费问答验收工具默认不执行，需显式 `--run-api` 并先核对每日预算。下一步仍需更大资料库、PDF/Word支持、真实课堂阅读与可见延迟验收。
+这条命令只读固定公开语料、只在本机检索，不调用API。付费问答验收工具默认不执行，需显式 `--run-api` 并先核对每日预算。下一步仍需更大资料库、PDF和复杂Word支持、真实课堂阅读与可见延迟验收。
 
 ## 窗口操作与下载检查（D-031）
 
@@ -64,3 +64,5 @@ python tools/eval_semantic_materials.py --model-dir logs/goal/models/multilingua
 网络传输只访问固定官方文件：ONNX读取首块即取消，未发布目标文件，临时文件清理；9,081,518字节的tokenizer完整下载并通过官方哈希。118MB ONNX沿用此前已下载且验证的缓存，没有重新全量下载。默认打开窗口不联网，资料不会在模型准备中发送。
 
 245项检查（244通过、1项系统权限跳过），新增15项涵盖校验、大小限制、取消清理、缓存复用、切换失败保留、偏好优先级和UI后台状态。画面与证据见 `docs/ui-model-settings-20261026.md`、`tests/live_suggest/model-controls-20261026.json`；没有新增生成API、真人或可见延迟结论。
+
+D-032已接入Word正文和简单表格，两份虚构Word十问关键词9/10、本地多语言10/10目标片段覆盖；旧47份载荷逐字保持。没有新增生成API或回答正确率结论。当前总测试262项（261通过、1跳过）。格式限制见 [外部文档读取](external-documents.md)。

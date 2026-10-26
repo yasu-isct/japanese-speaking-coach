@@ -1,0 +1,9 @@
+{
+  "provenance": "Two public synthetic DOCX files and ten fixed queries; no people or API.",
+  "sha256": {
+    "queries.json": "a22ac63de941b2d75a150699eee9a87934eaca3fc0e9e608143b6c867c0472f9",
+    "data/course.docx": "2dcd30af100362576688572af7be1e717d3893c8b98dadaea5f2a9e64bfb25ad",
+    "data/readme.txt": "7f7bc3d407ccc19e61ebb0296284376932d9e2854e9fe169d95f9a546d040f8f",
+    "data/workshop.docx": "e803172236bbe9e00aef8ff4c2cf1f666d257c98be06f07d4ff257a81e4dbe4f"
+  }
+}

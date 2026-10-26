@@ -1,5 +1,5 @@
 {
-  "_note": "Updated through D-031, local only and not deployed. Model setup, toggle and saved preferences are now accessible in the materials UI. No automatic download; first run uses keywords, later launches honour the saved choice. D-030 provides the fixed retrieval/answer/TTS measurements. Earlier images and video retain their dated provenance; new settings images use public materials and temporary preferences.",
+  "_note": "Updated through D-032, local only and not deployed. DOCX body paragraphs and simple tables now feed existing local retrieval with body/table positions. Two synthetic Word documents cover 10 fixed questions; this is retrieval coverage, not generated answer accuracy. No new API or visible latency measurement. Earlier images keep their dated provenance; the DOCX image is a synthetic retrieval/citation UI state.",
   "status": {
     "ja": "開発中：外部資料による返答とローカル復習を追加",
     "zh": "开发中：已增加外部资料回答和本地复盘",
@@ -11,11 +11,11 @@
     "en": "A Japanese conversation coach for the moment you are mid-conversation — GPU real-time subtitles plus reply suggestions built from the Skill's rules"
   },
   "number": {
-    "value": "36/36 ranges · 245 checks",
+    "value": "36/36 ranges · 262 checks",
     "label": {
-      "ja": "47の固定質問中36の目標範囲を取得（開発用データ含む）。回答正答率ではない。245テスト中244成功・1スキップ。",
-      "zh": "47个固定问题中的36个目标片段全部找到（含开发数据）；不是回答正确率。245项检查，244通过、1跳过。",
-      "en": "36/36 target ranges retrieved across 47 fixed questions, including development data; not answer accuracy. 245 checks: 244 pass, 1 skip."
+      "ja": "47の固定質問中36の目標範囲を取得（開発用データ含む）。回答正答率ではない。262テスト中261成功・1スキップ。",
+      "zh": "47个固定问题中的36个目标片段全部找到（含开发数据）；不是回答正确率。262项检查，261通过、1跳过。",
+      "en": "36/36 target ranges retrieved across 47 fixed questions, including development data; not answer accuracy. 262 checks: 261 pass, 1 skip."
     },
     "href": "https://github.com/yasu-isct/japanese-speaking-coach/blob/main/docs/showcase-ja.md"
   },
@@ -172,6 +172,22 @@
         "en": "Local multilingual search status, model location, toggle and download actions"
       },
       "caption": "公開資料・実際の本機モデル・一時設定、画面外描画（2026-10-26、D-031）；新しい回答や可視速度の証拠ではない"
+    },
+    {
+      "src": "/media/coach/live-materials-docx.png",
+      "width": 820,
+      "height": 600,
+      "label": {
+        "ja": "Word資料の検索",
+        "zh": "Word资料查找",
+        "en": "Word material search"
+      },
+      "alt": {
+        "ja": "架空Wordの表から取り出した文章と表行の出典",
+        "zh": "虚构Word表格中的片段与表格行出处",
+        "en": "A passage from a fictional Word table with its row location"
+      },
+      "caption": "公開架空Word・検索/引用状態の合成表示（2026-10-26、D-032）、画面外描画。生成API・可視速度の証拠ではない"
     }
   ],
   "demo_video": {

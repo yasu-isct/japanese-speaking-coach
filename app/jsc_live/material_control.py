@@ -91,14 +91,17 @@ class MaterialsController:
                         " 已开启本地多语言查找，支持不同说法；相关片段不一定包含答案。")
         if skipped or limited:
             message += " 部分资料未读取：请检查UTF-8编码、文件大小或目录层数。"
+        issues = [dict(issue) for issue in store.document_issues]
+        if issues:
+            message += " 有文档未完整读取，原因见下方。"
         if diagnostics.get("missing_root"):
             message = "资料文件夹还不存在，请选择已有文件夹。"
         elif diagnostics.get("unsafe_root") or diagnostics.get("root_read_error"):
             message = "资料文件夹无法读取，请选择实际存在且可访问的文件夹。"
         elif not store.chunks:
-            message += " 放入UTF-8的md/txt后点“重新读取资料”。"
+            message += " 放入md/txt或docx后点“重新读取资料”。"
         return {"root": str(store.root), "files": diagnostics.get("indexed_files", 0),
-                "chunks": len(store.chunks), "message": message}
+                "chunks": len(store.chunks), "message": message, "issues": issues}
 
     def reload(self, folder: str | Path | None = None) -> dict:
         """Run from a background worker. Existing suggestions retain old sources."""

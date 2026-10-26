@@ -16,7 +16,7 @@ import re
 import stat
 import unicodedata
 from collections import Counter
-from dataclasses import asdict, dataclass, fields
+from dataclasses import asdict, dataclass, field, fields
 from itertools import islice
 from pathlib import Path
 from types import MappingProxyType
@@ -34,6 +34,7 @@ def default_materials_root() -> Path:
 class MaterialsLimits:
     max_files: int = 64
     max_file_bytes: int = 65536
+    max_document_bytes: int = 10 * 1024 * 1024
     max_total_chars: int = 100000
     max_chunks: int = 256
     max_chunk_chars: int = 700
@@ -61,11 +62,29 @@ class MaterialChunk:
     text: str
     heading: str
     owner_hint: str
+    location: str = field(default="", kw_only=True)
 
 
 @dataclass(frozen=True)
 class MaterialHit(MaterialChunk):
     score: float
+
+
+def chunk_data(chunk: MaterialChunk) -> dict:
+    data = asdict(chunk)
+    if not data["location"]:
+        del data["location"]  # Preserve existing text-source payloads and saved logs.
+    return data
+
+
+def source_location(source: Mapping, *, short: bool = False) -> str:
+    """DOCX uses body positions, while text sources keep their original line IDs."""
+    path = source.get("relative_path", "")
+    location = source.get("location")
+    if isinstance(location, str) and location:
+        return f"{path}:{location}"
+    start = source.get("start_line", "?")
+    return f"{path}:{start}" if short else f"{path}:{start}–{source.get('end_line', '?')}"
 
 
 # These concepts improve cross-language matching, not fact extraction or inference.
@@ -202,6 +221,7 @@ class MaterialsStore:
         self._tokenizer = tokenizer
         counts: Counter[str] = Counter()
         chunks: list[MaterialChunk] = []
+        document_issues: list[dict] = []
         try:
             if not self.root.exists():
                 counts["missing_root"] += 1
@@ -214,22 +234,49 @@ class MaterialsStore:
                         counts["index_limit_reached"] += 1
                         break
                     counts["files_considered"] += 1
-                    text = self._read(path, resolved_root, counts)
-                    if text is None:
-                        continue
-                    if counts["indexed_chars"] + len(text) > self.limits.max_total_chars:
-                        counts["total_chars_limit"] += 1
-                        continue
                     relative = path.relative_to(resolved_root).as_posix()
+                    if path.suffix.casefold() == ".docx":
+                        from .document_text import DocumentError, extract_docx
+
+                        raw = self._read_bytes(path, resolved_root, counts, self.limits.max_document_bytes)
+                        if raw is None:
+                            document_issues.append({"path": relative, "message": "文件无法读取、已变化或超过10MB，请检查后重新读取。"})
+                            continue
+                        try:
+                            sections, notices = extract_docx(raw, max_chars=self.limits.max_total_chars)
+                        except DocumentError as exc:
+                            counts["document_read_error"] += 1
+                            document_issues.append({"path": relative, "message": str(exc)})
+                            continue
+                        document_issues.extend({"path": relative, "message": notice} for notice in notices)
+                        if not sections:
+                            counts["document_without_text"] += 1
+                            continue
+                        size = sum(len(section.text) for section in sections)
+                        blocks = ((list(enumerate(section.text.splitlines(), 1)), section.heading, section.location)
+                                  for section in sections)
+                    else:
+                        text = self._read(path, resolved_root, counts)
+                        if text is None:
+                            continue
+                        size = len(text)
+                        blocks = ((block, heading, "") for block, heading in _blocks(text))
+                    if counts["indexed_chars"] + size > self.limits.max_total_chars:
+                        counts["total_chars_limit"] += 1
+                        document_issues.append({"path": relative, "message": "资料总文字超过当前容量，此文件未读取。请减少文件后重新读取。"})
+                        continue
                     hint = "profile_candidate" if "/" not in relative and relative.casefold() in (
                         "profile.md", "basic-info.md") else "unverified"
                     counts["indexed_files"] += 1
-                    counts["indexed_chars"] += len(text)
-                    for block, heading in _blocks(text):
+                    counts["indexed_chars"] += size
+                    for block, heading, location in blocks:
                         for part, (start, end, body) in enumerate(_chunk_parts(block, self.limits.max_chunk_chars)):
-                            identity = json.dumps([relative, start, end, part, heading, body], ensure_ascii=False)
+                            identity_parts = [relative, start, end, part, heading, body]
+                            if location:
+                                identity_parts.append(location)
+                            identity = json.dumps(identity_parts, ensure_ascii=False)
                             source_id = "material-" + hashlib.sha256(identity.encode("utf-8")).hexdigest()[:24]
-                            chunks.append(MaterialChunk(source_id, relative, start, end, body, heading, hint))
+                            chunks.append(MaterialChunk(source_id, relative, start, end, body, heading, hint, location=location))
                             if len(chunks) >= self.limits.max_chunks:
                                 break
                         if len(chunks) >= self.limits.max_chunks:
@@ -237,6 +284,7 @@ class MaterialsStore:
         except (OSError, RuntimeError):
             counts["root_read_error"] += 1
         self.chunks = tuple(chunks)
+        self.document_issues = tuple(MappingProxyType(issue) for issue in document_issues)
         self.diagnostics: Mapping[str, int] = MappingProxyType(dict(counts, indexed_chunks=len(chunks)))
         self._terms = tuple(Counter(tokenizer(chunk.heading + "\n" + chunk.text)) for chunk in self.chunks)
         self._body_terms = tuple(frozenset(tokenizer(chunk.text)) for chunk in self.chunks)
@@ -273,20 +321,29 @@ class MaterialsStore:
                             directories.append((path, depth + 1))
                         else:
                             counts["depth_limit_reached"] += 1
-                    elif path.suffix.casefold() in (".md", ".txt") and path.is_file():
+                    elif path.suffix.casefold() in (".md", ".txt", ".docx") and path.is_file():
                         yield path
                 pending.extend(reversed(directories))
             except (OSError, RuntimeError):
                 counts["directory_read_error"] += 1
 
     def _read(self, path: Path, root: Path, counts: Counter) -> str | None:
+        raw = self._read_bytes(path, root, counts, self.limits.max_file_bytes)
+        if raw is not None:
+            try:
+                return raw.decode("utf-8-sig")
+            except UnicodeDecodeError:
+                counts["invalid_utf8"] += 1
+        return None
+
+    def _read_bytes(self, path: Path, root: Path, counts: Counter, byte_limit: int) -> bytes | None:
         try:
             resolved = path.resolve(strict=True)
             if not _inside(resolved, root) or _is_link(path):
                 counts["unsafe_path"] += 1
                 return None
             before = path.lstat()
-            if not stat.S_ISREG(before.st_mode) or before.st_size > self.limits.max_file_bytes:
+            if not stat.S_ISREG(before.st_mode) or before.st_size > byte_limit:
                 counts["file_size_or_type_limit"] += 1
                 return None
             flags = os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0)
@@ -294,16 +351,14 @@ class MaterialsStore:
                 if _signature(os.fstat(handle.fileno())) != _signature(before):
                     counts["file_changed"] += 1
                     return None
-                raw = handle.read(self.limits.max_file_bytes + 1)
+                raw = handle.read(byte_limit + 1)
                 after = os.fstat(handle.fileno())
-            if (len(raw) > self.limits.max_file_bytes or _signature(after) != _signature(before)
+            if (len(raw) > byte_limit or _signature(after) != _signature(before)
                     or _is_link(path) or path.resolve(strict=True) != resolved
                     or _signature(path.lstat()) != _signature(before)):
                 counts["file_changed"] += 1
                 return None
-            return raw.decode("utf-8-sig")
-        except UnicodeDecodeError:
-            counts["invalid_utf8"] += 1
+            return raw
         except (OSError, RuntimeError):
             counts["file_read_error"] += 1
         return None
@@ -398,7 +453,7 @@ class MaterialsStore:
                 continue
             if chars + len(chunk.text) > self.limits.max_result_chars:
                 continue
-            selected.append(asdict(chunk))
+            selected.append(chunk_data(chunk))
             seen.add(chunk.source_id)
             chars += len(chunk.text)
             if len(selected) >= self.limits.max_results:

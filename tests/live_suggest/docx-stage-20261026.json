@@ -1,0 +1,82 @@
+{
+  "decision": "D-032",
+  "provenance": "Synthetic public documents, local retrieval, synthetic citation-state UI; no generated answers.",
+  "api_calls": 0,
+  "network_calls": 0,
+  "private_data_read": false,
+  "real_user_settings_changed": false,
+  "tests": {
+    "run": 262,
+    "passed": 261,
+    "skipped": 1
+  },
+  "captures": {
+    "docx-before-20261026-213247": {
+      "method": "PrintWindow owned HWND",
+      "width": 820,
+      "height": 600,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "sha256": "893316bb74f81699e3c30f953d7cdd163c5e18bab00817c0a9f9803578328779"
+    },
+    "docx-after-20261026-213634": {
+      "method": "PrintWindow owned HWND",
+      "width": 820,
+      "height": 600,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "sha256": "5a44ff3df78ad0d41dc2f4f233957a3e6354b238a7fefc9a49e3cce262838522"
+    },
+    "docx-narrow-after-20261026-213636": {
+      "method": "PrintWindow owned HWND",
+      "width": 520,
+      "height": 540,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "sha256": "c54fccf95346f4d6d00581e7cf4cc660ae2e4a133750b96a68ec834d03b1275b"
+    },
+    "docx-final-20261026-213718": {
+      "method": "PrintWindow owned HWND",
+      "width": 820,
+      "height": 600,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "sha256": "30a133c6a9c8d73336fe3ece8bec197368cfe61ea5a1a6a1a0025a243a58a603"
+    },
+    "docx-narrow-final-20261026-213720": {
+      "method": "PrintWindow owned HWND",
+      "width": 520,
+      "height": 540,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "sha256": "74b9b310fd0597399bbb867f1cbdcc46a5ef9f41031ed8cf7d713b788a77c480"
+    }
+  },
+  "baseline": "docx-materials-before-20261026-213228.json",
+  "keyword_result": "docx-materials-keywords-20261026-213431.json",
+  "semantic_result": "docx-materials-semantic-20261026-213604.json",
+  "old_payload_verification": "model-preferences-20261026-213633.json",
+  "covered": {
+    "before": 0,
+    "keyword": 9,
+    "semantic": 10,
+    "total": 10
+  },
+  "unchanged_old_payloads": 47,
+  "limitations": [
+    "Retrieval coverage is not answer accuracy.",
+    "No Word layout/rendering or human review.",
+    "PDF and complex DOCX structures are not supported.",
+    "No new visible latency measurement."
+  ]
+}
