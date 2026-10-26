@@ -1,0 +1,349 @@
+{
+  "provenance": "Fixed synthetic PDF retrieval, not generated answer accuracy or visible latency.",
+  "api_calls": 0,
+  "network_calls": 0,
+  "private_data_read": false,
+  "mode": "semantic",
+  "sha256": {
+    "queries.json": "6ca2f703869e74566916ba2e6b348dee8579a5b5ebd669da6dbf4997901139a2",
+    "data/course.pdf": "0e9aab1cc298d56e39f345692cf529c34245c0c92e73948947d1d59b279a8f46",
+    "data/handbook.pdf": "65756815bdf2adebc4250826775a2be14b344a85d549f5a84e0cd0a0d2d09383",
+    "data/scan-only.pdf": "9364fb55912b03b88622a5b8c3cea9ff0342f44730365feb99d8238a5962d17c"
+  },
+  "diagnostics": {
+    "scanned_entries": 3,
+    "files_considered": 3,
+    "indexed_files": 2,
+    "indexed_chars": 982,
+    "document_without_text": 1,
+    "indexed_chunks": 4,
+    "semantic_enabled": 1,
+    "semantic_windows": 6
+  },
+  "issues": [
+    {
+      "path": "scan-only.pdf",
+      "message": "第1页没有可提取文字（共1页）；可能是空白或扫描页，如有图片内容请先转成文字。"
+    }
+  ],
+  "build_ms": 2228.369199903682,
+  "search_p50_ms": 3.5171999479644,
+  "search_p95_ms": 4.2236000299453735,
+  "coverage": 9,
+  "page_locations": 9,
+  "total": 10,
+  "rows": [
+    {
+      "id": "enrol",
+      "query": "申込みはいつまで、どこで行いますか？",
+      "path": "course.pdf",
+      "location": "第1页",
+      "needles": [
+        "三日前",
+        "受付フォーム"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-128b6f0e3ae9c37b5aa511ec",
+          "relative_path": "course.pdf",
+          "start_line": 1,
+          "end_line": 8,
+          "text": "JSC / PUBLIC SYNTHETIC DOCUMENT / PARSER FIXTURE\n公開講座の申込みと課題\n申込みは開催日の三日前まで、受付フォームで行います。\n音声課題は火曜日の午後九時までにWAV形式で提出します。\n課題の長さは二分以上、四分以内です。\nやむを得ず遅れる場合は、提出前に担当者へ連絡してください。\nFictional instructions for local software tests.\n1",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第1页"
+        },
+        {
+          "source_id": "material-57f715dfe33d7dd8265c7df8",
+          "relative_path": "course.pdf",
+          "start_line": 1,
+          "end_line": 8,
+          "text": "JSC / PUBLIC SYNTHETIC DOCUMENT / PARSER FIXTURE\n講座で使う機材の貸出\nマイクは一人一台、最長四十八時間まで借りられます。\n返却は平日の午前十時から午後四時まで、二階の窓口です。\n録音機の電池が切れたら、受付で予備の電池を受け取れます。\n貸出の予約は利用する前日の午後五時までです。\nFictional instructions for local software tests.\n2",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页"
+        }
+      ]
+    },
+    {
+      "id": "submit",
+      "query": "音声課題の提出期限と形式は何ですか？",
+      "path": "course.pdf",
+      "location": "第1页",
+      "needles": [
+        "火曜日",
+        "午後九時",
+        "WAV"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-128b6f0e3ae9c37b5aa511ec",
+          "relative_path": "course.pdf",
+          "start_line": 1,
+          "end_line": 8,
+          "text": "JSC / PUBLIC SYNTHETIC DOCUMENT / PARSER FIXTURE\n公開講座の申込みと課題\n申込みは開催日の三日前まで、受付フォームで行います。\n音声課題は火曜日の午後九時までにWAV形式で提出します。\n課題の長さは二分以上、四分以内です。\nやむを得ず遅れる場合は、提出前に担当者へ連絡してください。\nFictional instructions for local software tests.\n1",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第1页"
+        },
+        {
+          "source_id": "material-4c486817116eb7b10a3ae83c",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 7,
+          "text": "JSC / PUBLIC SYNTHETIC DOCUMENT / PARSER FIXTURE\n架空工作坊：入场说明\n参加者请在上午八点半前到前台签到，课程九点开始。\n如果迟到，请先发送邮件，再从教室后门安静进入。\n现场不提供午餐，请自备便当。饮用水可以在走廊补充。\nFictional instructions for local software tests.\n1",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第1页"
+        },
+        {
+          "source_id": "material-57f715dfe33d7dd8265c7df8",
+          "relative_path": "course.pdf",
+          "start_line": 1,
+          "end_line": 8,
+          "text": "JSC / PUBLIC SYNTHETIC DOCUMENT / PARSER FIXTURE\n講座で使う機材の貸出\nマイクは一人一台、最長四十八時間まで借りられます。\n返却は平日の午前十時から午後四時まで、二階の窓口です。\n録音機の電池が切れたら、受付で予備の電池を受け取れます。\n貸出の予約は利用する前日の午後五時までです。\nFictional instructions for local software tests.\n2",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页"
+        }
+      ]
+    },
+    {
+      "id": "duration",
+      "query": "課題の長さは何分ですか？",
+      "path": "course.pdf",
+      "location": "第1页",
+      "needles": [
+        "二分以上",
+        "四分以内"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-128b6f0e3ae9c37b5aa511ec",
+          "relative_path": "course.pdf",
+          "start_line": 1,
+          "end_line": 8,
+          "text": "JSC / PUBLIC SYNTHETIC DOCUMENT / PARSER FIXTURE\n公開講座の申込みと課題\n申込みは開催日の三日前まで、受付フォームで行います。\n音声課題は火曜日の午後九時までにWAV形式で提出します。\n課題の長さは二分以上、四分以内です。\nやむを得ず遅れる場合は、提出前に担当者へ連絡してください。\nFictional instructions for local software tests.\n1",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第1页"
+        },
+        {
+          "source_id": "material-57f715dfe33d7dd8265c7df8",
+          "relative_path": "course.pdf",
+          "start_line": 1,
+          "end_line": 8,
+          "text": "JSC / PUBLIC SYNTHETIC DOCUMENT / PARSER FIXTURE\n講座で使う機材の貸出\nマイクは一人一台、最長四十八時間まで借りられます。\n返却は平日の午前十時から午後四時まで、二階の窓口です。\n録音機の電池が切れたら、受付で予備の電池を受け取れます。\n貸出の予約は利用する前日の午後五時までです。\nFictional instructions for local software tests.\n2",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页"
+        }
+      ]
+    },
+    {
+      "id": "late",
+      "query": "課題の提出が遅れる場合はどうしますか？",
+      "path": "course.pdf",
+      "location": "第1页",
+      "needles": [
+        "提出前",
+        "担当者"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-128b6f0e3ae9c37b5aa511ec",
+          "relative_path": "course.pdf",
+          "start_line": 1,
+          "end_line": 8,
+          "text": "JSC / PUBLIC SYNTHETIC DOCUMENT / PARSER FIXTURE\n公開講座の申込みと課題\n申込みは開催日の三日前まで、受付フォームで行います。\n音声課題は火曜日の午後九時までにWAV形式で提出します。\n課題の長さは二分以上、四分以内です。\nやむを得ず遅れる場合は、提出前に担当者へ連絡してください。\nFictional instructions for local software tests.\n1",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第1页"
+        },
+        {
+          "source_id": "material-4c486817116eb7b10a3ae83c",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 7,
+          "text": "JSC / PUBLIC SYNTHETIC DOCUMENT / PARSER FIXTURE\n架空工作坊：入场说明\n参加者请在上午八点半前到前台签到，课程九点开始。\n如果迟到，请先发送邮件，再从教室后门安静进入。\n现场不提供午餐，请自备便当。饮用水可以在走廊补充。\nFictional instructions for local software tests.\n1",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第1页"
+        },
+        {
+          "source_id": "material-57f715dfe33d7dd8265c7df8",
+          "relative_path": "course.pdf",
+          "start_line": 1,
+          "end_line": 8,
+          "text": "JSC / PUBLIC SYNTHETIC DOCUMENT / PARSER FIXTURE\n講座で使う機材の貸出\nマイクは一人一台、最長四十八時間まで借りられます。\n返却は平日の午前十時から午後四時まで、二階の窓口です。\n録音機の電池が切れたら、受付で予備の電池を受け取れます。\n貸出の予約は利用する前日の午後五時までです。\nFictional instructions for local software tests.\n2",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页"
+        }
+      ]
+    },
+    {
+      "id": "mic",
+      "query": "マイクは何台、どのくらい借りられますか？",
+      "path": "course.pdf",
+      "location": "第2页",
+      "needles": [
+        "一人一台",
+        "四十八時間"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-57f715dfe33d7dd8265c7df8",
+          "relative_path": "course.pdf",
+          "start_line": 1,
+          "end_line": 8,
+          "text": "JSC / PUBLIC SYNTHETIC DOCUMENT / PARSER FIXTURE\n講座で使う機材の貸出\nマイクは一人一台、最長四十八時間まで借りられます。\n返却は平日の午前十時から午後四時まで、二階の窓口です。\n録音機の電池が切れたら、受付で予備の電池を受け取れます。\n貸出の予約は利用する前日の午後五時までです。\nFictional instructions for local software tests.\n2",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页"
+        }
+      ]
+    },
+    {
+      "id": "return",
+      "query": "機材はいつ、どこに返却しますか？",
+      "path": "course.pdf",
+      "location": "第2页",
+      "needles": [
+        "午前十時",
+        "午後四時",
+        "二階"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-57f715dfe33d7dd8265c7df8",
+          "relative_path": "course.pdf",
+          "start_line": 1,
+          "end_line": 8,
+          "text": "JSC / PUBLIC SYNTHETIC DOCUMENT / PARSER FIXTURE\n講座で使う機材の貸出\nマイクは一人一台、最長四十八時間まで借りられます。\n返却は平日の午前十時から午後四時まで、二階の窓口です。\n録音機の電池が切れたら、受付で予備の電池を受け取れます。\n貸出の予約は利用する前日の午後五時までです。\nFictional instructions for local software tests.\n2",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页"
+        }
+      ]
+    },
+    {
+      "id": "battery",
+      "query": "録音機の電池が切れたらどうしますか？",
+      "path": "course.pdf",
+      "location": "第2页",
+      "needles": [
+        "受付",
+        "予備の電池"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-57f715dfe33d7dd8265c7df8",
+          "relative_path": "course.pdf",
+          "start_line": 1,
+          "end_line": 8,
+          "text": "JSC / PUBLIC SYNTHETIC DOCUMENT / PARSER FIXTURE\n講座で使う機材の貸出\nマイクは一人一台、最長四十八時間まで借りられます。\n返却は平日の午前十時から午後四時まで、二階の窓口です。\n録音機の電池が切れたら、受付で予備の電池を受け取れます。\n貸出の予約は利用する前日の午後五時までです。\nFictional instructions for local software tests.\n2",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页"
+        }
+      ]
+    },
+    {
+      "id": "arrival",
+      "query": "参加者は何時までに受付へ行けばいいですか？",
+      "path": "handbook.pdf",
+      "location": "第1页",
+      "needles": [
+        "八点半",
+        "前台签到"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-4c486817116eb7b10a3ae83c",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 7,
+          "text": "JSC / PUBLIC SYNTHETIC DOCUMENT / PARSER FIXTURE\n架空工作坊：入场说明\n参加者请在上午八点半前到前台签到，课程九点开始。\n如果迟到，请先发送邮件，再从教室后门安静进入。\n现场不提供午餐，请自备便当。饮用水可以在走廊补充。\nFictional instructions for local software tests.\n1",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第1页"
+        },
+        {
+          "source_id": "material-128b6f0e3ae9c37b5aa511ec",
+          "relative_path": "course.pdf",
+          "start_line": 1,
+          "end_line": 8,
+          "text": "JSC / PUBLIC SYNTHETIC DOCUMENT / PARSER FIXTURE\n公開講座の申込みと課題\n申込みは開催日の三日前まで、受付フォームで行います。\n音声課題は火曜日の午後九時までにWAV形式で提出します。\n課題の長さは二分以上、四分以内です。\nやむを得ず遅れる場合は、提出前に担当者へ連絡してください。\nFictional instructions for local software tests.\n1",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第1页"
+        },
+        {
+          "source_id": "material-57f715dfe33d7dd8265c7df8",
+          "relative_path": "course.pdf",
+          "start_line": 1,
+          "end_line": 8,
+          "text": "JSC / PUBLIC SYNTHETIC DOCUMENT / PARSER FIXTURE\n講座で使う機材の貸出\nマイクは一人一台、最長四十八時間まで借りられます。\n返却は平日の午前十時から午後四時まで、二階の窓口です。\n録音機の電池が切れたら、受付で予備の電池を受け取れます。\n貸出の予約は利用する前日の午後五時までです。\nFictional instructions for local software tests.\n2",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页"
+        }
+      ]
+    },
+    {
+      "id": "lunch",
+      "query": "昼ご飯は用意してもらえますか？",
+      "path": "handbook.pdf",
+      "location": "第1页",
+      "needles": [
+        "不提供午餐",
+        "自备便当"
+      ],
+      "covered": false,
+      "location_matched": false,
+      "sources": []
+    },
+    {
+      "id": "router",
+      "query": "ルーターが反応しなくなったら、どうすればいいですか？",
+      "path": "handbook.pdf",
+      "location": "第2页",
+      "needles": [
+        "twenty seconds",
+        "two minutes",
+        "help desk"
+      ],
+      "covered": true,
+      "location_matched": true,
+      "sources": [
+        {
+          "source_id": "material-8d9006546ebee389924b265e",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 8,
+          "text": "JSC / PUBLIC SYNTHETIC DOCUMENT / PARSER FIXTURE\nNetwork troubleshooting\nIf the router stops responding, unplug its power cable.\nWait twenty seconds, reconnect it, and allow two minutes to start.\nIf the connection still fails, contact the help desk.\nKeep the router in place; do not press its factory reset button.\nFictional instructions for local software tests.\n2",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页"
+        }
+      ]
+    }
+  ]
+}

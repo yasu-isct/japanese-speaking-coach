@@ -1,0 +1,15 @@
+{
+  "kind": "Fixed prior public materials after PDF integration, and actual hidden parser process check",
+  "unchanged_previous_source_payloads": 57,
+  "legacy_47_search_timing": {
+    "samples": 47,
+    "p50_ms": 3.8942000828683376,
+    "p95_ms": 5.367100005969405
+  },
+  "pdf_three_file_index_ms": 995.632000034675,
+  "pdf_process_foreground_unchanged": true,
+  "api_calls": 0,
+  "network_calls": 0,
+  "private_data_read": false,
+  "real_user_settings_changed": false
+}

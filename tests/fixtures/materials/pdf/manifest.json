@@ -1,0 +1,9 @@
+{
+  "provenance": "Public synthetic documents, 4 text pages and 1 image-only page. Created with bundled ReportLab 4.4.9; no private inputs.",
+  "sha256": {
+    "queries.json": "6ca2f703869e74566916ba2e6b348dee8579a5b5ebd669da6dbf4997901139a2",
+    "data/course.pdf": "0e9aab1cc298d56e39f345692cf529c34245c0c92e73948947d1d59b279a8f46",
+    "data/handbook.pdf": "65756815bdf2adebc4250826775a2be14b344a85d549f5a84e0cd0a0d2d09383",
+    "data/scan-only.pdf": "9364fb55912b03b88622a5b8c3cea9ff0342f44730365feb99d8238a5962d17c"
+  }
+}

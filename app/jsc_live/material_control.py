@@ -99,7 +99,7 @@ class MaterialsController:
         elif diagnostics.get("unsafe_root") or diagnostics.get("root_read_error"):
             message = "资料文件夹无法读取，请选择实际存在且可访问的文件夹。"
         elif not store.chunks:
-            message += " 放入md/txt或docx后点“重新读取资料”。"
+            message += " 放入md/txt、docx或文字PDF后点“重新读取资料”。"
         return {"root": str(store.root), "files": diagnostics.get("indexed_files", 0),
                 "chunks": len(store.chunks), "message": message, "issues": issues}
 

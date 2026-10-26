@@ -1,5 +1,5 @@
 {
-  "_note": "Updated through D-032, local only and not deployed. DOCX body paragraphs and simple tables now feed existing local retrieval with body/table positions. Two synthetic Word documents cover 10 fixed questions; this is retrieval coverage, not generated answer accuracy. No new API or visible latency measurement. Earlier images keep their dated provenance; the DOCX image is a synthetic retrieval/citation UI state.",
+  "_note": "Updated through D-033, local only and not deployed. Text PDFs now feed retrieval with physical page citations through hidden time-limited parsing. Fixed synthetic PDF coverage is 9/10, with the Japanese lunch question still missed. This is retrieval, not answer accuracy. Prior 57 source payloads remain unchanged. New PDF UI media uses synthetic citation-state input; no API or new visible-latency evidence.",
   "status": {
     "ja": "開発中：外部資料による返答とローカル復習を追加",
     "zh": "开发中：已增加外部资料回答和本地复盘",
@@ -11,11 +11,11 @@
     "en": "A Japanese conversation coach for the moment you are mid-conversation — GPU real-time subtitles plus reply suggestions built from the Skill's rules"
   },
   "number": {
-    "value": "36/36 ranges · 262 checks",
+    "value": "36/36 ranges · 277 checks",
     "label": {
-      "ja": "47の固定質問中36の目標範囲を取得（開発用データ含む）。回答正答率ではない。262テスト中261成功・1スキップ。",
-      "zh": "47个固定问题中的36个目标片段全部找到（含开发数据）；不是回答正确率。262项检查，261通过、1跳过。",
-      "en": "36/36 target ranges retrieved across 47 fixed questions, including development data; not answer accuracy. 262 checks: 261 pass, 1 skip."
+      "ja": "47の固定質問中36の目標範囲を取得（開発用データ含む）。回答正答率ではない。277テスト中276成功・1スキップ。",
+      "zh": "47个固定问题中的36个目标片段全部找到（含开发数据）；不是回答正确率。277项检查，276通过、1跳过。",
+      "en": "36/36 target ranges retrieved across 47 fixed questions, including development data; not answer accuracy. 277 checks: 276 pass, 1 skip."
     },
     "href": "https://github.com/yasu-isct/japanese-speaking-coach/blob/main/docs/showcase-ja.md"
   },
@@ -188,6 +188,22 @@
         "en": "A passage from a fictional Word table with its row location"
       },
       "caption": "公開架空Word・検索/引用状態の合成表示（2026-10-26、D-032）、画面外描画。生成API・可視速度の証拠ではない"
+    },
+    {
+      "src": "/media/coach/live-materials-pdf.png",
+      "width": 820,
+      "height": 600,
+      "label": {
+        "ja": "PDFの資料とページ",
+        "zh": "PDF资料与页码",
+        "en": "PDF sources and pages"
+      },
+      "alt": {
+        "ja": "架空PDFの提出案内と物理ページ番号",
+        "zh": "虚构PDF讲义的提交说明与物理页码",
+        "en": "A fictional PDF course passage and its physical page number"
+      },
+      "caption": "公開架空PDF・検索/引用状態の合成表示（2026-10-26、D-033）、画面外描画。生成API・可視速度の証拠ではない"
     }
   ],
   "demo_video": {

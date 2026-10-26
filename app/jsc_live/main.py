@@ -150,7 +150,7 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--list-devices", action="store_true")
     p.add_argument("--suggest", action="store_true", help="show 3 reply suggestions (API settings in .env)")
     p.add_argument("--partner", help="who you are talking to, e.g. 上司 / 老师 / 店员 / 朋友 (helps politeness)")
-    p.add_argument("--materials", type=Path, help="external folder of UTF-8 .md/.txt and .docx reference documents")
+    p.add_argument("--materials", type=Path, help="external folder of UTF-8 .md/.txt, .docx and text PDF documents")
     retrieval = p.add_mutually_exclusive_group()
     retrieval.add_argument("--semantic-model", type=Path, help="use this prepared local model instead of saved retrieval settings; no automatic download")
     retrieval.add_argument("--keywords-only", action="store_true", help="use keyword retrieval for this run without changing saved preferences")
@@ -208,7 +208,7 @@ def main(argv: list[str] | None = None) -> None:
             destination = prepare_materials(selected_materials(args.materials), args.import_profile)
         except (OSError, ValueError) as exc:
             p.error(str(exc))
-        print(f"资料文件夹：{destination}\n可放入课程笔记、文章或工作文档（UTF-8 .md/.txt 或 .docx）。\n"
+        print(f"资料文件夹：{destination}\n可放入课程笔记、文章或工作文档（UTF-8 .md/.txt、.docx 或文字PDF）。\n"
               "开启建议后，检索命中的片段会发给 API；原资料保留，不会自动上传全部文件。")
         return
     if args.list_devices:

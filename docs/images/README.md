@@ -38,3 +38,5 @@
 字幕の誤認識も含め、実行結果はそのまま。
 
 `live-materials-docx.png`（820×600）はD-032。公開架空Wordの検索片段と引用状態を合成表示した画面で、生成APIは使用していない。改前/後/窄窓は画面外の自身HWNDのみ、無加工、前台不変。出典は本文段落/表行で、Wordページ番号ではない。SHAと来歴：`tests/live_suggest/docx-stage-20261026.json`。
+
+`live-materials-pdf.png`（820×600）はD-033。公開架空PDFから本機で抽出した文字と物理ページ番号を、合成引用状態として表示。生成APIなし、画面外自身HWNDのみ、無加工。SHAと来歴：`tests/live_suggest/pdf-stage-20261026.json`。

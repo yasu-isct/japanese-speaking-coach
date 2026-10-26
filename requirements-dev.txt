@@ -3,3 +3,4 @@
 numpy>=1.26
 fugashi==1.5.2
 unidic-lite==1.0.8
+pypdf==6.21.2

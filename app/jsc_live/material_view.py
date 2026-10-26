@@ -12,7 +12,7 @@ from .materials import source_location
 def source_text(root: str, sources: list[dict], cited_ids: list[str]) -> str:
     lines = [f"这条回答使用的资料文件夹：{root}" if root else "本轮参考片段", ""]
     if not sources:
-        lines += ["这轮没有查到相关片段。", "可放入 UTF-8 的 .md / .txt 或 .docx 文件，修改后点“重新读取资料”。"]
+        lines += ["这轮没有查到相关片段。", "可放入 UTF-8 的 .md / .txt、.docx 或文字PDF，修改后点“重新读取资料”。"]
     for source in sources:
         label = "回答引用" if source["source_id"] in cited_ids else "本轮发送"
         lines += [f"{label} · {source_location(source)}",
@@ -144,13 +144,16 @@ class MaterialsWindow:
         sources, cited_ids, snapshot_root = self._last_sources
         self.text.configure(state="normal")
         self.text.delete("1.0", "end")
+        old_root = snapshot_root if snapshot_root and snapshot_root != self.materials_root else ""
+        if sources:
+            self.text.insert("end", source_text(old_root, sources, cited_ids))
         if self.controller is not None:
             issues = self.controller.current().get("issues", [])
             if issues:
-                self.text.insert("end", "当前资料文件夹的读取提示（不随问题发送）：\n"
-                                 + "\n".join(f"• {issue['path']}：{issue['message']}" for issue in issues) + "\n\n")
-        old_root = snapshot_root if snapshot_root and snapshot_root != self.materials_root else ""
-        self.text.insert("end", source_text(old_root, sources, cited_ids))
-        self.text.insert("end", "\n\n支持md/txt和Word正文、简单表格；docx出处按段落/表格行标记。\n"
-                         "图片、页眉页脚、批注与文本框不参与查找。PDF暂请转成文字。")
+                self.text.insert("end", "\n\n当前文件夹的读取提示（不随问题发送）：\n"
+                                 + "\n\n".join(f"{issue['path']}\n{issue['message']}" for issue in issues) + "\n\n")
+        if not sources:
+            self.text.insert("end", source_text(old_root, sources, cited_ids))
+        self.text.insert("end", "\n\n支持md/txt、Word正文/简单表格和文字PDF；出处标到行、段落或PDF页。\n"
+                         "Word图片、页眉页脚、批注与文本框不参与查找；PDF扫描页请先转成文字。")
         self.text.configure(state="disabled")

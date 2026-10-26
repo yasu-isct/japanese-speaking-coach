@@ -5,6 +5,7 @@ numpy>=1.26
 SoundCard==0.4.6             # microphone + WASAPI loopback (system audio) capture
 fugashi==1.5.2               # MeCab binding for morphological analysis
 unidic-lite==1.0.8           # dictionary for fugashi (readings)
+pypdf==6.21.2               # local PDF text extraction; no OCR or external viewer
 
 # NVIDIA GPU (CUDA 12) runtime libraries; skip these to run on CPU (much slower)
 nvidia-cublas-cu12

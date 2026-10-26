@@ -78,7 +78,7 @@ def chunk_data(chunk: MaterialChunk) -> dict:
 
 
 def source_location(source: Mapping, *, short: bool = False) -> str:
-    """DOCX uses body positions, while text sources keep their original line IDs."""
+    """Structured documents use body/page positions; text keeps original lines."""
     path = source.get("relative_path", "")
     location = source.get("location")
     if isinstance(location, str) and location:
@@ -235,7 +235,7 @@ class MaterialsStore:
                         break
                     counts["files_considered"] += 1
                     relative = path.relative_to(resolved_root).as_posix()
-                    if path.suffix.casefold() == ".docx":
+                    if path.suffix.casefold() in (".docx", ".pdf"):
                         from .document_text import DocumentError, extract_docx
 
                         raw = self._read_bytes(path, resolved_root, counts, self.limits.max_document_bytes)
@@ -243,7 +243,11 @@ class MaterialsStore:
                             document_issues.append({"path": relative, "message": "文件无法读取、已变化或超过10MB，请检查后重新读取。"})
                             continue
                         try:
-                            sections, notices = extract_docx(raw, max_chars=self.limits.max_total_chars)
+                            if path.suffix.casefold() == ".pdf":
+                                from .pdf_text import extract_pdf
+                                sections, notices = extract_pdf(raw, max_chars=self.limits.max_total_chars)
+                            else:
+                                sections, notices = extract_docx(raw, max_chars=self.limits.max_total_chars)
                         except DocumentError as exc:
                             counts["document_read_error"] += 1
                             document_issues.append({"path": relative, "message": str(exc)})
@@ -321,7 +325,7 @@ class MaterialsStore:
                             directories.append((path, depth + 1))
                         else:
                             counts["depth_limit_reached"] += 1
-                    elif path.suffix.casefold() in (".md", ".txt", ".docx") and path.is_file():
+                    elif path.suffix.casefold() in (".md", ".txt", ".docx", ".pdf") and path.is_file():
                         yield path
                 pending.extend(reversed(directories))
             except (OSError, RuntimeError):

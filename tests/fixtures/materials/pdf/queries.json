@@ -1,0 +1,105 @@
+[
+  {
+    "id": "enrol",
+    "query": "申込みはいつまで、どこで行いますか？",
+    "path": "course.pdf",
+    "location": "第1页",
+    "needles": [
+      "三日前",
+      "受付フォーム"
+    ]
+  },
+  {
+    "id": "submit",
+    "query": "音声課題の提出期限と形式は何ですか？",
+    "path": "course.pdf",
+    "location": "第1页",
+    "needles": [
+      "火曜日",
+      "午後九時",
+      "WAV"
+    ]
+  },
+  {
+    "id": "duration",
+    "query": "課題の長さは何分ですか？",
+    "path": "course.pdf",
+    "location": "第1页",
+    "needles": [
+      "二分以上",
+      "四分以内"
+    ]
+  },
+  {
+    "id": "late",
+    "query": "課題の提出が遅れる場合はどうしますか？",
+    "path": "course.pdf",
+    "location": "第1页",
+    "needles": [
+      "提出前",
+      "担当者"
+    ]
+  },
+  {
+    "id": "mic",
+    "query": "マイクは何台、どのくらい借りられますか？",
+    "path": "course.pdf",
+    "location": "第2页",
+    "needles": [
+      "一人一台",
+      "四十八時間"
+    ]
+  },
+  {
+    "id": "return",
+    "query": "機材はいつ、どこに返却しますか？",
+    "path": "course.pdf",
+    "location": "第2页",
+    "needles": [
+      "午前十時",
+      "午後四時",
+      "二階"
+    ]
+  },
+  {
+    "id": "battery",
+    "query": "録音機の電池が切れたらどうしますか？",
+    "path": "course.pdf",
+    "location": "第2页",
+    "needles": [
+      "受付",
+      "予備の電池"
+    ]
+  },
+  {
+    "id": "arrival",
+    "query": "参加者は何時までに受付へ行けばいいですか？",
+    "path": "handbook.pdf",
+    "location": "第1页",
+    "needles": [
+      "八点半",
+      "前台签到"
+    ]
+  },
+  {
+    "id": "lunch",
+    "query": "昼ご飯は用意してもらえますか？",
+    "path": "handbook.pdf",
+    "location": "第1页",
+    "needles": [
+      "不提供午餐",
+      "自备便当"
+    ]
+  },
+  {
+    "id": "router",
+    "query": "ルーターが反応しなくなったら、どうすればいいですか？",
+    "path": "handbook.pdf",
+    "location": "第2页",
+    "needles": [
+      "twenty seconds",
+      "two minutes",
+      "help desk"
+    ]
+  }
+]
