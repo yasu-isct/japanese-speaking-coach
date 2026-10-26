@@ -153,6 +153,10 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--materials", type=Path, help="external folder of UTF-8 .md/.txt reference documents")
     p.add_argument("--init-materials", action="store_true", help="create the materials folder and exit; no API call")
     p.add_argument("--import-profile", type=Path, help="copy an old profile to external materials without overwriting, then exit")
+    p.add_argument("--review-session", type=Path, help="export a local session review and Anki cards, then exit without API/audio")
+    p.add_argument("--review-output", type=Path, help="new output folder for --review-session (never overwrites)")
+    p.add_argument("--anki-layout", choices=["basic", "fields"], default="basic",
+                   help="Anki card layout: Basic front/back (default) or four custom fields")
     p.add_argument("--suggest-timeout", type=float, default=3.0, help="seconds before a suggestion counts as late")
     p.add_argument("--turn-gap", type=float, default=0.8,
                    help="extra quiet seconds after a sentence before the turn is answered (on top of --end-silence)")
@@ -166,6 +170,25 @@ def main(argv: list[str] | None = None) -> None:
 
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
+    if args.review_output is not None and args.review_session is None:
+        p.error("--review-output 请与 --review-session 一起使用。")
+    if args.review_session is not None:
+        if args.init_materials or args.import_profile:
+            p.error("复盘和资料导入请分开执行。")
+        from .session_review import export_session_review
+
+        try:
+            exported = export_session_review(args.review_session, args.review_output, anki_layout=args.anki_layout)
+        except (OSError, ValueError) as exc:
+            p.error(str(exc))
+        print(f"复盘页：{exported.html_path}\nAnki 文件：{exported.anki_path}\n"
+              f"{exported.sentence_count} 条字幕，{exported.turn_count} 轮建议，{exported.card_count} 张卡。\n"
+              "全程在本机生成，未调用 API；用浏览器打开复盘页即可回看。")
+        if not exported.card_count:
+            print("这份存档没有可导出的查词记录。旧存档不会补造释义；录音版中查过的词会随存档保存。")
+        if exported.diagnostics:
+            print(f"部分记录需检查：{exported.diagnostics}（详情见复盘页）")
+        return
     if args.init_materials or args.import_profile:
         from .material_setup import prepare_materials
 
@@ -237,8 +260,13 @@ def main(argv: list[str] | None = None) -> None:
     lookup = Lookup(lookup_client)
     history_furigana = Furigana("all")
 
+    def record_lookup(record):
+        session = holder.get("session")
+        if session is not None:
+            session.add_lookup(record)
+
     def make_history(root, family):
-        return HistoryWindow(root, history_furigana, lookup, family)
+        return HistoryWindow(root, history_furigana, lookup, family, on_lookup=record_lookup)
 
     window = SubtitleWindow(events, font_size=args.font_size, history=args.history,
                             suggestion_timeout=args.suggest_timeout,

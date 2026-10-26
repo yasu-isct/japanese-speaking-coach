@@ -9,6 +9,7 @@
         clips/NNNN.wav           each finished sentence's audio
         clips/transcripts.tsv    NNNN.wav<TAB>text<TAB>language<TAB>dropped  (tools/compare_asr.py reads this folder)
         suggestions.jsonl        per turn: replies + asr / api / render ms (when --suggest is on)
+        vocabulary.jsonl         successful user-selected word lookups (when any)
 
 Everything stays under logs/, which is git-ignored. Recordings of a call contain the
 other person's voice, so the window shows a "録音中" mark while this is running.
@@ -100,6 +101,16 @@ class Session:
             if new:
                 f.write("started\tminutes\tsentences\tsource\tfolder\n")
             f.write(f"{self.meta['started']}\t{minutes:.1f}\t{self.sentences}\t{self.meta['source']}\t{self.dir.name}\n")
+
+    def add_lookup(self, record: dict) -> None:
+        """Save an explicit word lookup locally, including after audio stops."""
+        fields = ("kind", "word", "reading", "lemma", "meaning", "sentence", "utterance_id", "looked_up_at")
+        item = {key: record.get(key) for key in fields}
+        if item["kind"] != "lookup" or not item["word"] or not item["meaning"]:
+            return
+        with self.lock:
+            with (self.dir / "vocabulary.jsonl").open("a", encoding="utf-8") as output:
+                output.write(json.dumps(item, ensure_ascii=False) + "\n")
 
     def _write_meta(self) -> None:
         (self.dir / "meta.json").write_text(json.dumps(self.meta, ensure_ascii=False, indent=1), encoding="utf-8")

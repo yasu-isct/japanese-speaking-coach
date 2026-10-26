@@ -195,7 +195,7 @@ class SubtitleWindow:
                         self.lines.append((uid, segments, FG_OTHER_LANG if other else FG_FINAL))
                         self.lines = self.lines[-self.history:]
                         if self.history_window:
-                            self.history_window.add("".join(s.text for s in segments), other_language=other)
+                            self.history_window.add("".join(s.text for s in segments), other_language=other, uid=uid)
                     self.status = ""
                 elif kind == "session":
                     self.recording = True

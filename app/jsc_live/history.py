@@ -62,9 +62,12 @@ class Lookup:
 
 class HistoryWindow:
     def __init__(self, master: tk.Tk, furigana: Furigana, lookup: Lookup, family: str,
-                 font_size: int = 13, x: int | None = None, y: int | None = None) -> None:
+                 font_size: int = 13, x: int | None = None, y: int | None = None,
+                 on_lookup=None) -> None:
         self.furigana = furigana
         self.lookup = lookup
+        self.on_lookup = on_lookup
+        self.line_ids: dict[str, int | None] = {}
         self.results: queue.Queue = queue.Queue()
         self.top = tk.Toplevel(master)
         self.top.title("字幕历史（选中词语查读音和意思）")
@@ -101,8 +104,9 @@ class HistoryWindow:
         self.top.after(100, self._poll)
 
     # --- content -----------------------------------------------------------
-    def add(self, sentence: str, other_language: bool = False) -> None:
+    def add(self, sentence: str, other_language: bool = False, uid: int | None = None) -> None:
         at_bottom = self.text.yview()[1] > 0.98
+        self.line_ids[self.text.index("end-1c").split(".")[0]] = uid
         self.text.insert("end", time.strftime("%H:%M:%S") + "  ", "time")
         self.text.insert("end", sentence + "\n", "other" if other_language else ())
         if at_bottom:  # follow new lines unless the user scrolled up to read
@@ -120,16 +124,28 @@ class HistoryWindow:
             return
         sentence = line.split("  ", 1)[-1]
         reading, lemma = reading_and_lemma(self.furigana, word)
+        uid = self.line_ids.get(self.text.index("sel.first").split(".")[0])
         head = f"{word}　【{reading}】" + (f"　辞书形：{lemma}" if lemma and lemma != word else "")
         self.panel.configure(text=head + "\n意思：查询中…")
         self._pending = (word, sentence)
-        threading.Thread(target=self._ask, args=(word, sentence, head), daemon=True).start()
+        threading.Thread(target=self._ask, args=(word, sentence, head, reading, lemma, uid), daemon=True).start()
 
-    def _ask(self, word: str, sentence: str, head: str) -> None:
+    def _ask(self, word: str, sentence: str, head: str, reading: str = "", lemma: str = "",
+             uid: int | None = None) -> None:
         try:
             meaning = self.lookup.meaning(word, sentence)
         except Exception as exc:  # network errors etc. should not break the window
             meaning = f"（查询失败：{exc}）"
+        # Only completed dictionary responses become cards; errors and the
+        # no-client placeholder never enter the local vocabulary archive.
+        if (self.on_lookup is not None and (word, sentence) in self.lookup.cache
+                and meaning and meaning != "（没查到）"):
+            try:
+                self.on_lookup({"kind": "lookup", "word": word, "reading": reading,
+                                "lemma": lemma, "meaning": meaning, "sentence": sentence,
+                                "utterance_id": uid, "looked_up_at": time.time()})
+            except OSError:
+                meaning += "\n（本地查词记录未能保存，请检查存档文件夹。）"
         self.results.put((word, sentence, head, meaning))
 
     def _poll(self) -> None:

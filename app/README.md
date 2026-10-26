@@ -47,13 +47,13 @@
 有自己的资料文件夹时：
 
 ```powershell
-.\jsc-live.bat --materials "D:\我的资料\日语课"
+.\jsc-live.bat --suggest --materials "D:\我的资料\日语课"
 ```
 
 从旧版 `profile.md` 导入时：
 
 ```powershell
-.\jsc-live.bat --import-profile .\profile.md
+.\jsc-live.bat --import-profile "D:\ClaudeProject\japanese-speaking-coach\profile.md"
 ```
 
 这一步只复制到外部资料区，完成后退出；原文件保留，目标同名文件已存在就停止，不会覆盖。正常启动已不自动读取仓库里的 `profile.md`。个人背景只是资料的一种，也可以直接放入课程说明、会议笔记或操作手册。
@@ -113,6 +113,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 - 选中一个词（或一小段），底部显示：选中的文字【读音】、辞书形（如 恥ずかしかった → 恥ずかしい），以及这个词在这句话里的中文意思。
 - 读音在本机查，立刻出来；意思要问 DeepSeek（需要 `.env`），约 1 秒。查过的词会记住，再查不花时间。
 - 历史里只记字幕，不记建议（程序不知道你实际说了哪一条，记下来反而乱）。
+- 用录音版时，查到意思的词也会保存在本次存档里，供复盘和导出卡片；普通版不保存查词记录。
 
 ### 存档
 
@@ -124,9 +125,24 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | `stream.wav` | 这次听到的全部声音 |
 | `clips\` | 每句话单独的音频 + `transcripts.tsv` |
 | `suggestions.jsonl` | 每次的建议和耗时（开了建议时） |
+| `vocabulary.jsonl` | 你在历史窗口选中并查到意思的词（有查词时才生成） |
 | `meta.json` | 来源、模型、开始结束时间、句数 |
 
 `logs\sessions\index.tsv` 是总目录，每次使用一行（日期、分钟数、句数、文件夹名）。存档只在你电脑上，不会提交到 GitHub。视频通话时录下的是对方的声音，最好让对方知道。
+
+### 课后复盘和 Anki 卡片
+
+在仓库根目录运行下面的命令，把最后的文件夹换成要复习的那次存档（使用完整路径）：
+
+```powershell
+.\jsc-live.bat --review-session "D:\ClaudeProject\japanese-speaking-coach\logs\sessions\20261026-171615"
+```
+
+这一步不启动字幕窗、不调用 API。程序会显示两个新文件的位置：用浏览器打开复盘页，可以回看字幕、当时的建议和参考片段；把 Anki 文件导入 Anki，选择 Basic 笔记类型即可。建议会明确标为“可参考的说法”，并不表示你当时真的说过。
+
+卡片只采用存档里实际查过、已有释义的词，正面包含词语和原句，背面是读音与释义。同一个词在不同句子里可以分别复习。旧存档没保存查词时，仍可回看字幕和建议，但卡片数为零；程序不会凭空判断你哪里没听懂，也不会补造释义。可以在复盘页回听对应录音，自己挑出需要练习的句子。
+
+默认每次生成到新的复盘文件夹，不覆盖原录音或已有导出。需要自选位置时加 `--review-output "D:\我的复盘\新文件夹"`；使用自建的四字段笔记类型时加 `--anki-layout fields`，字段顺序为 Front、Reading、Meaning、Example。
 
 ### 没反应怎么办
 
@@ -178,6 +194,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 ### 全部参数
 
 直接用 Python 运行时：先 `conda activate jsc`，再在 `app` 目录下运行 `python -m jsc_live …`（直接运行时默认存档）。两个 `.bat` 会把参数原样传过去，`jsc-live.bat` 还会自动加上 `--no-record`。
+从 `.bat` 传入文件或文件夹时建议用完整路径，因为脚本会先切换到 `app` 目录。
 
 | 参数 | 说明 |
 |---|---|
@@ -189,6 +206,9 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | `--materials 文件夹` | 指定外部参考资料区；不指定就用用户数据目录 |
 | `--init-materials` | 建立资料区并显示路径，然后退出，不调用 API |
 | `--import-profile 文件` | 把明确指定的旧资料复制到资料区，保留原文件且不覆盖目标，然后退出 |
+| `--review-session 存档文件夹` | 只在本机生成复盘页和 Anki 文件，完成后退出 |
+| `--review-output 新文件夹` | 自选复盘输出位置，不覆盖已有文件夹 |
+| `--anki-layout basic / fields` | 默认 Basic 双面卡；fields 用四字段自建笔记类型 |
 | `--suggest-timeout 3` | 几秒没到算超时 |
 | `--turn-gap 0.8` | 对方停下来后再等几秒才出建议（在 0.6 秒分句停顿之外）；调小更快，调大更不容易把一段话切开 |
 | `--history 5` | 字幕区保留几句 |
@@ -212,7 +232,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | 接话建议，一问一答 10 句（deepseek-flash） | 最后一句字幕 → 建议显示：中位数 2.43 s，最大 2.63 s；其中等待停顿 0.82 s、API 往返 1.55 s（首字 0.85 s）、渲染 72 ms（`tests/live_suggest/e2e-dialogue-*`） |
 | 接话建议，独白 3 段 11 个片段 | 只请求 3 次，每次回应整段；2.49 / 2.65 / 3.09 s（`tests/live_suggest/e2e-monologue-*`） |
 
-单元测试：在 `japanese-speaking-coach` 目录下运行 `python -m unittest discover -s tests`，不需要显卡和网络。2026-10-26 本轮共166项：165通过，1项因系统不允许创建符号链接而跳过，另有链接属性和越界路径测试通过。
+单元测试：在 `japanese-speaking-coach` 目录下运行 `python -m unittest discover -s tests`，不需要显卡和网络。2026-10-26 本轮共189项：188通过，1项因系统不允许创建符号链接而跳过，另有链接属性和越界路径测试通过。
 
 开发评测默认在后台隐藏窗口，避免挡住正在使用的其它软件。`tools/e2e_suggest.py` 和 `tools/benchmark_overlay.py` 只在显式加 `--show-window` 时显示测试窗；Windows 下该窗口会鼠标穿透、不抢焦点。后台的 Canvas 完成耗时不是实际可见显示延迟，两种结果会分别标记。截图还须显式指定输出路径；提前结束的运行会标记未完成并返回非零退出码。
 
