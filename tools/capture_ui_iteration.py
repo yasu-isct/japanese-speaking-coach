@@ -1,32 +1,29 @@
 """Capture a fixed, synthetic subtitle window without API calls or audio.
 
-    python tools/capture_ui_iteration.py --show-window --label before
+    python tools/capture_ui_iteration.py --offscreen --label before
 
 Only the app's opaque window is captured. Each run gets a new directory under
 logs/ui-iterations/20261026-readability/. A locked desktop or capture failure is
 recorded, not worked around. The window closes automatically within five seconds.
-Without --show-window this tool prints instructions and never creates a window.
+Without --offscreen or --show-window this tool never creates a window.
 """
 
 from __future__ import annotations
 
 import argparse
-import ctypes
 import hashlib
 import json
-import os
 import queue
 import re
 import sys
 import time
-from ctypes import wintypes
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "app"))
 sys.path.insert(0, str(ROOT / "tools"))
-from test_window import create_test_window  # noqa: E402
+from test_window import create_test_window, verify_offscreen  # noqa: E402
 
 TOKYO = timezone(timedelta(hours=9))
 OUTPUT = ROOT / "logs/ui-iterations/20261026-readability"
@@ -74,29 +71,12 @@ def canvas_metrics(win) -> dict:
             "overflow_items": overflow}
 
 
-def owned_window_at_points(rect: tuple[int, int, int, int]) -> bool:
-    """Check that the capture rectangle is visibly occupied by this process."""
-    user32 = ctypes.windll.user32
-    user32.WindowFromPoint.argtypes = [wintypes.POINT]
-    user32.WindowFromPoint.restype = wintypes.HWND
-    user32.GetWindowThreadProcessId.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.DWORD)]
-    user32.GetWindowThreadProcessId.restype = wintypes.DWORD
-    x, y, width, height = rect
-    for dx, dy in ((2, 2), (width - 3, 2), (2, height - 3),
-                   (width - 3, height - 3), (width // 2, height // 2)):
-        hwnd = user32.WindowFromPoint(wintypes.POINT(x + dx, y + dy))
-        pid = wintypes.DWORD()
-        user32.GetWindowThreadProcessId(hwnd, ctypes.byref(pid))
-        if not hwnd or pid.value != os.getpid():
-            return False
-    return True
-
-
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--label", default="before")
     parser.add_argument("--font-size", type=int, default=16)
     parser.add_argument("--show-window", action="store_true", help="explicit Windows passive preview required for capture")
+    parser.add_argument("--offscreen", action="store_true", help="render outside all monitors; no desktop pixels are copied")
     args = parser.parse_args(argv)
     if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_-]{0,31}", args.label):
         parser.error("--label must contain only ASCII letters, digits, underscores or hyphens")
@@ -104,8 +84,10 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("--font-size must be between 12 and 72 points")
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
-    if not args.show_window:
-        print("No window opened. Capture requires explicit --show-window (Windows click-through, non-activating preview).")
+    if args.offscreen and args.show_window:
+        parser.error("Choose either --offscreen or --show-window")
+    if not (args.show_window or args.offscreen):
+        print("No window opened. Use --offscreen, or explicit --show-window for a passive preview.")
         return 0
     started = datetime.now(TOKYO)
     out = OUTPUT / f"{args.label}-{started:%Y%m%d-%H%M%S-%f}"
@@ -124,14 +106,14 @@ def main(argv: list[str] | None = None) -> int:
     win = None
     wall_start = time.perf_counter()
     try:
-        import screen_capture as sc
+        from window_capture import capture_owned_window
         from jsc_live.furigana import Furigana
         from jsc_live.overlay import SubtitleWindow
 
         events = queue.Queue()
         furigana = Furigana("graded")
         win = create_test_window(SubtitleWindow, events, font_size=args.font_size, width=900, history=3, alpha=1.0,
-                                 history_window=None, mode="full", show=True)
+                                 history_window=None, mode="full", show=args.show_window, offscreen=args.offscreen)
         metrics["test_window"] = win.test_window
         root = win.root
         root.title("jsc-live synthetic UI capture")
@@ -176,20 +158,13 @@ def main(argv: list[str] | None = None) -> int:
                          "operation_steps_from_initial": len(metrics["operations"]),
                          "captured": False}
                 metrics["states"].append(state)
-                if x < 0 or y < 0 or x + width > sw or y + height > sh:
-                    raise RuntimeError("App window is partly outside the primary screen; no screenshot saved")
+                state["would_fit_primary_screen"] = width <= sw and height <= sh
+                if args.offscreen:
+                    state["offscreen_check"] = verify_offscreen(root)
                 if state["alpha"] != 1.0:
                     raise RuntimeError("App window is not opaque; no screenshot saved")
-                if not owned_window_at_points(bounds):
-                    raise RuntimeError("Capture ownership check failed (passive click-through may hit the underlying window); "
-                                       "no screenshot saved and interactive mode will not be enabled")
-                rgb = sc.grab(*bounds)
-                if rgb.size == 0 or int(rgb.max()) == int(rgb.min()):
-                    raise RuntimeError("Capture returned an empty or flat image; no screenshot saved")
                 path = out / f"{args.label}-{state_name or mode}.png"
-                if path.exists():
-                    raise FileExistsError("Screenshot already exists; refusing to overwrite")
-                sc.save_png(path, rgb)
+                state["capture_method"] = capture_owned_window(root, path)
                 state["captured"] = True
                 state["image"] = path.name
                 state["image_sha256"] = sha256(path)

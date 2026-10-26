@@ -1,6 +1,16 @@
 # docs/images — 画面素材
 
-すべて **TTS 音声による再生・個人情報なし**。入力は `tests/sample_dialogues.md` の 10 文を Windows 標準音声（Haruka）で合成したもので、アプリ自身のファイル入力（`--source file --realtime`）で再生した。実在の人物の音声・個人情報は含まない。個人プロフィールは `profile.example.md` の例示用プレースホルダー。
+すべて **TTS 音声による再生・個人情報なし**。新旧の画面と測定条件は以下のとおり。
+
+## 2026-10-26：外部文書を使う返答
+
+`live-reference-answer.png`（900×419）と `live-reference-manual.png`（900×444）は、D-024の4問TTS実行 `tests/live_suggest/e2e-references-20261026-171615.jsonl` を現在のUI（アプリ `ed12b8f`）へ再表示した画面。架空の授業案内・録音機マニュアルから回答し、理由にファイル名と行番号を示す。
+
+`tools/capture_showcase.py --render-saved --materials tests/fixtures/materials/general/data` で再現可能。ウィンドウは全モニターの外側に配置し、入力透過・非アクティブを維持して自身のHWNDだけをPrintWindowで描画。デスクトップのピクセルは取得せず、APIも呼ばない。画像は無加工。これは保存済みTTS結果のUI再描画であり、新たなリアルタイム速度測定ではない。来歴とハッシュ：`tests/live_suggest/showcase-replay-20261026-200255.json`。
+
+## 2026-10-25：以前の画面と測定
+
+以下の旧素材は `tests/sample_dialogues.md` の10文をWindows Harukaで合成し、アプリのファイル入力で再生したもの。個人プロフィールは公開例のプレースホルダー。旧撮影スクリプトは現在の安全な再描画方式へ置き換え済み。
 
 撮影：2026-10-25、アプリのコードはコミット `3ba4bea`（D-020）の状態、撮影スクリプトは `tools/capture_showcase.py` / `tools/capture_archive.py`。1× 等倍、ウィンドウの枠は切っていない。数値は同じ実行のログから算出（`tests/live_suggest/showcase-20261025-1825.json`）。
 

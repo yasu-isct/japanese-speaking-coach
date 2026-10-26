@@ -126,12 +126,9 @@ def build_wav(turns: list[list[Path]], gap: float, inner_gap: float, path: Path)
 def screenshot(root, out: Path) -> None:
     if getattr(root, "_jsc_test_window_mode", None) != "passive" or not root.winfo_viewable():
         raise RuntimeError("Screenshots require an explicit visible passive test window")
-    root.update()
-    x, y, w, h = root.winfo_rootx(), root.winfo_rooty(), root.winfo_width(), root.winfo_height()
-    ps = ("Add-Type -AssemblyName System.Drawing; "
-          f"$b = New-Object Drawing.Bitmap {w},{h}; $g = [Drawing.Graphics]::FromImage($b); "
-          f"$g.CopyFromScreen({x},{y},0,0,$b.Size); $b.Save('{out}')")
-    subprocess.run(["powershell", "-NoProfile", "-c", ps], check=True)
+    from window_capture import capture_owned_window
+
+    capture_owned_window(root, out)
 
 
 def summarize(log_path: Path, md_path: Path, model: str, gap: float, scenario: str, inner_gap: float,

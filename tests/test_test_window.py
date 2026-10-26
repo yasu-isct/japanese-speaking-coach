@@ -224,7 +224,7 @@ class TestWindowTest(unittest.TestCase):
     def test_win32_signatures_keep_hwnd_pointer_sized_and_style_long(self):
         api = SimpleNamespace(**{name: Mock() for name in (
             "GetAncestor", "GetWindowLongW", "SetWindowLongW", "SetLayeredWindowAttributes",
-            "SetWindowPos", "GetForegroundWindow", "IsWindowVisible")})
+            "SetWindowPos", "GetForegroundWindow", "IsWindowVisible", "GetSystemMetrics", "GetWindowRect")})
         with patch.object(subject.ctypes, "WinDLL", return_value=api, create=True) as loader:
             result = subject._user32()
         loader.assert_called_once_with("user32", use_last_error=True)

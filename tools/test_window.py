@@ -30,6 +30,8 @@ def _user32():
                           ctypes.c_int, ctypes.c_int, wintypes.UINT], wintypes.BOOL),
         "GetForegroundWindow": ([], wintypes.HWND),
         "IsWindowVisible": ([wintypes.HWND], wintypes.BOOL),
+        "GetSystemMetrics": ([ctypes.c_int], ctypes.c_int),
+        "GetWindowRect": ([wintypes.HWND, ctypes.POINTER(wintypes.RECT)], wintypes.BOOL),
     }
     for name, (arguments, result) in signatures.items():
         function = getattr(api, name)
@@ -82,14 +84,40 @@ def _show_passive(root):
             "alpha_byte": alpha, "foreground_before": before, "foreground_after": after}
 
 
-def create_test_window(factory, *args, show=False, **kwargs):
+def verify_offscreen(root):
+    """Check native bounds against the entire virtual desktop, without reading it."""
+    api = _user32()
+    hwnd = api.GetAncestor(root.winfo_id(), GA_ROOT)
+    rect = wintypes.RECT()
+    right = api.GetSystemMetrics(76) + api.GetSystemMetrics(78)
+    bottom = api.GetSystemMetrics(77) + api.GetSystemMetrics(79)
+    if not hwnd or not api.GetWindowRect(hwnd, ctypes.byref(rect)) or rect.left <= right or rect.top <= bottom:
+        root.withdraw()
+        raise RuntimeError("Offscreen test window must stay beyond the virtual desktop")
+    return {"bounds": [rect.left, rect.top, rect.right, rect.bottom], "virtual_right": right, "virtual_bottom": bottom}
+
+
+def _place_offscreen(window):
+    api = _user32()
+    window.left = api.GetSystemMetrics(76) + api.GetSystemMetrics(78) + 1000
+    window.bottom = api.GetSystemMetrics(77) + api.GetSystemMetrics(79) + 4000
+    window.redraw()
+    window.root.update_idletasks()
+    return verify_offscreen(window.root)
+
+
+def create_test_window(factory, *args, show=False, offscreen=False, **kwargs):
     """Run a window factory with every Tk root withdrawn immediately on creation.
 
     Default windows stay withdrawn, while their Canvas and event queue still run.
+    Explicit offscreen renders map a protected window beyond every monitor,
+    verifying native bounds both before and after mapping.
     Explicit previews are Windows-only, click-through, and non-activating. Failure
     destroys every root created by this call; it never leaves an interactive UI.
     """
-    if show and sys.platform != "win32":
+    if show and offscreen:
+        raise ValueError("Choose either a visible preview or an offscreen render")
+    if (show or offscreen) and sys.platform != "win32":
         raise RuntimeError("Passive test-window previews are supported only on Windows")
     original, roots = tk.Tk, []
 
@@ -110,7 +138,11 @@ def create_test_window(factory, *args, show=False, **kwargs):
             raise RuntimeError("Test factory must construct exactly one Tk root")
         root.withdraw()
         root.update_idletasks()
-        metadata = _show_passive(root) if show else {"mode": "hidden", "visible_display_measured": False}
+        if offscreen:
+            _place_offscreen(window)  # prove position while still withdrawn
+        metadata = _show_passive(root) if (show or offscreen) else {"mode": "hidden", "visible_display_measured": False}
+        if offscreen:
+            metadata.update(mode="offscreen", visible_display_measured=False, **verify_offscreen(root))
         window.test_window = metadata
         root._jsc_test_window_mode = metadata["mode"]
         return window
