@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import queue
 import shutil
 import statistics
@@ -39,7 +40,7 @@ from jsc_live.asr import DEFAULT_MODEL  # noqa: E402
 from jsc_live.audio import SAMPLE_RATE, WavFileSource  # noqa: E402
 from jsc_live.main import worker  # noqa: E402
 from jsc_live.overlay import SubtitleWindow  # noqa: E402
-from jsc_live.suggest import Suggester  # noqa: E402
+from jsc_live.suggest import Suggester, load_profile  # noqa: E402
 
 AUDIO_DIR = ROOT / "tests" / "asr_eval" / "audio"
 OUT_DIR = ROOT / "tests" / "live_suggest"
@@ -147,7 +148,8 @@ def summarize(log_path: Path, md_path: Path, model: str, gap: float, scenario: s
         vals = sorted(r[key] for r in rows if isinstance(r.get(key), (int, float)))
         if vals:
             p90 = vals[min(len(vals) - 1, round(0.9 * (len(vals) - 1)))]
-            lines.append(f"- {label}：中位数 {statistics.median(vals):.0f} ms，p90 {p90:.0f} ms，"
+            p95 = vals[math.ceil(0.95 * len(vals)) - 1]
+            lines.append(f"- {label}：中位数 {statistics.median(vals):.0f} ms，p90 {p90:.0f} ms，p95 {p95:.0f} ms，"
                          f"最大 {vals[-1]:.0f} ms（n={len(vals)}）")
     within = sum(1 for r in rows if isinstance(r.get("shown_after_ms"), (int, float)) and r["shown_after_ms"] <= 3000)
     lines.append(f"- 3 秒内显示：{within}/{len(rows)}")
@@ -163,12 +165,14 @@ def main() -> None:
     p.add_argument("--inner-gap", type=float, default=0.75, help="pause between pieces of one turn (s)")
     p.add_argument("--shot-at", type=int, default=2, help="screenshot when this many suggestions have been drawn")
     p.add_argument("--screenshot", type=Path, default=ROOT / "logs" / "e2e-suggest.png")
+    p.add_argument("--profile", type=Path, help="explicit test profile; default: empty, never read private profile.md")
+    p.add_argument("--no-screenshot", action="store_true", help="measure the rendered window without capturing the screen")
     cli = p.parse_args()
     sys.stdout.reconfigure(encoding="utf-8")
 
     demo = Path(tempfile.gettempdir()) / "jsc_e2e_suggest.wav"
     build_wav(synthesize(SCENARIOS[cli.scenario], cli.voice), cli.gap, cli.inner_gap, demo)
-    suggester = Suggester()
+    suggester = Suggester(profile=load_profile(cli.profile) if cli.profile else "")
     args = argparse.Namespace(source="file", file=str(demo), realtime=True, device=None,
                               model=DEFAULT_MODEL, device_type="auto",
                               furigana="graded", end_silence=0.6, no_partial=False, turn_gap=0.8)
@@ -182,7 +186,7 @@ def main() -> None:
         manager = holder["manager"]
         manager.rendered(uid, payload, timed_out)
         drawn_count[0] += 1
-        if drawn_count[0] == cli.shot_at:
+        if not cli.no_screenshot and drawn_count[0] == cli.shot_at:
             cli.screenshot.parent.mkdir(parents=True, exist_ok=True)
             screenshot(window.root, cli.screenshot.resolve())
 
@@ -204,7 +208,7 @@ def main() -> None:
 
     log_path = holder["manager"].log.path
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    stamp = log_path.stem.replace("live-", "")
+    stamp = log_path.parent.name if log_path.name == "suggestions.jsonl" else log_path.stem.replace("live-", "")
     saved = OUT_DIR / f"e2e-{cli.scenario}-{stamp}.jsonl"
     shutil.copy(log_path, saved)
     summarize(saved, OUT_DIR / f"e2e-{cli.scenario}-{stamp}.md", suggester.model, cli.gap, cli.scenario, cli.inner_gap)

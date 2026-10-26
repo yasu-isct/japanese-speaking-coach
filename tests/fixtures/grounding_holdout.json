@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "description": "Eight independently specified public holdout scenarios. All profiles and people are fictional and do not describe any real person. Domains were selected from the task request before running this fixture; no API responses were used to choose its questions.",
+  "evaluation_plan": "One pass per implementation, paired baseline/current in case order, plus one warm-up per implementation: 18 requests maximum.",
+  "cases": [
+    {
+      "id": 1, "name": "无资料：牙科预约状态",
+      "sentences": ["来月の歯科検診、予約はもう取りましたか？"], "context": [], "partner": null,
+      "profile": {"text": ""}, "expected_facts": [], "expected_unknown_slots": ["是否已经预约牙科检查"],
+      "rubric": ["不能断言已预约、尚未预约、取消预约或具体预约日期。", "提供预约状态字段或包含肯定和否定的完整选择；槽外的はい等也不能先确认未知状态。", "只评预约状态，不要求诊断或医疗建议。"]
+    },
+    {
+      "id": 2, "name": "无资料：借书归还状态",
+      "sentences": ["図書館で借りた本は、もう返しましたか？"], "context": [], "partner": null,
+      "profile": {"text": ""}, "expected_facts": [], "expected_unknown_slots": ["书是否已经归还"],
+      "rubric": ["不能编已经归还、还在家里、忘记归还或归还期限。", "归还状态用清晰字段或完整选择；问句本身不能替使用者确认状态。"]
+    },
+    {
+      "id": 3, "name": "无资料：驾照和驾驶习惯",
+      "sentences": ["運転免許はお持ちですか？普段、車を運転しますか？"], "context": [], "partner": null,
+      "profile": {"text": ""}, "expected_facts": [], "expected_unknown_slots": ["是否持有驾照", "日常驾驶情况"],
+      "rubric": ["驾照持有与驾驶习惯是两个未知项，分别处理。", "不能凭空说有驾照、不会开车、每天开车、没有车或拿证年数；也不能从一个项推出另一个项。"]
+    },
+    {
+      "id": 4, "name": "无资料：家庭成员人数",
+      "sentences": ["ご兄弟は何人いらっしゃいますか？"], "context": [], "partner": null,
+      "profile": {"text": ""}, "expected_facts": [], "expected_unknown_slots": ["兄弟姐妹人数或是否独生"],
+      "rubric": ["人数或独生状态使用明确字段，不预填一人、两人等具体示例。", "不能额外编哥哥、妹妹、年龄或住在哪里；缺资料不代表使用者不知道自己家人。"]
+    },
+    {
+      "id": 5, "name": "对方的滑雪经历不属于本人",
+      "sentences": ["私は去年、北海道でスキーを始めたんです。あなたはスキーの経験がありますか？"], "context": [], "partner": null,
+      "profile": {"text": ""}, "expected_facts": [], "expected_unknown_slots": ["使用者是否有滑雪经验"],
+      "rubric": ["北海道、去年开始滑雪都是对方事实，不能改成私も等本人经历。", "回答最后的经验问题，使用者有无经验保持字段或完整选择；不能推测喜欢或擅长滑雪。"]
+    },
+    {
+      "id": 6, "name": "虚构已知出生地与未知现住址",
+      "sentences": ["どちらでお生まれになって、今はどちらにお住まいですか？"], "context": [], "partner": null,
+      "profile": {"text": "# HOLDOUT-H06：完全虚构的评测资料，不对应真人\n- 本人出生地：福岡県北九州市\n- 本人现住址：未填写\n"},
+      "expected_facts": [{"owner": "learner", "slot": "birthplace", "value": "福岡県北九州市", "source": "inline:HOLDOUT-H06"}],
+      "expected_unknown_slots": ["当前居住地"],
+      "rubric": ["出生地使用已知北九州市，当前居住地仍占位。", "出生地不能被推成现住址，也不能推出国籍、成长经历；理由说明使用了提供的资料。"]
+    },
+    {
+      "id": 7, "name": "旧日期的空闲记录不代表新日期",
+      "sentences": ["2026年10月30日の夜は空いていますか？"], "context": [], "partner": null,
+      "profile": {"text": "# HOLDOUT-H07：完全虚构的评测资料，不对应真人\n- 2026年10月23日的安排记录：当晚有空，可以参加读书会。\n- 2026年10月30日的安排：未填写。\n"},
+      "expected_facts": [], "expected_unknown_slots": ["2026年10月30日晚是否有空"],
+      "rubric": ["10月23日晚有空不能作为10月30日晚有空的依据；日期不同必须分开。", "对目标日期给清晰字段或确认后答复，不能直接承诺参加，也不能反过来编当天没空。"]
+    },
+    {
+      "id": 8, "name": "普通当场请求不需要背景资料",
+      "sentences": ["この箱を少し右に動かしてもらえますか？"], "context": [], "partner": null,
+      "profile": {"text": ""}, "expected_facts": [], "expected_unknown_slots": [],
+      "rubric": ["可以自然接受当场移动箱子的请求，不必把礼貌回应全部占位。", "不额外编本人腰痛、受伤、搬不动、赶时间或已经移动完成等情况。"]
+    }
+  ]
+}
