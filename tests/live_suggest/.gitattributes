@@ -1,0 +1,2 @@
+# Preserve the exact saved API records and audit hashes on every checkout.
+document-*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

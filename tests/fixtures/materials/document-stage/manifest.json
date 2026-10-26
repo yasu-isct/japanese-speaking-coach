@@ -1,0 +1,15 @@
+{
+  "provenance": "Eight public fictional document cases frozen before D-037 generation tests; seven available, one missing detail. Renewal is a known D-030 regression.",
+  "sha256": {
+    "tests/fixtures/materials/document-stage/answer-cases.json": "f72c8ed6203afd118ec88f98df263a4c8d12555d1eb9f1f58095fe9ff6e42d8c",
+    "tests/fixtures/materials/long_pdf/data/handbook.pdf": "98c822822a65e1326402d65f5a6c0b6de1b36740494659f6d4d89d8f70f56a24",
+    "tests/fixtures/materials/documents/data/course.docx": "2dcd30af100362576688572af7be1e717d3893c8b98dadaea5f2a9e64bfb25ad",
+    "tests/fixtures/materials/documents/data/readme.txt": "4ee3cb08d139cc7ab4b8d39032968705a2a1ed70929d2effb2ec859697a4b5b3",
+    "tests/fixtures/materials/documents/data/workshop.docx": "e803172236bbe9e00aef8ff4c2cf1f666d257c98be06f07d4ff257a81e4dbe4f",
+    "tests/fixtures/materials/general-independent/data/cafeteria.md": "612df8a37d6469ad721f683249c4e132af137511e38e6f2dd746414f2dd19b36",
+    "tests/fixtures/materials/general-independent/data/equipment.md": "de3ad48b3fa901e20077e12508a8dbe7698ed05af41ad08273360f94774e059e",
+    "tests/fixtures/materials/general-independent/data/event.md": "21146d45bc80563cf78e48e5f23fcf9b2e06e837524cfd3ab06198c016aca016",
+    "tests/fixtures/materials/general-independent/data/library.md": "ff68104073cba485edddae033e984db877ae183c6222fca8ee86fa0fb5d5616b",
+    "tests/fixtures/materials/general-independent/data/project.md": "097a5061afa23239841aff36fb9cb5ea29263053b7e4021613efa093c4e65c15"
+  }
+}

@@ -42,6 +42,18 @@ def fake_suggester(chunks=None, error=None):
 
 
 class PromptTest(unittest.TestCase):
+    def test_materials_mode_overrides_only_the_short_style_contract(self):
+        from jsc_live.materials import MaterialsStore
+        from jsc_live.suggest import POLITENESS, _section
+
+        prompt = Suggester(env=ENV, materials=MaterialsStore()).system_prompt
+        rules = POLITENESS.read_text(encoding="utf-8")
+        self.assertNotIn("15 个假名", prompt)
+        # Object priority, warning conditions and reason rules remain verbatim.
+        self.assertIn(_section(rules, "## 1.", "### かんたん"), prompt)
+        self.assertIn(_section(rules, "## 5.", None), prompt)
+        self.assertIn("15 个假名", Suggester(env=ENV, profile="").system_prompt)
+
     def test_system_prompt_reuses_skill_rules(self):
         prompt = build_system_prompt()
         self.assertIn("## 通用规则", prompt)

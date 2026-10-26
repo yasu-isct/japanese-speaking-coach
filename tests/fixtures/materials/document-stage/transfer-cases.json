@@ -1,0 +1,9 @@
+{
+  "description": "Four fresh wording checks constructed AFTER the final D-037 prompt; not blind held-out data, no before/after claim. Existing public fictional sources. Frozen before this one run.",
+  "cases": [
+    {"id":"box","corpus":"general-independent","partner":"朋友","query":"返すとき、箱には何を入れるんだっけ？","answer_available":true,"expected_style":"カジュアル","required_facts":["本体","线缆","说明书"]},
+    {"id":"retention","corpus":"general-independent","partner":"上司","query":"アップロードしたテストファイルは何日たったら消えるの？","answer_available":true,"expected_style":"丁寧","casual_warning":true,"required_facts":["上传的测试文件七天后自动删除"]},
+    {"id":"lost_property","corpus":"general-independent","partner":"朋友","query":"忘れ物はどこで何日間預かってくれるの？受け取りに何がいるの？","answer_available":true,"expected_style":"カジュアル","required_facts":["前台保管14天","领取需要整理号码"]},
+    {"id":"opening_missing","corpus":"general-independent","query":"食堂は何時に開きますか？","answer_available":false,"expected_style":"丁寧","required_facts":["明确说明资料没有营业时刻","不以营业日期代替时刻答案","不虚构时刻"]}
+  ]
+}

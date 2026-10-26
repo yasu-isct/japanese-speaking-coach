@@ -49,3 +49,5 @@
 
 
 `live-materials-long-pdf.png`（820×600）はD-036。固定架空PDFの音声課題に関する実際のローカル検索と、合成引用状態。物理ページと今回の抽出ブロック番号を表示する。画面外自身HWNDのみ、前台不変、無加工。生成API・真人体験・可視速度の証拠ではない。SHAと来歴：`tests/live_suggest/long-pdf-stage-20261026.json`。
+
+`live-document-answer.png`（900×584）はD-037。架空Wordの欠席連絡規則に対する保存済み生成回答（final、absence）を現在のUIで再描画。画面外自身HWNDのみ、前台不変、無加工。新規APIなし、可視速度・真人体験の証拠ではない。原始出力、画像SHA、前後/狭幅の問題：`tests/live_suggest/document-answer-stage-20261026.json`、`docs/document-answers-20261026.md`。

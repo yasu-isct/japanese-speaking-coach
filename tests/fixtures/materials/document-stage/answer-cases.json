@@ -1,0 +1,13 @@
+{
+  "description": "Eight general-document stage cases, frozen before generation checks. Seven available answers and one absent equipment detail. Public fictional documents only; not a personal-profile evaluation.",
+  "cases": [
+    {"id":"press","corpus":"long_pdf","query":"ヒートプレスを掃除する前に何分待ちますか？何を使いますか？","answer_available":true,"required_facts":["关闭电源后等待15分钟","使用提供的布","不要用湿海绵"],"source":"handbook.pdf:第2页・片段3"},
+    {"id":"booking","corpus":"long_pdf","query":"スタジオの予約はいつまで無料で変更できますか？その後の料金は？","answer_available":true,"required_facts":["前一天17点前免费更改","之后500日元","运营方关闭建筑时除外"],"source":"handbook.pdf:第2页・片段4"},
+    {"id":"meal","corpus":"long_pdf","query":"昼ご飯は用意してもらえますか？どこで食べられますか？","answer_available":true,"required_facts":["不提供午餐，需自带或自行购买","只能在靠窗的两张桌子用餐"],"source":"handbook.pdf:第4页・片段4"},
+    {"id":"storage","corpus":"long_pdf","query":"ワークショップの作品は何日預けられて、何時に受け取れますか？","answer_available":true,"required_facts":["可免费保管3天","下午2点到5点领取"],"source":"handbook.pdf:第4页・片段5"},
+    {"id":"absence","corpus":"documents","query":"欠席連絡はいつまでに、どうやって行いますか？","answer_available":true,"required_facts":["课程开始2小时前","写在学习网站的联系栏","不需要打电话"],"source":"course.docx:第5段"},
+    {"id":"cancel","corpus":"documents","query":"予約をキャンセルするには、いつまでに何をすればいいですか？当日のキャンセルはどうなりますか？","answer_available":true,"required_facts":["前一天20点前","通过预约网站办理","当天取消不退材料费"],"source":"workshop.docx:第7段"},
+    {"id":"renewal","corpus":"general-independent","query":"図書室の本はどんな条件で貸出期間を延ばせますか？","answer_available":true,"required_facts":["没有预约者","在到期前办理","只能延期1次"],"source":"library.md:4","note":"Known simple-reply condition omission from D-030; retained regression case, not unseen."},
+    {"id":"equipment_missing","corpus":"long_pdf","query":"ヒートプレスのメーカーと型番を教えてください。","answer_available":false,"required_facts":["明确说明所查资料没有厂家与型号","不以【】空栏代替资料缺失说明","不编造品牌/型号或声称保密"],"source":null}
+  ]
+}

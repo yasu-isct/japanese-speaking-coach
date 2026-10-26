@@ -1,5 +1,5 @@
 {
-  "_note": "Updated through D-036, local only, not deployed. Long single-column PDF pages can use visual paragraph gaps after exact non-whitespace character/order comparison with plain extraction. Frozen synthetic 16-question fact coverage stays 16/16; complete-section coverage improves 9/16 to 16/16 and selected text averages 1371 to 882 characters. These are retrieval-context metrics, not answer accuracy or API costs. Prior 67 payloads unchanged. No new generated answers or visible-latency evidence.",
+  "_note": "Updated through D-037, local only, not deployed. Eight fixed public document questions: full frozen checklist coverage 8/24 to 15/24 replies; retrospective question-essentials coverage 13/24 to 21/24. Agent review, not overall correctness or blind evaluation. Exceptions, speaker role, simple tone, length and narrow-window density remain unresolved. Four-turn public TTS hidden Canvas p95 2.608 s; visible 3 s acceptance remains unmet.",
   "status": {
     "ja": "開発中：外部資料による返答とローカル復習を追加",
     "zh": "开发中：已增加外部资料回答和本地复盘",
@@ -11,18 +11,18 @@
     "en": "A Japanese conversation coach for the moment you are mid-conversation — GPU real-time subtitles plus reply suggestions built from the Skill's rules"
   },
   "number": {
-    "value": "36/36 ranges · 312 checks",
+    "value": "36/36 ranges · 317 checks",
     "label": {
-      "ja": "47の固定質問中36の目標範囲を取得（開発用データ含む）。回答正答率ではない。312テスト中311成功・1スキップ。",
-      "zh": "47个固定问题中的36个目标片段全部找到（含开发数据）；不是回答正确率。312项检查，311通过、1跳过。",
-      "en": "36/36 target ranges retrieved across 47 fixed questions, including development data; not answer accuracy. 312 checks: 311 pass, 1 skip."
+      "ja": "47の固定質問中36の目標範囲を取得（開発用データ含む）。回答正答率ではない。317テスト中316成功・1スキップ。",
+      "zh": "47个固定问题中的36个目标片段全部找到（含开发数据）；不是回答正确率。317项检查，316通过、1跳过。",
+      "en": "36/36 target ranges retrieved across 47 fixed questions, including development data; not answer accuracy. 317 checks: 316 pass, 1 skip."
     },
     "href": "https://github.com/yasu-isct/japanese-speaking-coach/blob/main/docs/showcase-ja.md"
   },
   "verification": {
-    "ja": "D-030の4段TTSは非表示Canvas p95 2.753秒。可視3秒は未達。6問の回答段階チェックには資料欠落時の表現と簡単版の条件省略が残り、第三者試用は未実施。",
-    "zh": "D-030四段TTS的隐藏Canvas p95为2.753秒，可见3秒目标仍未通过。6题回答阶段检查仍有资料缺失表述和简易回复条件遗漏，尚无第三方试用。",
-    "en": "D-030 four-turn TTS hidden Canvas p95: 2.753 s; visible 3 s acceptance remains unmet. The six-question answer stage still has a missing-information wording failure and an omitted condition in a simple reply. No third-party trial yet."
+    "ja": "D-037の4段TTSは非表示Canvas p95 2.608秒。可視3秒は未達。8問の回答確認では例外の主体・話者の役割・簡単版の自然さ・長い表示に課題が残り、第三者試用は未実施。",
+    "zh": "D-037四段TTS隐藏Canvas p95 2.608秒，可见3秒仍未通过。八题回答检查仍有例外主体、说话角色、简易日语与长文排版问题，尚无第三方试用。",
+    "en": "D-037 four-turn TTS hidden Canvas p95: 2.608 s; visible 3 s acceptance remains unmet. Eight-question review retains failures in exception scope, speaker role, simple Japanese and long-answer layout. No third-party trial yet."
   },
   "change": {
     "ja": "2 文の録音だけで認識モデルを替え、後で 1 文まるごと捏造する失敗を見つけた。次は少数の結果で決めず、保存した実音声で再生して確かめてから変える。",
@@ -252,6 +252,22 @@
         "en": "A course assignment section with physical page and extraction-block citation"
       },
       "caption": "架空PDF・検索/引用状態の合成表示（2026-10-26、D-036）。画面外自身HWND、生成API・可視速度の証拠ではない"
+    },
+    {
+      "src": "/media/coach/live-document-answer.png",
+      "width": 900,
+      "height": 584,
+      "label": {
+        "ja": "文書の規則から返答",
+        "zh": "根据文档规定回答",
+        "en": "Answers from document rules"
+      },
+      "alt": {
+        "ja": "架空Wordの欠席期限と連絡欄を含む三つの回答",
+        "zh": "包含虚构Word请假截止时间和联系栏的三条回答",
+        "en": "Three saved answers with a fictional course absence deadline and contact field"
+      },
+      "caption": "公開架空Word・保存済み生成回答の画面外再描画（2026-10-26、D-037）。可視速度・一般的な正答率の証拠ではない"
     }
   ],
   "demo_video": {
