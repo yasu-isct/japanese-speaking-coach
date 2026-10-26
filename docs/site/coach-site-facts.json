@@ -1,5 +1,5 @@
 {
-  "_note": "Updated through D-035, local only, not deployed. GUI materials startup is asynchronous: keywords first, then optional local semantic search, with progress/cancel and honest readiness notices. With audio/API isolated and 100 synthetic files, offscreen window construction changed from 22.33s to 0.36s; total materials readiness still took about 25s. This is not whole-app readiness, real-speaker or visible-latency evidence. No new generated answers.",
+  "_note": "Updated through D-036, local only, not deployed. Long single-column PDF pages can use visual paragraph gaps after exact non-whitespace character/order comparison with plain extraction. Frozen synthetic 16-question fact coverage stays 16/16; complete-section coverage improves 9/16 to 16/16 and selected text averages 1371 to 882 characters. These are retrieval-context metrics, not answer accuracy or API costs. Prior 67 payloads unchanged. No new generated answers or visible-latency evidence.",
   "status": {
     "ja": "開発中：外部資料による返答とローカル復習を追加",
     "zh": "开发中：已增加外部资料回答和本地复盘",
@@ -11,11 +11,11 @@
     "en": "A Japanese conversation coach for the moment you are mid-conversation — GPU real-time subtitles plus reply suggestions built from the Skill's rules"
   },
   "number": {
-    "value": "36/36 ranges · 302 checks",
+    "value": "36/36 ranges · 312 checks",
     "label": {
-      "ja": "47の固定質問中36の目標範囲を取得（開発用データ含む）。回答正答率ではない。302テスト中301成功・1スキップ。",
-      "zh": "47个固定问题中的36个目标片段全部找到（含开发数据）；不是回答正确率。302项检查，301通过、1跳过。",
-      "en": "36/36 target ranges retrieved across 47 fixed questions, including development data; not answer accuracy. 302 checks: 301 pass, 1 skip."
+      "ja": "47の固定質問中36の目標範囲を取得（開発用データ含む）。回答正答率ではない。312テスト中311成功・1スキップ。",
+      "zh": "47个固定问题中的36个目标片段全部找到（含开发数据）；不是回答正确率。312项检查，311通过、1跳过。",
+      "en": "36/36 target ranges retrieved across 47 fixed questions, including development data; not answer accuracy. 312 checks: 311 pass, 1 skip."
     },
     "href": "https://github.com/yasu-isct/japanese-speaking-coach/blob/main/docs/showcase-ja.md"
   },
@@ -236,6 +236,22 @@
         "en": "Synthetic startup with keywords ready while semantic retrieval is loading"
       },
       "caption": "架空100資料・音声/ASR/APIを隔離（2026-10-26、D-035）。画面外自身HWND、全アプリ起動や可視速度の証拠ではない"
+    },
+    {
+      "src": "/media/coach/live-materials-long-pdf.png",
+      "width": 820,
+      "height": 600,
+      "label": {
+        "ja": "長いPDFの資料",
+        "zh": "长PDF资料片段",
+        "en": "Focused long-PDF sources"
+      },
+      "alt": {
+        "ja": "音声課題の節から始まる資料と物理ページ・断片番号",
+        "zh": "从音声课题小节开始的资料及物理页与片段号",
+        "en": "A course assignment section with physical page and extraction-block citation"
+      },
+      "caption": "架空PDF・検索/引用状態の合成表示（2026-10-26、D-036）。画面外自身HWND、生成API・可視速度の証拠ではない"
     }
   ],
   "demo_video": {

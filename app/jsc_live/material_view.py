@@ -229,5 +229,6 @@ class MaterialsWindow:
         if not sources:
             self.text.insert("end", source_text(old_root, sources, cited_ids))
         self.text.insert("end", "\n\n支持md/txt、Word正文/简单表格和文字PDF；出处标到行、段落或PDF页。\n"
-                         "Word图片、页眉页脚、批注与文本框不参与查找；PDF扫描页请先转成文字。")
+                         "Word图片、页眉页脚、批注与文本框不参与查找；PDF扫描页请先转成文字。\n"
+                         "PDF片段号按本次读取顺序编号，不是原文的段落编号。")
         self.text.configure(state="disabled")

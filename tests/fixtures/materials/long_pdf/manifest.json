@@ -1,0 +1,8 @@
+{
+  "provenance": "Four synthetic long pages, twenty sections, sixteen Japanese questions. Frozen before D-036 implementation; ReportLab 4.4.9, no private input.",
+  "sha256": {
+    "data/handbook.pdf": "98c822822a65e1326402d65f5a6c0b6de1b36740494659f6d4d89d8f70f56a24",
+    "queries.json": "51f8f4fddb5e13b4820cbdc62493efab39b681ea8796db9321ac460c2321a50a",
+    "content.json": "1882e314eaf2f63cc16ca06ac6ea8391ac2c71d0a2a1cc52aceb8eedd0d741bf"
+  }
+}

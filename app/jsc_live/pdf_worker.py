@@ -4,16 +4,66 @@ from __future__ import annotations
 from io import BytesIO
 import json
 import logging
+import re
 import sys
 
 MAX_INPUT_BYTES = 10 * 1024 * 1024
 MAX_PAGES = 80
 MAX_PAGE_STREAM_BYTES = 2 * 1024 * 1024
 MAX_TOTAL_STREAM_BYTES = 8 * 1024 * 1024
+LONG_PAGE_CHARS = 700
+MAX_LAYOUT_CHARS = 20000
+MAX_LAYOUT_OPERATIONS = 8000
+MAX_PAGE_BLOCKS = 64
 
 
 class _ReadLimit(ValueError):
     pass
+
+
+def layout_blocks(text: str, layout: str) -> list[str] | None:
+    """Map visual blank lines to original text, only with identical character order.
+
+    Layout output supplies boundaries, never replacement text. This avoids losing
+    rotated text, changing reading order, or inventing whitespace inside words.
+    """
+    if len(layout) > min(400000, max(8192, len(text) * 4)):
+        return None
+    groups = [group for group in re.split(r'\n\s*\n', layout.strip()) if group.strip()]
+    if not groups or len(groups) > MAX_PAGE_BLOCKS:
+        return None
+    compact = lambda value: re.sub(r'\s+', '', value)
+    lengths = [len(compact(group)) for group in groups]
+    if ''.join(compact(group) for group in groups) != compact(text):
+        return None
+    positions = [i for i, char in enumerate(text) if not char.isspace()]
+    blocks, count, start = [], 0, 0
+    for length in lengths:
+        count += length
+        end = positions[count] if count < len(positions) else len(text)
+        blocks.append(text[start:end].strip())
+        start = end
+    return blocks
+
+
+def page_parts(page, text: str, number: int, content) -> tuple[list[dict], bool]:
+    original = [{'text': text, 'location': f'第{number}页', 'heading': ''}]
+    if len(text) <= LONG_PAGE_CHARS:
+        return original, False  # Short existing pages keep identical source payloads.
+    if len(text) > MAX_LAYOUT_CHARS:
+        return original, True
+    try:
+        if len(content.operations) > MAX_LAYOUT_OPERATIONS:
+            return original, True
+        blocks = layout_blocks(text, page.extract_text(extraction_mode='layout'))
+    except Exception:
+        blocks = None
+    if blocks is None:
+        return original, True
+    if len(blocks) == 1:
+        return original, False
+    return [{'text': block, 'location': f'第{number}页・片段{index}', 'heading': ''}
+            for index, block in enumerate(blocks, 1)], False
 
 
 def parse_pdf(raw: bytes, max_chars: int) -> dict:
@@ -58,7 +108,7 @@ def parse_pdf(raw: bytes, max_chars: int) -> dict:
                 return {'ok': False, 'error': 'PDF没有可读取的页面，请重新导出文档。'}
             if page_count > MAX_PAGES:
                 return {'ok': False, 'error': 'PDF超过80页，请按章节拆成较小的文件。'}
-            parts, empty_pages = [], []
+            parts, empty_pages, layout_fallback_pages = [], [], []
             total_chars = stream_bytes = 0
             for number, page in enumerate(reader.pages, 1):
                 content = page.get_contents()
@@ -73,13 +123,19 @@ def parse_pdf(raw: bytes, max_chars: int) -> dict:
                 total_chars += len(text)
                 if total_chars > max_chars:
                     raise _ReadLimit('PDF文字超过资料容量，请按章节拆成较小的文件。')
-                parts.append({'text': text, 'location': f'第{number}页', 'heading': ''})
+                page_sections, layout_fallback = page_parts(page, text, number, content)
+                parts.extend(page_sections)
+                if layout_fallback:
+                    layout_fallback_pages.append(number)
         notices = []
         if empty_pages:
             shown = '、'.join(map(str, empty_pages[:10])) + ('等' if len(empty_pages) > 10 else '')
             notices.append(f'第{shown}页没有可提取文字（共{len(empty_pages)}页）；可能是空白或扫描页，如有图片内容请先转成文字。')
         if warning_count:
             notices.append('部分PDF字体或结构解析有提示，文字可能不完整；请核对原页或另存为文字。')
+        if layout_fallback_pages:
+            shown = '、'.join(map(str, layout_fallback_pages[:10])) + ('等' if len(layout_fallback_pages) > 10 else '')
+            notices.append(f'第{shown}页未可靠识别段落边界，已保留原提取文字与页码；复杂版式请核对原页。')
         return {'ok': True, 'parts': parts, 'notices': notices}
     except _ReadLimit as exc:
         return {'ok': False, 'error': str(exc)}

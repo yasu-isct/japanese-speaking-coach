@@ -46,3 +46,6 @@
 
 
 `live-materials-startup.png`（900×149）はD-035。100份架空資料で、キーワードが使える状態から多言語索引を準備する実際のUI状態。音声/ASR/APIは隔離し、字幕部分は合成起動テスト文字。画面外自身HWNDのみ、前台不変、無加工。全アプリの起動時間や可視速度の証拠ではない。SHAと来歴：`tests/live_suggest/materials-startup-stage-20261026.json`。
+
+
+`live-materials-long-pdf.png`（820×600）はD-036。固定架空PDFの音声課題に関する実際のローカル検索と、合成引用状態。物理ページと今回の抽出ブロック番号を表示する。画面外自身HWNDのみ、前台不変、無加工。生成API・真人体験・可視速度の証拠ではない。SHAと来歴：`tests/live_suggest/long-pdf-stage-20261026.json`。

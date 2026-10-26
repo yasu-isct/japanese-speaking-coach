@@ -1,0 +1,170 @@
+[
+  {
+    "id": "recorder",
+    "query": "録音機は何日借りられて、いつまでに返しますか？",
+    "path": "handbook.pdf",
+    "page": 1,
+    "needles": [
+      "three days",
+      "before noon on the fourth day"
+    ]
+  },
+  {
+    "id": "consent",
+    "query": "録音には同意していない人と話す場合はどうしますか？",
+    "path": "handbook.pdf",
+    "page": 1,
+    "needles": [
+      "refusing recording",
+      "written notes only"
+    ]
+  },
+  {
+    "id": "expenses",
+    "query": "交通費の上限と、領収書を出す期限を教えてください。",
+    "path": "handbook.pdf",
+    "page": 1,
+    "needles": [
+      "2400 yen",
+      "ten calendar days"
+    ]
+  },
+  {
+    "id": "report",
+    "query": "調査レポートの締切と語数の条件は何ですか？",
+    "path": "handbook.pdf",
+    "page": 1,
+    "needles": [
+      "Wednesday at 18:00",
+      "1200 and 1600 words",
+      "references do not count"
+    ]
+  },
+  {
+    "id": "press",
+    "query": "ヒートプレスを掃除する前に何分待ちますか？何を使いますか？",
+    "path": "handbook.pdf",
+    "page": 2,
+    "needles": [
+      "fifteen minutes",
+      "supplied cloth",
+      "not a wet sponge"
+    ]
+  },
+  {
+    "id": "booking",
+    "query": "スタジオの予約はいつまで無料で変更できますか？その後の料金は？",
+    "path": "handbook.pdf",
+    "page": 2,
+    "needles": [
+      "17:00 on the preceding day",
+      "500 yen"
+    ]
+  },
+  {
+    "id": "network",
+    "query": "スタジオのWi-Fiコードが使えません。どうすればいいですか？",
+    "path": "handbook.pdf",
+    "page": 2,
+    "needles": [
+      "date and room",
+      "replacement code",
+      "Do not restart"
+    ]
+  },
+  {
+    "id": "collection",
+    "query": "スタジオの完成品はいつ、どこで受け取れますか？",
+    "path": "handbook.pdf",
+    "page": 2,
+    "needles": [
+      "seven days",
+      "11:00 to 16:00",
+      "Tuesday through Saturday"
+    ]
+  },
+  {
+    "id": "audio",
+    "query": "音声課題の形式、締切、容量を教えてください。",
+    "path": "handbook.pdf",
+    "page": 3,
+    "needles": [
+      "WAV形式",
+      "木曜日の午後八時",
+      "二十MB以下"
+    ]
+  },
+  {
+    "id": "sharing",
+    "query": "配布資料を公開サイトに載せてもいいですか？",
+    "path": "handbook.pdf",
+    "page": 3,
+    "needles": [
+      "事前に許可",
+      "その人の同意"
+    ]
+  },
+  {
+    "id": "absent",
+    "query": "休んだ授業の要点はいつから見られますか？",
+    "path": "handbook.pdf",
+    "page": 3,
+    "needles": [
+      "翌日の正午以降",
+      "学習ページ"
+    ]
+  },
+  {
+    "id": "slides",
+    "query": "最終発表のスライドは何枚までで、いつ提出しますか？",
+    "path": "handbook.pdf",
+    "page": 3,
+    "needles": [
+      "六枚以内",
+      "前日の午後六時",
+      "PDF"
+    ]
+  },
+  {
+    "id": "frame",
+    "query": "ワークショップの木枠代は参加費に含まれていますか？",
+    "path": "handbook.pdf",
+    "page": 4,
+    "needles": [
+      "不包含额外的木框",
+      "每个八百日元"
+    ]
+  },
+  {
+    "id": "meal",
+    "query": "昼ご飯は用意してもらえますか？どこで食べられますか？",
+    "path": "handbook.pdf",
+    "page": 4,
+    "needles": [
+      "不提供午餐",
+      "自备便当",
+      "靠窗的两张桌子"
+    ]
+  },
+  {
+    "id": "storage",
+    "query": "ワークショップの作品は何日預けられて、何時に受け取れますか？",
+    "path": "handbook.pdf",
+    "page": 4,
+    "needles": [
+      "免费保管三天",
+      "下午两点到五点",
+      "一楼前台"
+    ]
+  },
+  {
+    "id": "cancel",
+    "query": "ワークショップをキャンセルした場合、いつまで全額返金されますか？",
+    "path": "handbook.pdf",
+    "page": 4,
+    "needles": [
+      "四十八小时以前",
+      "全部报名费"
+    ]
+  }
+]

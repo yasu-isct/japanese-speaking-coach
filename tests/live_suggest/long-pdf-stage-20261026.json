@@ -1,0 +1,79 @@
+{
+  "decision": "D-036",
+  "tests": {
+    "run": 312,
+    "pass": 311,
+    "skip": 1
+  },
+  "api_calls": 0,
+  "private_data_read": false,
+  "real_user_settings_changed": false,
+  "artifacts": [
+    "long-pdf-after-keywords-20261026-224502.json",
+    "long-pdf-after-semantic-20261026-224504.json",
+    "long-pdf-before-context-20261026-224345.json",
+    "long-pdf-before-keywords-20261026-224040.json",
+    "long-pdf-before-semantic-20261026-224042.json",
+    "long-pdf-regression-20261026-224728.json"
+  ],
+  "captures": {
+    "long-pdf-before-20261026-224412": {
+      "method": "PrintWindow owned HWND",
+      "width": 820,
+      "height": 600,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "sha256": "3ed8f22f8f0f24d9804cca9f5ad4a2c42718f839019ecc71345ae2ed69bb10ce"
+    },
+    "long-pdf-after-20261026-224703": {
+      "method": "PrintWindow owned HWND",
+      "width": 820,
+      "height": 600,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "sha256": "dcdb2e5d6a3f16746d31b6c60561c6d242db9fd8c39247ff5a336b4e740ebcf7"
+    },
+    "long-pdf-narrow-after-20261026-224707": {
+      "method": "PrintWindow owned HWND",
+      "width": 520,
+      "height": 540,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "sha256": "6893d7488205816e5304bdb71a171b006169bd14a1ddbbc9c0185eb815856329"
+    }
+  },
+  "fixture_rendering": {
+    "pages": 4,
+    "tool": "bundled pdftoppm",
+    "dpi": 85,
+    "inspected": true,
+    "font_substitution_warnings": true,
+    "legible": true
+  },
+  "fact_coverage": {
+    "before": 16,
+    "after": 16,
+    "total": 16
+  },
+  "complete_section_coverage": {
+    "before": 9,
+    "after": 16,
+    "total": 16
+  },
+  "mean_selected_characters": {
+    "before": 1370.875,
+    "after": 882.125
+  },
+  "limitations": [
+    "Synthetic single-column documents, not all PDFs.",
+    "Context coverage, not answer accuracy or API cost savings.",
+    "Long individual paragraphs and cross-page context remain.",
+    "No new ASR, generation, visible latency or real-speaker evidence."
+  ]
+}
