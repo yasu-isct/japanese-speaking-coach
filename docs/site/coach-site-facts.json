@@ -1,5 +1,5 @@
 {
-  "_note": "Updated 2026-10-26 through D-026. New reference screenshots replay the frozen 4-turn TTS output through app ed12b8f offscreen; they do not measure new latency. Earlier media and video remain explicitly dated 2026-10-25. Sources: docs/showcase-ja.md and tests/live_suggest/showcase-replay-20261026-200255.json. Local only; not deployed.",
+  "_note": "Updated 2026-10-26 through D-027. New reference screenshots replay the frozen 4-turn TTS output through app ed12b8f offscreen; they do not measure new latency. Earlier media and video remain explicitly dated 2026-10-25. Sources: docs/showcase-ja.md and tests/live_suggest/showcase-replay-20261026-200255.json. Local only; not deployed. D-027 adds folder selection and live refresh; materials window renders a public TTS source snapshot.",
   "status": {
     "ja": "開発中：外部資料による返答とローカル復習を追加",
     "zh": "开发中：已增加外部资料回答和本地复盘",
@@ -11,11 +11,11 @@
     "en": "A Japanese conversation coach for the moment you are mid-conversation — GPU real-time subtitles plus reply suggestions built from the Skill's rules"
   },
   "number": {
-    "value": "5/5 citations · 197 checks",
+    "value": "5/5 citations · 208 checks",
     "label": {
-      "ja": "資料あり5問で有効な引用5/5（小規模デモ）、単体テスト197件中196成功・1件権限スキップ",
-      "zh": "5个有资料问题均有有效出处（小样本演示）；197项检查，196通过、1项权限跳过",
-      "en": "Valid citations on 5/5 document-backed demo questions; 197 checks, 196 pass and one permission-related skip"
+      "ja": "資料あり5問で有効な引用5/5（小規模デモ）、単体テスト208件中207成功・1件権限スキップ",
+      "zh": "5个有资料问题均有有效出处（小样本演示）；208项检查，207通过、1项权限跳过",
+      "en": "Valid citations on 5/5 document-backed demo questions; 208 checks, 207 pass and one permission-related skip"
     },
     "href": "https://github.com/yasu-isct/japanese-speaking-coach/blob/main/docs/showcase-ja.md"
   },
@@ -54,6 +54,11 @@
       "ja": "保存済みの会話を復習し、実際に調べた語をAnkiへ書き出す",
       "zh": "从存档复盘，并把实际查过的词导出到Anki",
       "en": "Review archived conversations and export looked-up words to Anki"
+    },
+    {
+      "ja": "資料フォルダーを画面で選び、再起動せず読み直す",
+      "zh": "在窗口选择资料文件夹，无需重启即可重新读取",
+      "en": "Choose a materials folder in the UI and reload it without restarting"
     }
   ],
   "media": [

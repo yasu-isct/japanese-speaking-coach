@@ -218,6 +218,8 @@ def _turn_html(turn: dict, index: int, sentence_ids: set[int]) -> str:
     cited = _list(turn.get("cited_source_ids"))
     if sources:
         result.append('<details><summary>查看当时发送的参考片段</summary><p class="muted">保留的是当时的片段快照。“回答引用”是模型声明，不代表已核实。</p>')
+        if turn.get("materials_root"):
+            result.append(_paragraph("生成时的资料文件夹：" + _string(turn["materials_root"]), "muted"))
         for source in sources:
             label = "回答引用" if source.get("source_id") in cited else "本轮发送"
             location = f"{_string(source.get('relative_path'))}:{source.get('start_line', '?')}–{source.get('end_line', '?')}"

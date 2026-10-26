@@ -8,6 +8,8 @@
 
 `tools/capture_showcase.py --render-saved --materials tests/fixtures/materials/general/data` で再現可能。ウィンドウは全モニターの外側に配置し、入力透過・非アクティブを維持して自身のHWNDだけをPrintWindowで描画。デスクトップのピクセルは取得せず、APIも呼ばない。画像は無加工。これは保存済みTTS結果のUI再描画であり、新たなリアルタイム速度測定ではない。来歴とハッシュ：`tests/live_suggest/showcase-replay-20261026-200255.json`。
 
+`live-materials.png`（820×600）はD-027の資料管理窓。上と同じ公開TTS回答の参考片段を表示し、明示した公開fixtureの索引を読み込んだ画面。自身のHWNDを画面外で描画し、個人資料や新しいAPI応答は使っていない。ソースと画像のSHA-256：`tests/live_suggest/material-ui-20261026-201649.json`。改前後のチェックは `docs/ui-materials-20261026.md`。
+
 ## 2026-10-25：以前の画面と測定
 
 以下の旧素材は `tests/sample_dialogues.md` の10文をWindows Harukaで合成し、アプリのファイル入力で再生したもの。個人プロフィールは公開例のプレースホルダー。旧撮影スクリプトは現在の安全な再描画方式へ置き換え済み。

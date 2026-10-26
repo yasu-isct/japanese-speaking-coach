@@ -36,14 +36,17 @@
    LLM_MODEL=deepseek-flash
    ```
    不放这个文件也能用字幕，只是没有建议。
-3. 想让回答参考课程笔记、文章、工作文档或个人背景，可以先建立外部资料文件夹：
+3. 想让回答参考课程笔记、文章、工作文档或个人背景，启动后点字幕窗上的 **「资料」→「选择资料文件夹…」**。放入UTF-8的 `.md` / `.txt`，一个主题一段、标题写清楚。软件会记住选择；修改文件后点 **「重新读取资料」**，下一次建议就会使用新内容，不用重启。
+
+   如果想先建立默认资料文件夹，也可以运行：
    ```powershell
    .\jsc-live.bat --init-materials
    ```
-   命令会显示文件夹位置，默认在 `%LOCALAPPDATA%\JapaneseSpeakingCoach\materials`，和代码分开。把 UTF-8 的 `.md` / `.txt` 文件放进去即可；一个主题一段、加清楚的标题更容易查到，修改后重启应用。
+   首次默认位置在 `%LOCALAPPDATA%\JapaneseSpeakingCoach\materials`，和代码分开；选过其它文件夹后会使用上次选择。资料窗口显示实际读取了多少文件，文件编码或大小不合适时也会提示。
    - 不放资料也能用字幕和接话建议；需要补充的具体情况应留成【字段】，请先填写再说。
    - 开启建议后，软件会在本机找相关片段，**把命中的片段随问题发给 API**。只放愿意发送的资料；不会自动扫描你的课堂存档。
    - 回答用了资料时，理由会显示文件名与行号；点工具栏「资料」可查看本轮实际发送的片段。检索命中和模型声明引用会分别标记。
+   - 换文件夹或重新读取时，正在生成的回答仍保留原片段和出处，下一次请求才用新资料。读取失败时继续使用原资料。
    - 检索和模型都可能漏掉信息或引用不当；这是参考回答，仍需结合当前谈话判断。
 
 有自己的资料文件夹时：
@@ -51,6 +54,8 @@
 ```powershell
 .\jsc-live.bat --suggest --materials "D:\我的资料\日语课"
 ```
+
+命令中的 `--materials` 优先于上次选择；单独传这个参数不会改掉已记住的选择。窗口里选择或重新读取后，目录路径会保存在用户数据区的 `settings.json`，文件内容不会写入设置。
 
 从旧版 `profile.md` 导入时：
 
@@ -95,7 +100,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 |---|---|
 | 透明 − / 透明 + | 调透明度（也可以按住 Ctrl 滚鼠标滚轮） |
 | 历史 | 打开 / 关闭字幕历史窗口 |
-| 资料 | 查看本轮发给 API 的参考片段和回答声明引用的出处 |
+| 资料 | 选择/重新读取资料文件夹，查看本轮参考片段和回答出处 |
 | 收起中文 / 展开中文 | 收起或显示中文意思与理由；⚠ 警告一直保留 |
 | 收起 | 只留这一排按钮，字幕和建议都不显示 |
 | 字幕 | 只显示字幕，不显示建议 |
@@ -205,7 +210,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | `--source file --file a.wav --realtime` | 用 WAV 文件模拟实时输入 |
 | `--suggest` | 打开接话建议（需要 `.env`） |
 | `--partner 上司` | 对方是谁，影响 ⭐ 和 ⚠ |
-| `--materials 文件夹` | 指定外部参考资料区；不指定就用用户数据目录 |
+| `--materials 文件夹` | 指定外部资料区；不指定则用上次选择，首次用用户数据目录 |
 | `--init-materials` | 建立资料区并显示路径，然后退出，不调用 API |
 | `--import-profile 文件` | 把明确指定的旧资料复制到资料区，保留原文件且不覆盖目标，然后退出 |
 | `--review-session 存档文件夹` | 只在本机生成复盘页和 Anki 文件，完成后退出 |
@@ -234,7 +239,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | 接话建议，一问一答 10 句（deepseek-flash） | 最后一句字幕 → 建议显示：中位数 2.43 s，最大 2.63 s；其中等待停顿 0.82 s、API 往返 1.55 s（首字 0.85 s）、渲染 72 ms（`tests/live_suggest/e2e-dialogue-*`） |
 | 接话建议，独白 3 段 11 个片段 | 只请求 3 次，每次回应整段；2.49 / 2.65 / 3.09 s（`tests/live_suggest/e2e-monologue-*`） |
 
-单元测试：在 `japanese-speaking-coach` 目录下运行 `python -m unittest discover -s tests`，不需要显卡和网络。2026-10-26 本轮共197项：196通过，1项因系统不允许创建符号链接而跳过，另有链接属性和越界路径测试通过。
+单元测试：在 `japanese-speaking-coach` 目录下运行 `python -m unittest discover -s tests`，不需要显卡和网络。2026-10-26 本轮共208项：207通过，1项因系统不允许创建符号链接而跳过，另有链接属性和越界路径测试通过。
 
 开发评测默认在后台隐藏窗口，避免挡住正在使用的其它软件。`tools/e2e_suggest.py` 和 `tools/benchmark_overlay.py` 只在显式加 `--show-window` 时显示测试窗；Windows 下该窗口会鼠标穿透、不抢焦点。后台的 Canvas 完成耗时不是实际可见显示延迟，两种结果会分别标记。截图还须显式指定输出路径；提前结束的运行会标记未完成并返回非零退出码。
 

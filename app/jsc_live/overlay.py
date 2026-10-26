@@ -55,12 +55,13 @@ class SubtitleWindow:
     def __init__(self, events: "queue.Queue[tuple[str, int, list[Segment]]]", font_size: int = 16,
                  width: int = 900, history: int = 5, alpha: float = 0.88,
                  suggestion_timeout: float = 3.0, on_suggestion_drawn=None, history_window=None,
-                 mode: str = "full", materials_root: str | None = None) -> None:
+                 mode: str = "full", materials_root: str | None = None, materials_controller=None) -> None:
         self.events = events
         self.alpha = alpha
         self.mode = mode
         self.show_meanings = True
         self.materials_root = materials_root
+        self.materials_controller = materials_controller
         self.materials_window = None
         self.recording = False
         self.history_factory = history_window   # callable(root, family) -> HistoryWindow, or None
@@ -132,9 +133,11 @@ class SubtitleWindow:
             from .material_view import MaterialsWindow
 
             if self.materials_window is None:
-                self.materials_window = MaterialsWindow(self.root, self.family, self.materials_root)
+                self.materials_window = MaterialsWindow(self.root, self.family, self.materials_root,
+                                                        controller=self.materials_controller)
             payload = self.suggestion["payload"] if self.suggestion else {}
-            self.materials_window.show(payload.get("sources", []), payload.get("cited_source_ids", []))
+            self.materials_window.show(payload.get("sources", []), payload.get("cited_source_ids", []),
+                                       snapshot_root=payload.get("materials_root"))
 
     def _pick_family(self) -> str:
         families = set(tkfont.families(self.root))

@@ -191,9 +191,10 @@ def main(argv: list[str] | None = None) -> None:
         return
     if args.init_materials or args.import_profile:
         from .material_setup import prepare_materials
+        from .settings import selected_materials
 
         try:
-            destination = prepare_materials(args.materials, args.import_profile)
+            destination = prepare_materials(selected_materials(args.materials), args.import_profile)
         except (OSError, ValueError) as exc:
             p.error(str(exc))
         print(f"资料文件夹：{destination}\n可放入课程笔记、文章或工作文档（UTF-8 .md/.txt）。\n"
@@ -209,13 +210,14 @@ def main(argv: list[str] | None = None) -> None:
     if args.suggest:
         from .suggest import Suggester
         from .materials import MaterialsStore
+        from .settings import selected_materials
 
         try:
-            suggester = Suggester(partner=args.partner, materials=MaterialsStore(args.materials))
+            suggester = Suggester(partner=args.partner, materials=MaterialsStore(selected_materials(args.materials)))
             print(f"[资料] {suggester.materials.root}（{len(suggester.materials.chunks)} 个片段）；"
                   "本轮查到的相关片段会随问题发给 API。", flush=True)
             if args.materials is None and (Path(__file__).resolve().parents[2] / "profile.md").is_file():
-                print("[资料] 检测到旧 profile.md；需要使用时运行 jsc-live.bat --import-profile profile.md。"
+                print("[资料] 检测到旧 profile.md；需要使用时运行 jsc-live.bat --import-profile \"旧资料的完整路径\"。"
                       "原文件会保留，不自动读取或覆盖。", flush=True)
         except RuntimeError as exc:  # no .env: keep the subtitles, skip suggestions
             print(f"[suggest] disabled: {exc}", flush=True)
@@ -268,11 +270,17 @@ def main(argv: list[str] | None = None) -> None:
     def make_history(root, family):
         return HistoryWindow(root, history_furigana, lookup, family, on_lookup=record_lookup)
 
+    materials_controller = None
+    if suggester and suggester.materials is not None:
+        from .material_control import MaterialsController
+        materials_controller = MaterialsController(suggester)
+
     window = SubtitleWindow(events, font_size=args.font_size, history=args.history,
                             suggestion_timeout=args.suggest_timeout,
                             on_suggestion_drawn=suggestion_drawn,
                             history_window=None if args.no_history else make_history,
                             materials_root=str(suggester.materials.root) if suggester and suggester.materials is not None else None,
+                            materials_controller=materials_controller,
                             mode="full" if suggester else "subtitles")
     try:
         window.run()

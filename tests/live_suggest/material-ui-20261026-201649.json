@@ -1,0 +1,14 @@
+{
+  "kind": "public TTS source snapshot; materials UI offscreen render",
+  "baseline_commit": "495f555",
+  "size": [
+    820,
+    600
+  ],
+  "image": "docs/images/live-materials.png",
+  "image_sha256": "15284188184356b096ab20791f3e97bd9fbabcd6822a663fa08f7c2206951b98",
+  "material_view_sha256": "9b2d29045a2abac329f1737dc3fedb997a00733e04fb98c07b3bbf8a1017080b",
+  "input": "tests/live_suggest/e2e-references-20261026-171615.jsonl",
+  "api_calls": 0,
+  "visible_desktop_window": false
+}

@@ -170,6 +170,7 @@ class SuggestionManager:
         } for r in s.replies]
         return {"state": state, "replies": replies, "reason": s.reason, "error": s.error,
                 "sources": s.sources, "cited_source_ids": s.cited_source_ids,
+                "materials_root": s.materials_root,
                 "queued_at": time.perf_counter()}
 
     def _run(self, uid: int, text: list[str], context: list[str]) -> None:
@@ -183,6 +184,7 @@ class SuggestionManager:
                         first_token_ms=round(s.first_token_ms, 1) if s.first_token_ms else None,
                         replies=[asdict(r) for r in s.replies], reason=s.reason, raw=s.raw, error=s.error,
                         sources=s.sources, cited_source_ids=s.cited_source_ids,
+                        materials_root=s.materials_root,
                         retrieval_ms=round(s.retrieval_ms, 3) if s.retrieval_ms is not None else None,
                         retrieval_cached=s.retrieval_cached,
                         star_inferred=s.star_inferred)
