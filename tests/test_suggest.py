@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "app"))
 
 from jsc_live.suggest import (  # noqa: E402
-    Reply, Suggester, build_system_prompt, build_user_message, load_env, parse_line, strip_ruby,
+    Recommendation, Reply, Suggester, build_system_prompt, build_user_message, load_env, parse_line, strip_ruby,
 )
 
 GOOD = (
@@ -18,11 +18,17 @@ GOOD = (
     "かんたん||はい、わかりました。|好的，明白了。|\n"
     "理由|你说明对方是上司，所以用丁寧。"
 )
+UNSTARRED = (
+    "丁寧||そうなんですね。|这样啊。|\n"
+    "カジュアル||そうなんだ。|这样啊。|\n"
+    "かんたん||はい。|嗯。|\n"
+    "理由|顺着话头回应即可。"
+)
 ENV = {"LLM_API_KEY": "test", "LLM_BASE_URL": "http://localhost:9", "LLM_MODEL": "fake"}
 
 
 def fake_suggester(chunks=None, error=None):
-    s = Suggester(partner="上司", env=ENV)
+    s = Suggester(partner="上司", env=ENV, profile="")
 
     def stream(messages):
         s.sent = messages
@@ -74,6 +80,18 @@ class ProfileTest(unittest.TestCase):
 
 
 class ParseTest(unittest.TestCase):
+    def test_recommendation_accepts_one_style_and_supported_separators(self):
+        for style in ("丁寧", "カジュアル", "かんたん"):
+            for separator in ("|", "｜", ":", "："):
+                with self.subTest(style=style, separator=separator):
+                    self.assertEqual(parse_line(f"  推荐 {separator} {style}  "), Recommendation(style))
+
+    def test_recommendation_rejects_unknown_multiple_or_extra_fields(self):
+        for line in ("推荐|", "推荐|普通体", "推荐|丁寧、カジュアル", "推荐|丁寧/カジュアル",
+                     "推荐|丁寧|カジュアル", "推荐|丁寧|", "推荐|丁寧|这是理由", "推荐|⭐丁寧"):
+            with self.subTest(line=line):
+                self.assertIsNone(parse_line(line))
+
     def test_reply_line(self):
         r = parse_line("カジュアル||うん、わかった。|嗯，知道了。|⚠")
         self.assertEqual(r, Reply("カジュアル", "うん、わかった。", "嗯，知道了。", star=False, warn=True))
@@ -115,6 +133,8 @@ class SuggestTest(unittest.TestCase):
         result = s.suggest("この資料、明日までにまとめてもらえますか？", [], on_update=lambda r: updates.append(len(r.replies)))
         self.assertIsNone(result.error)
         self.assertTrue(result.complete)
+        self.assertFalse(result.star_inferred)
+        self.assertIsNone(result.recommended_style)
         self.assertEqual([r.style for r in result.replies], ["丁寧", "カジュアル", "かんたん"])
         self.assertEqual(updates[:3], [1, 2, 3])  # each reply is shown as soon as its line is done
         self.assertTrue(result.replies[1].warn)
@@ -129,9 +149,9 @@ class SuggestTest(unittest.TestCase):
         self.assertEqual([r.style for r in result.replies], ["丁寧", "カジュアル", "かんたん"])
 
     def test_deepseek_thinking_off_by_default(self):
-        s = Suggester(env={**ENV, "LLM_BASE_URL": "https://api.deepseek.com"})
+        s = Suggester(env={**ENV, "LLM_BASE_URL": "https://api.deepseek.com"}, profile="")
         self.assertEqual(s.extra_body, {"thinking": {"type": "disabled"}})
-        self.assertEqual(Suggester(env=ENV).extra_body, {})
+        self.assertEqual(Suggester(env=ENV, profile="").extra_body, {})
 
     def test_missing_star_cell_and_star_from_reason(self):
         raw = ("丁寧||明日は予定があるので、また今度お願いします。|我明天有安排。|\n"
@@ -142,6 +162,8 @@ class SuggestTest(unittest.TestCase):
         self.assertTrue(result.complete)
         self.assertEqual(result.replies[1].text, "明日はちょっと無理かも。")
         self.assertTrue(result.replies[1].star)
+        self.assertTrue(result.star_inferred)
+        self.assertIsNone(result.recommended_style)
 
     def test_malformed_reply_is_an_error(self):
         result = fake_suggester(["丁寧||はい。|好的。|\n"]).suggest("x", [])
@@ -155,6 +177,100 @@ class SuggestTest(unittest.TestCase):
     def test_missing_settings(self):
         with self.assertRaises(RuntimeError):
             Suggester(env={"LLM_API_KEY": "x"})
+
+
+class RecommendationTest(unittest.TestCase):
+    def test_first_recommendation_streams_without_an_empty_callback(self):
+        raw = "推荐|カジュアル\n" + UNSTARRED
+        snapshots = []
+        result = fake_suggester([raw[i:i + 3] for i in range(0, len(raw), 3)]).suggest(
+            "x", [], on_update=lambda s: snapshots.append(
+                (len(s.replies), tuple(r.style for r in s.replies if r.star))))
+        self.assertEqual(snapshots, [(1, ()), (2, ("カジュアル",)),
+                                     (3, ("カジュアル",)), (3, ("カジュアル",))])
+        self.assertTrue(result.complete)
+        self.assertIsNone(result.error)
+        self.assertEqual(result.recommended_style, "カジュアル")
+        self.assertFalse(result.star_inferred)
+        self.assertEqual(result.reason, "顺着话头回应即可。")
+
+    def test_late_recommendation_without_newline_replaces_old_star_and_keeps_reason(self):
+        raw = GOOD + "\n推荐|カジュアル"
+        snapshots = []
+        result = fake_suggester([raw[:-2], raw[-2:]]).suggest(
+            "x", [], on_update=lambda s: snapshots.append(tuple(r.style for r in s.replies if r.star)))
+        self.assertEqual(snapshots[:-1], [("丁寧",)] * 4)
+        self.assertEqual(snapshots[-1], ("カジュアル",))
+        self.assertEqual(result.reason, "你说明对方是上司，所以用丁寧。")
+        self.assertEqual(result.recommended_style, "カジュアル")
+        self.assertTrue(result.complete)
+        self.assertFalse(result.star_inferred)
+
+    def test_first_recommendation_overrides_all_later_inline_stars(self):
+        raw = "推荐|かんたん\n" + GOOD.replace("カジュアル||", "カジュアル|⭐|").replace(
+            "かんたん||", "かんたん|⭐|")
+        snapshots = []
+        result = fake_suggester([raw]).suggest(
+            "x", [], on_update=lambda s: snapshots.append(tuple(r.style for r in s.replies if r.star)))
+        self.assertEqual(snapshots, [(), (), ("かんたん",), ("かんたん",)])
+        self.assertEqual(result.recommended_style, "かんたん")
+        self.assertTrue(result.complete)
+        self.assertFalse(result.star_inferred)
+
+    def test_recommendation_between_out_of_order_replies_updates_existing_reply(self):
+        lines = UNSTARRED.splitlines()
+        raw = "\n".join([lines[1], "推荐:カジュアル", lines[2], lines[0], lines[3]])
+        snapshots = []
+        result = fake_suggester([raw]).suggest(
+            "x", [], on_update=lambda s: snapshots.append(
+                (len(s.replies), tuple(r.style for r in s.replies if r.star))))
+        self.assertEqual(snapshots[:2], [(1, ()), (1, ("カジュアル",))])
+        self.assertEqual([r.style for r in result.replies], ["丁寧", "カジュアル", "かんたん"])
+        self.assertEqual([r.style for r in result.replies if r.star], ["カジュアル"])
+        self.assertTrue(result.complete)
+        self.assertFalse(result.star_inferred)
+
+    def test_repeated_and_conflicting_recommendations_keep_first_choice_without_callbacks(self):
+        lines = UNSTARRED.splitlines()
+        raw = "\n".join(["推荐|カジュアル", lines[0], "推荐|丁寧", "推荐|カジュアル",
+                          lines[1], "推荐|かんたん", lines[2], lines[3]])
+        snapshots = []
+        result = fake_suggester([raw]).suggest(
+            "x", [], on_update=lambda s: snapshots.append(
+                (len(s.replies), tuple(r.style for r in s.replies if r.star))))
+        self.assertEqual(snapshots, [(1, ()), (2, ("カジュアル",)),
+                                     (3, ("カジュアル",)), (3, ("カジュアル",))])
+        self.assertEqual(result.recommended_style, "カジュアル")
+        self.assertTrue(result.complete)
+        self.assertFalse(result.star_inferred)
+
+    def test_invalid_recommendations_preserve_polite_fallback(self):
+        for line in ("推荐|普通体", "推荐|丁寧/カジュアル", "推荐|カジュアル|多余栏"):
+            with self.subTest(line=line):
+                result = fake_suggester([line + "\n" + UNSTARRED]).suggest("x", [])
+                self.assertIsNone(result.recommended_style)
+                self.assertTrue(result.star_inferred)
+                self.assertTrue(result.complete)
+                self.assertEqual([r.style for r in result.replies if r.star], ["丁寧"])
+
+    def test_invalid_recommendation_preserves_legacy_inline_star(self):
+        result = fake_suggester(["推荐|未知\n" + GOOD]).suggest("x", [])
+        self.assertIsNone(result.recommended_style)
+        self.assertFalse(result.star_inferred)
+        self.assertTrue(result.complete)
+        self.assertEqual([r.style for r in result.replies if r.star], ["丁寧"])
+
+    def test_missing_recommended_reply_does_not_choose_another_style(self):
+        lines = GOOD.splitlines()
+        for replies in ([], [lines[0], lines[2], lines[3]]):
+            with self.subTest(reply_count=len(replies)):
+                raw = "\n".join(["推荐|カジュアル", *replies])
+                result = fake_suggester([raw]).suggest("x", [])
+                self.assertEqual(result.recommended_style, "カジュアル")
+                self.assertEqual([r.style for r in result.replies if r.star], [])
+                self.assertFalse(result.complete)
+                self.assertFalse(result.star_inferred)
+                self.assertEqual(result.error, "incomplete or malformed reply")
 
 
 class TurnTest(unittest.TestCase):

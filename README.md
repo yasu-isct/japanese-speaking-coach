@@ -107,7 +107,7 @@ Known limits: the "users" in tests are simulated; native-speaker review and real
 
 1. **This repo (phase 1)** — the Skill.
 2. **Phase 2, working** — real-time Japanese subtitles with furigana (faster-whisper large-v3-turbo on the GPU, MeCab readings), reply suggestions after each turn (DeepSeek, rules read from the Skill), a history window with word lookup, and an optional session recording. Last subtitle → suggestions p50 2.46 s on 10 TTS sentences. See [`app/README.md`](app/README.md) and [`docs/status.md`](docs/status.md).
-3. Next — fewer missing ⭐ picks, replies grounded in the learner's profile and past sessions, a third-party trial.
+3. Next — broader tests of ⭐ choices, replies grounded in the learner's profile and past sessions, a third-party trial.
 
 ---
 

@@ -44,13 +44,16 @@ LIVE_MODE = """
 你在一个实时字幕应用里工作。学生正在对话中，对方刚说完一句话，学生只有几秒钟看屏幕。
 上面的规则（三种回复的定义、⭐ 推荐规则、⚠ 提示、个人信息、站在学生角色、句数限制、politeness.md）全部照常适用，只有输出形式改成下面这样：
 
-1. 只输出 4 行，不输出 `## 听懂`、`## 生词`、标题、空行或任何其它文字：
+1. 先按上面的 ⭐ 推荐规则选出唯一风格，再写三条回复。只输出 5 行，不输出 `## 听懂`、`## 生词`、标题、空行或任何其它文字：
 ```
-丁寧|<⭐ 或留空>|<日语回复>|<中文意思>|<⚠ 或留空>
-カジュアル|<⭐ 或留空>|<日语回复>|<中文意思>|<⚠ 或留空>
-かんたん|<⭐ 或留空>|<日语回复>|<中文意思>|
+推荐|<丁寧、カジュアル、かんたん 三选一>
+丁寧|<日语回复>|<中文意思>|<⚠ 或留空>
+カジュアル|<日语回复>|<中文意思>|<⚠ 或留空>
+かんたん|<日语回复>|<中文意思>|
 理由|<推荐理由，一句话>
 ```
+   「推荐」行必填，不能留空、不能写多个风格；应用把这一明确选择显示成 ⭐，回复行不用重复写 ⭐。
+   选择依据是学生的要求、已知对象和对方的用语，不是三条回复中哪条最短：学生要求最简单或表示紧张才优先かんたん；否则按对象、です/ます或敬语、普通体加口语标记的顺序判断；仍判断不了就丁寧。理由必须说明这个选择的依据。
 2. 日语回复**不加注音括号**（应用会自己加注音）。
 3. 本应用**没有记忆和过往对话**：通用规则 4 的第 1、2 步不适用。学生的个人事实（名字、来日本多久、学校、公司、专业、爱好、经历等）**每一处都必须写成【】**，如「日本に来て【半年】です」；不写【】就等于编造。
 4. 输入来自语音识别，可能有错字；按最可能的意思回复，不要指出错字。
@@ -72,15 +75,21 @@ class Reply:
     warn: bool = False
 
 
+@dataclass(frozen=True)
+class Recommendation:
+    style: str
+
+
 @dataclass
 class Suggestion:
     replies: list[Reply] = field(default_factory=list)
     reason: str = ""
     raw: str = ""
-    star_inferred: bool = False           # the model gave no ⭐; it was filled in by infer_star
+    star_inferred: bool = False           # no explicit model choice; filled in by infer_star
     first_token_ms: float | None = None   # request sent -> first content token
     api_ms: float | None = None           # request sent -> last token (API round trip)
     error: str | None = None
+    recommended_style: str | None = None  # first valid standalone model choice, ahead of inline stars
 
     @property
     def complete(self) -> bool:
@@ -159,11 +168,14 @@ def build_user_message(sentence: str | list[str], context: list[str], partner: s
     return "\n".join(lines)
 
 
-def parse_line(line: str) -> Reply | str | None:
-    """A reply line -> Reply, the reason line -> str, anything else -> None."""
+def parse_line(line: str) -> Reply | Recommendation | str | None:
+    """Parse a reply, an explicit recommendation, or a reason; ignore other lines."""
     line = line.strip().strip("`").strip()
     if not line:
         return None
+    recommendation = re.fullmatch(r"推荐\s*[|｜:：]\s*(丁寧|カジュアル|かんたん)", line)
+    if recommendation:
+        return Recommendation(recommendation.group(1))
     reason = re.match(r"^(?:推荐)?理由\s*[|｜:：]\s*(.+)$", line)
     if reason:
         return reason.group(1).strip()
@@ -284,7 +296,17 @@ class Suggester:
     @staticmethod
     def _accept(result: Suggestion, line: str) -> bool:
         parsed = parse_line(line)
+        if isinstance(parsed, Recommendation):
+            # Keep the first valid choice stable if the model repeats or contradicts itself.
+            if result.recommended_style is not None:
+                return False
+            result.recommended_style = parsed.style
+            for reply in result.replies:
+                reply.star = reply.style == parsed.style
+            return bool(result.replies)  # no empty UI update when the choice arrives first
         if isinstance(parsed, Reply) and parsed.style not in [r.style for r in result.replies]:
+            if result.recommended_style is not None:
+                parsed.star = parsed.style == result.recommended_style
             # The model sometimes writes the lines out of order; always show 丁寧 / カジュアル / かんたん.
             result.replies.append(parsed)
             result.replies.sort(key=lambda r: STYLES.index(r.style))
@@ -301,6 +323,9 @@ def infer_star(result: Suggestion) -> None:
     First choice: the one style the reason names. Otherwise 丁寧, which is the
     Skill's own fallback (⭐ rule 5: when unsure, polite is the safe choice).
     """
+    # A missing reply for an explicit choice is malformed, not permission to choose another style.
+    if result.recommended_style is not None:
+        return
     if result.replies and not any(r.star for r in result.replies):
         result.star_inferred = True
         named = [r for r in result.replies if r.style in result.reason]
