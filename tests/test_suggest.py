@@ -9,7 +9,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "app"))
 
 from jsc_live.suggest import (  # noqa: E402
-    Recommendation, Reply, Suggester, build_system_prompt, build_user_message, load_env, parse_line, strip_ruby,
+    Recommendation, Reply, Suggester, build_system_prompt, build_user_message, clean_profile, load_env, load_profile,
+    parse_line, strip_ruby,
 )
 
 GOOD = (
@@ -50,6 +51,9 @@ class PromptTest(unittest.TestCase):
         # Modes B-D are not part of the live prompt.
         self.assertNotIn("## C. 情景陪练", prompt)
         self.assertNotIn("name: japanese-speaking-coach", prompt)
+        self.assertNotIn("【友達(ともだち)と鎌倉(かまくら)】", prompt)
+        self.assertNotIn("能搜索的过往对话", prompt)
+        self.assertNotIn("若对方的话需要学生做选择", prompt)
 
     def test_user_message_is_text_only(self):
         msg = build_user_message("明日ひま？", ["お疲れ", "今日寒いね"], "朋友")
@@ -71,12 +75,42 @@ class ProfileTest(unittest.TestCase):
         self.assertEqual(profile, "# 我的个人资料\n- 来日本：一年半")
         prompt = build_system_prompt(profile)
         self.assertTrue(prompt.endswith("- 来日本：一年半"))
-        self.assertIn("资料里有的：直接用", prompt)
-        self.assertNotIn("学生的个人资料", build_system_prompt(""))
+        self.assertIn("不加【】", prompt)
+        self.assertNotIn("## 学生提供的资料", build_system_prompt(""))
 
     def test_suggester_takes_an_explicit_profile(self):
         self.assertIn("一年半", Suggester(env=ENV, profile="- 来日本：一年半").system_prompt)
-        self.assertNotIn("学生的个人资料", Suggester(env=ENV, profile="").system_prompt)
+        self.assertNotIn("## 学生提供的资料", Suggester(env=ENV, profile="").system_prompt)
+
+    def test_unfilled_public_template_is_not_a_persons_background(self):
+        self.assertEqual(load_profile(ROOT / "profile.example.md"), "")
+        example = "# Profile\n- 出身：（例）上海\n- 名字：(例) 李明\n- 爱好：未填写\n"
+        client = Suggester(env=ENV, profile=example)
+        self.assertEqual(client.profile, "")
+        self.assertEqual(client.system_prompt, build_system_prompt())
+
+    def test_mixed_profile_keeps_known_facts_without_interpreting_unknowns(self):
+        raw = ("# Test profile\n> guidance\n- 出身：南京\n- 年龄：\n- 工作：未填写\n"
+               "- 爱好：不知道（资料没有填写）\n- 学校：【学校名】\n- 来日本：一年半\n"
+               "- 家人：弟は医者です。\n")
+        cleaned = clean_profile(raw)
+        self.assertIn("- 出身：南京", cleaned)
+        self.assertIn("- 来日本：一年半", cleaned)
+        self.assertIn("- 家人：弟は医者です。", cleaned)  # preserve ownership instead of promoting it to learner facts
+        self.assertNotIn("不知道", cleaned)
+        self.assertNotIn("未填写", cleaned)
+        self.assertNotIn("【学校名】", cleaned)
+        self.assertEqual(clean_profile(cleaned), cleaned)
+
+    def test_profile_cleaning_does_not_rewrite_the_file(self):
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "fictional-profile.md"
+            raw = "# Test\n- 名字：（例）例子\n- 出身：南京\n"
+            path.write_text(raw, encoding="utf-8")
+            self.assertEqual(load_profile(path), "# Test\n- 出身：南京")
+            self.assertEqual(path.read_text(encoding="utf-8"), raw)
 
 
 class ParseTest(unittest.TestCase):
@@ -117,12 +151,26 @@ class ParseTest(unittest.TestCase):
         self.assertEqual((r.text, r.meaning), ("それはいい経験ですね。", ""))
         self.assertIsNone(parse_line("丁寧|⭐||"))
 
+    def test_warning_attached_to_meaning_preserves_translation(self):
+        reply = parse_line("カジュアル|よろしくね。|请多关照。　⚠ 对此对象不要用")
+        self.assertEqual(reply, Reply("カジュアル", "よろしくね。", "请多关照。", warn=True))
+
     def test_reason_with_colon(self):
         self.assertEqual(parse_line("理由：对方用了「マジ」。"), "对方用了「マジ」。")
         self.assertEqual(parse_line("推荐理由: 对方用了です。"), "对方用了です。")
 
     def test_ruby_removed(self):
         self.assertEqual(strip_ruby("資料(しりょう)をまとめます"), "資料をまとめます")
+
+    def test_unknown_value_does_not_keep_a_decisive_yes_or_no_prefix(self):
+        for prefix in ("はい", "うん", "ええ", "いいえ"):
+            with self.subTest(prefix=prefix):
+                reply = parse_line(f"丁寧|{prefix}、カードは【有無】です。|是的，卡【有无】。|")
+                self.assertEqual(reply.text, "カードは【有無】です。")
+                self.assertEqual(reply.meaning, "卡【有无】。")
+        self.assertEqual(parse_line("丁寧|はい、お願いします。|好的，麻烦您。|").text, "はい、お願いします。")
+        self.assertEqual(parse_line("丁寧|はい、お願いします。【名前】です。|麻烦您。我叫【名字】。|").text,
+                         "はい、お願いします。【名前】です。")
 
 
 class SuggestTest(unittest.TestCase):

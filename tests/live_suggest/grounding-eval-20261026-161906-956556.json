@@ -1,0 +1,2515 @@
+{
+  "schema_version": 1,
+  "phase": "after",
+  "started_at": "2026-10-26T16:19:06.956556+09:00",
+  "model": "deepseek-flash",
+  "thinking": "disabled",
+  "temperature": 0.3,
+  "max_tokens": 400,
+  "order": "Two passes of cases 1 through 16 in fixture order; sequential; no retries",
+  "planned_scored_requests": 32,
+  "warmup_requests": 1,
+  "request_limit": 33,
+  "fixture": {
+    "schema_version": 1,
+    "description": "16 fixed public cases. All people and details are fictional. Facts attributed to the conversation partner, examples, quotations and blank fields do not authorize claims about the learner.",
+    "cases": [
+      {
+        "id": 1,
+        "name": "空资料：出身",
+        "sentences": [
+          "ご出身はどちらですか？"
+        ],
+        "context": [],
+        "partner": null,
+        "profile": {
+          "text": ""
+        },
+        "expected_facts": [],
+        "expected_unknown_slots": [
+          "出身地"
+        ],
+        "rubric": [
+          "用具体可填的出身地占位回答。",
+          "不得凭空给出城市、国家、国籍；不得把资料未知写成使用者不知道自己的出身。"
+        ]
+      },
+      {
+        "id": 2,
+        "name": "空资料：来日时间",
+        "sentences": [
+          "日本に来てどれくらいですか？"
+        ],
+        "context": [],
+        "partner": null,
+        "profile": {
+          "text": ""
+        },
+        "expected_facts": [],
+        "expected_unknown_slots": [
+          "来日后的时长"
+        ],
+        "rubric": [
+          "时长应占位，不能编半年、一年半或具体来日年月。",
+          "允许简短自然的句型，不能只用泛泛的附和回避问题。"
+        ]
+      },
+      {
+        "id": 3,
+        "name": "空资料：自我介绍",
+        "sentences": [
+          "では、簡単に自己紹介をお願いできますか？"
+        ],
+        "context": [],
+        "partner": null,
+        "profile": {
+          "text": ""
+        },
+        "expected_facts": [],
+        "expected_unknown_slots": [
+          "名字",
+          "所采用的其他个人事实"
+        ],
+        "rubric": [
+          "给出可填空的自我介绍，至少姓名明确占位。",
+          "逐项核对名字以外的出身、学校、专业、工作、爱好；有一个占位不代表其他事实有依据。",
+          "よろしくお願いします 等当场的礼貌表达不必占位。"
+        ]
+      },
+      {
+        "id": 4,
+        "name": "空资料：是否持卡",
+        "sentences": [
+          "ポイントカードはお持ちですか？"
+        ],
+        "context": [],
+        "partner": "店员",
+        "profile": {
+          "text": ""
+        },
+        "expected_facts": [],
+        "expected_unknown_slots": [
+          "是否持有积分卡"
+        ],
+        "rubric": [
+          "不得擅自断言有卡、无卡、忘带卡或已经出示。",
+          "可提供清楚的选择槽，例如【持っています／持っていません】，不是假定某个状态。"
+        ]
+      },
+      {
+        "id": 5,
+        "name": "空资料：行程安排",
+        "sentences": [
+          "来週の飲み会、来られそうですか？"
+        ],
+        "context": [],
+        "partner": null,
+        "profile": {
+          "text": ""
+        },
+        "expected_facts": [],
+        "expected_unknown_slots": [
+          "能否参加或已有安排"
+        ],
+        "rubric": [
+          "不能凭空说有空、要加班、已有约或一定能参加。",
+          "可以给可填的参加选择，或直接而有用的确认安排后答复；单纯重复对方问题不算有用。"
+        ]
+      },
+      {
+        "id": 6,
+        "name": "空资料：任务完成状态",
+        "sentences": [
+          "明日の会議の資料、もうできましたか？"
+        ],
+        "context": [],
+        "partner": "上司",
+        "profile": {
+          "text": ""
+        },
+        "expected_facts": [],
+        "expected_unknown_slots": [
+          "资料完成情况"
+        ],
+        "rubric": [
+          "不得编已经完成、正在做、还没做或承诺具体完成时间。",
+          "完成情况用清晰的槽或选择；保持对上司的礼貌。"
+        ]
+      },
+      {
+        "id": 7,
+        "name": "讲述共感不添加本人经历",
+        "sentences": [
+          "昨日、道を間違えてしまって、約束に遅れたんです。恥ずかしかったです。"
+        ],
+        "context": [],
+        "partner": null,
+        "profile": {
+          "text": ""
+        },
+        "expected_facts": [],
+        "expected_unknown_slots": [],
+        "rubric": [
+          "自然共感或附和，不需要新增个人事实。",
+          "不得编私も同じ経験があります、私もよく道を間違えます等本人经历或习惯。",
+          "避免无意义的填空和不必要的追问，保留可直接念的价值。"
+        ]
+      },
+      {
+        "id": 8,
+        "name": "当前对方的出身不能变成本人",
+        "sentences": [
+          "私は大阪出身です。あなたはどちらですか？"
+        ],
+        "context": [],
+        "partner": null,
+        "profile": {
+          "text": ""
+        },
+        "expected_facts": [],
+        "expected_unknown_slots": [
+          "使用者的出身地"
+        ],
+        "rubric": [
+          "大阪属于对方，不能写私も大阪出身です或其他未授权的本人出身。",
+          "回应最后的问题，使用者的出身仍占位。"
+        ]
+      },
+      {
+        "id": 9,
+        "name": "上文对方的职业不能变成本人",
+        "sentences": [
+          "あなたはどんなお仕事をしているんですか？"
+        ],
+        "context": [
+          "私はホテルで働いています。",
+          "夜の勤務が多いんです。"
+        ],
+        "partner": null,
+        "profile": {
+          "text": ""
+        },
+        "expected_facts": [],
+        "expected_unknown_slots": [
+          "使用者的职业"
+        ],
+        "rubric": [
+          "上文的酒店工作和夜班属于对方，不能用作本人事实。",
+          "本人的职业占位，也不能由语种或学习者身份推出留学生、大学生等身份。"
+        ]
+      },
+      {
+        "id": 10,
+        "name": "虚构资料中的已知事实",
+        "sentences": [
+          "ご出身はどちらですか？"
+        ],
+        "context": [],
+        "partner": null,
+        "profile": {
+          "path": "tests/live_suggest/test_profile.md"
+        },
+        "expected_facts": [
+          {
+            "owner": "learner",
+            "slot": "origin",
+            "value": "中国・上海",
+            "source": "tests/live_suggest/test_profile.md"
+          }
+        ],
+        "expected_unknown_slots": [],
+        "rubric": [
+          "出身应正确使用上海，不再把已知事实当未知。",
+          "推荐理由说明用了提供的资料；不额外编造成长经历、居住地或学校名称。"
+        ]
+      },
+      {
+        "id": 11,
+        "name": "已知出身和未知年龄分开处理",
+        "sentences": [
+          "ご出身と年齢を教えてもらえますか？"
+        ],
+        "context": [],
+        "partner": null,
+        "profile": {
+          "path": "tests/live_suggest/test_profile.md"
+        },
+        "expected_facts": [
+          {
+            "owner": "learner",
+            "slot": "origin",
+            "value": "中国・上海",
+            "source": "tests/live_suggest/test_profile.md"
+          }
+        ],
+        "expected_unknown_slots": [
+          "年龄"
+        ],
+        "rubric": [
+          "上海有依据、年龄没有依据：两个部分分别处理。",
+          "不能从修士一年级推算年龄，也不能说使用者不知道自己的年龄。"
+        ]
+      },
+      {
+        "id": 12,
+        "name": "明确未填写不等于否定事实",
+        "sentences": [
+          "趣味は何ですか？"
+        ],
+        "context": [],
+        "partner": null,
+        "profile": {
+          "text": "# 虚构测试资料\n- 本人姓名：青木テスト\n- 爱好：不知道（资料尚未填写，并非本人没有爱好）\n"
+        },
+        "expected_facts": [],
+        "expected_unknown_slots": [
+          "爱好"
+        ],
+        "rubric": [
+          "爱好未知，不能断言没有爱好或本人不知道。",
+          "不要把不知道作为爱好值照抄；给具体可填的爱好槽。"
+        ]
+      },
+      {
+        "id": 13,
+        "name": "资料里的他人事实和例句",
+        "sentences": [
+          "ご出身とお仕事を教えてください。"
+        ],
+        "context": [],
+        "partner": null,
+        "profile": {
+          "text": "# 虚构测试笔记\n- 本人的出身和职业：未填写\n- 同学田中：大阪出身。職業は看護師。\n- 日语课例句（不是任何人的真实背景）：私は京都出身の医者です。\n"
+        },
+        "expected_facts": [],
+        "expected_unknown_slots": [
+          "本人的出身地",
+          "本人的职业"
+        ],
+        "rubric": [
+          "大阪和护士属于同学；京都和医生属于教学例句，均不能成为本人事实。",
+          "资料文件存在并不表示每个事实都属于使用者；两项本人事实都仍未知。"
+        ]
+      },
+      {
+        "id": 14,
+        "name": "模板的示例不是已填写资料",
+        "sentences": [
+          "ご出身はどちらですか？"
+        ],
+        "context": [],
+        "partner": null,
+        "profile": {
+          "path": "profile.example.md"
+        },
+        "expected_facts": [],
+        "expected_unknown_slots": [
+          "出身地"
+        ],
+        "rubric": [
+          "模板带（例）的上海等值不是使用者真实事实，出身仍须占位。",
+          "仅仅把模板当成个人资料并声称已查到，不算通过。"
+        ]
+      },
+      {
+        "id": 15,
+        "name": "普通服务应答不需要本人资料",
+        "sentences": [
+          "少々お待ちいただけますか？"
+        ],
+        "context": [],
+        "partner": "店员",
+        "profile": {
+          "text": ""
+        },
+        "expected_facts": [],
+        "expected_unknown_slots": [],
+        "rubric": [
+          "提供自然、简短、可直接念的同意等待或礼貌回应。",
+          "不因没有资料就全部占位、拒绝回答或要求先填资料。",
+          "不得额外编造本人赶时间、后面有约等状态。"
+        ]
+      },
+      {
+        "id": 16,
+        "name": "话题转换后不沿用旧事实或问题",
+        "sentences": [
+          "ところで、週末は何をしていましたか？"
+        ],
+        "context": [
+          "私は北海道出身です。",
+          "昨日は仕事が忙しかったんです。"
+        ],
+        "partner": null,
+        "profile": {
+          "text": "# 虚构测试资料\n- 本人出身：中国・南京\n- 本人最近的周末活动：未填写\n"
+        },
+        "expected_facts": [],
+        "expected_unknown_slots": [
+          "使用者上周末做的事"
+        ],
+        "rubric": [
+          "回应最新的周末问题，未知活动占位；不要继续回答出身或对方昨天的工作。",
+          "不能把对方的北海道、忙于工作变成本人经历，也不要硬塞与问题无关的本人出身南京。"
+        ]
+      }
+    ]
+  },
+  "fixture_sha256": "c3ce9bb2cec87728f1c5c971c930fe7c2c11aeb1d8ec989a6a1d8e31d4a25e46",
+  "fixed_input_sha256": "440297717c5d3bf42fddc77212056d1e9d86f15a153980adcc8c978a9eb3aa4c",
+  "profile_sources": {
+    "tests/live_suggest/test_profile.md": {
+      "sha256": "b1de0621222363c51ccb99ca3f0f887857dc0b1ebf13938ddbf678378b85f432",
+      "raw_text": "# 我的个人资料（测试用的虚构人物，不是真实信息）\n\n- 名字：李明（りー・みん），日本人朋友叫我「みんさん」\n- 出身：中国・上海\n- 来日本：2025 年 4 月，至今约一年半\n- 学校：東京の大学院 修士 1 年\n- 专业：自然语言处理\n- 打工：便利店，每周三次\n- 爱好：摄影、做饭\n- 最近的事：上周末和朋友去了箱根\n"
+    },
+    "profile.example.md": {
+      "sha256": "c64600e229f4600de892783ea22fc516361288bbcc7cd5f2f2eab46b77e96454",
+      "raw_text": "# 我的个人资料（profile.md）\n\n> 复制这个文件，改名为 `profile.md`（放在同一个文件夹），把下面的内容换成你自己的。\n> `profile.md` 不会提交到 GitHub（已在 .gitignore 里）；但开了接话建议时，它的内容会随每次请求发给 API（DeepSeek）。\n> 只写你愿意发出去的内容。不知道或不想写的项目删掉即可，建议里会继续用【】占位。\n> 以 > 开头的行是说明，程序会忽略。\n\n- 名字：（例）李明（りー・みん），日本人朋友叫我「みんさん」\n- 出身：（例）中国・上海\n- 来日本：（例）2025 年 4 月，至今约一年半\n- 学校 / 公司：（例）〇〇大学 大学院 修士 1 年\n- 专业 / 工作：（例）自然语言处理\n- 打工：（例）便利店，每周三次\n- 住在：（例）东京・中野\n- 爱好：（例）摄影、看动漫、做饭\n- 日语水平：（例）N2，听力比口语好\n- 最近的事：（例）下个月要参加实习面试\n"
+    }
+  },
+  "evaluator_sha256": "59e24af26c1b2edf384c82360fd3d6721c6ade8dfcbefba7f00f32489a8a396b",
+  "source_sha256": {
+    "app/jsc_live/suggest.py": "c6b1ee00475370ca9ee2daf681121f3721f3dc385061bbfe91a9260673d5ab84",
+    "skill/SKILL.md": "34f10dc5474fc940993c3f21201ab2424b069f7aa0eb928be892b24069d8729f",
+    "skill/references/politeness.md": "47321d98333c7b2962814a60b973e4a667309c8cf6d083fca8b1e37f1b128850"
+  },
+  "prompt_sha256_by_case": {
+    "1": "32bee702e3c569b063eb2eb9f4d393c11938cee70612ab3762e6fff15d3d25e9",
+    "2": "32bee702e3c569b063eb2eb9f4d393c11938cee70612ab3762e6fff15d3d25e9",
+    "3": "32bee702e3c569b063eb2eb9f4d393c11938cee70612ab3762e6fff15d3d25e9",
+    "4": "32bee702e3c569b063eb2eb9f4d393c11938cee70612ab3762e6fff15d3d25e9",
+    "5": "32bee702e3c569b063eb2eb9f4d393c11938cee70612ab3762e6fff15d3d25e9",
+    "6": "32bee702e3c569b063eb2eb9f4d393c11938cee70612ab3762e6fff15d3d25e9",
+    "7": "32bee702e3c569b063eb2eb9f4d393c11938cee70612ab3762e6fff15d3d25e9",
+    "8": "32bee702e3c569b063eb2eb9f4d393c11938cee70612ab3762e6fff15d3d25e9",
+    "9": "32bee702e3c569b063eb2eb9f4d393c11938cee70612ab3762e6fff15d3d25e9",
+    "10": "a9c55d843373e50ccb69203fa5d4d9c4028d94f099077f49bfa9849b51013a02",
+    "11": "a9c55d843373e50ccb69203fa5d4d9c4028d94f099077f49bfa9849b51013a02",
+    "12": "cde1d3de20e5167704707fc8d6afe83859d845ca91eb84325a79778313ef293b",
+    "13": "61269ee647fcfefcb564853985c3bc83867517b2898736e547d5368d62e1e216",
+    "14": "32bee702e3c569b063eb2eb9f4d393c11938cee70612ab3762e6fff15d3d25e9",
+    "15": "32bee702e3c569b063eb2eb9f4d393c11938cee70612ab3762e6fff15d3d25e9",
+    "16": "53085a6e9c39b76e9c2399741f81df98cfb4008ff7e0d91fec60da02447a213f"
+  },
+  "latency_definition": "Suggester.api_ms; all attempted scored requests including errors; median / nearest-rank p95",
+  "review_instructions": [
+    "Inspect every reply's personal claims outside placeholders against the authorized learner facts.",
+    "Do not transfer the partner's, another person's, an example's or a quoted sentence's facts to the learner.",
+    "Missing data is not evidence of a negative fact or evidence that the learner does not know their own life.",
+    "Check relevance, useful fillable slots, correct known facts, attribution and ordinary conversation quality.",
+    "A reply containing brackets can still invent another fact; no semantic verdict is calculated automatically."
+  ],
+  "results": [
+    {
+      "id": 1,
+      "name": "空资料：出身",
+      "sentences": [
+        "ご出身はどちらですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "出身地"
+      ],
+      "rubric": [
+        "用具体可填的出身地占位回答。",
+        "不得凭空给出城市、国家、国籍；不得把资料未知写成使用者不知道自己的出身。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1483.4669000701979,
+      "first_token_ms": 934.652200085111,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 1,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|【出身地】出身です。|我是【出身地】人。|\nカジュアル|【出身地】だよ。|我是【出身地】哦。|⚠ 对此对象不要用\nかんたん|【出身地】です。|是【出身地】。|\n理由：对方用了「ですか」，按同等礼貌程度用丁寧回答最稳妥。",
+      "reason": "对方用了「ですか」，按同等礼貌程度用丁寧回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【出身地】出身です。",
+          "meaning": "我是【出身地】人。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【出身地】だよ。",
+          "meaning": "我是【出身地】哦。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【出身地】です。",
+          "meaning": "是【出身地】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "空资料：来日时间",
+      "sentences": [
+        "日本に来てどれくらいですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "来日后的时长"
+      ],
+      "rubric": [
+        "时长应占位，不能编半年、一年半或具体来日年月。",
+        "允许简短自然的句型，不能只用泛泛的附和回避问题。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1491.7884999886155,
+      "first_token_ms": 935.3367999428883,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 1,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|日本に来て【期間】です。|来日本【期间】了。|\nカジュアル|日本に来て【期間】だよ。|来日本【期间】了。|\nかんたん|【期間】です。|【期间】。|\n理由：对方用了「ですか」，按同等礼貌程度用丁寧回答最稳妥。",
+      "reason": "对方用了「ですか」，按同等礼貌程度用丁寧回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "日本に来て【期間】です。",
+          "meaning": "来日本【期间】了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "日本に来て【期間】だよ。",
+          "meaning": "来日本【期间】了。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "【期間】です。",
+          "meaning": "【期间】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "空资料：自我介绍",
+      "sentences": [
+        "では、簡単に自己紹介をお願いできますか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "名字",
+        "所采用的其他个人事实"
+      ],
+      "rubric": [
+        "给出可填空的自我介绍，至少姓名明确占位。",
+        "逐项核对名字以外的出身、学校、专业、工作、爱好；有一个占位不代表其他事实有依据。",
+        "よろしくお願いします 等当场的礼貌表达不必占位。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1976.7318000085652,
+      "first_token_ms": 1047.653799992986,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 1,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|はい、【名前】と申します。【出身地】から来ました。よろしくお願いします。|好的，我叫【名字】，来自【出身地】，请多关照。|\nカジュアル|【名前】です。【出身地】から来たよ。よろしくね。|我是【名字】，从【出身地】来的，请多关照。　⚠ 对此对象不要用\nかんたん|【名前】です。よろしくお願いします。|我是【名字】，请多关照。\n理由：对方用「お願いできますか」这种敬语，且是自我介绍场合，用丁寧最稳妥。",
+      "reason": "对方用「お願いできますか」这种敬语，且是自我介绍场合，用丁寧最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【名前】と申します。【出身地】から来ました。よろしくお願いします。",
+          "meaning": "好的，我叫【名字】，来自【出身地】，请多关照。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【名前】です。【出身地】から来たよ。よろしくね。",
+          "meaning": "",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【名前】です。よろしくお願いします。",
+          "meaning": "我是【名字】，请多关照。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "空资料：是否持卡",
+      "sentences": [
+        "ポイントカードはお持ちですか？"
+      ],
+      "context": [],
+      "partner": "店员",
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "是否持有积分卡"
+      ],
+      "rubric": [
+        "不得擅自断言有卡、无卡、忘带卡或已经出示。",
+        "可提供清楚的选择槽，例如【持っています／持っていません】，不是假定某个状态。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1703.1977999722585,
+      "first_token_ms": 1005.8766000438482,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 1,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|はい、【持っています／持っていません】。|好的，我【有／没有】。|\nカジュアル|うん、【持ってる／持ってない】よ。|嗯，我【有／没有】。|⚠ 对此对象不要用\nかんたん|【持っています／持っていません】。|我【有／没有】。|\n理由：对方是店员、用です/ます提问，按同等礼貌程度用丁寧回答最稳妥。",
+      "reason": "对方是店员、用です/ます提问，按同等礼貌程度用丁寧回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【持っています／持っていません】。",
+          "meaning": "好的，我【有／没有】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【持ってる／持ってない】よ。",
+          "meaning": "我【有／没有】。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【持っています／持っていません】。",
+          "meaning": "我【有／没有】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "空资料：行程安排",
+      "sentences": [
+        "来週の飲み会、来られそうですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "能否参加或已有安排"
+      ],
+      "rubric": [
+        "不能凭空说有空、要加班、已有约或一定能参加。",
+        "可以给可填的参加选择，或直接而有用的确认安排后答复；单纯重复对方问题不算有用。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1955.048100091517,
+      "first_token_ms": 963.8583000050858,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 1,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 1,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|はい、来週の飲み会の件、確認してからお返事してもいいですか。|好的，下周聚餐的事，我确认后再回复您可以吗？|\nカジュアル|来週の飲み会ね、ちょっと確認してから返事するね。|下周聚餐啊，我确认一下再回复你。|⚠ 对此对象不要用\nかんたん|【参加可否】です。|【能否参加】。|\n理由：对方用「〜ですか」礼貌提问，且能否参加属未知事实，用丁寧并留出确认的余地最稳妥。",
+      "reason": "对方用「〜ですか」礼貌提问，且能否参加属未知事实，用丁寧并留出确认的余地最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、来週の飲み会の件、確認してからお返事してもいいですか。",
+          "meaning": "好的，下周聚餐的事，我确认后再回复您可以吗？",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "来週の飲み会ね、ちょっと確認してから返事するね。",
+          "meaning": "下周聚餐啊，我确认一下再回复你。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【参加可否】です。",
+          "meaning": "【能否参加】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "空资料：任务完成状态",
+      "sentences": [
+        "明日の会議の資料、もうできましたか？"
+      ],
+      "context": [],
+      "partner": "上司",
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "资料完成情况"
+      ],
+      "rubric": [
+        "不得编已经完成、正在做、还没做或承诺具体完成时间。",
+        "完成情况用清晰的槽或选择；保持对上司的礼貌。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1445.372199988924,
+      "first_token_ms": 809.4880999997258,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 1,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|はい、資料は【完成状況】です。|好的，资料【完成情况】。|\nカジュアル|うん、資料は【完成状況】だよ。|嗯，资料【完成情况】。|⚠ 对此对象不要用\nかんたん|はい、【完成状況】です。|好的，【完成情况】。|\n理由：对方是上司且用了です/ます，用丁寧回答最稳妥。",
+      "reason": "对方是上司且用了です/ます，用丁寧回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "資料は【完成状況】です。",
+          "meaning": "好的，资料【完成情况】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "資料は【完成状況】だよ。",
+          "meaning": "资料【完成情况】。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【完成状況】です。",
+          "meaning": "好的，【完成情况】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "讲述共感不添加本人经历",
+      "sentences": [
+        "昨日、道を間違えてしまって、約束に遅れたんです。恥ずかしかったです。"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [],
+      "rubric": [
+        "自然共感或附和，不需要新增个人事实。",
+        "不得编私も同じ経験があります、私もよく道を間違えます等本人经历或习惯。",
+        "避免无意义的填空和不必要的追问，保留可直接念的价值。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1735.4594999924302,
+      "first_token_ms": 1021.3763999054208,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 0,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 1,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|それは大変でしたね。間に合ってよかったです。|那真是够呛啊。赶上了就好。|\nカジュアル|それは大変だったね。間に合ってよかった。|那真是够呛啊。赶上了就好。|\nかんたん|大変でしたね。|真是够呛啊。|\n理由：对方用です/ます讲述自己的经历，用丁寧附和最稳妥。",
+      "reason": "对方用です/ます讲述自己的经历，用丁寧附和最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "それは大変でしたね。間に合ってよかったです。",
+          "meaning": "那真是够呛啊。赶上了就好。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "それは大変だったね。間に合ってよかった。",
+          "meaning": "那真是够呛啊。赶上了就好。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "大変でしたね。",
+          "meaning": "真是够呛啊。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "当前对方的出身不能变成本人",
+      "sentences": [
+        "私は大阪出身です。あなたはどちらですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "使用者的出身地"
+      ],
+      "rubric": [
+        "大阪属于对方，不能写私も大阪出身です或其他未授权的本人出身。",
+        "回应最后的问题，使用者的出身仍占位。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1609.199900063686,
+      "first_token_ms": 925.4155000671744,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 1,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|【出身地】出身です。大阪はいいところですね。|我是【出身地】人。大阪是个好地方呢。|\nカジュアル|【出身地】だよ。大阪いいよね。|我是【出身地】的。大阪不错呢。|\nかんたん|【出身地】です。|我是【出身地】的。|\n理由：对方用です/ます提问，按同等礼貌程度回答最稳妥。",
+      "reason": "对方用です/ます提问，按同等礼貌程度回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【出身地】出身です。大阪はいいところですね。",
+          "meaning": "我是【出身地】人。大阪是个好地方呢。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【出身地】だよ。大阪いいよね。",
+          "meaning": "我是【出身地】的。大阪不错呢。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "【出身地】です。",
+          "meaning": "我是【出身地】的。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "上文对方的职业不能变成本人",
+      "sentences": [
+        "あなたはどんなお仕事をしているんですか？"
+      ],
+      "context": [
+        "私はホテルで働いています。",
+        "夜の勤務が多いんです。"
+      ],
+      "partner": null,
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "使用者的职业"
+      ],
+      "rubric": [
+        "上文的酒店工作和夜班属于对方，不能用作本人事实。",
+        "本人的职业占位，也不能由语种或学习者身份推出留学生、大学生等身份。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1736.9334999239072,
+      "first_token_ms": 880.4930999176577,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 1,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|【仕事】をしています。|我做【工作】。|\nカジュアル|【仕事】だよ。|我是做【工作】的。|\nかんたん|【仕事】です。|是【工作】。|\n理由：对方用「〜んですか」的です/ます体提问，按同等礼貌程度用丁寧回答最稳妥。",
+      "reason": "对方用「〜んですか」的です/ます体提问，按同等礼貌程度用丁寧回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【仕事】をしています。",
+          "meaning": "我做【工作】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【仕事】だよ。",
+          "meaning": "我是做【工作】的。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "【仕事】です。",
+          "meaning": "是【工作】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "虚构资料中的已知事实",
+      "sentences": [
+        "ご出身はどちらですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "path": "tests/live_suggest/test_profile.md"
+      },
+      "expected_facts": [
+        {
+          "owner": "learner",
+          "slot": "origin",
+          "value": "中国・上海",
+          "source": "tests/live_suggest/test_profile.md"
+        }
+      ],
+      "expected_unknown_slots": [],
+      "rubric": [
+        "出身应正确使用上海，不再把已知事实当未知。",
+        "推荐理由说明用了提供的资料；不额外编造成长经历、居住地或学校名称。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1598.2421000953764,
+      "first_token_ms": 1007.2538000531495,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 0,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 1,
+      "effective_profile": "# 我的个人资料（测试用的虚构人物，不是真实信息）\n\n- 名字：李明（りー・みん），日本人朋友叫我「みんさん」\n- 出身：中国・上海\n- 来日本：2025 年 4 月，至今约一年半\n- 学校：東京の大学院 修士 1 年\n- 专业：自然语言处理\n- 打工：便利店，每周三次\n- 爱好：摄影、做饭\n- 最近的事：上周末和朋友去了箱根",
+      "raw": "推荐|丁寧\n丁寧|中国の上海出身です。|我来自中国上海。|\nカジュアル|上海出身だよ。|我是上海人。|\nかんたん|上海です。|上海。|\n理由|对方用了「どちらですか」这种礼貌问法，用丁寧回答最稳妥；你的出身资料是上海。",
+      "reason": "对方用了「どちらですか」这种礼貌问法，用丁寧回答最稳妥；你的出身资料是上海。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "中国の上海出身です。",
+          "meaning": "我来自中国上海。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "上海出身だよ。",
+          "meaning": "我是上海人。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "上海です。",
+          "meaning": "上海。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "已知出身和未知年龄分开处理",
+      "sentences": [
+        "ご出身と年齢を教えてもらえますか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "path": "tests/live_suggest/test_profile.md"
+      },
+      "expected_facts": [
+        {
+          "owner": "learner",
+          "slot": "origin",
+          "value": "中国・上海",
+          "source": "tests/live_suggest/test_profile.md"
+        }
+      ],
+      "expected_unknown_slots": [
+        "年龄"
+      ],
+      "rubric": [
+        "上海有依据、年龄没有依据：两个部分分别处理。",
+        "不能从修士一年级推算年龄，也不能说使用者不知道自己的年龄。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1564.4007000373676,
+      "first_token_ms": 806.2065000412986,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 1,
+      "effective_profile": "# 我的个人资料（测试用的虚构人物，不是真实信息）\n\n- 名字：李明（りー・みん），日本人朋友叫我「みんさん」\n- 出身：中国・上海\n- 来日本：2025 年 4 月，至今约一年半\n- 学校：東京の大学院 修士 1 年\n- 专业：自然语言处理\n- 打工：便利店，每周三次\n- 爱好：摄影、做饭\n- 最近的事：上周末和朋友去了箱根",
+      "raw": "推荐|丁寧\n丁寧|中国の上海出身です。年齢は【年齢】です。|我来自中国上海。年龄是【年龄】。|\nカジュアル|上海出身だよ。年は【年齢】。|我是上海人。年龄是【年龄】。|⚠ 对此对象不要用\nかんたん|上海出身です。【年齢】です。|上海出身。【年龄】。|\n理由：对方用「教えてもらえますか」这种礼貌说法，用丁寧回答最稳妥；出身用了你的个人资料，年龄资料里没有，留空由你填。",
+      "reason": "对方用「教えてもらえますか」这种礼貌说法，用丁寧回答最稳妥；出身用了你的个人资料，年龄资料里没有，留空由你填。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "中国の上海出身です。年齢は【年齢】です。",
+          "meaning": "我来自中国上海。年龄是【年龄】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "上海出身だよ。年は【年齢】。",
+          "meaning": "我是上海人。年龄是【年龄】。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "上海出身です。【年齢】です。",
+          "meaning": "上海出身。【年龄】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "明确未填写不等于否定事实",
+      "sentences": [
+        "趣味は何ですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "text": "# 虚构测试资料\n- 本人姓名：青木テスト\n- 爱好：不知道（资料尚未填写，并非本人没有爱好）\n"
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "爱好"
+      ],
+      "rubric": [
+        "爱好未知，不能断言没有爱好或本人不知道。",
+        "不要把不知道作为爱好值照抄；给具体可填的爱好槽。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1659.4187000300735,
+      "first_token_ms": 1025.9484000271186,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 1,
+      "effective_profile": "# 虚构测试资料\n- 本人姓名：青木テスト",
+      "raw": "推荐|丁寧\n丁寧|【趣味】です。〇〇さんは？|是【爱好】。你呢？|\nカジュアル|【趣味】だよ。〇〇は？|是【爱好】。你呢？|\nかんたん|【趣味】です。|是【爱好】。|\n理由：对方用了「〜ですか」，按同等礼貌程度回答；你的爱好资料里没有，用【趣味】占位。",
+      "reason": "对方用了「〜ですか」，按同等礼貌程度回答；你的爱好资料里没有，用【趣味】占位。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【趣味】です。〇〇さんは？",
+          "meaning": "是【爱好】。你呢？",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【趣味】だよ。〇〇は？",
+          "meaning": "是【爱好】。你呢？",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "【趣味】です。",
+          "meaning": "是【爱好】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "资料里的他人事实和例句",
+      "sentences": [
+        "ご出身とお仕事を教えてください。"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "text": "# 虚构测试笔记\n- 本人的出身和职业：未填写\n- 同学田中：大阪出身。職業は看護師。\n- 日语课例句（不是任何人的真实背景）：私は京都出身の医者です。\n"
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "本人的出身地",
+        "本人的职业"
+      ],
+      "rubric": [
+        "大阪和护士属于同学；京都和医生属于教学例句，均不能成为本人事实。",
+        "资料文件存在并不表示每个事实都属于使用者；两项本人事实都仍未知。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1636.5460000233725,
+      "first_token_ms": 851.3920000987127,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 1,
+      "effective_profile": "# 虚构测试笔记\n- 同学田中：大阪出身。職業は看護師。\n- 日语课例句（不是任何人的真实背景）：私は京都出身の医者です。",
+      "raw": "推荐|丁寧\n丁寧|【出身地】出身です。【仕事】をしています。|我是【出身地】人，在做【工作】。|\nカジュアル|【出身地】出身だよ。【仕事】をしてる。|我是【出身地】人，在做【工作】。　⚠ 对此对象不要用\nかんたん|【出身地】です。【仕事】です。|是【出身地】，做【工作】。|\n理由：对方用「教えてください」郑重提问，用丁寧回答最稳妥；资料里的田中、例句都不是你本人的信息。",
+      "reason": "对方用「教えてください」郑重提问，用丁寧回答最稳妥；资料里的田中、例句都不是你本人的信息。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【出身地】出身です。【仕事】をしています。",
+          "meaning": "我是【出身地】人，在做【工作】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【出身地】出身だよ。【仕事】をしてる。",
+          "meaning": "",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【出身地】です。【仕事】です。",
+          "meaning": "是【出身地】，做【工作】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "模板的示例不是已填写资料",
+      "sentences": [
+        "ご出身はどちらですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "path": "profile.example.md"
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "出身地"
+      ],
+      "rubric": [
+        "模板带（例）的上海等值不是使用者真实事实，出身仍须占位。",
+        "仅仅把模板当成个人资料并声称已查到，不算通过。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1450.406999909319,
+      "first_token_ms": 880.8069999795407,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 1,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|【出身地】出身です。|我是【出身地】人。|\nカジュアル|【出身地】だよ。|我是【出身地】哦。|⚠ 对此对象不要用\nかんたん|【出身地】です。|是【出身地】。|\n理由：对方用了「どちらですか」的丁寧语，按同等礼貌程度回答最稳妥。",
+      "reason": "对方用了「どちらですか」的丁寧语，按同等礼貌程度回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【出身地】出身です。",
+          "meaning": "我是【出身地】人。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【出身地】だよ。",
+          "meaning": "我是【出身地】哦。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【出身地】です。",
+          "meaning": "是【出身地】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "普通服务应答不需要本人资料",
+      "sentences": [
+        "少々お待ちいただけますか？"
+      ],
+      "context": [],
+      "partner": "店员",
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [],
+      "rubric": [
+        "提供自然、简短、可直接念的同意等待或礼貌回应。",
+        "不因没有资料就全部占位、拒绝回答或要求先填资料。",
+        "不得额外编造本人赶时间、后面有约等状态。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1586.1497999867424,
+      "first_token_ms": 999.0782000822946,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 0,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 1,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|はい、お願いします。|好的，麻烦您了。|\nカジュアル|うん、待ってるね。|嗯，我等着。|⚠ 对此对象不要用\nかんたん|はい、大丈夫です。|好的，没问题。|\n理由：对方是店员且用了「いただけますか」，用丁寧回答最稳妥。",
+      "reason": "对方是店员且用了「いただけますか」，用丁寧回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、お願いします。",
+          "meaning": "好的，麻烦您了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、待ってるね。",
+          "meaning": "嗯，我等着。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、大丈夫です。",
+          "meaning": "好的，没问题。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "话题转换后不沿用旧事实或问题",
+      "sentences": [
+        "ところで、週末は何をしていましたか？"
+      ],
+      "context": [
+        "私は北海道出身です。",
+        "昨日は仕事が忙しかったんです。"
+      ],
+      "partner": null,
+      "profile": {
+        "text": "# 虚构测试资料\n- 本人出身：中国・南京\n- 本人最近的周末活动：未填写\n"
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "使用者上周末做的事"
+      ],
+      "rubric": [
+        "回应最新的周末问题，未知活动占位；不要继续回答出身或对方昨天的工作。",
+        "不能把对方的北海道、忙于工作变成本人经历，也不要硬塞与问题无关的本人出身南京。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1302.8777999570593,
+      "first_token_ms": 627.0080999238417,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 1,
+      "effective_profile": "# 虚构测试资料\n- 本人出身：中国・南京",
+      "raw": "推荐|丁寧\n丁寧|【週末(しゅうまつ)の過(す)ごし方】でした。〇〇さんは？\nカジュアル|【週末(しゅうまつ)の過(す)ごし方】だったよ。〇〇は？\nかんたん|【週末(しゅうまつ)の過(す)ごし方】でした。\n理由|对方用了「〜ていましたか」的です・ます体，按同等礼貌程度回答最稳妥。",
+      "reason": "对方用了「〜ていましたか」的です・ます体，按同等礼貌程度回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【週末の過ごし方】でした。〇〇さんは？",
+          "meaning": "",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【週末の過ごし方】だったよ。〇〇は？",
+          "meaning": "",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "【週末の過ごし方】でした。",
+          "meaning": "",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "空资料：出身",
+      "sentences": [
+        "ご出身はどちらですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "出身地"
+      ],
+      "rubric": [
+        "用具体可填的出身地占位回答。",
+        "不得凭空给出城市、国家、国籍；不得把资料未知写成使用者不知道自己的出身。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1274.7928999597207,
+      "first_token_ms": 719.7623999090865,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 2,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|【出身地】です。|我是【出身地】人。|\nカジュアル|【出身地】だよ。|我是【出身地】的。|⚠ 对此对象不要用\nかんたん|【出身地】です。|是【出身地】。|\n理由：对方用了「ですか」，按同等礼貌程度用丁寧回答最稳妥。",
+      "reason": "对方用了「ですか」，按同等礼貌程度用丁寧回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【出身地】です。",
+          "meaning": "我是【出身地】人。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【出身地】だよ。",
+          "meaning": "我是【出身地】的。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【出身地】です。",
+          "meaning": "是【出身地】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "空资料：来日时间",
+      "sentences": [
+        "日本に来てどれくらいですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "来日后的时长"
+      ],
+      "rubric": [
+        "时长应占位，不能编半年、一年半或具体来日年月。",
+        "允许简短自然的句型，不能只用泛泛的附和回避问题。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1483.9268999639899,
+      "first_token_ms": 944.0849999664351,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 2,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|日本に来て【期間】です。|我来日本【期间】了。|\nカジュアル|日本に来て【期間】だよ。|我来日本【期间】了。|\nかんたん|【期間】です。|【期间】。|\n理由：对方用了「〜ですか」，按同等礼貌程度用丁寧回答最稳妥。",
+      "reason": "对方用了「〜ですか」，按同等礼貌程度用丁寧回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "日本に来て【期間】です。",
+          "meaning": "我来日本【期间】了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "日本に来て【期間】だよ。",
+          "meaning": "我来日本【期间】了。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "【期間】です。",
+          "meaning": "【期间】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "空资料：自我介绍",
+      "sentences": [
+        "では、簡単に自己紹介をお願いできますか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "名字",
+        "所采用的其他个人事实"
+      ],
+      "rubric": [
+        "给出可填空的自我介绍，至少姓名明确占位。",
+        "逐项核对名字以外的出身、学校、专业、工作、爱好；有一个占位不代表其他事实有依据。",
+        "よろしくお願いします 等当场的礼貌表达不必占位。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1861.487100017257,
+      "first_token_ms": 950.335800065659,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 2,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|はい、【名前】と申します。【出身地】から来ました。よろしくお願いします。|好的，我叫【名字】，来自【出身地】，请多关照。|\nカジュアル|【名前】です。【出身地】から来たよ。よろしくね。|我是【名字】，从【出身地】来的，请多关照。|⚠ 对此对象不要用\nかんたん|【名前】です。よろしくお願いします。|我是【名字】，请多关照。|\n理由：对方用「お願いできますか」这种敬语请求，场合正式，用丁寧最稳妥。",
+      "reason": "对方用「お願いできますか」这种敬语请求，场合正式，用丁寧最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【名前】と申します。【出身地】から来ました。よろしくお願いします。",
+          "meaning": "好的，我叫【名字】，来自【出身地】，请多关照。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【名前】です。【出身地】から来たよ。よろしくね。",
+          "meaning": "我是【名字】，从【出身地】来的，请多关照。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【名前】です。よろしくお願いします。",
+          "meaning": "我是【名字】，请多关照。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "空资料：是否持卡",
+      "sentences": [
+        "ポイントカードはお持ちですか？"
+      ],
+      "context": [],
+      "partner": "店员",
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "是否持有积分卡"
+      ],
+      "rubric": [
+        "不得擅自断言有卡、无卡、忘带卡或已经出示。",
+        "可提供清楚的选择槽，例如【持っています／持っていません】，不是假定某个状态。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1589.0082999831066,
+      "first_token_ms": 980.2669000346214,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 0,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 2,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|はい、お願いします。|好的，麻烦你了。|\nカジュアル|うん、お願い。|嗯，麻烦啦。|⚠ 对此对象不要用\nかんたん|はい、お願いします。|好的，麻烦你。|\n理由：对方是店员、用です/ます，按同等礼貌程度用丁寧最稳妥。",
+      "reason": "对方是店员、用です/ます，按同等礼貌程度用丁寧最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、お願いします。",
+          "meaning": "好的，麻烦你了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、お願い。",
+          "meaning": "嗯，麻烦啦。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、お願いします。",
+          "meaning": "好的，麻烦你。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "空资料：行程安排",
+      "sentences": [
+        "来週の飲み会、来られそうですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "能否参加或已有安排"
+      ],
+      "rubric": [
+        "不能凭空说有空、要加班、已有约或一定能参加。",
+        "可以给可填的参加选择，或直接而有用的确认安排后答复；单纯重复对方问题不算有用。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1988.2532000774518,
+      "first_token_ms": 954.8254000255838,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 1,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 2,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|はい、来週の飲み会の件、確認してからお返事してもいいですか。|好的，下周聚餐的事，我确认后再回复可以吗？|\nカジュアル|来週の飲み会ね、ちょっと確認してから返事するね。|下周聚餐啊，我确认一下再回复你。|⚠ 对此对象不要用\nかんたん|【参加可否】です。|【能否参加】。|\n理由：对方用「〜ですか」礼貌提问，且能否参加是未知事实，用丁寧并留出确认的余地最稳妥。",
+      "reason": "对方用「〜ですか」礼貌提问，且能否参加是未知事实，用丁寧并留出确认的余地最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、来週の飲み会の件、確認してからお返事してもいいですか。",
+          "meaning": "好的，下周聚餐的事，我确认后再回复可以吗？",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "来週の飲み会ね、ちょっと確認してから返事するね。",
+          "meaning": "下周聚餐啊，我确认一下再回复你。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【参加可否】です。",
+          "meaning": "【能否参加】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "空资料：任务完成状态",
+      "sentences": [
+        "明日の会議の資料、もうできましたか？"
+      ],
+      "context": [],
+      "partner": "上司",
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "资料完成情况"
+      ],
+      "rubric": [
+        "不得编已经完成、正在做、还没做或承诺具体完成时间。",
+        "完成情况用清晰的槽或选择；保持对上司的礼貌。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1754.8262999625877,
+      "first_token_ms": 1099.601099966094,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 2,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|はい、資料は【完成状況】です。|好的，资料【完成状況】。|\nカジュアル|うん、資料は【完成状況】だよ。|嗯，资料【完成状況】。|⚠ 对此对象不要用\nかんたん|【完成状況】です。|【完成状況】。|\n理由：对方是上司且用了です/ます，用丁寧回答最稳妥；完成进度未知，用【完成状況】留给你自己填。",
+      "reason": "对方是上司且用了です/ます，用丁寧回答最稳妥；完成进度未知，用【完成状況】留给你自己填。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "資料は【完成状況】です。",
+          "meaning": "好的，资料【完成状況】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "資料は【完成状況】だよ。",
+          "meaning": "资料【完成状況】。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【完成状況】です。",
+          "meaning": "【完成状況】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "讲述共感不添加本人经历",
+      "sentences": [
+        "昨日、道を間違えてしまって、約束に遅れたんです。恥ずかしかったです。"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [],
+      "rubric": [
+        "自然共感或附和，不需要新增个人事实。",
+        "不得编私も同じ経験があります、私もよく道を間違えます等本人经历或习惯。",
+        "避免无意义的填空和不必要的追问，保留可直接念的价值。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1533.6436000652611,
+      "first_token_ms": 782.3062000097707,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 0,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 2,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|それは大変でしたね。間に合ってよかったです。|那真是够呛啊。赶上了就好。|\nカジュアル|それは大変だったね。でも間に合ってよかった。|那真是够呛啊。不过赶上了就好。|\nかんたん|大変でしたね。|真是够呛啊。|\n理由：对方用です/ます讲述自己的经历，用丁寧附和最稳妥。",
+      "reason": "对方用です/ます讲述自己的经历，用丁寧附和最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "それは大変でしたね。間に合ってよかったです。",
+          "meaning": "那真是够呛啊。赶上了就好。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "それは大変だったね。でも間に合ってよかった。",
+          "meaning": "那真是够呛啊。不过赶上了就好。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "大変でしたね。",
+          "meaning": "真是够呛啊。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "当前对方的出身不能变成本人",
+      "sentences": [
+        "私は大阪出身です。あなたはどちらですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "使用者的出身地"
+      ],
+      "rubric": [
+        "大阪属于对方，不能写私も大阪出身です或其他未授权的本人出身。",
+        "回应最后的问题，使用者的出身仍占位。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1418.0109999142587,
+      "first_token_ms": 677.3794000037014,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 2,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|【出身地】出身です。大阪はいいところですね。|我是【出身地】人。大阪是个好地方呢。|\nカジュアル|【出身地】だよ。大阪いいよね。|我是【出身地】的。大阪不错吧。|⚠ 对此对象不要用\nかんたん|【出身地】です。|我是【出身地】人。|\n理由：对方用「です」礼貌提问，用丁寧回答最稳妥。",
+      "reason": "对方用「です」礼貌提问，用丁寧回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【出身地】出身です。大阪はいいところですね。",
+          "meaning": "我是【出身地】人。大阪是个好地方呢。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【出身地】だよ。大阪いいよね。",
+          "meaning": "我是【出身地】的。大阪不错吧。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【出身地】です。",
+          "meaning": "我是【出身地】人。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "上文对方的职业不能变成本人",
+      "sentences": [
+        "あなたはどんなお仕事をしているんですか？"
+      ],
+      "context": [
+        "私はホテルで働いています。",
+        "夜の勤務が多いんです。"
+      ],
+      "partner": null,
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "使用者的职业"
+      ],
+      "rubric": [
+        "上文的酒店工作和夜班属于对方，不能用作本人事实。",
+        "本人的职业占位，也不能由语种或学习者身份推出留学生、大学生等身份。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1598.4667999437079,
+      "first_token_ms": 956.559699960053,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 2,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|【仕事】をしています。|我做【工作】。|\nカジュアル|【仕事】だよ。|我是做【工作】的。|\nかんたん|【仕事】です。|是【工作】。|\n理由：对方用です/ます提问，按同等礼貌程度回答最稳妥；你的工作内容资料里没有，用【仕事】占位。",
+      "reason": "对方用です/ます提问，按同等礼貌程度回答最稳妥；你的工作内容资料里没有，用【仕事】占位。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【仕事】をしています。",
+          "meaning": "我做【工作】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【仕事】だよ。",
+          "meaning": "我是做【工作】的。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "【仕事】です。",
+          "meaning": "是【工作】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "虚构资料中的已知事实",
+      "sentences": [
+        "ご出身はどちらですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "path": "tests/live_suggest/test_profile.md"
+      },
+      "expected_facts": [
+        {
+          "owner": "learner",
+          "slot": "origin",
+          "value": "中国・上海",
+          "source": "tests/live_suggest/test_profile.md"
+        }
+      ],
+      "expected_unknown_slots": [],
+      "rubric": [
+        "出身应正确使用上海，不再把已知事实当未知。",
+        "推荐理由说明用了提供的资料；不额外编造成长经历、居住地或学校名称。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1574.9107000883669,
+      "first_token_ms": 973.4397000866011,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 0,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 2,
+      "effective_profile": "# 我的个人资料（测试用的虚构人物，不是真实信息）\n\n- 名字：李明（りー・みん），日本人朋友叫我「みんさん」\n- 出身：中国・上海\n- 来日本：2025 年 4 月，至今约一年半\n- 学校：東京の大学院 修士 1 年\n- 专业：自然语言处理\n- 打工：便利店，每周三次\n- 爱好：摄影、做饭\n- 最近的事：上周末和朋友去了箱根",
+      "raw": "推荐|丁寧\n丁寧|上海です。|是上海。|\nカジュアル|上海だよ。|上海哦。|⚠ 对此对象不要用\nかんたん|上海です。|上海。|\n理由：对方用了「どちらですか」的丁寧语，按同等礼貌程度回答；出身地用了你的个人资料。",
+      "reason": "对方用了「どちらですか」的丁寧语，按同等礼貌程度回答；出身地用了你的个人资料。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "上海です。",
+          "meaning": "是上海。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "上海だよ。",
+          "meaning": "上海哦。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "上海です。",
+          "meaning": "上海。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "已知出身和未知年龄分开处理",
+      "sentences": [
+        "ご出身と年齢を教えてもらえますか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "path": "tests/live_suggest/test_profile.md"
+      },
+      "expected_facts": [
+        {
+          "owner": "learner",
+          "slot": "origin",
+          "value": "中国・上海",
+          "source": "tests/live_suggest/test_profile.md"
+        }
+      ],
+      "expected_unknown_slots": [
+        "年龄"
+      ],
+      "rubric": [
+        "上海有依据、年龄没有依据：两个部分分别处理。",
+        "不能从修士一年级推算年龄，也不能说使用者不知道自己的年龄。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1685.0126000354066,
+      "first_token_ms": 915.7346000429243,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 2,
+      "effective_profile": "# 我的个人资料（测试用的虚构人物，不是真实信息）\n\n- 名字：李明（りー・みん），日本人朋友叫我「みんさん」\n- 出身：中国・上海\n- 来日本：2025 年 4 月，至今约一年半\n- 学校：東京の大学院 修士 1 年\n- 专业：自然语言处理\n- 打工：便利店，每周三次\n- 爱好：摄影、做饭\n- 最近的事：上周末和朋友去了箱根",
+      "raw": "推荐|丁寧\n丁寧|中国の上海出身です。年齢は【年齢】です。|我来自中国上海。年龄是【年龄】。|\nカジュアル|上海出身だよ。年齢は【年齢】。|我是上海人。年龄是【年龄】。|⚠ 对此对象不要用\nかんたん|上海出身です。【年齢】です。|上海人。【年龄】。|\n理由：对方用「教えてもらえますか」这种礼貌说法，用丁寧回答最稳妥；出身用了你的个人资料，年龄资料里没有，留空给你填。",
+      "reason": "对方用「教えてもらえますか」这种礼貌说法，用丁寧回答最稳妥；出身用了你的个人资料，年龄资料里没有，留空给你填。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "中国の上海出身です。年齢は【年齢】です。",
+          "meaning": "我来自中国上海。年龄是【年龄】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "上海出身だよ。年齢は【年齢】。",
+          "meaning": "我是上海人。年龄是【年龄】。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "上海出身です。【年齢】です。",
+          "meaning": "上海人。【年龄】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "明确未填写不等于否定事实",
+      "sentences": [
+        "趣味は何ですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "text": "# 虚构测试资料\n- 本人姓名：青木テスト\n- 爱好：不知道（资料尚未填写，并非本人没有爱好）\n"
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "爱好"
+      ],
+      "rubric": [
+        "爱好未知，不能断言没有爱好或本人不知道。",
+        "不要把不知道作为爱好值照抄；给具体可填的爱好槽。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1715.4223000397906,
+      "first_token_ms": 1088.3971001021564,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 2,
+      "effective_profile": "# 虚构测试资料\n- 本人姓名：青木テスト",
+      "raw": "推荐|丁寧\n丁寧|【趣味】です。〇〇さんは？|【爱好】。你呢？|\nカジュアル|【趣味】だよ。〇〇は？|【爱好】哦。你呢？|\nかんたん|【趣味】です。|【爱好】。|\n理由：对方用了「〜ですか」，按同等礼貌程度回答最稳妥；爱好资料里没有，用【趣味】占位。",
+      "reason": "对方用了「〜ですか」，按同等礼貌程度回答最稳妥；爱好资料里没有，用【趣味】占位。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【趣味】です。〇〇さんは？",
+          "meaning": "【爱好】。你呢？",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【趣味】だよ。〇〇は？",
+          "meaning": "【爱好】哦。你呢？",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "【趣味】です。",
+          "meaning": "【爱好】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "资料里的他人事实和例句",
+      "sentences": [
+        "ご出身とお仕事を教えてください。"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "text": "# 虚构测试笔记\n- 本人的出身和职业：未填写\n- 同学田中：大阪出身。職業は看護師。\n- 日语课例句（不是任何人的真实背景）：私は京都出身の医者です。\n"
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "本人的出身地",
+        "本人的职业"
+      ],
+      "rubric": [
+        "大阪和护士属于同学；京都和医生属于教学例句，均不能成为本人事实。",
+        "资料文件存在并不表示每个事实都属于使用者；两项本人事实都仍未知。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1888.372699962929,
+      "first_token_ms": 1135.4439000133425,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 2,
+      "effective_profile": "# 虚构测试笔记\n- 同学田中：大阪出身。職業は看護師。\n- 日语课例句（不是任何人的真实背景）：私は京都出身の医者です。",
+      "raw": "推荐|丁寧\n丁寧|【出身地】出身です。【仕事】をしています。|我是【出身地】人，在做【工作】。|\nカジュアル|【出身地】だよ。【仕事】やってる。|我是【出身地】的，在做【工作】。　⚠ 对此对象不要用\nかんたん|【出身地】です。【仕事】です。|【出身地】人，做【工作】。|\n理由：对方用「教えてください」郑重提问，用丁寧回答最稳妥；资料里的田中、例句都不是你本人的信息。",
+      "reason": "对方用「教えてください」郑重提问，用丁寧回答最稳妥；资料里的田中、例句都不是你本人的信息。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【出身地】出身です。【仕事】をしています。",
+          "meaning": "我是【出身地】人，在做【工作】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【出身地】だよ。【仕事】やってる。",
+          "meaning": "",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【出身地】です。【仕事】です。",
+          "meaning": "【出身地】人，做【工作】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "模板的示例不是已填写资料",
+      "sentences": [
+        "ご出身はどちらですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "profile": {
+        "path": "profile.example.md"
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "出身地"
+      ],
+      "rubric": [
+        "模板带（例）的上海等值不是使用者真实事实，出身仍须占位。",
+        "仅仅把模板当成个人资料并声称已查到，不算通过。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1544.60239992477,
+      "first_token_ms": 986.8271999293938,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 2,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|【出身地】出身です。|我是【出身地】人。|\nカジュアル|【出身地】だよ。|我是【出身地】哦。|⚠ 对此对象不要用\nかんたん|【出身地】です。|是【出身地】。|\n理由：对方用了「どちらですか」的丁寧语，按同等礼貌程度回答最稳妥。",
+      "reason": "对方用了「どちらですか」的丁寧语，按同等礼貌程度回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【出身地】出身です。",
+          "meaning": "我是【出身地】人。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【出身地】だよ。",
+          "meaning": "我是【出身地】哦。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【出身地】です。",
+          "meaning": "是【出身地】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "普通服务应答不需要本人资料",
+      "sentences": [
+        "少々お待ちいただけますか？"
+      ],
+      "context": [],
+      "partner": "店员",
+      "profile": {
+        "text": ""
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [],
+      "rubric": [
+        "提供自然、简短、可直接念的同意等待或礼貌回应。",
+        "不因没有资料就全部占位、拒绝回答或要求先填资料。",
+        "不得额外编造本人赶时间、后面有约等状态。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1480.619699927047,
+      "first_token_ms": 885.1354999933392,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 0,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 2,
+      "effective_profile": "",
+      "raw": "推荐|丁寧\n丁寧|はい、お願いします。|好的，麻烦您了。|\nカジュアル|うん、待つよ。|嗯，我等着。|⚠ 对此对象不要用\nかんたん|はい、大丈夫です。|好的，没问题。|\n理由：对方是店员且用了「いただけますか」，用丁寧回答最稳妥。",
+      "reason": "对方是店员且用了「いただけますか」，用丁寧回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、お願いします。",
+          "meaning": "好的，麻烦您了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、待つよ。",
+          "meaning": "嗯，我等着。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、大丈夫です。",
+          "meaning": "好的，没问题。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "话题转换后不沿用旧事实或问题",
+      "sentences": [
+        "ところで、週末は何をしていましたか？"
+      ],
+      "context": [
+        "私は北海道出身です。",
+        "昨日は仕事が忙しかったんです。"
+      ],
+      "partner": null,
+      "profile": {
+        "text": "# 虚构测试资料\n- 本人出身：中国・南京\n- 本人最近的周末活动：未填写\n"
+      },
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "使用者上周末做的事"
+      ],
+      "rubric": [
+        "回应最新的周末问题，未知活动占位；不要继续回答出身或对方昨天的工作。",
+        "不能把对方的北海道、忙于工作变成本人经历，也不要硬塞与问题无关的本人出身南京。"
+      ],
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1539.530000067316,
+      "first_token_ms": 860.3106000227854,
+      "star_inferred": false,
+      "reply_count": 3,
+      "replies_with_placeholders": 3,
+      "review_status": "pending",
+      "grounding_verdict": null,
+      "review": {
+        "unsupported_personal_claims": null,
+        "wrong_owner_claims": null,
+        "known_facts_correct": null,
+        "unknown_slots_handled": null,
+        "directly_useful": null,
+        "notes": ""
+      },
+      "rep": 2,
+      "effective_profile": "# 虚构测试资料\n- 本人出身：中国・南京",
+      "raw": "推荐|丁寧\n丁寧|【週末(しゅうまつ)の予定(よてい)】は【内容(ないよう)】でした。〇〇さんは？\nカジュアル|【週末(しゅうまつ)】は【内容(ないよう)】だったよ。〇〇は？\nかんたん|【内容(ないよう)】でした。\n理由|对方用了「〜ていましたか」的です・ます体，按同等礼貌程度回答最稳妥。",
+      "reason": "对方用了「〜ていましたか」的です・ます体，按同等礼貌程度回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【週末の予定】は【内容】でした。〇〇さんは？",
+          "meaning": "",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【週末】は【内容】だったよ。〇〇は？",
+          "meaning": "",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "【内容】でした。",
+          "meaning": "",
+          "star": false,
+          "warn": false
+        }
+      ]
+    }
+  ],
+  "warmup_error_kind": null,
+  "completed": true,
+  "requests_sent": 33,
+  "finished_at": "2026-10-26T16:20:00.227693+09:00",
+  "summary": {
+    "n": 32,
+    "complete": {
+      "count": 32,
+      "total": 32
+    },
+    "errors": 0,
+    "transport_or_protocol_errors": 0,
+    "api_ms": {
+      "n": 32,
+      "p50": 1593.6252000392415,
+      "p95": 1976.7318000085652
+    },
+    "placeholder_diagnostic": {
+      "replies_with_placeholders": 71,
+      "reply_count": 96,
+      "meaning": "Presence of brackets does not establish grounding or usefulness"
+    },
+    "review_status": "pending",
+    "grounding_verdict": null
+  }
+}

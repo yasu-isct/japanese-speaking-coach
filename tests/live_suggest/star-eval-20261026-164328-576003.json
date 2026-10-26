@@ -1,0 +1,2703 @@
+{
+  "schema_version": 1,
+  "phase": "after",
+  "started_at": "2026-10-26T16:43:28.576003+09:00",
+  "model": "deepseek-flash",
+  "thinking": "disabled",
+  "temperature": 0.3,
+  "max_tokens": 400,
+  "profile": "explicitly empty; private profile.md is not loaded",
+  "order": "A: passes 1-3, samples 1-20; then B: last 100 saved rows in file order; sequential",
+  "warmup_requests": 1,
+  "request_limit": 161,
+  "latency_definition": "Suggester.api_ms; all attempted scored requests; p50 median, p95 nearest rank",
+  "rate_definition": "all attempted scored requests, including errors; star_not_inferred is literal not star_inferred; exactly_one_model_star additionally requires exactly one parsed star and no request or format error",
+  "evaluator_sha256": "1a667e85a64c1f4c4ac5b1c20e78ae9984fb1d3f051f8b5bae66cfdc2f8fa35c",
+  "suggest_module_sha256": "f1b44f3fcd11db48af25bde31ca062674d3b62a49ef7238fe93ebb49154aa3fb",
+  "system_prompt_sha256": "4f2a1a9157e7d38d81cfb01f61c3ba945c14a7fff37deec33a519afdc84641c1",
+  "A_input_sha256": "13298d76845f1cca3968548e8216560a4632c7c93009f1b8d835bf01e4e711d8",
+  "B_input_sha256": null,
+  "B_input_count": 0,
+  "A_results": [
+    {
+      "id": 1,
+      "sentences": [
+        "ポイントカードはお持ちですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1755.1783999660984,
+      "first_token_ms": 1106.4035999588668,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|丁寧\n丁寧|はい、【持っています／持っていません】。|是，我【有／没有】。|\nカジュアル|うん、【持ってる／持ってない】。|嗯，我【有／没有】。　⚠ 对此对象不要用\nかんたん|はい、【持っています】。|是，我【有】。|\n理由|对方是店员、用了「〜ですか」，按同等礼貌程度回答。",
+      "reason": "对方是店员、用了「〜ですか」，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【持っています／持っていません】。",
+          "meaning": "我【有／没有】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【持ってる／持ってない】。",
+          "meaning": "我【有／没有】。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【持っています】。",
+          "meaning": "我【有】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "sentences": [
+        "お箸おつけしますか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1362.4534000409767,
+      "first_token_ms": 765.7056000316516,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|丁寧\n丁寧|はい、お願いします。|好的，麻烦您。|\nカジュアル|うん、お願い。|嗯，麻烦你。　⚠ 对此对象不要用\nかんたん|はい、お願いします。|好的，麻烦您。|\n理由|对方是店员，用「おつけしますか」礼貌询问，按同等礼貌程度回答。",
+      "reason": "对方是店员，用「おつけしますか」礼貌询问，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、お願いします。",
+          "meaning": "好的，麻烦您。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、お願い。",
+          "meaning": "嗯，麻烦你。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、お願いします。",
+          "meaning": "好的，麻烦您。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "sentences": [
+        "こちら温めますか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1218.8002000330016,
+      "first_token_ms": 644.3912000395358,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|丁寧\n丁寧|はい、お願いします。|好的，麻烦您。|\nカジュアル|うん、お願い。|嗯，拜托了。　⚠ 对此对象不要用\nかんたん|はい、お願いします。|好的，麻烦您。|\n理由|对方是店员、用「〜ますか」礼貌提问，用丁寧回答最稳妥。",
+      "reason": "对方是店员、用「〜ますか」礼貌提问，用丁寧回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、お願いします。",
+          "meaning": "好的，麻烦您。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、お願い。",
+          "meaning": "嗯，拜托了。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、お願いします。",
+          "meaning": "好的，麻烦您。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "sentences": [
+        "少々お待ちいただけますか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1316.8654000619426,
+      "first_token_ms": 752.3096000077203,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|丁寧\n丁寧|はい、大丈夫です。|好的，没问题。|\nカジュアル|うん、大丈夫だよ。|嗯，没问题。　⚠ 对此对象不要用\nかんたん|はい、大丈夫です。|好的，没问题。|\n理由|对方用「いただけますか」的敬语，按同等礼貌程度回答。",
+      "reason": "对方用「いただけますか」的敬语，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、大丈夫です。",
+          "meaning": "好的，没问题。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、大丈夫だよ。",
+          "meaning": "嗯，没问题。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、大丈夫です。",
+          "meaning": "好的，没问题。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "sentences": [
+        "来週の飲み会、来られそうですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1592.1133999945596,
+      "first_token_ms": 977.4203000124544,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|丁寧\n丁寧|はい、【参加できます／参加できません】。|好的，我【能参加／不能参加】。|\nカジュアル|うん、【参加できる／参加できない】。|嗯，我【能去／不能去】。|\nかんたん|はい、【参加できます】。|好的，我【能参加】。|\n理由|对方用「〜ですか」礼貌提问，按同等礼貌程度回答。",
+      "reason": "对方用「〜ですか」礼貌提问，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【参加できます／参加できません】。",
+          "meaning": "我【能参加／不能参加】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【参加できる／参加できない】。",
+          "meaning": "我【能去／不能去】。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "【参加できます】。",
+          "meaning": "我【能参加】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "sentences": [
+        "この資料、明日までにまとめてもらえますか？"
+      ],
+      "context": [],
+      "partner": "上司",
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1359.3298000050709,
+      "first_token_ms": 798.2267000479624,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|丁寧\n丁寧|はい、明日までにまとめます。|好的，我会在明天之前整理好。|\nカジュアル|うん、明日までにまとめるね。|嗯，明天之前整理好。|⚠ 对此对象不要用\nかんたん|はい、わかりました。|好的，明白了。|\n理由|你说明对方是上司，即使对方用「もらえますか」也用丁寧回答。",
+      "reason": "你说明对方是上司，即使对方用「もらえますか」也用丁寧回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、明日までにまとめます。",
+          "meaning": "好的，我会在明天之前整理好。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、明日までにまとめるね。",
+          "meaning": "嗯，明天之前整理好。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、わかりました。",
+          "meaning": "好的，明白了。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "sentences": [
+        "日本に来てどれくらいですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1456.8717998918146,
+      "first_token_ms": 944.8787999572232,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|丁寧\n丁寧|日本に来て【期間】です。|我来日本【期间】了。|\nカジュアル|日本に来て【期間】だよ。|我来日本【期间】了。|⚠ 对此对象不要用\nかんたん|【期間】です。|【期间】。|\n理由|对方用了「〜ですか」，按同等礼貌程度回答。",
+      "reason": "对方用了「〜ですか」，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "日本に来て【期間】です。",
+          "meaning": "我来日本【期间】了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "日本に来て【期間】だよ。",
+          "meaning": "我来日本【期间】了。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【期間】です。",
+          "meaning": "【期间】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "sentences": [
+        "お疲れ様です。今日はもう上がりですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1485.5327000841498,
+      "first_token_ms": 897.1509999828413,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|丁寧\n丁寧|はい、今日はもう上がりです。|是的，今天已经下班了。|\nカジュアル|うん、今日はもう上がりだよ。|嗯，今天已经下班了。　⚠ 对此对象不要用\nかんたん|はい、もう上がりです。|是的，已经下班了。|\n理由|对方用「ですか」礼貌提问，按同等礼貌程度回答。",
+      "reason": "对方用「ですか」礼貌提问，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、今日はもう上がりです。",
+          "meaning": "是的，今天已经下班了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、今日はもう上がりだよ。",
+          "meaning": "嗯，今天已经下班了。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、もう上がりです。",
+          "meaning": "是的，已经下班了。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "sentences": [
+        "すみません、明日のシフトなんですけど、急に一人休みが出ちゃって、もし可能だったら夕方から入ってもらえたりしませんか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1734.770500101149,
+      "first_token_ms": 838.0541000515223,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|丁寧\n丁寧|はい、夕方からでしたら【入れる／入れない】です。|好的，傍晚以后的话我【能来／不能来】。|\nカジュアル|夕方からなら【入れる／入れない】よ。|傍晚以后的话我【能来／不能来】。　⚠ 对此对象不要用\nかんたん|はい、【大丈夫です／無理です】。|好的，【没问题／不行】。|\n理由|对方用「〜ませんか」礼貌地请求，你也用丁寧回答。",
+      "reason": "对方用「〜ませんか」礼貌地请求，你也用丁寧回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "夕方からでしたら【入れる／入れない】です。",
+          "meaning": "傍晚以后的话我【能来／不能来】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "夕方からなら【入れる／入れない】よ。",
+          "meaning": "傍晚以后的话我【能来／不能来】。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【大丈夫です／無理です】。",
+          "meaning": "【没问题／不行】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "sentences": [
+        "レポートの締め切り、一日延ばしてもいいですよ。"
+      ],
+      "context": [],
+      "partner": "老师",
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1182.1850000414997,
+      "first_token_ms": 624.2339999880642,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|丁寧\n丁寧|ありがとうございます。助かります。|谢谢您，帮大忙了。|\nカジュアル|ありがとう。助かる。|谢啦，帮大忙了。|　⚠ 对此对象不要用\nかんたん|ありがとうございます。|谢谢您。|\n理由|对方是老师，用です・ます体礼貌回应最稳妥。",
+      "reason": "对方是老师，用です・ます体礼貌回应最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "ありがとうございます。助かります。",
+          "meaning": "谢谢您，帮大忙了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "ありがとう。助かる。",
+          "meaning": "谢啦，帮大忙了。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "ありがとうございます。",
+          "meaning": "谢谢您。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "sentences": [
+        "今日マジ寒くない？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "カジュアル",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1862.670800066553,
+      "first_token_ms": 1230.8291000081226,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|カジュアル\n丁寧|そうですね、今日は本当に寒いですね。|是啊，今天真的很冷呢。|\nカジュアル|マジで寒いね。|真的超冷的。|\nかんたん|寒いね。|好冷啊。|\n理由|对方用了「マジ」「〜くない？」这种朋友间的口语说法。",
+      "reason": "对方用了「マジ」「〜くない？」这种朋友间的口语说法。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "そうですね、今日は本当に寒いですね。",
+          "meaning": "是啊，今天真的很冷呢。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "マジで寒いね。",
+          "meaning": "真的超冷的。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "寒いね。",
+          "meaning": "好冷啊。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "sentences": [
+        "明日ひま？ご飯行かない？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "カジュアル",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1820.093399961479,
+      "first_token_ms": 952.7209000661969,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|カジュアル\n丁寧|明日は【予定】です。ご飯、ぜひ行きたいです。|明天我【有空/没空】。吃饭我很想去。|\nカジュアル|明日は【予定】。ご飯、行きたい！|明天我【有空/没空】。吃饭想去！|\nかんたん|明日は【予定】。行きたい！|明天我【有空/没空】。想去！|\n理由|对方用「ひま？」「行かない？」这种口语邀约，是朋友间的说法。",
+      "reason": "对方用「ひま？」「行かない？」这种口语邀约，是朋友间的说法。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "明日は【予定】です。ご飯、ぜひ行きたいです。",
+          "meaning": "明天我【有空/没空】。吃饭我很想去。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "明日は【予定】。ご飯、行きたい！",
+          "meaning": "明天我【有空/没空】。吃饭想去！",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "明日は【予定】。行きたい！",
+          "meaning": "明天我【有空/没空】。想去！",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "sentences": [
+        "それ、めっちゃいいじゃん！"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "カジュアル",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1584.1815000167117,
+      "first_token_ms": 967.8184000076726,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|カジュアル\n丁寧|そうなんですね、よかったです。|这样啊，那太好了。|\nカジュアル|それ、いいね！|那个不错啊！|\nかんたん|いいね！|不错！|\n理由|对方用了「めっちゃ」「〜じゃん」，是朋友间的说法。",
+      "reason": "对方用了「めっちゃ」「〜じゃん」，是朋友间的说法。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "そうなんですね、よかったです。",
+          "meaning": "这样啊，那太好了。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "それ、いいね！",
+          "meaning": "那个不错啊！",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "いいね！",
+          "meaning": "不错！",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "sentences": [
+        "ってか、昨日のやつどうなった？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1382.9264000523835,
+      "first_token_ms": 655.5786000099033,
+      "matches_expected": false,
+      "model_matches_expected": false,
+      "rep": 1,
+      "raw": "推荐|丁寧\n丁寧|昨日の件は【進捗状況】です。|昨天那件事是【进展情况】。|\nカジュアル|昨日のやつは【進捗状況】だよ。|昨天那事儿是【进展情况】。|\nかんたん|【進捗状況】です。|【进展情况】。|\n理由|对方用「どうなった？」问结果，但没说明关系，用丁寧最稳妥。",
+      "reason": "对方用「どうなった？」问结果，但没说明关系，用丁寧最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "昨日の件は【進捗状況】です。",
+          "meaning": "昨天那件事是【进展情况】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "昨日のやつは【進捗状況】だよ。",
+          "meaning": "昨天那事儿是【进展情况】。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "【進捗状況】です。",
+          "meaning": "【进展情况】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "sentences": [
+        "先行ってて、すぐ追いつくから"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "カジュアル",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1322.3869000794366,
+      "first_token_ms": 730.6397000793368,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|カジュアル\n丁寧|わかりました。気をつけて行ってください。|好的，路上小心。|\nカジュアル|わかった、先に行ってるね。|知道了，我先走啦。|\nかんたん|うん、わかった。|嗯，知道了。|\n理由|对方用「〜てて」「〜から」的口语说法，是朋友间的随意语气。",
+      "reason": "对方用「〜てて」「〜から」的口语说法，是朋友间的随意语气。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "わかりました。気をつけて行ってください。",
+          "meaning": "好的，路上小心。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "わかった、先に行ってるね。",
+          "meaning": "知道了，我先走啦。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "うん、わかった。",
+          "meaning": "嗯，知道了。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "sentences": [
+        "来れなくても全然大丈夫だよ"
+      ],
+      "context": [],
+      "partner": "同一个研究室的同学",
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "カジュアル",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1867.494500009343,
+      "first_token_ms": 1086.7032000096515,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|カジュアル\n丁寧|お気遣いありがとうございます。【参加可否】です。|谢谢您费心。我【能否参加】。|\nカジュアル|気遣ってくれてありがとう。【参加可否】。|谢谢你惦记着。我【能否参加】。|\nかんたん|ありがとう。【参加可否】。|谢谢。我【能否参加】。|\n理由|对方用「だよ」这种口语说法，是关系熟的同学之间的口气。",
+      "reason": "对方用「だよ」这种口语说法，是关系熟的同学之间的口气。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "お気遣いありがとうございます。【参加可否】です。",
+          "meaning": "谢谢您费心。我【能否参加】。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "気遣ってくれてありがとう。【参加可否】。",
+          "meaning": "谢谢你惦记着。我【能否参加】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "ありがとう。【参加可否】。",
+          "meaning": "谢谢。我【能否参加】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "sentences": [
+        "いや、それはちょっと……"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1205.7271999074146,
+      "first_token_ms": 680.9518999652937,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|丁寧\n丁寧|そうですか。わかりました。|这样啊，我明白了。|\nカジュアル|そっか。わかった。|这样啊，知道了。|\nかんたん|わかりました。|明白了。|\n理由|对方句尾省略、看不出关系，用丁寧最稳妥。",
+      "reason": "对方句尾省略、看不出关系，用丁寧最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "そうですか。わかりました。",
+          "meaning": "这样啊，我明白了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "そっか。わかった。",
+          "meaning": "这样啊，知道了。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "わかりました。",
+          "meaning": "明白了。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "sentences": [
+        "前向きに考えておきます"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1748.1534999096766,
+      "first_token_ms": 1146.8723999569193,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|丁寧\n丁寧|承知しました。ありがとうございます。|明白了，谢谢您。|\nカジュアル|了解、ありがとう。|了解，谢谢。|　⚠ 对此对象不要用\nかんたん|はい、ありがとうございます。|好的，谢谢。|\n理由|对方用「〜ておきます」的です・ます体，按同等礼貌程度回答。",
+      "reason": "对方用「〜ておきます」的です・ます体，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "承知しました。ありがとうございます。",
+          "meaning": "明白了，谢谢您。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "了解、ありがとう。",
+          "meaning": "了解，谢谢。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、ありがとうございます。",
+          "meaning": "好的，谢谢。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "sentences": [
+        "来週の会議何時から出したっけ"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1539.7340999916196,
+      "first_token_ms": 797.4503999575973,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|丁寧\n丁寧|来週(らいしゅう)の会議(かいぎ)は何時(なんじ)からでしたっけ。|下周的会议是从几点开始来着？|\nカジュアル|来週の会議、何時からだっけ？|下周的会议几点开始来着？　⚠ 对此对象不要用\nかんたん|何時(なんじ)からでしたっけ。|是几点开始来着？|\n理由|对方用了「〜でしたっけ」，按同等礼貌程度回答。",
+      "reason": "对方用了「〜でしたっけ」，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "来週の会議は何時からでしたっけ。",
+          "meaning": "下周的会议是从几点开始来着？",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "来週の会議、何時からだっけ？",
+          "meaning": "下周的会议几点开始来着？",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "何時からでしたっけ。",
+          "meaning": "是几点开始来着？",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "sentences": [
+        "大丈夫？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1406.2912999652326,
+      "first_token_ms": 1033.7403999874368,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 1,
+      "raw": "推荐|丁寧\n丁寧|はい、大丈夫です。|嗯，我没事。|\nカジュアル|うん、大丈夫だよ。|嗯，没事的。|\nかんたん|はい、大丈夫です。|嗯，没事。|\n理由|看不出你们的关系，用丁寧最稳妥。",
+      "reason": "看不出你们的关系，用丁寧最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、大丈夫です。",
+          "meaning": "嗯，我没事。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、大丈夫だよ。",
+          "meaning": "嗯，没事的。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、大丈夫です。",
+          "meaning": "嗯，没事。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "sentences": [
+        "ポイントカードはお持ちですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1334.8884000442922,
+      "first_token_ms": 726.1089000385255,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|丁寧\n丁寧|はい、【持っています／持っていません】。|是的，我【有／没有】。|\nカジュアル|うん、【持ってる／持ってない】よ。|嗯，我【有／没有】哦。　⚠ 对此对象不要用\nかんたん|はい、【持っています】。|是的，我有。|\n理由|对方是店员，用です・ます礼貌回答最稳妥。",
+      "reason": "对方是店员，用です・ます礼貌回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【持っています／持っていません】。",
+          "meaning": "我【有／没有】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【持ってる／持ってない】よ。",
+          "meaning": "我【有／没有】哦。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【持っています】。",
+          "meaning": "我有。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "sentences": [
+        "お箸おつけしますか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1532.833099947311,
+      "first_token_ms": 795.9170000394806,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|丁寧\n丁寧|はい、お願いします。|好的，麻烦您。|\nカジュアル|うん、お願い。|嗯，麻烦啦。　⚠ 对此对象不要用\nかんたん|はい、お願いします。|好的，麻烦您。|\n理由|对方是店员用「〜ますか」询问，按同等礼貌程度回答。",
+      "reason": "对方是店员用「〜ますか」询问，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、お願いします。",
+          "meaning": "好的，麻烦您。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、お願い。",
+          "meaning": "嗯，麻烦啦。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、お願いします。",
+          "meaning": "好的，麻烦您。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "sentences": [
+        "こちら温めますか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1387.53980002366,
+      "first_token_ms": 838.7463000835851,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|丁寧\n丁寧|はい、お願いします。|好的，麻烦您。|\nカジュアル|うん、お願い。|嗯，麻烦你。|　⚠ 对此对象不要用\nかんたん|はい、お願いします。|好的，麻烦您。|\n理由|对方是店员、用です/ます询问，按同等礼貌程度回答。",
+      "reason": "对方是店员、用です/ます询问，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、お願いします。",
+          "meaning": "好的，麻烦您。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、お願い。",
+          "meaning": "嗯，麻烦你。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、お願いします。",
+          "meaning": "好的，麻烦您。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "sentences": [
+        "少々お待ちいただけますか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1363.5020999936387,
+      "first_token_ms": 819.1236000275239,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|丁寧\n丁寧|はい、少々お待ちします。|好的，我等一下。|\nカジュアル|うん、待ってるね。|嗯，我等着。　⚠ 对此对象不要用\nかんたん|はい、わかりました。|好的，明白了。|\n理由|对方用「いただけますか」礼貌地请求，按同等礼貌程度回答。",
+      "reason": "对方用「いただけますか」礼貌地请求，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、少々お待ちします。",
+          "meaning": "好的，我等一下。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、待ってるね。",
+          "meaning": "嗯，我等着。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、わかりました。",
+          "meaning": "好的，明白了。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "sentences": [
+        "来週の飲み会、来られそうですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 2025.6734999129549,
+      "first_token_ms": 1362.0896999491379,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|丁寧\n丁寧|来週は【参加できます／参加できません】。|下周【能参加／不能参加】。|\nカジュアル|来週は【参加できる／参加できない】。|下周【能去／去不了】。　⚠ 对此对象不要用\nかんたん|はい、【参加できます】。|好，我【能参加】。|\n理由|对方用「〜ですか」礼貌提问，按同等礼貌程度回答。",
+      "reason": "对方用「〜ですか」礼貌提问，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "来週は【参加できます／参加できません】。",
+          "meaning": "下周【能参加／不能参加】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "来週は【参加できる／参加できない】。",
+          "meaning": "下周【能去／去不了】。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【参加できます】。",
+          "meaning": "好，我【能参加】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "sentences": [
+        "この資料、明日までにまとめてもらえますか？"
+      ],
+      "context": [],
+      "partner": "上司",
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1325.2941999817267,
+      "first_token_ms": 733.5849999217317,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|丁寧\n丁寧|はい、明日までにまとめます。|好的，我会在明天之前整理好。|\nカジュアル|うん、明日までにまとめるね。|嗯，明天之前整理好。|⚠ 对此对象不要用\nかんたん|はい、わかりました。|好的，明白了。|\n理由|你说明对方是上司，所以用丁寧。",
+      "reason": "你说明对方是上司，所以用丁寧。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、明日までにまとめます。",
+          "meaning": "好的，我会在明天之前整理好。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、明日までにまとめるね。",
+          "meaning": "嗯，明天之前整理好。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、わかりました。",
+          "meaning": "好的，明白了。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "sentences": [
+        "日本に来てどれくらいですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1153.0593000352383,
+      "first_token_ms": 640.5009999871254,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|丁寧\n丁寧|日本に来て【期間】です。|来日本【期间】了。|\nカジュアル|日本に来て【期間】だよ。|来日本【期间】了。　⚠ 对此对象不要用\nかんたん|【期間】です。|【期间】。|\n理由|对方用「〜ですか」礼貌提问，按同等礼貌程度回答。",
+      "reason": "对方用「〜ですか」礼貌提问，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "日本に来て【期間】です。",
+          "meaning": "来日本【期间】了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "日本に来て【期間】だよ。",
+          "meaning": "来日本【期间】了。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【期間】です。",
+          "meaning": "【期间】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "sentences": [
+        "お疲れ様です。今日はもう上がりですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1408.6761999642476,
+      "first_token_ms": 861.4048999734223,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|丁寧\n丁寧|はい、今日はもう上がりです。|是的，今天已经下班了。|\nカジュアル|うん、今日はもう上がりだよ。|嗯，今天已经下班了。　⚠ 对此对象不要用\nかんたん|はい、もう上がりです。|是的，已经下班了。|\n理由|对方用「ですか」礼貌提问，按同等礼貌程度回答。",
+      "reason": "对方用「ですか」礼貌提问，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、今日はもう上がりです。",
+          "meaning": "是的，今天已经下班了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、今日はもう上がりだよ。",
+          "meaning": "嗯，今天已经下班了。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、もう上がりです。",
+          "meaning": "是的，已经下班了。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "sentences": [
+        "すみません、明日のシフトなんですけど、急に一人休みが出ちゃって、もし可能だったら夕方から入ってもらえたりしませんか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1929.8704999964684,
+      "first_token_ms": 720.2160999877378,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|丁寧\n丁寧|お休みが出たんですね。夕方からでしたら【入れる／入れない】です。|是有人突然休息了啊。傍晚开始的话我【能来／不能来】。|\nカジュアル|急に大変だね。夕方からなら【入れる／入れない】よ。|突然这样真够呛啊。傍晚开始的话我【能来／不能来】。　⚠ 对此对象不要用\nかんたん|大変ですね。夕方から【入れます／入れません】。|真不容易啊。傍晚开始我【能来／不能来】。|\n理由|对方用「〜ませんか」礼貌地请求，按同等礼貌程度用丁寧回答。",
+      "reason": "对方用「〜ませんか」礼貌地请求，按同等礼貌程度用丁寧回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "お休みが出たんですね。夕方からでしたら【入れる／入れない】です。",
+          "meaning": "是有人突然休息了啊。傍晚开始的话我【能来／不能来】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "急に大変だね。夕方からなら【入れる／入れない】よ。",
+          "meaning": "突然这样真够呛啊。傍晚开始的话我【能来／不能来】。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "大変ですね。夕方から【入れます／入れません】。",
+          "meaning": "真不容易啊。傍晚开始我【能来／不能来】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "sentences": [
+        "レポートの締め切り、一日延ばしてもいいですよ。"
+      ],
+      "context": [],
+      "partner": "老师",
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1523.8549000350758,
+      "first_token_ms": 869.3620000267401,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|丁寧\n丁寧|ありがとうございます。助かります。|谢谢您，帮大忙了。|\nカジュアル|ありがとう。助かる。|谢啦，帮大忙了。|　⚠ 对此对象不要用\nかんたん|ありがとうございます。|谢谢您。|\n理由|你说明对方是老师，即使对方说话客气也用丁寧。",
+      "reason": "你说明对方是老师，即使对方说话客气也用丁寧。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "ありがとうございます。助かります。",
+          "meaning": "谢谢您，帮大忙了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "ありがとう。助かる。",
+          "meaning": "谢啦，帮大忙了。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "ありがとうございます。",
+          "meaning": "谢谢您。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "sentences": [
+        "今日マジ寒くない？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "カジュアル",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1569.5632999995723,
+      "first_token_ms": 956.3486999832094,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|カジュアル\n丁寧|そうですね、今日は本当に寒いですね。|是啊，今天真的很冷呢。|\nカジュアル|マジで寒いよね。|真的超冷的。|\nかんたん|うん、寒いね。|嗯，好冷。|\n理由|对方用了「マジ」「〜くない？」这种朋友间的口语说法。",
+      "reason": "对方用了「マジ」「〜くない？」这种朋友间的口语说法。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "そうですね、今日は本当に寒いですね。",
+          "meaning": "是啊，今天真的很冷呢。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "マジで寒いよね。",
+          "meaning": "真的超冷的。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "うん、寒いね。",
+          "meaning": "嗯，好冷。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "sentences": [
+        "明日ひま？ご飯行かない？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "カジュアル",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1630.8197000762448,
+      "first_token_ms": 577.7450000168756,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|カジュアル\n丁寧|明日は【予定】です。ご飯、ぜひ行きたいです。|明天我【有安排/没安排】。吃饭我很想去。|\nカジュアル|明日は【予定】だよ。ご飯行きたい！|明天我【有安排/没安排】。想去吃饭！|\nかんたん|明日は【予定】。行きたい！|明天我【有安排/没安排】。想去！|\n理由|对方用「ひま？」「行かない？」这种朋友间的随意说法，用カジュアル回应最自然。",
+      "reason": "对方用「ひま？」「行かない？」这种朋友间的随意说法，用カジュアル回应最自然。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "明日は【予定】です。ご飯、ぜひ行きたいです。",
+          "meaning": "明天我【有安排/没安排】。吃饭我很想去。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "明日は【予定】だよ。ご飯行きたい！",
+          "meaning": "明天我【有安排/没安排】。想去吃饭！",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "明日は【予定】。行きたい！",
+          "meaning": "明天我【有安排/没安排】。想去！",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "sentences": [
+        "それ、めっちゃいいじゃん！"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "カジュアル",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1159.272599965334,
+      "first_token_ms": 462.61449996382,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|カジュアル\n丁寧|そうなんですね、よかったです。|这样啊，真好。|\nカジュアル|それ、いいね！|那个不错啊！|　⚠ 对此对象不要用\nかんたん|いいね！|不错！|\n理由|对方用了「めっちゃ」「〜じゃん」，是朋友间的说法。",
+      "reason": "对方用了「めっちゃ」「〜じゃん」，是朋友间的说法。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "そうなんですね、よかったです。",
+          "meaning": "这样啊，真好。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "それ、いいね！",
+          "meaning": "那个不错啊！",
+          "star": true,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "いいね！",
+          "meaning": "不错！",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "sentences": [
+        "ってか、昨日のやつどうなった？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1629.7877000179142,
+      "first_token_ms": 912.0366999413818,
+      "matches_expected": false,
+      "model_matches_expected": false,
+      "rep": 2,
+      "raw": "推荐|丁寧\n丁寧|昨日の件(けん)ですか。【状況】です。|昨天那件事吗？【情况】。|\nカジュアル|昨日のやつ？【状況】だよ。|昨天那事？【情况】。|\nかんたん|昨日の件は【状況】です。|昨天那件事是【情况】。|\n理由|对方用普通体但没有口语标记，看不出关系，用丁寧最稳妥。",
+      "reason": "对方用普通体但没有口语标记，看不出关系，用丁寧最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "昨日の件ですか。【状況】です。",
+          "meaning": "昨天那件事吗？【情况】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "昨日のやつ？【状況】だよ。",
+          "meaning": "昨天那事？【情况】。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "昨日の件は【状況】です。",
+          "meaning": "昨天那件事是【情况】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "sentences": [
+        "先行ってて、すぐ追いつくから"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "カジュアル",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1593.5450999531895,
+      "first_token_ms": 968.9250999363139,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|カジュアル\n丁寧|わかりました。気をつけて行ってください。|好的，路上小心。|\nカジュアル|わかった、先に行ってるね。|知道了，我先走了。|\nかんたん|わかった、ありがとう。|知道了，谢谢。|\n理由|对方用「〜てて」「〜から」的口语说法，是朋友间的随意语气。",
+      "reason": "对方用「〜てて」「〜から」的口语说法，是朋友间的随意语气。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "わかりました。気をつけて行ってください。",
+          "meaning": "好的，路上小心。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "わかった、先に行ってるね。",
+          "meaning": "知道了，我先走了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "わかった、ありがとう。",
+          "meaning": "知道了，谢谢。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "sentences": [
+        "来れなくても全然大丈夫だよ"
+      ],
+      "context": [],
+      "partner": "同一个研究室的同学",
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "カジュアル",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1952.9694999800995,
+      "first_token_ms": 872.3478999454528,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|カジュアル\n丁寧|お気遣いありがとうございます。助かります。|谢谢您费心，帮大忙了。|\nカジュアル|気遣ってくれてありがとう。助かる。|谢谢你替我着想，帮大忙了。|\nかんたん|ありがとう。助かる。|谢谢，帮大忙了。|\n理由|对方用「〜だよ」这种随意的口语，是熟悉的同学之间说话。",
+      "reason": "对方用「〜だよ」这种随意的口语，是熟悉的同学之间说话。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "お気遣いありがとうございます。助かります。",
+          "meaning": "谢谢您费心，帮大忙了。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "気遣ってくれてありがとう。助かる。",
+          "meaning": "谢谢你替我着想，帮大忙了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "ありがとう。助かる。",
+          "meaning": "谢谢，帮大忙了。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "sentences": [
+        "いや、それはちょっと……"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1381.5585999982432,
+      "first_token_ms": 866.3301999913529,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|丁寧\n丁寧|そうですか。わかりました。|这样啊，我明白了。|\nカジュアル|そっか。わかった。|这样啊，知道了。|\nかんたん|わかりました。|明白了。|\n理由|对方句尾省略、看不出关系，用丁寧最稳妥。",
+      "reason": "对方句尾省略、看不出关系，用丁寧最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "そうですか。わかりました。",
+          "meaning": "这样啊，我明白了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "そっか。わかった。",
+          "meaning": "这样啊，知道了。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "わかりました。",
+          "meaning": "明白了。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "sentences": [
+        "前向きに考えておきます"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1531.3727000029758,
+      "first_token_ms": 923.2130999444053,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|丁寧\n丁寧|承知しました。ありがとうございます。|明白了，谢谢您。|\nカジュアル|了解、ありがとう。|了解，谢谢。|　⚠ 对此对象不要用\nかんたん|わかりました。ありがとう。|明白了，谢谢。|\n理由|对方用「〜ておきます」的です・ます体，按同等礼貌程度回答。",
+      "reason": "对方用「〜ておきます」的です・ます体，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "承知しました。ありがとうございます。",
+          "meaning": "明白了，谢谢您。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "了解、ありがとう。",
+          "meaning": "了解，谢谢。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "わかりました。ありがとう。",
+          "meaning": "明白了，谢谢。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "sentences": [
+        "来週の会議何時から出したっけ"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1454.8866000259295,
+      "first_token_ms": 660.0938000483438,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|丁寧\n丁寧|来週(らいしゅう)の会議(かいぎ)は何時(なんじ)からでしたっけ。|下周的会议是从几点开始来着？|\nカジュアル|来週の会議、何時からだっけ？|下周的会议几点开始来着？　⚠ 对此对象不要用\nかんたん|何時(なんじ)からでしたか。|是几点开始来着？|\n理由|对方用了「〜でしたっけ」，按同等礼貌程度回答。",
+      "reason": "对方用了「〜でしたっけ」，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "来週の会議は何時からでしたっけ。",
+          "meaning": "下周的会议是从几点开始来着？",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "来週の会議、何時からだっけ？",
+          "meaning": "下周的会议几点开始来着？",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "何時からでしたか。",
+          "meaning": "是几点开始来着？",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "sentences": [
+        "大丈夫？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1369.3742000032216,
+      "first_token_ms": 901.6166999936104,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 2,
+      "raw": "推荐|丁寧\n丁寧|はい、大丈夫です。|嗯，没事。|\nカジュアル|うん、大丈夫だよ。|嗯，没事的。|\nかんたん|はい、大丈夫です。|嗯，没事。|\n理由|看不出你们的关系，用丁寧最稳妥。",
+      "reason": "看不出你们的关系，用丁寧最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、大丈夫です。",
+          "meaning": "嗯，没事。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、大丈夫だよ。",
+          "meaning": "嗯，没事的。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、大丈夫です。",
+          "meaning": "嗯，没事。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "sentences": [
+        "ポイントカードはお持ちですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1395.728399977088,
+      "first_token_ms": 722.4091000389308,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|丁寧\n丁寧|はい、【持っています／持っていません】。|是的，我【有／没有】。|\nカジュアル|うん、【持ってる／持ってない】よ。|嗯，我【有／没有】哦。　⚠ 对此对象不要用\nかんたん|はい、【持っています】。|是的，我【有】。|\n理由|对方是店员、用です/ます提问，按同等礼貌程度回答。",
+      "reason": "对方是店员、用です/ます提问，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "【持っています／持っていません】。",
+          "meaning": "我【有／没有】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "【持ってる／持ってない】よ。",
+          "meaning": "我【有／没有】哦。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "【持っています】。",
+          "meaning": "我【有】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "sentences": [
+        "お箸おつけしますか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1679.9120999639854,
+      "first_token_ms": 1035.1966000162065,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|丁寧\n丁寧|はい、お願いします。|好的，麻烦您。|\nカジュアル|うん、お願い。|嗯，麻烦啦。　⚠ 对此对象不要用\nかんたん|はい、お願いします。|好的，麻烦您。|\n理由|对方是店员、用「〜ますか」礼貌提问，用丁寧回答最稳妥。",
+      "reason": "对方是店员、用「〜ますか」礼貌提问，用丁寧回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、お願いします。",
+          "meaning": "好的，麻烦您。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、お願い。",
+          "meaning": "嗯，麻烦啦。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、お願いします。",
+          "meaning": "好的，麻烦您。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "sentences": [
+        "こちら温めますか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1398.0603999225423,
+      "first_token_ms": 885.2024999214336,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|丁寧\n丁寧|はい、お願いします。|好的，麻烦您。|\nカジュアル|うん、お願い。|嗯，麻烦你。　⚠ 对此对象不要用\nかんたん|はい、お願いします。|好的，麻烦您。|\n理由|对方是店员、用です/ます问话，用丁寧回答最稳妥。",
+      "reason": "对方是店员、用です/ます问话，用丁寧回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、お願いします。",
+          "meaning": "好的，麻烦您。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、お願い。",
+          "meaning": "嗯，麻烦你。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、お願いします。",
+          "meaning": "好的，麻烦您。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "sentences": [
+        "少々お待ちいただけますか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1311.8391999742016,
+      "first_token_ms": 766.5667999535799,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|丁寧\n丁寧|はい、少々お待ちします。|好的，我等一下。|\nカジュアル|うん、待ってるね。|嗯，我等着。|⚠ 对此对象不要用\nかんたん|はい、わかりました。|好的，明白了。|\n理由|对方用了「いただけますか」的敬语，按同等礼貌程度回答。",
+      "reason": "对方用了「いただけますか」的敬语，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、少々お待ちします。",
+          "meaning": "好的，我等一下。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、待ってるね。",
+          "meaning": "嗯，我等着。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、わかりました。",
+          "meaning": "好的，明白了。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "sentences": [
+        "来週の飲み会、来られそうですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1487.7154000569135,
+      "first_token_ms": 822.745000012219,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|丁寧\n丁寧|来週は【参加できます／参加できません】。|下周我【能参加／不能参加】。|\nカジュアル|来週は【参加できる／参加できない】。|下周我【能去／去不了】。　⚠ 对此对象不要用\nかんたん|来週は【参加できます／参加できません】。|下周我【能参加／不能参加】。|\n理由|对方用「〜ですか」礼貌提问，按同等礼貌程度回答最稳妥。",
+      "reason": "对方用「〜ですか」礼貌提问，按同等礼貌程度回答最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "来週は【参加できます／参加できません】。",
+          "meaning": "下周我【能参加／不能参加】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "来週は【参加できる／参加できない】。",
+          "meaning": "下周我【能去／去不了】。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "来週は【参加できます／参加できません】。",
+          "meaning": "下周我【能参加／不能参加】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "sentences": [
+        "この資料、明日までにまとめてもらえますか？"
+      ],
+      "context": [],
+      "partner": "上司",
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1391.9595000334084,
+      "first_token_ms": 733.0179000273347,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|丁寧\n丁寧|はい、明日までにまとめます。|好的，我会在明天之前整理好。|\nカジュアル|うん、明日までにまとめるね。|嗯，明天之前整理好。|⚠ 对此对象不要用\nかんたん|はい、わかりました。|好的，明白了。|\n理由|你说明对方是上司，即使对方用「〜てもらえますか」也用丁寧回答。",
+      "reason": "你说明对方是上司，即使对方用「〜てもらえますか」也用丁寧回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、明日までにまとめます。",
+          "meaning": "好的，我会在明天之前整理好。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、明日までにまとめるね。",
+          "meaning": "嗯，明天之前整理好。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、わかりました。",
+          "meaning": "好的，明白了。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "sentences": [
+        "日本に来てどれくらいですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1547.5208000279963,
+      "first_token_ms": 996.8919000821188,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|丁寧\n丁寧|日本に来て【期間】です。|我来日本【期间】了。|\nカジュアル|日本に来て【期間】だよ。|我来日本【期间】了。|⚠ 对此对象不要用\nかんたん|日本に来て【期間】です。|我来日本【期间】了。|\n理由|对方用了「〜ですか」，按同等礼貌程度回答。",
+      "reason": "对方用了「〜ですか」，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "日本に来て【期間】です。",
+          "meaning": "我来日本【期间】了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "日本に来て【期間】だよ。",
+          "meaning": "我来日本【期间】了。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "日本に来て【期間】です。",
+          "meaning": "我来日本【期间】了。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "sentences": [
+        "お疲れ様です。今日はもう上がりですか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1344.9427000014111,
+      "first_token_ms": 769.3757000379264,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|丁寧\n丁寧|はい、今日はもう上がりです。|是的，今天已经下班了。|\nカジュアル|うん、今日はもう上がりだよ。|嗯，今天已经下班了。　⚠ 对此对象不要用\nかんたん|はい、もう上がりです。|是的，已经下班了。|\n理由|对方用「ですか」礼貌提问，按同等礼貌程度回答。",
+      "reason": "对方用「ですか」礼貌提问，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、今日はもう上がりです。",
+          "meaning": "是的，今天已经下班了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、今日はもう上がりだよ。",
+          "meaning": "嗯，今天已经下班了。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、もう上がりです。",
+          "meaning": "是的，已经下班了。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "sentences": [
+        "すみません、明日のシフトなんですけど、急に一人休みが出ちゃって、もし可能だったら夕方から入ってもらえたりしませんか？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1639.638000051491,
+      "first_token_ms": 851.6061000991613,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|丁寧\n丁寧|お休みの人が出たんですね。夕方からでしたら【参加可否】。\nカジュアル|急に大変だね。夕方からなら【参加可否】。　⚠ 对此对象不要用\nかんたん|大変ですね。【参加可否】。\n理由|对方用「〜ませんか」礼貌地请求，按同等礼貌程度用丁寧回答。",
+      "reason": "对方用「〜ませんか」礼貌地请求，按同等礼貌程度用丁寧回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "お休みの人が出たんですね。夕方からでしたら【参加可否】。",
+          "meaning": "",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "急に大変だね。夕方からなら【参加可否】。",
+          "meaning": "",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "大変ですね。【参加可否】。",
+          "meaning": "",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "sentences": [
+        "レポートの締め切り、一日延ばしてもいいですよ。"
+      ],
+      "context": [],
+      "partner": "老师",
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1324.5505000231788,
+      "first_token_ms": 741.9504000572488,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|丁寧\n丁寧|ありがとうございます。助かります。|谢谢您，帮大忙了。|\nカジュアル|ありがとう。助かる。|谢啦，帮大忙了。|　⚠ 对此对象不要用\nかんたん|ありがとうございます。|谢谢您。|\n理由|你说明对方是老师，即使对方说话客气也用丁寧。",
+      "reason": "你说明对方是老师，即使对方说话客气也用丁寧。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "ありがとうございます。助かります。",
+          "meaning": "谢谢您，帮大忙了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "ありがとう。助かる。",
+          "meaning": "谢啦，帮大忙了。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "ありがとうございます。",
+          "meaning": "谢谢您。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "sentences": [
+        "今日マジ寒くない？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "カジュアル",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1307.9222000669688,
+      "first_token_ms": 718.5804999899119,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|カジュアル\n丁寧|そうですね、今日は本当に寒いですね。|是啊，今天真的很冷呢。|\nカジュアル|マジで寒いよね。|真的超冷的。|\nかんたん|うん、寒いね。|嗯，好冷。|\n理由|对方用了「マジ」「〜くない？」这种朋友间的口语说法。",
+      "reason": "对方用了「マジ」「〜くない？」这种朋友间的口语说法。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "そうですね、今日は本当に寒いですね。",
+          "meaning": "是啊，今天真的很冷呢。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "マジで寒いよね。",
+          "meaning": "真的超冷的。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "うん、寒いね。",
+          "meaning": "嗯，好冷。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "sentences": [
+        "明日ひま？ご飯行かない？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "カジュアル",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1970.1030000578612,
+      "first_token_ms": 975.777400075458,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|カジュアル\n丁寧|明日は【予定】です。ご飯、ぜひお願いします。|明天我【有空/没空】。吃饭的话，请务必算上我。|\nカジュアル|明日は【予定】。ご飯行こう！|明天我【有空/没空】。一起去吃饭吧！|\nかんたん|明日は【予定】。行くよ！|明天我【有空/没空】。我去！|\n理由|对方用「ひま？」「行かない？」这种朋友间的口语邀约，用カジュアル回应。",
+      "reason": "对方用「ひま？」「行かない？」这种朋友间的口语邀约，用カジュアル回应。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "明日は【予定】です。ご飯、ぜひお願いします。",
+          "meaning": "明天我【有空/没空】。吃饭的话，请务必算上我。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "明日は【予定】。ご飯行こう！",
+          "meaning": "明天我【有空/没空】。一起去吃饭吧！",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "明日は【予定】。行くよ！",
+          "meaning": "明天我【有空/没空】。我去！",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "sentences": [
+        "それ、めっちゃいいじゃん！"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "カジュアル",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1499.9461999395862,
+      "first_token_ms": 948.216599994339,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|カジュアル\n丁寧|そうなんですね、よかったです。|这样啊，那太好了。|\nカジュアル|それ、いいね！|那个不错啊！|\nかんたん|いいね！|不错！|\n理由|对方用了「めっちゃ」「〜じゃん」，是朋友间的说法。",
+      "reason": "对方用了「めっちゃ」「〜じゃん」，是朋友间的说法。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "そうなんですね、よかったです。",
+          "meaning": "这样啊，那太好了。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "それ、いいね！",
+          "meaning": "那个不错啊！",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "いいね！",
+          "meaning": "不错！",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "sentences": [
+        "ってか、昨日のやつどうなった？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1403.3080999506637,
+      "first_token_ms": 691.6475999169052,
+      "matches_expected": false,
+      "model_matches_expected": false,
+      "rep": 3,
+      "raw": "推荐|丁寧\n丁寧|昨日の件(けん)ですか。【状況】です。|昨天那件事吗？【情况】。\nカジュアル|昨日のやつ？【状況】だよ。|昨天那事？【情况】。　⚠ 对此对象不要用\nかんたん|昨日の件(けん)ですね。【状況】です。|昨天那件事吧。【情况】。\n理由|看不出你们的关系，用丁寧最稳妥。",
+      "reason": "看不出你们的关系，用丁寧最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "昨日の件ですか。【状況】です。",
+          "meaning": "昨天那件事吗？【情况】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "昨日のやつ？【状況】だよ。",
+          "meaning": "昨天那事？【情况】。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "昨日の件ですね。【状況】です。",
+          "meaning": "昨天那件事吧。【情况】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "sentences": [
+        "先行ってて、すぐ追いつくから"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "カジュアル",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1542.6186999538913,
+      "first_token_ms": 886.4886000519618,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|カジュアル\n丁寧|わかりました。気をつけてください。|好的，路上小心。|\nカジュアル|わかった、先に行ってるね。|知道了，我先走啦。|\nかんたん|わかった、またね。|知道了，回头见。|\n理由|对方用「〜てて」「〜から」这种口语说法，是朋友间的随意语气。",
+      "reason": "对方用「〜てて」「〜から」这种口语说法，是朋友间的随意语气。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "わかりました。気をつけてください。",
+          "meaning": "好的，路上小心。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "わかった、先に行ってるね。",
+          "meaning": "知道了，我先走啦。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "わかった、またね。",
+          "meaning": "知道了，回头见。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "sentences": [
+        "来れなくても全然大丈夫だよ"
+      ],
+      "context": [],
+      "partner": "同一个研究室的同学",
+      "expected": "カジュアル",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "カジュアル",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1785.6298999395221,
+      "first_token_ms": 974.3511999258772,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|カジュアル\n丁寧|お気遣いありがとうございます。参加は【参加可否】です。|谢谢您费心。我【能参加／不能参加】。|\nカジュアル|気遣ってくれてありがとう。参加は【参加可否】だよ。|谢谢你替我着想。我【能参加／不能参加】。|\nかんたん|ありがとう。参加は【参加可否】です。|谢谢。我【能参加／不能参加】。|\n理由|对方是同研究室同学，用了「〜だよ」这种口语说法。",
+      "reason": "对方是同研究室同学，用了「〜だよ」这种口语说法。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "お気遣いありがとうございます。参加は【参加可否】です。",
+          "meaning": "谢谢您费心。我【能参加／不能参加】。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "気遣ってくれてありがとう。参加は【参加可否】だよ。",
+          "meaning": "谢谢你替我着想。我【能参加／不能参加】。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "ありがとう。参加は【参加可否】です。",
+          "meaning": "谢谢。我【能参加／不能参加】。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "sentences": [
+        "いや、それはちょっと……"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1393.3793000178412,
+      "first_token_ms": 889.6762999938801,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|丁寧\n丁寧|そうですか。わかりました。|这样啊，我明白了。|\nカジュアル|そっか。わかった。|这样啊，知道了。|⚠ 对此对象不要用\nかんたん|わかりました。|明白了。|\n理由|看不出你们的关系，用丁寧最稳妥。",
+      "reason": "看不出你们的关系，用丁寧最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "そうですか。わかりました。",
+          "meaning": "这样啊，我明白了。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "そっか。わかった。",
+          "meaning": "这样啊，知道了。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "わかりました。",
+          "meaning": "明白了。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "sentences": [
+        "前向きに考えておきます"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1353.1238998984918,
+      "first_token_ms": 771.210299921222,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|丁寧\n丁寧|ご検討(けんとう)いただきありがとうございます。|谢谢您考虑。|\nカジュアル|考えてくれてありがとう。|谢谢你考虑。|　⚠ 对此对象不要用\nかんたん|ありがとうございます。|谢谢。|\n理由|对方用「〜ておきます」的丁寧说法，按同等礼貌程度回答。",
+      "reason": "对方用「〜ておきます」的丁寧说法，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "ご検討いただきありがとうございます。",
+          "meaning": "谢谢您考虑。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "考えてくれてありがとう。",
+          "meaning": "谢谢你考虑。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "ありがとうございます。",
+          "meaning": "谢谢。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "sentences": [
+        "来週の会議何時から出したっけ"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1847.089600050822,
+      "first_token_ms": 1028.2950999680907,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|丁寧\n丁寧|来週(らいしゅう)の会議(かいぎ)は何時(なんじ)からでしたっけ。|下周的会议是从几点开始来着？|\nカジュアル|来週(らいしゅう)の会議(かいぎ)、何時(なんじ)からだっけ？|下周的会议几点开始来着？　⚠ 对此对象不要用\nかんたん|何時(なんじ)からでしたっけ。|是几点开始来着？|\n理由|对方用了「でしたっけ」，按同等礼貌程度回答。",
+      "reason": "对方用了「でしたっけ」，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "来週の会議は何時からでしたっけ。",
+          "meaning": "下周的会议是从几点开始来着？",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "来週の会議、何時からだっけ？",
+          "meaning": "下周的会议几点开始来着？",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "何時からでしたっけ。",
+          "meaning": "是几点开始来着？",
+          "star": false,
+          "warn": false
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "sentences": [
+        "大丈夫？"
+      ],
+      "context": [],
+      "partner": null,
+      "expected": "丁寧",
+      "star_inferred": false,
+      "exactly_one_model_star": true,
+      "actual": "丁寧",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1375.8461000397801,
+      "first_token_ms": 921.1667999625206,
+      "matches_expected": true,
+      "model_matches_expected": true,
+      "rep": 3,
+      "raw": "推荐|丁寧\n丁寧|はい、大丈夫です。|嗯，没事。|\nカジュアル|うん、大丈夫だよ。|嗯，没事的。|\nかんたん|はい、大丈夫です。|嗯，没事。|\n理由|对方只说了「大丈夫？」，看不出关系，用丁寧最稳妥。",
+      "reason": "对方只说了「大丈夫？」，看不出关系，用丁寧最稳妥。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "はい、大丈夫です。",
+          "meaning": "嗯，没事。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "うん、大丈夫だよ。",
+          "meaning": "嗯，没事的。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "はい、大丈夫です。",
+          "meaning": "嗯，没事。",
+          "star": false,
+          "warn": false
+        }
+      ]
+    }
+  ],
+  "warmup_error_kind": null,
+  "completed": true,
+  "finished_at": "2026-10-26T16:45:00.370553+09:00",
+  "requests_sent": 61,
+  "A_summary": {
+    "n": 60,
+    "star_not_inferred": {
+      "count": 60,
+      "total": 60,
+      "rate": 1.0
+    },
+    "exactly_one_model_star": {
+      "count": 60,
+      "total": 60,
+      "rate": 1.0
+    },
+    "complete": {
+      "count": 60,
+      "total": 60,
+      "rate": 1.0
+    },
+    "errors": 0,
+    "transport_or_protocol_errors": 0,
+    "malformed": 0,
+    "api_ms": {
+      "n": 60,
+      "p50": 1455.879199958872,
+      "p95": 1929.8704999964684
+    },
+    "matches_expected": {
+      "count": 57,
+      "total": 60,
+      "rate": 0.95
+    },
+    "model_matches_expected": {
+      "count": 57,
+      "total": 60,
+      "rate": 0.95
+    }
+  }
+}

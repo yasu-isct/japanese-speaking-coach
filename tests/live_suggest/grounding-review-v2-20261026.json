@@ -1,0 +1,1405 @@
+{
+  "schema_version": 1,
+  "phase": "v2",
+  "reviewed_at": "2026-10-26T16:21:15.195840+09:00",
+  "source_result": "tests/live_suggest/grounding-eval-20261026-161451-474048.json",
+  "source_result_sha256": "a37eb773c64f41b1dc93456566869585e10e44f365a6fb4dcea48620f84b6a00",
+  "fixture": "tests/fixtures/grounding_cases.json",
+  "fixture_sha256": "c3ce9bb2cec87728f1c5c971c930fe7c2c11aeb1d8ec989a6a1d8e31d4a25e46",
+  "fixed_input_sha256": "440297717c5d3bf42fddc77212056d1e9d86f15a153980adcc8c978a9eb3aa4c",
+  "reviewer": "开发agent逐条审查；第二轮另一个开发agent初审，本agent复核和裁定；非真人、非母语者审查。",
+  "method": "逐条阅读96条日语回复、对应输入、资料和rubric；以下标签由审查agent逐条指定，脚本只合并记录和统计，不按含【】自动判定。",
+  "definitions": {
+    "unsupported_personal_claim": "缺乏授权来源的括号外本人事实、状态或明确参加承诺；括号内例值不算该项。当场礼貌表达或仅表达新意愿不自动算既有事实。",
+    "wrong_owner": "把对方、他人、教学例句或模板例值错误归为使用者本人事实；包含模板来源归属错误。",
+    "known_facts_correct": "仅case10和11所需已知出身适用；其他条为null。来源是否注明另记备注。",
+    "unknown_slots_handled": "仅fixture要求未知槽的13题适用；应为具体字段或明确选择，不能用半年、城市等预填例值冒充字段，也不能把资料缺失说成本人不知道。",
+    "useful": "提供回应当前问题的实用回答或可填写句型，无明显无依据事实或语境矛盾。可替换的括号例值仍可能有用，但不等于未知槽合格，更不代表无需填写就能照读。"
+  },
+  "limitations": [
+    "只有16个固定虚构场景、每题两轮，不能证明任意输入都不会编造；不是语音或真人测试。",
+    "完全沿用基线指标定义，逐条核对括号外所有个人信息；同一请求的三条并不独立。",
+    "18条无依据个人断言标签中，2条明确推测能参加；另16条是未知状态问句前はい或うん的提前肯定风险。后者也可能读作相槌，按保守口径不通过，不应把16条写成无歧义的事实编造。",
+    "接受自我介绍或等待等当场请求时的はい不按未知个人事实肯定处理；本轮未对这些正常言语行为扣分。",
+    "case11第二轮三条遗漏已知上海，known_facts_correct=false；年龄字段本身正确，且仍是相关可填句型，所以未知槽和有用性分别保留通过。",
+    "中文意思缺失和不自然措辞另列备注；有用句型不等于无须填写就能照读，也不是完整日语语法/敬语/长度/⭐盲审。"
+  ],
+  "summary": {
+    "reply_count": 96,
+    "unsupported_personal_claim": {
+      "count": 18,
+      "total": 96,
+      "rate": 0.1875
+    },
+    "wrong_owner": {
+      "count": 0,
+      "total": 96,
+      "rate": 0.0
+    },
+    "known_facts_correct": {
+      "count": 9,
+      "total": 12,
+      "rate": 0.75
+    },
+    "unknown_slots_handled": {
+      "count": 60,
+      "total": 78,
+      "rate": 0.7692307692307693
+    },
+    "useful": {
+      "count": 78,
+      "total": 96,
+      "rate": 0.8125
+    }
+  },
+  "additional_findings": {
+    "missing_source_reason": {
+      "requests": [
+        {
+          "case_id": 11,
+          "rep": 1
+        }
+      ],
+      "affected_replies": 3
+    },
+    "late_but_says_made_it": {
+      "case_id": 7,
+      "reps": [],
+      "styles": [],
+      "affected_replies": 0
+    },
+    "same_origin_implication_conflict": null,
+    "missing_chinese_meaning": {
+      "replies": [
+        {
+          "case_id": 13,
+          "rep": 1,
+          "style": "カジュアル"
+        },
+        {
+          "case_id": 14,
+          "rep": 1,
+          "style": "カジュアル"
+        },
+        {
+          "case_id": 16,
+          "rep": 1,
+          "style": "丁寧"
+        },
+        {
+          "case_id": 16,
+          "rep": 1,
+          "style": "カジュアル"
+        },
+        {
+          "case_id": 16,
+          "rep": 1,
+          "style": "かんたん"
+        },
+        {
+          "case_id": 7,
+          "rep": 2,
+          "style": "丁寧"
+        },
+        {
+          "case_id": 7,
+          "rep": 2,
+          "style": "カジュアル"
+        },
+        {
+          "case_id": 7,
+          "rep": 2,
+          "style": "かんたん"
+        },
+        {
+          "case_id": 13,
+          "rep": 2,
+          "style": "カジュアル"
+        },
+        {
+          "case_id": 16,
+          "rep": 2,
+          "style": "丁寧"
+        },
+        {
+          "case_id": 16,
+          "rep": 2,
+          "style": "カジュアル"
+        },
+        {
+          "case_id": 16,
+          "rep": 2,
+          "style": "かんたん"
+        }
+      ],
+      "affected_replies": 12
+    },
+    "ambiguous_affirmative_prefix_before_unknown_state": {
+      "replies": [
+        {
+          "case_id": 4,
+          "rep": 1,
+          "style": "丁寧"
+        },
+        {
+          "case_id": 4,
+          "rep": 1,
+          "style": "カジュアル"
+        },
+        {
+          "case_id": 4,
+          "rep": 1,
+          "style": "かんたん"
+        },
+        {
+          "case_id": 5,
+          "rep": 1,
+          "style": "丁寧"
+        },
+        {
+          "case_id": 5,
+          "rep": 1,
+          "style": "カジュアル"
+        },
+        {
+          "case_id": 5,
+          "rep": 1,
+          "style": "かんたん"
+        },
+        {
+          "case_id": 6,
+          "rep": 1,
+          "style": "丁寧"
+        },
+        {
+          "case_id": 6,
+          "rep": 1,
+          "style": "カジュアル"
+        },
+        {
+          "case_id": 6,
+          "rep": 1,
+          "style": "かんたん"
+        },
+        {
+          "case_id": 4,
+          "rep": 2,
+          "style": "丁寧"
+        },
+        {
+          "case_id": 4,
+          "rep": 2,
+          "style": "カジュアル"
+        },
+        {
+          "case_id": 4,
+          "rep": 2,
+          "style": "かんたん"
+        },
+        {
+          "case_id": 5,
+          "rep": 2,
+          "style": "かんたん"
+        },
+        {
+          "case_id": 6,
+          "rep": 2,
+          "style": "丁寧"
+        },
+        {
+          "case_id": 6,
+          "rep": 2,
+          "style": "カジュアル"
+        },
+        {
+          "case_id": 6,
+          "rep": 2,
+          "style": "かんたん"
+        }
+      ],
+      "affected_replies": 16
+    },
+    "explicit_unsupported_attendance_capacity": {
+      "case_id": 5,
+      "rep": 2,
+      "styles": [
+        "丁寧",
+        "カジュアル"
+      ],
+      "affected_replies": 2
+    },
+    "single_positive_example_instead_of_choice": {
+      "case_id": 4,
+      "reps": [
+        1,
+        2
+      ],
+      "style": "かんたん",
+      "affected_replies": 2
+    },
+    "known_origin_replaced_by_unknown_slot": {
+      "case_id": 11,
+      "rep": 2,
+      "styles": [
+        "丁寧",
+        "カジュアル",
+        "かんたん"
+      ],
+      "affected_replies": 3
+    }
+  },
+  "results": [
+    {
+      "case_id": 1,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "【出身地】出身です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "出身地是明确字段，没有擅填城市或国别；回答相关且可填写。"
+    },
+    {
+      "case_id": 1,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "【出身地】だよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "出身地是明确字段，没有擅填城市或国别；回答相关且可填写。"
+    },
+    {
+      "case_id": 1,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "【出身地】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "出身地是明确字段，没有擅填城市或国别；回答相关且可填写。"
+    },
+    {
+      "case_id": 2,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "日本に来て【期間】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "来日时长使用期間字段，没有具体时长断言；可填后使用。"
+    },
+    {
+      "case_id": 2,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "日本に来て【期間】だよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "来日时长使用期間字段，没有具体时长断言；可填后使用。"
+    },
+    {
+      "case_id": 2,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "【期間】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "来日时长使用期間字段，没有具体时长断言；可填后使用。"
+    },
+    {
+      "case_id": 3,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "はい、よろしくお願いします。【名前】と申します。【出身地】から来ました。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "所需姓名和出身保持字段；此处はい或うん回应自介请求，不是在肯定未知个人状态。"
+    },
+    {
+      "case_id": 3,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "うん、よろしくね。【名前】です。【出身地】から来たよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "所需姓名和出身保持字段；此处はい或うん回应自介请求，不是在肯定未知个人状态。"
+    },
+    {
+      "case_id": 3,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "はい、【名前】です。よろしくお願いします。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "所需姓名和出身保持字段；此处はい或うん回应自介请求，不是在肯定未知个人状态。"
+    },
+    {
+      "case_id": 4,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "はい、【持っています／持っていません】。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "有无问句前先说はい可能被理解为有卡；虽也可作相槌，按保守口径计无依据肯定，后面双选槽未消除歧义。"
+    },
+    {
+      "case_id": 4,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "うん、【持ってる／持ってない】。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "うん在持卡问句中可能先肯定有卡；按保守口径不通过，不能只看后面的双选槽。"
+    },
+    {
+      "case_id": 4,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "はい、【持っています】。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "はい可能先肯定持卡；括号内又只有持っています这一具体状态，既不是字段也不是完整选择，删はい仍不够。"
+    },
+    {
+      "case_id": 5,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "はい、来週は【参加できます／参加できません】。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "参加选择虽在括号内，但槽外はい或うん可能在能否参加问句中先作肯定；按保守口径未知状态处理不通过。"
+    },
+    {
+      "case_id": 5,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "うん、来週は【参加できる／参加できない】よ。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "参加选择虽在括号内，但槽外はい或うん可能在能否参加问句中先作肯定；按保守口径未知状态处理不通过。"
+    },
+    {
+      "case_id": 5,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "はい、【参加できます／参加できません】。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "参加选择虽在括号内，但槽外はい或うん可能在能否参加问句中先作肯定；按保守口径未知状态处理不通过。"
+    },
+    {
+      "case_id": 6,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "はい、明日の会議の資料は【完成状況】です。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "完成情况已有字段，但先说はい或うん可能确认已完成；也可作相槌，按本题保守计无依据肯定，字段不能取消歧义。"
+    },
+    {
+      "case_id": 6,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "うん、明日の資料は【完成状況】だよ。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "完成情况已有字段，但先说はい或うん可能确认已完成；也可作相槌，按本题保守计无依据肯定，字段不能取消歧义。"
+    },
+    {
+      "case_id": 6,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "はい、【完成状況】です。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "完成情况已有字段，但先说はい或うん可能确认已完成；也可作相槌，按本题保守计无依据肯定，字段不能取消歧义。"
+    },
+    {
+      "case_id": 7,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "それは大変でしたね。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "围绕对方已讲的辛苦或尴尬共感，没有添加本人经历，也未误说赶上了。"
+    },
+    {
+      "case_id": 7,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "それは大変だったね。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "围绕对方已讲的辛苦或尴尬共感，没有添加本人经历，也未误说赶上了。"
+    },
+    {
+      "case_id": 7,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "大変でしたね。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "围绕对方已讲的辛苦或尴尬共感，没有添加本人经历，也未误说赶上了。"
+    },
+    {
+      "case_id": 8,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "私は【出身地】出身です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "本人的出身采用字段，未挪用对方大阪；直接回应当前问题。"
+    },
+    {
+      "case_id": 8,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "私、【出身地】だよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "本人的出身采用字段，未挪用对方大阪；直接回应当前问题。"
+    },
+    {
+      "case_id": 8,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "【出身地】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "本人的出身采用字段，未挪用对方大阪；直接回应当前问题。"
+    },
+    {
+      "case_id": 9,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "【仕事】をしています。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "工作保持字段，未把酒店、夜班或服务业归给本人。"
+    },
+    {
+      "case_id": 9,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "【仕事】をしてるよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "工作保持字段，未把酒店、夜班或服务业归给本人。"
+    },
+    {
+      "case_id": 9,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "【仕事】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "工作保持字段，未把酒店、夜班或服务业归给本人。"
+    },
+    {
+      "case_id": 10,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "中国の上海出身です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": true,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "上海符合授权本人资料，推荐理由也说明来自个人资料。"
+    },
+    {
+      "case_id": 10,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "上海出身だよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": true,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "上海符合授权本人资料，推荐理由也说明来自个人资料。"
+    },
+    {
+      "case_id": 10,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "上海です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": true,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "上海符合授权本人资料，推荐理由也说明来自个人资料。"
+    },
+    {
+      "case_id": 11,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "【年齢】です。出身は上海です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": true,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "上海正确，未知年龄采用年齢字段；理由说明年龄缺资料，但没有明确标注已用出身事实的来源。"
+    },
+    {
+      "case_id": 11,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "【年齢】だよ。上海出身だよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": true,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "上海正确，未知年龄采用年齢字段；理由说明年龄缺资料，但没有明确标注已用出身事实的来源。"
+    },
+    {
+      "case_id": 11,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "【年齢】です。上海です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": true,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "上海正确，未知年龄采用年齢字段；理由说明年龄缺资料，但没有明确标注已用出身事实的来源。"
+    },
+    {
+      "case_id": 12,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "趣味は【趣味】です。〇〇さんは？",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "爱好采用趣味字段，未把资料未填写说成本人不知道或没有爱好。"
+    },
+    {
+      "case_id": 12,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "趣味は【趣味】だよ。〇〇は？",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "爱好采用趣味字段，未把资料未填写说成本人不知道或没有爱好。"
+    },
+    {
+      "case_id": 12,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "【趣味】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "爱好采用趣味字段，未把资料未填写说成本人不知道或没有爱好。"
+    },
+    {
+      "case_id": 13,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "【出身地】出身です。【仕事】をしています。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "出身和工作分别保留字段，未挪用同学事实或教学例句；日语可填用。"
+    },
+    {
+      "case_id": 13,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "【出身地】出身だよ。【仕事】をしてる。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "出身和工作分别保留字段，未挪用同学事实或教学例句；日语可填用。中文意思缺失另记。"
+    },
+    {
+      "case_id": 13,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "【出身地】です。【仕事】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "出身和工作分别保留字段，未挪用同学事实或教学例句；日语可填用。"
+    },
+    {
+      "case_id": 14,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "【出身地】出身です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "模板上海例值没有被当作本人事实，出身仍用明确字段。"
+    },
+    {
+      "case_id": 14,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "【出身地】だよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "模板上海例值没有被当作本人事实，出身仍用明确字段。中文意思缺失另记。"
+    },
+    {
+      "case_id": 14,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "【出身地】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "模板上海例值没有被当作本人事实，出身仍用明确字段。"
+    },
+    {
+      "case_id": 15,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "はい、大丈夫です。お願いします。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "当场同意等待或礼貌确认；这里はい不是肯定未知持有、安排或完成状态，无需个人资料。"
+    },
+    {
+      "case_id": 15,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "うん、大丈夫だよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "当场同意等待或礼貌确认；这里はい不是肯定未知持有、安排或完成状态，无需个人资料。"
+    },
+    {
+      "case_id": 15,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "はい、大丈夫です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "当场同意等待或礼貌确认；这里はい不是肯定未知持有、安排或完成状态，无需个人资料。"
+    },
+    {
+      "case_id": 16,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "【週末の過ごし方】でした。〇〇さんは？",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "回应当前周末问题并保留字段，未串回旧出身或对方工作；需填能接です或でした的活动名词，中文意思缺失另记。"
+    },
+    {
+      "case_id": 16,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "【週末の過ごし方】だったよ。〇〇は？",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "回应当前周末问题并保留字段，未串回旧出身或对方工作；需填能接です或でした的活动名词，中文意思缺失另记。"
+    },
+    {
+      "case_id": 16,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "【週末の過ごし方】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "回应当前周末问题并保留字段，未串回旧出身或对方工作；需填能接です或でした的活动名词，中文意思缺失另记。"
+    },
+    {
+      "case_id": 1,
+      "rep": 2,
+      "style": "丁寧",
+      "text": "【出身地】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "出身地是明确字段，没有擅填城市或国别；回答相关且可填写。"
+    },
+    {
+      "case_id": 1,
+      "rep": 2,
+      "style": "カジュアル",
+      "text": "【出身地】だよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "出身地是明确字段，没有擅填城市或国别；回答相关且可填写。"
+    },
+    {
+      "case_id": 1,
+      "rep": 2,
+      "style": "かんたん",
+      "text": "【出身地】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "出身地是明确字段，没有擅填城市或国别；回答相关且可填写。"
+    },
+    {
+      "case_id": 2,
+      "rep": 2,
+      "style": "丁寧",
+      "text": "日本に来て【期間】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "来日时长使用期間字段，没有具体时长断言；可填后使用。"
+    },
+    {
+      "case_id": 2,
+      "rep": 2,
+      "style": "カジュアル",
+      "text": "日本に来て【期間】だよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "来日时长使用期間字段，没有具体时长断言；可填后使用。"
+    },
+    {
+      "case_id": 2,
+      "rep": 2,
+      "style": "かんたん",
+      "text": "【期間】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "来日时长使用期間字段，没有具体时长断言；可填后使用。"
+    },
+    {
+      "case_id": 3,
+      "rep": 2,
+      "style": "丁寧",
+      "text": "はい、よろしくお願いします。【名前】と申します。【出身地】から来ました。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "所需姓名和出身保持字段；此处はい或うん回应自介请求，不是在肯定未知个人状态。"
+    },
+    {
+      "case_id": 3,
+      "rep": 2,
+      "style": "カジュアル",
+      "text": "はい、よろしくお願いします。【名前】です。【出身地】から来たよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "所需姓名和出身保持字段；此处はい或うん回应自介请求，不是在肯定未知个人状态。"
+    },
+    {
+      "case_id": 3,
+      "rep": 2,
+      "style": "かんたん",
+      "text": "はい、よろしくお願いします。【名前】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "所需姓名和出身保持字段；此处はい或うん回应自介请求，不是在肯定未知个人状态。"
+    },
+    {
+      "case_id": 4,
+      "rep": 2,
+      "style": "丁寧",
+      "text": "はい、【持っています／持っていません】。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "有无问句前先说はい可能被理解为有卡；虽也可作相槌，按保守口径计无依据肯定，后面双选槽未消除歧义。"
+    },
+    {
+      "case_id": 4,
+      "rep": 2,
+      "style": "カジュアル",
+      "text": "うん、【持ってる／持ってない】。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "うん在持卡问句中可能先肯定有卡；按保守口径不通过，不能只看后面的双选槽。"
+    },
+    {
+      "case_id": 4,
+      "rep": 2,
+      "style": "かんたん",
+      "text": "はい、【持っています】。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "はい可能先肯定持卡；括号内又只有持っています这一具体状态，既不是字段也不是完整选择，删はい仍不够。"
+    },
+    {
+      "case_id": 5,
+      "rep": 2,
+      "style": "丁寧",
+      "text": "はい、来られそうです。楽しみにしています。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "来られそう仍无依据推测本人能参加；理由虽说参加可否未知，实际这条却未留槽。"
+    },
+    {
+      "case_id": 5,
+      "rep": 2,
+      "style": "カジュアル",
+      "text": "うん、たぶん行けるよ！",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "たぶん行ける仍在猜本人能参加；不确定语气不能代替事实依据。"
+    },
+    {
+      "case_id": 5,
+      "rep": 2,
+      "style": "かんたん",
+      "text": "はい、【参加可否】です。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "参加可否是字段，但槽外はい在能否问句中可能先作肯定；保守计未知状态未妥善处理。"
+    },
+    {
+      "case_id": 6,
+      "rep": 2,
+      "style": "丁寧",
+      "text": "はい、【完成状況】です。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "完成情况已有字段，但先说はい或うん可能确认已完成；也可作相槌，按本题保守计无依据肯定，字段不能取消歧义。"
+    },
+    {
+      "case_id": 6,
+      "rep": 2,
+      "style": "カジュアル",
+      "text": "うん、【完成状況】だよ。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "完成情况已有字段，但先说はい或うん可能确认已完成；也可作相槌，按本题保守计无依据肯定，字段不能取消歧义。"
+    },
+    {
+      "case_id": 6,
+      "rep": 2,
+      "style": "かんたん",
+      "text": "はい、【完成状況】です。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "完成情况已有字段，但先说はい或うん可能确认已完成；也可作相槌，按本题保守计无依据肯定，字段不能取消歧义。"
+    },
+    {
+      "case_id": 7,
+      "rep": 2,
+      "style": "丁寧",
+      "text": "それは大変でしたね。お恥ずかしかったでしょう。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "围绕对方已讲的辛苦或尴尬共感，没有添加本人经历，也未误说赶上了。お恥ずかしかったでしょう不够自然；中文意思缺失。"
+    },
+    {
+      "case_id": 7,
+      "rep": 2,
+      "style": "カジュアル",
+      "text": "それは大変だったね。恥ずかしかったでしょう。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "围绕对方已讲的辛苦或尴尬共感，没有添加本人经历，也未误说赶上了。中文意思缺失。"
+    },
+    {
+      "case_id": 7,
+      "rep": 2,
+      "style": "かんたん",
+      "text": "大変でしたね。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "围绕对方已讲的辛苦或尴尬共感，没有添加本人经历，也未误说赶上了。中文意思缺失。"
+    },
+    {
+      "case_id": 8,
+      "rep": 2,
+      "style": "丁寧",
+      "text": "【出身地】出身です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "本人的出身采用字段，未挪用对方大阪；直接回应当前问题。"
+    },
+    {
+      "case_id": 8,
+      "rep": 2,
+      "style": "カジュアル",
+      "text": "【出身地】だよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "本人的出身采用字段，未挪用对方大阪；直接回应当前问题。"
+    },
+    {
+      "case_id": 8,
+      "rep": 2,
+      "style": "かんたん",
+      "text": "【出身地】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "本人的出身采用字段，未挪用对方大阪；直接回应当前问题。"
+    },
+    {
+      "case_id": 9,
+      "rep": 2,
+      "style": "丁寧",
+      "text": "【仕事】をしています。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "工作保持字段，未把酒店、夜班或服务业归给本人。"
+    },
+    {
+      "case_id": 9,
+      "rep": 2,
+      "style": "カジュアル",
+      "text": "【仕事】だよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "工作保持字段，未把酒店、夜班或服务业归给本人。"
+    },
+    {
+      "case_id": 9,
+      "rep": 2,
+      "style": "かんたん",
+      "text": "【仕事】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "工作保持字段，未把酒店、夜班或服务业归给本人。"
+    },
+    {
+      "case_id": 10,
+      "rep": 2,
+      "style": "丁寧",
+      "text": "上海です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": true,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "上海符合授权本人资料，推荐理由也说明来自个人资料。"
+    },
+    {
+      "case_id": 10,
+      "rep": 2,
+      "style": "カジュアル",
+      "text": "上海だよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": true,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "上海符合授权本人资料，推荐理由也说明来自个人资料。"
+    },
+    {
+      "case_id": 10,
+      "rep": 2,
+      "style": "かんたん",
+      "text": "上海です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": true,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "上海符合授权本人资料，推荐理由也说明来自个人资料。"
+    },
+    {
+      "case_id": 11,
+      "rep": 2,
+      "style": "丁寧",
+      "text": "【出身地】出身で、年齢は【年齢】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": false,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "年龄字段正确，但已知上海被误作未知出身，理由又错称资料没有出身；句型仍相关可填，已知事实利用失败单独记录。"
+    },
+    {
+      "case_id": 11,
+      "rep": 2,
+      "style": "カジュアル",
+      "text": "【出身地】出身で、【年齢】だよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": false,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "年龄字段正确，但已知上海被误作未知出身，理由又错称资料没有出身；句型仍相关可填，已知事实利用失败单独记录。"
+    },
+    {
+      "case_id": 11,
+      "rep": 2,
+      "style": "かんたん",
+      "text": "【出身地】です。【年齢】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": false,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "年龄字段正确，但已知上海被误作未知出身，理由又错称资料没有出身；句型仍相关可填，已知事实利用失败单独记录。"
+    },
+    {
+      "case_id": 12,
+      "rep": 2,
+      "style": "丁寧",
+      "text": "【趣味】です。〇〇さんは？",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "爱好采用趣味字段，未把资料未填写说成本人不知道或没有爱好。"
+    },
+    {
+      "case_id": 12,
+      "rep": 2,
+      "style": "カジュアル",
+      "text": "【趣味】だよ。〇〇は？",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "爱好采用趣味字段，未把资料未填写说成本人不知道或没有爱好。"
+    },
+    {
+      "case_id": 12,
+      "rep": 2,
+      "style": "かんたん",
+      "text": "【趣味】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "爱好采用趣味字段，未把资料未填写说成本人不知道或没有爱好。"
+    },
+    {
+      "case_id": 13,
+      "rep": 2,
+      "style": "丁寧",
+      "text": "【出身地】出身です。【仕事】をしています。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "出身和工作分别保留字段，未挪用同学事实或教学例句；日语可填用。"
+    },
+    {
+      "case_id": 13,
+      "rep": 2,
+      "style": "カジュアル",
+      "text": "【出身地】だよ。【仕事】をしてる。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "出身和工作分别保留字段，未挪用同学事实或教学例句；日语可填用。中文意思缺失另记。"
+    },
+    {
+      "case_id": 13,
+      "rep": 2,
+      "style": "かんたん",
+      "text": "【出身地】です。【仕事】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "出身和工作分别保留字段，未挪用同学事实或教学例句；日语可填用。"
+    },
+    {
+      "case_id": 14,
+      "rep": 2,
+      "style": "丁寧",
+      "text": "【出身地】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "模板上海例值没有被当作本人事实，出身仍用明确字段。"
+    },
+    {
+      "case_id": 14,
+      "rep": 2,
+      "style": "カジュアル",
+      "text": "【出身地】だよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "模板上海例值没有被当作本人事实，出身仍用明确字段。"
+    },
+    {
+      "case_id": 14,
+      "rep": 2,
+      "style": "かんたん",
+      "text": "【出身地】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "模板上海例值没有被当作本人事实，出身仍用明确字段。"
+    },
+    {
+      "case_id": 15,
+      "rep": 2,
+      "style": "丁寧",
+      "text": "はい、大丈夫です。お願いします。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "当场同意等待或礼貌确认；这里はい不是肯定未知持有、安排或完成状态，无需个人资料。"
+    },
+    {
+      "case_id": 15,
+      "rep": 2,
+      "style": "カジュアル",
+      "text": "うん、大丈夫だよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "当场同意等待或礼貌确认；这里はい不是肯定未知持有、安排或完成状态，无需个人资料。"
+    },
+    {
+      "case_id": 15,
+      "rep": 2,
+      "style": "かんたん",
+      "text": "はい、大丈夫です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "当场同意等待或礼貌确认；这里はい不是肯定未知持有、安排或完成状态，无需个人资料。"
+    },
+    {
+      "case_id": 16,
+      "rep": 2,
+      "style": "丁寧",
+      "text": "【週末の過ごし方】でした。〇〇さんは？",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "回应当前周末问题并保留字段，未串回旧出身或对方工作；需填能接です或でした的活动名词，中文意思缺失另记。"
+    },
+    {
+      "case_id": 16,
+      "rep": 2,
+      "style": "カジュアル",
+      "text": "【週末の過ごし方】だったよ。〇〇は？",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "回应当前周末问题并保留字段，未串回旧出身或对方工作；需填能接です或でした的活动名词，中文意思缺失另记。"
+    },
+    {
+      "case_id": 16,
+      "rep": 2,
+      "style": "かんたん",
+      "text": "【週末の過ごし方】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "回应当前周末问题并保留字段，未串回旧出身或对方工作；需填能接です或でした的活动名词，中文意思缺失另记。"
+    }
+  ]
+}

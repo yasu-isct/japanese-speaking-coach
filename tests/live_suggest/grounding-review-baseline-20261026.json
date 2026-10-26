@@ -8,7 +8,7 @@
   "fixture_sha256": "c3ce9bb2cec87728f1c5c971c930fe7c2c11aeb1d8ec989a6a1d8e31d4a25e46",
   "fixed_input_sha256": "440297717c5d3bf42fddc77212056d1e9d86f15a153980adcc8c978a9eb3aa4c",
   "reviewer": "开发agent逐条审查；第二轮另一个开发agent初审，本agent复核和裁定；非真人、非母语者审查。",
-  "method": "逐条阅读96条日语回复、对应输入、资料和rubric；以下标签人工指定，脚本只合并记录和统计，不按含【】自动判定。",
+  "method": "逐条阅读96条日语回复、对应输入、资料和rubric；以下标签由审查agent逐条指定，脚本只合并记录和统计，不按含【】自动判定。",
   "definitions": {
     "unsupported_personal_claim": "缺乏授权来源的括号外本人事实、状态或明确参加承诺；括号内例值不算该项。当场礼貌表达或仅表达新意愿不自动算既有事实。",
     "wrong_owner": "把对方、他人、教学例句或模板例值错误归为使用者本人事实；包含模板来源归属错误。",
