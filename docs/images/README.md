@@ -14,6 +14,10 @@
 
 `live-review-picker.png`（780×570）はD-028の復習窓。公開fixture `tests/fixtures/session_review/` の2字幕・2回答・2カードを実際にバックグラウンドで書き出した。音声を含まない架空データであり、TTSやAPIを実行していない。画面外の自身のHWNDだけを捕獲、無加工。来歴とSHA：`tests/live_suggest/review-ui-20261026-203339.json`。
 
+## 2026-10-26：任意のローカル多言語検索
+
+`live-materials-semantic.png`（820×600）はD-030の有効状態。公開資料の索引を本機モデルで作り、本文は以前のTTS出典スナップショットを再表示している。画面外の自身のHWNDのみ捕獲し、前台を変えていない。新たな生成回答の画面ではない。SHAと来歴：`tests/live_suggest/semantic-stage-summary-20261026.json`。
+
 ## 2026-10-25：以前の画面と測定
 
 以下の旧素材は `tests/sample_dialogues.md` の10文をWindows Harukaで合成し、アプリのファイル入力で再生したもの。個人プロフィールは公開例のプレースホルダー。旧撮影スクリプトは現在の安全な再描画方式へ置き換え済み。

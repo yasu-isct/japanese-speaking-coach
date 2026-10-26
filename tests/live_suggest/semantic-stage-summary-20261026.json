@@ -1,0 +1,58 @@
+{
+  "kind": "D-030 general-document stage; synthetic/public only",
+  "api_question_cases": 6,
+  "last_code_changes": "Final guards handle reload failures and diagnostic fallback mode only; all retrieval payloads rechecked without API.",
+  "final_retrieval_payloads_identical": 47,
+  "final_answer_source_snapshots_identical": 6,
+  "runtime_sha256": "0e4b19d5e28a4932c12300c5aef8a2183990435a7d5298edb2904d840ebfc470",
+  "suggest_sha256": "77a4cf597d59005d83e6068c9e650fd851146576eafb31604ef20051dd499a6b",
+  "agent_review": {
+    "not_human_or_general_accuracy": true,
+    "recommended_reply_covers_requested_known_facts": {
+      "keyword_baseline": 1,
+      "multilingual": 3,
+      "cases": 3
+    },
+    "missing_document_answer_explicitly_reported_after_rule_update": {
+      "passed": 2,
+      "cases": 3
+    },
+    "known_limitations": [
+      "Simple reply for library renewal omits the before-due-date condition.",
+      "Password case still says cannot disclose instead of stating the provided material lacks it.",
+      "Topic-related snippets can lack the requested answer; empty retrieval is not answer correctness."
+    ]
+  },
+  "tts": {
+    "input_kind": "Windows Haruka synthetic Japanese",
+    "window_hidden": true,
+    "turns": 4,
+    "cached": 4,
+    "complete": true,
+    "hidden_canvas_ms": {
+      "p50": 2522.3,
+      "p95": 2752.5
+    },
+    "api_ms": {
+      "p50": 1626.0,
+      "p95": 1874.0
+    },
+    "visible_latency_measured": false
+  },
+  "ui": {
+    "image": "docs/images/live-materials-semantic.png",
+    "image_sha256": "28fbac9e51afece9571a57e1b1324b90338c71c3752385f2cd3dbe6dc2b5ce2d",
+    "kind": "Current local semantic index status; source text replays a saved public TTS answer",
+    "before": "logs/ui-iterations/materials-d030-before-20261026-205048/materials.png",
+    "after": "logs/ui-iterations/materials-d030-after-20261026-205502/materials.png",
+    "narrow": "logs/ui-iterations/materials-d030-after-narrow-20261026-205504/materials.png",
+    "foreground_unchanged": true,
+    "desktop_pixels_copied": false
+  },
+  "tests": {
+    "total": 230,
+    "passed": 229,
+    "skipped": 1
+  },
+  "private_data_read": false
+}

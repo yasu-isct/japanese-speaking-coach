@@ -1,5 +1,5 @@
 {
-  "_note": "Updated 2026-10-26 through D-028. New reference screenshots replay the frozen 4-turn TTS output through app ed12b8f offscreen; they do not measure new latency. Earlier media and video remain explicitly dated 2026-10-25. Sources: docs/showcase-ja.md and tests/live_suggest/showcase-replay-20261026-200255.json. Local only; not deployed. D-027 adds folder selection and live refresh; materials window renders a public TTS source snapshot. D-028 adds a local archive picker and independent review launcher; review screenshot uses a public synthetic archive without audio.",
+  "_note": "Updated 2026-10-26 through D-028. New reference screenshots replay the frozen 4-turn TTS output through app ed12b8f offscreen; they do not measure new latency. Earlier media and video remain explicitly dated 2026-10-25. Sources: docs/showcase-ja.md and tests/live_suggest/showcase-replay-20261026-200255.json. Local only; not deployed. D-027 adds folder selection and live refresh; materials window renders a public TTS source snapshot. D-028 adds a local archive picker and independent review launcher; review screenshot uses a public synthetic archive without audio. D-030 adds explicitly enabled local multilingual retrieval, full-text token windows, refresh/prefetch and a six-question answer stage; default remains lexical. Current test count is 230 (229 pass, 1 skip). Current hidden four-turn TTS p95 is 2752.5 ms; no new visible latency claim.",
   "status": {
     "ja": "開発中：外部資料による返答とローカル復習を追加",
     "zh": "开发中：已增加外部资料回答和本地复盘",
@@ -11,18 +11,18 @@
     "en": "A Japanese conversation coach for the moment you are mid-conversation — GPU real-time subtitles plus reply suggestions built from the Skill's rules"
   },
   "number": {
-    "value": "5/5 citations · 219 checks",
+    "value": "36/36 ranges · 230 checks",
     "label": {
-      "ja": "資料あり5問で有効な引用5/5（小規模デモ）、単体テスト219件中218成功・1件権限スキップ",
-      "zh": "5个有资料问题均有有效出处（小样本演示）；219项检查，218通过、1项权限跳过",
-      "en": "Valid citations on 5/5 document-backed demo questions; 219 checks, 218 pass and one permission-related skip"
+      "ja": "47の固定質問中36の目標範囲を取得（開発用データ含む）。回答正答率ではない。230テスト中229成功・1スキップ。",
+      "zh": "47个固定问题中的36个目标片段全部找到（含开发数据）；不是回答正确率。230项检查，229通过、1跳过。",
+      "en": "36/36 target ranges retrieved across 47 fixed questions, including development data; not answer accuracy. 230 checks: 229 pass, 1 skip."
     },
     "href": "https://github.com/yasu-isct/japanese-speaking-coach/blob/main/docs/showcase-ja.md"
   },
   "verification": {
-    "ja": "通用資料4問TTSの非表示Canvas完了p95は2.73秒。可視表示の新しい合格を意味せず、D-023の別の可視10問はp95 3.59秒で未達。第三者試用と母語話者レビューは未実施。",
-    "zh": "通用资料4问TTS的隐藏Canvas完成p95为2.73秒，不等于可见显示达标；D-023的另一次可见10问p95为3.59秒，仍未达标。第三方试用与母语者审阅尚未完成。",
-    "en": "Four document TTS turns reached hidden Canvas completion at p95 2.73 s, not visible-display acceptance. A separate D-023 visible 10-turn run reached p95 3.59 s and missed the target. No third-party or native-speaker review yet."
+    "ja": "D-030の4段TTSは非表示Canvas p95 2.753秒。可視3秒は未達。6問の回答段階チェックには資料欠落時の表現と簡単版の条件省略が残り、第三者試用は未実施。",
+    "zh": "D-030四段TTS的隐藏Canvas p95为2.753秒，可见3秒目标仍未通过。6题回答阶段检查仍有资料缺失表述和简易回复条件遗漏，尚无第三方试用。",
+    "en": "D-030 four-turn TTS hidden Canvas p95: 2.753 s; visible 3 s acceptance remains unmet. The six-question answer stage still has a missing-information wording failure and an omitted condition in a simple reply. No third-party trial yet."
   },
   "change": {
     "ja": "2 文の録音だけで認識モデルを替え、後で 1 文まるごと捏造する失敗を見つけた。次は少数の結果で決めず、保存した実音声で再生して確かめてから変える。",
@@ -64,6 +64,11 @@
       "ja": "会話を一覧から選び、音声認識を起動せず課後に復習する",
       "zh": "在列表选择存档，课后独立启动复盘",
       "en": "Choose an archive and review after class without starting live transcription"
+    },
+    {
+      "ja": "任意のローカル多言語検索で、言い換えや他言語の資料を探す",
+      "zh": "可选本地多语言查找，支持不同问法与跨语言资料",
+      "en": "Opt in to local multilingual retrieval for paraphrases and cross-language documents"
     }
   ],
   "media": [

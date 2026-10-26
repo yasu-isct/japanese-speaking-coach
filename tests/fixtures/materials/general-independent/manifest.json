@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "frozen_at": "2026-10-26T20:48:02.259834",
+  "description": "Independent fictional documents frozen before D-030 implementation; no person or private archive.",
+  "sha256": {
+    "queries.json": "9aafb1e816105586ef9b5730e52fe2d398af8c27ddcd1926d52faddd935e8099",
+    "data/cafeteria.md": "612df8a37d6469ad721f683249c4e132af137511e38e6f2dd746414f2dd19b36",
+    "data/equipment.md": "de3ad48b3fa901e20077e12508a8dbe7698ed05af41ad08273360f94774e059e",
+    "data/event.md": "21146d45bc80563cf78e48e5f23fcf9b2e06e837524cfd3ab06198c016aca016",
+    "data/library.md": "ff68104073cba485edddae033e984db877ae183c6222fca8ee86fa0fb5d5616b",
+    "data/project.md": "097a5061afa23239841aff36fb9cb5ea29263053b7e4021613efa093c4e65c15"
+  }
+}

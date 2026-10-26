@@ -244,6 +244,10 @@ class MaterialsStore:
         self._average_length = sum(self._lengths) / len(self._lengths) if self._lengths else 1.0
         self._document_frequency = Counter(term for terms in self._terms for term in terms)
 
+    def rebuild(self, root):
+        """Create a new snapshot with the same limits and retrieval configuration."""
+        return MaterialsStore(root, limits=self.limits, tokenizer=self._tokenizer)
+
     def _paths(self, root: Path, counts: Counter) -> Iterable[Path]:
         pending = [(root, 0)]
         while pending and counts["scanned_entries"] < self.limits.max_scan_entries:

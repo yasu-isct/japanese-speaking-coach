@@ -1,0 +1,3104 @@
+{
+  "api_calls": 0,
+  "private_data_read": false,
+  "runtime_sha256": "278b633b1fc55d405ea19339ef8e5802b9b71c34f8d69144b057bb1d92ec5579",
+  "evaluator_sha256": "5b8882770bdbcb6123c4a18d1df007dc5c2a316f782cab6c27475349486e45db",
+  "suites": {
+    "general": {
+      "index_ms": 109.0569,
+      "windows": 16,
+      "chunks": 16,
+      "timing": {
+        "samples": 10,
+        "p50_ms": 3.7407,
+        "p95_ms": 5.1034
+      },
+      "rows": [
+        {
+          "annotation": {
+            "id": 1,
+            "query": "自然言語処理の授業では、どの形式で提出しますか？",
+            "topic": "课程说明・日语",
+            "relevant": [
+              {
+                "path": "course.md",
+                "start": 6,
+                "end": 6
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-2cc11aa50cfab5142ddf7575",
+              "material-7ff1bee742ed06973aeede83",
+              "material-470c588a7a940ee94044321d"
+            ],
+            "sources": [
+              {
+                "source_id": "material-2cc11aa50cfab5142ddf7575",
+                "relative_path": "course.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "対象：文章を単語や形態素に分ける処理を学ぶ入門授業。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-7ff1bee742ed06973aeede83",
+                "relative_path": "course.md",
+                "start_line": 6,
+                "end_line": 6,
+                "text": "- 提出形式：分析結果をPDFにまとめて提出する。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-470c588a7a940ee94044321d",
+                "relative_path": "course.md",
+                "start_line": 7,
+                "end_line": 7,
+                "text": "- 参考资料：分词、词性标注和简单的检索评价。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-2cc11aa50cfab5142ddf7575\", \"relative_path\": \"course.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"対象：文章を単語や形態素に分ける処理を学ぶ入門授業。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-7ff1bee742ed06973aeede83\", \"relative_path\": \"course.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 提出形式：分析結果をPDFにまとめて提出する。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-470c588a7a940ee94044321d\", \"relative_path\": \"course.md\", \"start_line\": 7, \"end_line\": 7, \"text\": \"- 参考资料：分词、词性标注和简单的检索评价。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "course.md",
+                "start": 6,
+                "end": 6,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 74,
+            "payload_chars": 663,
+            "payload_utf8_bytes": 863
+          }
+        },
+        {
+          "annotation": {
+            "id": 2,
+            "query": "自然语言处理课的作业截止是什么时候？",
+            "topic": "课程截止・中文",
+            "relevant": [
+              {
+                "path": "course.md",
+                "start": 5,
+                "end": 5
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-df697be132dcdeafe31e6b10",
+              "material-2cc11aa50cfab5142ddf7575",
+              "material-7ff1bee742ed06973aeede83"
+            ],
+            "sources": [
+              {
+                "source_id": "material-df697be132dcdeafe31e6b10",
+                "relative_path": "course.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 作业截止：2026年11月5日18点。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-2cc11aa50cfab5142ddf7575",
+                "relative_path": "course.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "対象：文章を単語や形態素に分ける処理を学ぶ入門授業。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-7ff1bee742ed06973aeede83",
+                "relative_path": "course.md",
+                "start_line": 6,
+                "end_line": 6,
+                "text": "- 提出形式：分析結果をPDFにまとめて提出する。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-df697be132dcdeafe31e6b10\", \"relative_path\": \"course.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 作业截止：2026年11月5日18点。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-2cc11aa50cfab5142ddf7575\", \"relative_path\": \"course.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"対象：文章を単語や形態素に分ける処理を学ぶ入門授業。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-7ff1bee742ed06973aeede83\", \"relative_path\": \"course.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 提出形式：分析結果をPDFにまとめて提出する。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "course.md",
+                "start": 5,
+                "end": 5,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 72,
+            "payload_chars": 661,
+            "payload_utf8_bytes": 839
+          }
+        },
+        {
+          "annotation": {
+            "id": 3,
+            "query": "レビュー会議に参加する前に、何を用意しますか？",
+            "topic": "会议事前准备・日语",
+            "relevant": [
+              {
+                "path": "meeting.md",
+                "start": 4,
+                "end": 4
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-1a169af29ada669b05cdad6f",
+              "material-1fa067f0f6dc5ad51c27ed14",
+              "material-2c80b66e659ed73de5b4b466"
+            ],
+            "sources": [
+              {
+                "source_id": "material-1a169af29ada669b05cdad6f",
+                "relative_path": "meeting.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 事前準備：会議までに、提案書と直近の利用統計を用意する。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-1fa067f0f6dc5ad51c27ed14",
+                "relative_path": "meeting.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 参加者：開発担当とデザイン担当。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-2c80b66e659ed73de5b4b466",
+                "relative_path": "meeting.md",
+                "start_line": 6,
+                "end_line": 6,
+                "text": "- 会议链接失效：在团队知识库的「每周评审」页获取新链接。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-1a169af29ada669b05cdad6f\", \"relative_path\": \"meeting.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 事前準備：会議までに、提案書と直近の利用統計を用意する。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-1fa067f0f6dc5ad51c27ed14\", \"relative_path\": \"meeting.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 参加者：開発担当とデザイン担当。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-2c80b66e659ed73de5b4b466\", \"relative_path\": \"meeting.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 会议链接失效：在团队知识库的「每周评审」页获取新链接。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "meeting.md",
+                "start": 4,
+                "end": 4,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 77,
+            "payload_chars": 669,
+            "payload_utf8_bytes": 877
+          }
+        },
+        {
+          "annotation": {
+            "id": 4,
+            "query": "会议链接失效时在哪里找新链接？",
+            "topic": "会议入口・中文",
+            "relevant": [
+              {
+                "path": "meeting.md",
+                "start": 6,
+                "end": 6
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-2c80b66e659ed73de5b4b466"
+            ],
+            "sources": [
+              {
+                "source_id": "material-2c80b66e659ed73de5b4b466",
+                "relative_path": "meeting.md",
+                "start_line": 6,
+                "end_line": 6,
+                "text": "- 会议链接失效：在团队知识库的「每周评审」页获取新链接。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-2c80b66e659ed73de5b4b466\", \"relative_path\": \"meeting.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 会议链接失效：在团队知识库的「每周评审」页获取新链接。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "meeting.md",
+                "start": 6,
+                "end": 6,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 29,
+            "payload_chars": 259,
+            "payload_utf8_bytes": 335
+          }
+        },
+        {
+          "annotation": {
+            "id": 5,
+            "query": "録音機の赤いランプが点滅したら、どうすればいいですか？",
+            "topic": "手册故障提示・日语",
+            "relevant": [
+              {
+                "path": "manual.md",
+                "start": 5,
+                "end": 5
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-850d820e19d9c963f1e8ed9a",
+              "material-3f06fb4ea57c568e2829c4e0",
+              "material-67f1444ae7bbaa5a2fe9c111"
+            ],
+            "sources": [
+              {
+                "source_id": "material-850d820e19d9c963f1e8ed9a",
+                "relative_path": "manual.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-3f06fb4ea57c568e2829c4e0",
+                "relative_path": "manual.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 青いランプ：録音中。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-67f1444ae7bbaa5a2fe9c111",
+                "relative_path": "manual.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 電源：右側のボタンを二秒押す。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-850d820e19d9c963f1e8ed9a\", \"relative_path\": \"manual.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-3f06fb4ea57c568e2829c4e0\", \"relative_path\": \"manual.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 青いランプ：録音中。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-67f1444ae7bbaa5a2fe9c111\", \"relative_path\": \"manual.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 電源：右側のボタンを二秒押す。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "manual.md",
+                "start": 5,
+                "end": 5,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 60,
+            "payload_chars": 664,
+            "payload_utf8_bytes": 868
+          }
+        },
+        {
+          "annotation": {
+            "id": 6,
+            "query": "录音设备录满以后应该怎样处理？",
+            "topic": "手册步骤・中文",
+            "relevant": [
+              {
+                "path": "manual.md",
+                "start": 6,
+                "end": 6
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-e56b061dd6af33adeb908bba",
+              "material-3f06fb4ea57c568e2829c4e0",
+              "material-850d820e19d9c963f1e8ed9a"
+            ],
+            "sources": [
+              {
+                "source_id": "material-e56b061dd6af33adeb908bba",
+                "relative_path": "manual.md",
+                "start_line": 6,
+                "end_line": 6,
+                "text": "- 录满后的处理：先将录音备份到电脑，确认备份完整后再删除设备中的旧录音。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-3f06fb4ea57c568e2829c4e0",
+                "relative_path": "manual.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 青いランプ：録音中。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-850d820e19d9c963f1e8ed9a",
+                "relative_path": "manual.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-e56b061dd6af33adeb908bba\", \"relative_path\": \"manual.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 录满后的处理：先将录音备份到电脑，确认备份完整后再删除设备中的旧录音。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-3f06fb4ea57c568e2829c4e0\", \"relative_path\": \"manual.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 青いランプ：録音中。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-850d820e19d9c963f1e8ed9a\", \"relative_path\": \"manual.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "manual.md",
+                "start": 6,
+                "end": 6,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 80,
+            "payload_chars": 684,
+            "payload_utf8_bytes": 928
+          }
+        },
+        {
+          "annotation": {
+            "id": 7,
+            "query": "この記事で、間隔を空けて復習する利点は何と説明されていますか？",
+            "topic": "文章解释・日语",
+            "relevant": [
+              {
+                "path": "article.md",
+                "start": 3,
+                "end": 3
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-8cd413926774b463c32ed432",
+              "material-a6011cb650d5690ad2e8cdd9",
+              "material-31ecd3f04f30ba9410cdd945"
+            ],
+            "sources": [
+              {
+                "source_id": "material-8cd413926774b463c32ed432",
+                "relative_path": "article.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "間隔を空けて復習すると、忘れかけた内容を思い出す練習になり、長く覚えやすくなる。",
+                "heading": "学習記事：復習の間隔",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-a6011cb650d5690ad2e8cdd9",
+                "relative_path": "article.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "一度にまとめて読む方法は、短い時間で全体を見る目的には使えるが、長期の記憶とは分けて考える。",
+                "heading": "学習記事：復習の間隔",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-31ecd3f04f30ba9410cdd945",
+                "relative_path": "article.md",
+                "start_line": 7,
+                "end_line": 7,
+                "text": "この記事は学習方法の解説であり、医療上の助言ではない。",
+                "heading": "学習記事：復習の間隔",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-8cd413926774b463c32ed432\", \"relative_path\": \"article.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"間隔を空けて復習すると、忘れかけた内容を思い出す練習になり、長く覚えやすくなる。\", \"heading\": \"学習記事：復習の間隔\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-a6011cb650d5690ad2e8cdd9\", \"relative_path\": \"article.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"一度にまとめて読む方法は、短い時間で全体を見る目的には使えるが、長期の記憶とは分けて考える。\", \"heading\": \"学習記事：復習の間隔\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-31ecd3f04f30ba9410cdd945\", \"relative_path\": \"article.md\", \"start_line\": 7, \"end_line\": 7, \"text\": \"この記事は学習方法の解説であり、医療上の助言ではない。\", \"heading\": \"学習記事：復習の間隔\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "article.md",
+                "start": 3,
+                "end": 3,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 113,
+            "payload_chars": 702,
+            "payload_utf8_bytes": 988
+          }
+        },
+        {
+          "annotation": {
+            "id": 8,
+            "query": "复习的间隔应该是多少分钟？",
+            "topic": "文章未给出具体分钟数",
+            "relevant": [],
+            "forbidden": [],
+            "forbid_all_sources": true
+          },
+          "result": {
+            "source_ids": [
+              "material-a6011cb650d5690ad2e8cdd9",
+              "material-8cd413926774b463c32ed432"
+            ],
+            "sources": [
+              {
+                "source_id": "material-a6011cb650d5690ad2e8cdd9",
+                "relative_path": "article.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "一度にまとめて読む方法は、短い時間で全体を見る目的には使えるが、長期の記憶とは分けて考える。",
+                "heading": "学習記事：復習の間隔",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-8cd413926774b463c32ed432",
+                "relative_path": "article.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "間隔を空けて復習すると、忘れかけた内容を思い出す練習になり、長く覚えやすくなる。",
+                "heading": "学習記事：復習の間隔",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-a6011cb650d5690ad2e8cdd9\", \"relative_path\": \"article.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"一度にまとめて読む方法は、短い時間で全体を見る目的には使えるが、長期の記憶とは分けて考える。\", \"heading\": \"学習記事：復習の間隔\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-8cd413926774b463c32ed432\", \"relative_path\": \"article.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"間隔を空けて復習すると、忘れかけた内容を思い出す練習になり、長く覚えやすくなる。\", \"heading\": \"学習記事：復習の間隔\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [],
+            "relevant_ranges_covered": 0,
+            "relevant_ranges_expected": 0,
+            "all_relevant_ranges_covered": null,
+            "forbidden_rule_applicable": true,
+            "forbidden_violations": [
+              {
+                "rule": "no source is relevant to this question",
+                "source_ids": [
+                  "material-a6011cb650d5690ad2e8cdd9",
+                  "material-8cd413926774b463c32ed432"
+                ]
+              }
+            ],
+            "failure_reasons": [
+              "Sent forbidden annotated range no source is relevant to this question"
+            ],
+            "forbidden_free": false,
+            "empty_sources": false,
+            "body_chars": 86,
+            "payload_chars": 495,
+            "payload_utf8_bytes": 707
+          }
+        },
+        {
+          "annotation": {
+            "id": 9,
+            "query": "活动场馆附近的停车费是多少？",
+            "topic": "文档中没有场馆或停车资料",
+            "relevant": [],
+            "forbidden": [],
+            "forbid_all_sources": true
+          },
+          "result": {
+            "source_ids": [],
+            "sources": [],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+            "relevant_ranges": [],
+            "relevant_ranges_covered": 0,
+            "relevant_ranges_expected": 0,
+            "all_relevant_ranges_covered": null,
+            "forbidden_rule_applicable": true,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": true,
+            "body_chars": 0,
+            "payload_chars": 51,
+            "payload_utf8_bytes": 51
+          }
+        },
+        {
+          "annotation": {
+            "id": 10,
+            "query": "このカメラのレンズは交換できますか？",
+            "topic": "文档中没有相机说明",
+            "relevant": [],
+            "forbidden": [],
+            "forbid_all_sources": true
+          },
+          "result": {
+            "source_ids": [
+              "material-3f06fb4ea57c568e2829c4e0"
+            ],
+            "sources": [
+              {
+                "source_id": "material-3f06fb4ea57c568e2829c4e0",
+                "relative_path": "manual.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 青いランプ：録音中。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-3f06fb4ea57c568e2829c4e0\", \"relative_path\": \"manual.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 青いランプ：録音中。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [],
+            "relevant_ranges_covered": 0,
+            "relevant_ranges_expected": 0,
+            "all_relevant_ranges_covered": null,
+            "forbidden_rule_applicable": true,
+            "forbidden_violations": [
+              {
+                "rule": "no source is relevant to this question",
+                "source_ids": [
+                  "material-3f06fb4ea57c568e2829c4e0"
+                ]
+              }
+            ],
+            "failure_reasons": [
+              "Sent forbidden annotated range no source is relevant to this question"
+            ],
+            "forbidden_free": false,
+            "empty_sources": false,
+            "body_chars": 12,
+            "payload_chars": 246,
+            "payload_utf8_bytes": 298
+          }
+        }
+      ],
+      "summary": {
+        "covered": 7,
+        "expected": 7,
+        "empty": 1,
+        "no_data": 3,
+        "mean_payload_chars": 509.4
+      }
+    },
+    "general-followup": {
+      "index_ms": 100.4974,
+      "windows": 16,
+      "chunks": 16,
+      "timing": {
+        "samples": 20,
+        "p50_ms": 3.54805,
+        "p95_ms": 4.7617
+      },
+      "rows": [
+        {
+          "annotation": {
+            "id": 1,
+            "query": "レポートはどんなファイルで出せばいいですか？",
+            "topic": "Japanese paraphrase: submission format",
+            "relevant": [
+              {
+                "path": "course.md",
+                "start": 6,
+                "end": 6
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-1a169af29ada669b05cdad6f",
+              "material-7ff1bee742ed06973aeede83"
+            ],
+            "sources": [
+              {
+                "source_id": "material-1a169af29ada669b05cdad6f",
+                "relative_path": "meeting.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 事前準備：会議までに、提案書と直近の利用統計を用意する。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-7ff1bee742ed06973aeede83",
+                "relative_path": "course.md",
+                "start_line": 6,
+                "end_line": 6,
+                "text": "- 提出形式：分析結果をPDFにまとめて提出する。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-1a169af29ada669b05cdad6f\", \"relative_path\": \"meeting.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 事前準備：会議までに、提案書と直近の利用統計を用意する。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-7ff1bee742ed06973aeede83\", \"relative_path\": \"course.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 提出形式：分析結果をPDFにまとめて提出する。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "course.md",
+                "start": 6,
+                "end": 6,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 55,
+            "payload_chars": 465,
+            "payload_utf8_bytes": 605
+          }
+        },
+        {
+          "annotation": {
+            "id": 2,
+            "query": "自然言語処理の宿題はいつまでですか？",
+            "topic": "Japanese query of Chinese deadline",
+            "relevant": [
+              {
+                "path": "course.md",
+                "start": 5,
+                "end": 5
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-2cc11aa50cfab5142ddf7575",
+              "material-df697be132dcdeafe31e6b10",
+              "material-7ff1bee742ed06973aeede83"
+            ],
+            "sources": [
+              {
+                "source_id": "material-2cc11aa50cfab5142ddf7575",
+                "relative_path": "course.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "対象：文章を単語や形態素に分ける処理を学ぶ入門授業。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-df697be132dcdeafe31e6b10",
+                "relative_path": "course.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 作业截止：2026年11月5日18点。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-7ff1bee742ed06973aeede83",
+                "relative_path": "course.md",
+                "start_line": 6,
+                "end_line": 6,
+                "text": "- 提出形式：分析結果をPDFにまとめて提出する。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-2cc11aa50cfab5142ddf7575\", \"relative_path\": \"course.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"対象：文章を単語や形態素に分ける処理を学ぶ入門授業。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-df697be132dcdeafe31e6b10\", \"relative_path\": \"course.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 作业截止：2026年11月5日18点。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-7ff1bee742ed06973aeede83\", \"relative_path\": \"course.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 提出形式：分析結果をPDFにまとめて提出する。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "course.md",
+                "start": 5,
+                "end": 5,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 72,
+            "payload_chars": 661,
+            "payload_utf8_bytes": 839
+          }
+        },
+        {
+          "annotation": {
+            "id": 3,
+            "query": "自然言語処理ではどんな内容を参考にしますか？",
+            "topic": "Japanese query of Chinese references",
+            "relevant": [
+              {
+                "path": "course.md",
+                "start": 7,
+                "end": 7
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-2cc11aa50cfab5142ddf7575",
+              "material-470c588a7a940ee94044321d",
+              "material-7ff1bee742ed06973aeede83"
+            ],
+            "sources": [
+              {
+                "source_id": "material-2cc11aa50cfab5142ddf7575",
+                "relative_path": "course.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "対象：文章を単語や形態素に分ける処理を学ぶ入門授業。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-470c588a7a940ee94044321d",
+                "relative_path": "course.md",
+                "start_line": 7,
+                "end_line": 7,
+                "text": "- 参考资料：分词、词性标注和简单的检索评价。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-7ff1bee742ed06973aeede83",
+                "relative_path": "course.md",
+                "start_line": 6,
+                "end_line": 6,
+                "text": "- 提出形式：分析結果をPDFにまとめて提出する。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-2cc11aa50cfab5142ddf7575\", \"relative_path\": \"course.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"対象：文章を単語や形態素に分ける処理を学ぶ入門授業。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-470c588a7a940ee94044321d\", \"relative_path\": \"course.md\", \"start_line\": 7, \"end_line\": 7, \"text\": \"- 参考资料：分词、词性标注和简单的检索评价。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-7ff1bee742ed06973aeede83\", \"relative_path\": \"course.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 提出形式：分析結果をPDFにまとめて提出する。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "course.md",
+                "start": 7,
+                "end": 7,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 74,
+            "payload_chars": 663,
+            "payload_utf8_bytes": 863
+          }
+        },
+        {
+          "annotation": {
+            "id": 4,
+            "query": "What is the deadline for the natural language processing assignment?",
+            "topic": "English query of Chinese deadline",
+            "relevant": [
+              {
+                "path": "course.md",
+                "start": 5,
+                "end": 5
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-df697be132dcdeafe31e6b10",
+              "material-2cc11aa50cfab5142ddf7575",
+              "material-7ff1bee742ed06973aeede83"
+            ],
+            "sources": [
+              {
+                "source_id": "material-df697be132dcdeafe31e6b10",
+                "relative_path": "course.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 作业截止：2026年11月5日18点。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-2cc11aa50cfab5142ddf7575",
+                "relative_path": "course.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "対象：文章を単語や形態素に分ける処理を学ぶ入門授業。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-7ff1bee742ed06973aeede83",
+                "relative_path": "course.md",
+                "start_line": 6,
+                "end_line": 6,
+                "text": "- 提出形式：分析結果をPDFにまとめて提出する。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-df697be132dcdeafe31e6b10\", \"relative_path\": \"course.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 作业截止：2026年11月5日18点。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-2cc11aa50cfab5142ddf7575\", \"relative_path\": \"course.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"対象：文章を単語や形態素に分ける処理を学ぶ入門授業。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-7ff1bee742ed06973aeede83\", \"relative_path\": \"course.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 提出形式：分析結果をPDFにまとめて提出する。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "course.md",
+                "start": 5,
+                "end": 5,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 72,
+            "payload_chars": 661,
+            "payload_utf8_bytes": 839
+          }
+        },
+        {
+          "annotation": {
+            "id": 5,
+            "query": "打ち合わせの前に準備する資料を教えてください。",
+            "topic": "Japanese paraphrase: meeting preparation",
+            "relevant": [
+              {
+                "path": "meeting.md",
+                "start": 4,
+                "end": 4
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-1a169af29ada669b05cdad6f",
+              "material-1fa067f0f6dc5ad51c27ed14",
+              "material-4abdd2fbc9bd881e3a7fa88d"
+            ],
+            "sources": [
+              {
+                "source_id": "material-1a169af29ada669b05cdad6f",
+                "relative_path": "meeting.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 事前準備：会議までに、提案書と直近の利用統計を用意する。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-1fa067f0f6dc5ad51c27ed14",
+                "relative_path": "meeting.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 参加者：開発担当とデザイン担当。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-4abdd2fbc9bd881e3a7fa88d",
+                "relative_path": "meeting.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 開催：2026年11月2日、オンライン。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-1a169af29ada669b05cdad6f\", \"relative_path\": \"meeting.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 事前準備：会議までに、提案書と直近の利用統計を用意する。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-1fa067f0f6dc5ad51c27ed14\", \"relative_path\": \"meeting.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 参加者：開発担当とデザイン担当。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-4abdd2fbc9bd881e3a7fa88d\", \"relative_path\": \"meeting.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 開催：2026年11月2日、オンライン。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "meeting.md",
+                "start": 4,
+                "end": 4,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 70,
+            "payload_chars": 662,
+            "payload_utf8_bytes": 842
+          }
+        },
+        {
+          "annotation": {
+            "id": 6,
+            "query": "製品レビューの開催日はいつですか？",
+            "topic": "Japanese paraphrase: meeting date",
+            "relevant": [
+              {
+                "path": "meeting.md",
+                "start": 3,
+                "end": 3
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-4abdd2fbc9bd881e3a7fa88d",
+              "material-1a169af29ada669b05cdad6f",
+              "material-1fa067f0f6dc5ad51c27ed14"
+            ],
+            "sources": [
+              {
+                "source_id": "material-4abdd2fbc9bd881e3a7fa88d",
+                "relative_path": "meeting.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 開催：2026年11月2日、オンライン。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-1a169af29ada669b05cdad6f",
+                "relative_path": "meeting.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 事前準備：会議までに、提案書と直近の利用統計を用意する。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-1fa067f0f6dc5ad51c27ed14",
+                "relative_path": "meeting.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 参加者：開発担当とデザイン担当。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-4abdd2fbc9bd881e3a7fa88d\", \"relative_path\": \"meeting.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 開催：2026年11月2日、オンライン。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-1a169af29ada669b05cdad6f\", \"relative_path\": \"meeting.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 事前準備：会議までに、提案書と直近の利用統計を用意する。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-1fa067f0f6dc5ad51c27ed14\", \"relative_path\": \"meeting.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 参加者：開発担当とデザイン担当。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "meeting.md",
+                "start": 3,
+                "end": 3,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 70,
+            "payload_chars": 662,
+            "payload_utf8_bytes": 842
+          }
+        },
+        {
+          "annotation": {
+            "id": 7,
+            "query": "评审会的参会者有哪些？",
+            "topic": "Chinese query of Japanese participants",
+            "relevant": [
+              {
+                "path": "meeting.md",
+                "start": 5,
+                "end": 5
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-1fa067f0f6dc5ad51c27ed14",
+              "material-2c80b66e659ed73de5b4b466",
+              "material-1a169af29ada669b05cdad6f"
+            ],
+            "sources": [
+              {
+                "source_id": "material-1fa067f0f6dc5ad51c27ed14",
+                "relative_path": "meeting.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 参加者：開発担当とデザイン担当。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-2c80b66e659ed73de5b4b466",
+                "relative_path": "meeting.md",
+                "start_line": 6,
+                "end_line": 6,
+                "text": "- 会议链接失效：在团队知识库的「每周评审」页获取新链接。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-1a169af29ada669b05cdad6f",
+                "relative_path": "meeting.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 事前準備：会議までに、提案書と直近の利用統計を用意する。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-1fa067f0f6dc5ad51c27ed14\", \"relative_path\": \"meeting.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 参加者：開発担当とデザイン担当。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-2c80b66e659ed73de5b4b466\", \"relative_path\": \"meeting.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 会议链接失效：在团队知识库的「每周评审」页获取新链接。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-1a169af29ada669b05cdad6f\", \"relative_path\": \"meeting.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 事前準備：会議までに、提案書と直近の利用統計を用意する。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "meeting.md",
+                "start": 5,
+                "end": 5,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 77,
+            "payload_chars": 669,
+            "payload_utf8_bytes": 877
+          }
+        },
+        {
+          "annotation": {
+            "id": 8,
+            "query": "レビュー会議のURLが使えません。どこで新しいものを探せますか？",
+            "topic": "Japanese query of Chinese meeting URL",
+            "relevant": [
+              {
+                "path": "meeting.md",
+                "start": 6,
+                "end": 6
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-1a169af29ada669b05cdad6f",
+              "material-2c80b66e659ed73de5b4b466",
+              "material-4abdd2fbc9bd881e3a7fa88d"
+            ],
+            "sources": [
+              {
+                "source_id": "material-1a169af29ada669b05cdad6f",
+                "relative_path": "meeting.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 事前準備：会議までに、提案書と直近の利用統計を用意する。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-2c80b66e659ed73de5b4b466",
+                "relative_path": "meeting.md",
+                "start_line": 6,
+                "end_line": 6,
+                "text": "- 会议链接失效：在团队知识库的「每周评审」页获取新链接。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-4abdd2fbc9bd881e3a7fa88d",
+                "relative_path": "meeting.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 開催：2026年11月2日、オンライン。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-1a169af29ada669b05cdad6f\", \"relative_path\": \"meeting.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 事前準備：会議までに、提案書と直近の利用統計を用意する。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-2c80b66e659ed73de5b4b466\", \"relative_path\": \"meeting.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 会议链接失效：在团队知识库的「每周评审」页获取新链接。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-4abdd2fbc9bd881e3a7fa88d\", \"relative_path\": \"meeting.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 開催：2026年11月2日、オンライン。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "meeting.md",
+                "start": 6,
+                "end": 6,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 81,
+            "payload_chars": 673,
+            "payload_utf8_bytes": 875
+          }
+        },
+        {
+          "annotation": {
+            "id": 9,
+            "query": "録音機を起動するには、どのボタンをどれくらい押せばよいですか？",
+            "topic": "Japanese paraphrase: powering a device",
+            "relevant": [
+              {
+                "path": "manual.md",
+                "start": 3,
+                "end": 3
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-67f1444ae7bbaa5a2fe9c111",
+              "material-3f06fb4ea57c568e2829c4e0",
+              "material-e56b061dd6af33adeb908bba"
+            ],
+            "sources": [
+              {
+                "source_id": "material-67f1444ae7bbaa5a2fe9c111",
+                "relative_path": "manual.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 電源：右側のボタンを二秒押す。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-3f06fb4ea57c568e2829c4e0",
+                "relative_path": "manual.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 青いランプ：録音中。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-e56b061dd6af33adeb908bba",
+                "relative_path": "manual.md",
+                "start_line": 6,
+                "end_line": 6,
+                "text": "- 录满后的处理：先将录音备份到电脑，确认备份完整后再删除设备中的旧录音。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-67f1444ae7bbaa5a2fe9c111\", \"relative_path\": \"manual.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 電源：右側のボタンを二秒押す。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-3f06fb4ea57c568e2829c4e0\", \"relative_path\": \"manual.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 青いランプ：録音中。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-e56b061dd6af33adeb908bba\", \"relative_path\": \"manual.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 录满后的处理：先将录音备份到电脑，确认备份完整后再删除设备中的旧录音。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "manual.md",
+                "start": 3,
+                "end": 3,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 66,
+            "payload_chars": 670,
+            "payload_utf8_bytes": 886
+          }
+        },
+        {
+          "annotation": {
+            "id": 10,
+            "query": "青い表示灯は何を意味しますか？",
+            "topic": "Japanese paraphrase: recording indicator",
+            "relevant": [
+              {
+                "path": "manual.md",
+                "start": 4,
+                "end": 4
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-3f06fb4ea57c568e2829c4e0"
+            ],
+            "sources": [
+              {
+                "source_id": "material-3f06fb4ea57c568e2829c4e0",
+                "relative_path": "manual.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 青いランプ：録音中。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-3f06fb4ea57c568e2829c4e0\", \"relative_path\": \"manual.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 青いランプ：録音中。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "manual.md",
+                "start": 4,
+                "end": 4,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 12,
+            "payload_chars": 246,
+            "payload_utf8_bytes": 298
+          }
+        },
+        {
+          "annotation": {
+            "id": 11,
+            "query": "録音機の赤色LEDが点滅しています。対応を教えてください。",
+            "topic": "Japanese paraphrase: battery indicator",
+            "relevant": [
+              {
+                "path": "manual.md",
+                "start": 5,
+                "end": 5
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-850d820e19d9c963f1e8ed9a",
+              "material-3f06fb4ea57c568e2829c4e0",
+              "material-67f1444ae7bbaa5a2fe9c111"
+            ],
+            "sources": [
+              {
+                "source_id": "material-850d820e19d9c963f1e8ed9a",
+                "relative_path": "manual.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-3f06fb4ea57c568e2829c4e0",
+                "relative_path": "manual.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 青いランプ：録音中。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-67f1444ae7bbaa5a2fe9c111",
+                "relative_path": "manual.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 電源：右側のボタンを二秒押す。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-850d820e19d9c963f1e8ed9a\", \"relative_path\": \"manual.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-3f06fb4ea57c568e2829c4e0\", \"relative_path\": \"manual.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 青いランプ：録音中。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-67f1444ae7bbaa5a2fe9c111\", \"relative_path\": \"manual.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 電源：右側のボタンを二秒押す。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "manual.md",
+                "start": 5,
+                "end": 5,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 60,
+            "payload_chars": 664,
+            "payload_utf8_bytes": 868
+          }
+        },
+        {
+          "annotation": {
+            "id": 12,
+            "query": "録音機の容量がいっぱいです。保存済みの音声はどうしますか？",
+            "topic": "Japanese query of Chinese storage instructions",
+            "relevant": [
+              {
+                "path": "manual.md",
+                "start": 6,
+                "end": 6
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-3f06fb4ea57c568e2829c4e0",
+              "material-850d820e19d9c963f1e8ed9a",
+              "material-e56b061dd6af33adeb908bba"
+            ],
+            "sources": [
+              {
+                "source_id": "material-3f06fb4ea57c568e2829c4e0",
+                "relative_path": "manual.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 青いランプ：録音中。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-850d820e19d9c963f1e8ed9a",
+                "relative_path": "manual.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-e56b061dd6af33adeb908bba",
+                "relative_path": "manual.md",
+                "start_line": 6,
+                "end_line": 6,
+                "text": "- 录满后的处理：先将录音备份到电脑，确认备份完整后再删除设备中的旧录音。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-3f06fb4ea57c568e2829c4e0\", \"relative_path\": \"manual.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 青いランプ：録音中。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-850d820e19d9c963f1e8ed9a\", \"relative_path\": \"manual.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-e56b061dd6af33adeb908bba\", \"relative_path\": \"manual.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 录满后的处理：先将录音备份到电脑，确认备份完整后再删除设备中的旧录音。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "manual.md",
+                "start": 6,
+                "end": 6,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 80,
+            "payload_chars": 684,
+            "payload_utf8_bytes": 928
+          }
+        },
+        {
+          "annotation": {
+            "id": 13,
+            "query": "What should I do when the red light on the recorder blinks?",
+            "topic": "English query of Japanese battery instructions",
+            "relevant": [
+              {
+                "path": "manual.md",
+                "start": 5,
+                "end": 5
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-850d820e19d9c963f1e8ed9a",
+              "material-3f06fb4ea57c568e2829c4e0",
+              "material-67f1444ae7bbaa5a2fe9c111"
+            ],
+            "sources": [
+              {
+                "source_id": "material-850d820e19d9c963f1e8ed9a",
+                "relative_path": "manual.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-3f06fb4ea57c568e2829c4e0",
+                "relative_path": "manual.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 青いランプ：録音中。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-67f1444ae7bbaa5a2fe9c111",
+                "relative_path": "manual.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 電源：右側のボタンを二秒押す。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-850d820e19d9c963f1e8ed9a\", \"relative_path\": \"manual.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-3f06fb4ea57c568e2829c4e0\", \"relative_path\": \"manual.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 青いランプ：録音中。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-67f1444ae7bbaa5a2fe9c111\", \"relative_path\": \"manual.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 電源：右側のボタンを二秒押す。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "manual.md",
+                "start": 5,
+                "end": 5,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 60,
+            "payload_chars": 664,
+            "payload_utf8_bytes": 868
+          }
+        },
+        {
+          "annotation": {
+            "id": 14,
+            "query": "复习之间留出间隔有什么好处？",
+            "topic": "Chinese query of Japanese learning article",
+            "relevant": [
+              {
+                "path": "article.md",
+                "start": 3,
+                "end": 3
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-a6011cb650d5690ad2e8cdd9",
+              "material-8cd413926774b463c32ed432",
+              "material-31ecd3f04f30ba9410cdd945"
+            ],
+            "sources": [
+              {
+                "source_id": "material-a6011cb650d5690ad2e8cdd9",
+                "relative_path": "article.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "一度にまとめて読む方法は、短い時間で全体を見る目的には使えるが、長期の記憶とは分けて考える。",
+                "heading": "学習記事：復習の間隔",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-8cd413926774b463c32ed432",
+                "relative_path": "article.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "間隔を空けて復習すると、忘れかけた内容を思い出す練習になり、長く覚えやすくなる。",
+                "heading": "学習記事：復習の間隔",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-31ecd3f04f30ba9410cdd945",
+                "relative_path": "article.md",
+                "start_line": 7,
+                "end_line": 7,
+                "text": "この記事は学習方法の解説であり、医療上の助言ではない。",
+                "heading": "学習記事：復習の間隔",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-a6011cb650d5690ad2e8cdd9\", \"relative_path\": \"article.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"一度にまとめて読む方法は、短い時間で全体を見る目的には使えるが、長期の記憶とは分けて考える。\", \"heading\": \"学習記事：復習の間隔\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-8cd413926774b463c32ed432\", \"relative_path\": \"article.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"間隔を空けて復習すると、忘れかけた内容を思い出す練習になり、長く覚えやすくなる。\", \"heading\": \"学習記事：復習の間隔\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-31ecd3f04f30ba9410cdd945\", \"relative_path\": \"article.md\", \"start_line\": 7, \"end_line\": 7, \"text\": \"この記事は学習方法の解説であり、医療上の助言ではない。\", \"heading\": \"学習記事：復習の間隔\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "article.md",
+                "start": 3,
+                "end": 3,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 113,
+            "payload_chars": 702,
+            "payload_utf8_bytes": 988
+          }
+        },
+        {
+          "annotation": {
+            "id": 15,
+            "query": "まとめ読みはどういう目的なら使えますか？",
+            "topic": "Japanese paraphrase: reading method",
+            "relevant": [
+              {
+                "path": "article.md",
+                "start": 5,
+                "end": 5
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-a6011cb650d5690ad2e8cdd9",
+              "material-2cc11aa50cfab5142ddf7575",
+              "material-7ff1bee742ed06973aeede83"
+            ],
+            "sources": [
+              {
+                "source_id": "material-a6011cb650d5690ad2e8cdd9",
+                "relative_path": "article.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "一度にまとめて読む方法は、短い時間で全体を見る目的には使えるが、長期の記憶とは分けて考える。",
+                "heading": "学習記事：復習の間隔",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-2cc11aa50cfab5142ddf7575",
+                "relative_path": "course.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "対象：文章を単語や形態素に分ける処理を学ぶ入門授業。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-7ff1bee742ed06973aeede83",
+                "relative_path": "course.md",
+                "start_line": 6,
+                "end_line": 6,
+                "text": "- 提出形式：分析結果をPDFにまとめて提出する。",
+                "heading": "自然言語処理・授業案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-a6011cb650d5690ad2e8cdd9\", \"relative_path\": \"article.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"一度にまとめて読む方法は、短い時間で全体を見る目的には使えるが、長期の記憶とは分けて考える。\", \"heading\": \"学習記事：復習の間隔\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-2cc11aa50cfab5142ddf7575\", \"relative_path\": \"course.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"対象：文章を単語や形態素に分ける処理を学ぶ入門授業。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-7ff1bee742ed06973aeede83\", \"relative_path\": \"course.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 提出形式：分析結果をPDFにまとめて提出する。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "article.md",
+                "start": 5,
+                "end": 5,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 97,
+            "payload_chars": 686,
+            "payload_utf8_bytes": 934
+          }
+        },
+        {
+          "annotation": {
+            "id": 16,
+            "query": "録音機を水に濡らしても大丈夫ですか？",
+            "topic": "Japanese paraphrase: water precaution",
+            "relevant": [
+              {
+                "path": "manual.md",
+                "start": 7,
+                "end": 7
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-3f06fb4ea57c568e2829c4e0",
+              "material-707ce44c1c90ad1b5883af3b",
+              "material-e56b061dd6af33adeb908bba",
+              "material-850d820e19d9c963f1e8ed9a"
+            ],
+            "sources": [
+              {
+                "source_id": "material-3f06fb4ea57c568e2829c4e0",
+                "relative_path": "manual.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 青いランプ：録音中。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-707ce44c1c90ad1b5883af3b",
+                "relative_path": "manual.md",
+                "start_line": 7,
+                "end_line": 7,
+                "text": "- 防水仕様：記載なし。水に触れさせない。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-e56b061dd6af33adeb908bba",
+                "relative_path": "manual.md",
+                "start_line": 6,
+                "end_line": 6,
+                "text": "- 录满后的处理：先将录音备份到电脑，确认备份完整后再删除设备中的旧录音。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-850d820e19d9c963f1e8ed9a",
+                "relative_path": "manual.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-3f06fb4ea57c568e2829c4e0\", \"relative_path\": \"manual.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 青いランプ：録音中。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-707ce44c1c90ad1b5883af3b\", \"relative_path\": \"manual.md\", \"start_line\": 7, \"end_line\": 7, \"text\": \"- 防水仕様：記載なし。水に触れさせない。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-e56b061dd6af33adeb908bba\", \"relative_path\": \"manual.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 录满后的处理：先将录音备份到电脑，确认备份完整后再删除设备中的旧录音。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-850d820e19d9c963f1e8ed9a\", \"relative_path\": \"manual.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "manual.md",
+                "start": 7,
+                "end": 7,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 101,
+            "payload_chars": 890,
+            "payload_utf8_bytes": 1204
+          }
+        },
+        {
+          "annotation": {
+            "id": 17,
+            "query": "大学近くの駐車場は一時間いくらですか？",
+            "topic": "No parking information",
+            "relevant": [],
+            "forbidden": [],
+            "forbid_all_sources": true
+          },
+          "result": {
+            "source_ids": [],
+            "sources": [],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+            "relevant_ranges": [],
+            "relevant_ranges_covered": 0,
+            "relevant_ranges_expected": 0,
+            "all_relevant_ranges_covered": null,
+            "forbidden_rule_applicable": true,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": true,
+            "body_chars": 0,
+            "payload_chars": 51,
+            "payload_utf8_bytes": 51
+          }
+        },
+        {
+          "annotation": {
+            "id": 18,
+            "query": "明日の東京は雨ですか？",
+            "topic": "No weather information",
+            "relevant": [],
+            "forbidden": [],
+            "forbid_all_sources": true
+          },
+          "result": {
+            "source_ids": [],
+            "sources": [],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+            "relevant_ranges": [],
+            "relevant_ranges_covered": 0,
+            "relevant_ranges_expected": 0,
+            "all_relevant_ranges_covered": null,
+            "forbidden_rule_applicable": true,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": true,
+            "body_chars": 0,
+            "payload_chars": 51,
+            "payload_utf8_bytes": 51
+          }
+        },
+        {
+          "annotation": {
+            "id": 19,
+            "query": "会議の参加費はいくらですか？",
+            "topic": "Meeting exists but no fee information",
+            "relevant": [],
+            "forbidden": [],
+            "forbid_all_sources": true
+          },
+          "result": {
+            "source_ids": [
+              "material-1a169af29ada669b05cdad6f",
+              "material-1fa067f0f6dc5ad51c27ed14"
+            ],
+            "sources": [
+              {
+                "source_id": "material-1a169af29ada669b05cdad6f",
+                "relative_path": "meeting.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 事前準備：会議までに、提案書と直近の利用統計を用意する。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-1fa067f0f6dc5ad51c27ed14",
+                "relative_path": "meeting.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 参加者：開発担当とデザイン担当。",
+                "heading": "製品レビュー会議の案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-1a169af29ada669b05cdad6f\", \"relative_path\": \"meeting.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 事前準備：会議までに、提案書と直近の利用統計を用意する。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-1fa067f0f6dc5ad51c27ed14\", \"relative_path\": \"meeting.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 参加者：開発担当とデザイン担当。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [],
+            "relevant_ranges_covered": 0,
+            "relevant_ranges_expected": 0,
+            "all_relevant_ranges_covered": null,
+            "forbidden_rule_applicable": true,
+            "forbidden_violations": [
+              {
+                "rule": "no source is relevant to this question",
+                "source_ids": [
+                  "material-1a169af29ada669b05cdad6f",
+                  "material-1fa067f0f6dc5ad51c27ed14"
+                ]
+              }
+            ],
+            "failure_reasons": [
+              "Sent forbidden annotated range no source is relevant to this question"
+            ],
+            "forbidden_free": false,
+            "empty_sources": false,
+            "body_chars": 48,
+            "payload_chars": 459,
+            "payload_utf8_bytes": 591
+          }
+        },
+        {
+          "annotation": {
+            "id": 20,
+            "query": "録音機をBluetoothで接続する方法は？",
+            "topic": "Device exists but no Bluetooth information",
+            "relevant": [],
+            "forbidden": [],
+            "forbid_all_sources": true
+          },
+          "result": {
+            "source_ids": [
+              "material-3f06fb4ea57c568e2829c4e0",
+              "material-e56b061dd6af33adeb908bba",
+              "material-67f1444ae7bbaa5a2fe9c111",
+              "material-850d820e19d9c963f1e8ed9a"
+            ],
+            "sources": [
+              {
+                "source_id": "material-3f06fb4ea57c568e2829c4e0",
+                "relative_path": "manual.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 青いランプ：録音中。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-e56b061dd6af33adeb908bba",
+                "relative_path": "manual.md",
+                "start_line": 6,
+                "end_line": 6,
+                "text": "- 录满后的处理：先将录音备份到电脑，确认备份完整后再删除设备中的旧录音。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-67f1444ae7bbaa5a2fe9c111",
+                "relative_path": "manual.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 電源：右側のボタンを二秒押す。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-850d820e19d9c963f1e8ed9a",
+                "relative_path": "manual.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。",
+                "heading": "録音機・录音设备の操作マニュアル",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-3f06fb4ea57c568e2829c4e0\", \"relative_path\": \"manual.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 青いランプ：録音中。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-e56b061dd6af33adeb908bba\", \"relative_path\": \"manual.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 录满后的处理：先将录音备份到电脑，确认备份完整后再删除设备中的旧录音。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-67f1444ae7bbaa5a2fe9c111\", \"relative_path\": \"manual.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 電源：右側のボタンを二秒押す。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-850d820e19d9c963f1e8ed9a\", \"relative_path\": \"manual.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [],
+            "relevant_ranges_covered": 0,
+            "relevant_ranges_expected": 0,
+            "all_relevant_ranges_covered": null,
+            "forbidden_rule_applicable": true,
+            "forbidden_violations": [
+              {
+                "rule": "no source is relevant to this question",
+                "source_ids": [
+                  "material-3f06fb4ea57c568e2829c4e0",
+                  "material-e56b061dd6af33adeb908bba",
+                  "material-67f1444ae7bbaa5a2fe9c111",
+                  "material-850d820e19d9c963f1e8ed9a"
+                ]
+              }
+            ],
+            "failure_reasons": [
+              "Sent forbidden annotated range no source is relevant to this question"
+            ],
+            "forbidden_free": false,
+            "empty_sources": false,
+            "body_chars": 97,
+            "payload_chars": 886,
+            "payload_utf8_bytes": 1192
+          }
+        }
+      ],
+      "summary": {
+        "covered": 16,
+        "expected": 16,
+        "empty": 2,
+        "no_data": 4,
+        "mean_payload_chars": 588.45
+      }
+    },
+    "general-independent": {
+      "index_ms": 180.8362,
+      "windows": 16,
+      "chunks": 13,
+      "timing": {
+        "samples": 17,
+        "p50_ms": 3.5829,
+        "p95_ms": 4.971
+      },
+      "rows": [
+        {
+          "annotation": {
+            "id": 1,
+            "query": "図書室では何冊を何日間借りられますか？",
+            "topic": "independent public documents",
+            "relevant": [
+              {
+                "path": "library.md",
+                "start": 3,
+                "end": 3
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-9e7f05339215976d12a31f03",
+              "material-6fddfa588f702a77bf4ebb46",
+              "material-bf218949913966e6cb1010a8"
+            ],
+            "sources": [
+              {
+                "source_id": "material-9e7f05339215976d12a31f03",
+                "relative_path": "library.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 借阅规则：每次最多借三本，借期十四天。",
+                "heading": "架空中央図書室の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-6fddfa588f702a77bf4ebb46",
+                "relative_path": "library.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 延期：没有预约者时，可以在到期前办理一次延期。",
+                "heading": "架空中央図書室の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-bf218949913966e6cb1010a8",
+                "relative_path": "event.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。閉会の案内として、忘れ物は受付で十四日間保管し、受け取りには整理番号が必要と説明した。",
+                "heading": "架空展示イベントの運営記録",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-9e7f05339215976d12a31f03\", \"relative_path\": \"library.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 借阅规则：每次最多借三本，借期十四天。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-6fddfa588f702a77bf4ebb46\", \"relative_path\": \"library.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 延期：没有预约者时，可以在到期前办理一次延期。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-bf218949913966e6cb1010a8\", \"relative_path\": \"event.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。閉会の案内として、忘れ物は受付で十四日間保管し、受け取りには整理番号が必要と説明した。\", \"heading\": \"架空展示イベントの運営記録\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "library.md",
+                "start": 3,
+                "end": 3,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 545,
+            "payload_chars": 1135,
+            "payload_utf8_bytes": 2283
+          }
+        },
+        {
+          "annotation": {
+            "id": 2,
+            "query": "図書室の本はどんな条件で貸出期間を延ばせますか？",
+            "topic": "independent public documents",
+            "relevant": [
+              {
+                "path": "library.md",
+                "start": 4,
+                "end": 4
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-9e7f05339215976d12a31f03",
+              "material-6fddfa588f702a77bf4ebb46",
+              "material-38a1840c43a1eabf4237a395"
+            ],
+            "sources": [
+              {
+                "source_id": "material-9e7f05339215976d12a31f03",
+                "relative_path": "library.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 借阅规则：每次最多借三本，借期十四天。",
+                "heading": "架空中央図書室の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-6fddfa588f702a77bf4ebb46",
+                "relative_path": "library.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 延期：没有预约者时，可以在到期前办理一次延期。",
+                "heading": "架空中央図書室の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-38a1840c43a1eabf4237a395",
+                "relative_path": "library.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 返却：閉館中は入口右側の返却箱に入れる。",
+                "heading": "架空中央図書室の案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-9e7f05339215976d12a31f03\", \"relative_path\": \"library.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 借阅规则：每次最多借三本，借期十四天。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-6fddfa588f702a77bf4ebb46\", \"relative_path\": \"library.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 延期：没有预约者时，可以在到期前办理一次延期。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-38a1840c43a1eabf4237a395\", \"relative_path\": \"library.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 返却：閉館中は入口右側の返却箱に入れる。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "library.md",
+                "start": 4,
+                "end": 4,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 68,
+            "payload_chars": 657,
+            "payload_utf8_bytes": 841
+          }
+        },
+        {
+          "annotation": {
+            "id": 3,
+            "query": "图书室关门后要把书还到哪里？",
+            "topic": "independent public documents",
+            "relevant": [
+              {
+                "path": "library.md",
+                "start": 5,
+                "end": 5
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-38a1840c43a1eabf4237a395",
+              "material-6fddfa588f702a77bf4ebb46",
+              "material-9e7f05339215976d12a31f03"
+            ],
+            "sources": [
+              {
+                "source_id": "material-38a1840c43a1eabf4237a395",
+                "relative_path": "library.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 返却：閉館中は入口右側の返却箱に入れる。",
+                "heading": "架空中央図書室の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-6fddfa588f702a77bf4ebb46",
+                "relative_path": "library.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 延期：没有预约者时，可以在到期前办理一次延期。",
+                "heading": "架空中央図書室の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-9e7f05339215976d12a31f03",
+                "relative_path": "library.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 借阅规则：每次最多借三本，借期十四天。",
+                "heading": "架空中央図書室の案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-38a1840c43a1eabf4237a395\", \"relative_path\": \"library.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 返却：閉館中は入口右側の返却箱に入れる。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-6fddfa588f702a77bf4ebb46\", \"relative_path\": \"library.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 延期：没有预约者时，可以在到期前办理一次延期。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-9e7f05339215976d12a31f03\", \"relative_path\": \"library.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 借阅规则：每次最多借三本，借期十四天。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "library.md",
+                "start": 5,
+                "end": 5,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 68,
+            "payload_chars": 657,
+            "payload_utf8_bytes": 841
+          }
+        },
+        {
+          "annotation": {
+            "id": 4,
+            "query": "研修楼食堂周末营业吗？",
+            "topic": "independent public documents",
+            "relevant": [
+              {
+                "path": "cafeteria.md",
+                "start": 3,
+                "end": 3
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-031860f5f2f39b4730a2b6a4",
+              "material-b774117b317cc87f099ea1ad",
+              "material-d1c066921f6d9e44a359bc8c"
+            ],
+            "sources": [
+              {
+                "source_id": "material-031860f5f2f39b4730a2b6a4",
+                "relative_path": "cafeteria.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 営業日：月曜日から金曜日。土日と祝日は休み。",
+                "heading": "架空研修棟食堂の利用メモ",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-b774117b317cc87f099ea1ad",
+                "relative_path": "cafeteria.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 菜单：每天提供两种套餐，其中一种不含肉。",
+                "heading": "架空研修棟食堂の利用メモ",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-d1c066921f6d9e44a359bc8c",
+                "relative_path": "cafeteria.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 支払い：食券は現金だけで購入する。カードや電子マネーは使えない。",
+                "heading": "架空研修棟食堂の利用メモ",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-031860f5f2f39b4730a2b6a4\", \"relative_path\": \"cafeteria.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 営業日：月曜日から金曜日。土日と祝日は休み。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-b774117b317cc87f099ea1ad\", \"relative_path\": \"cafeteria.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 菜单：每天提供两种套餐，其中一种不含肉。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-d1c066921f6d9e44a359bc8c\", \"relative_path\": \"cafeteria.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 支払い：食券は現金だけで購入する。カードや電子マネーは使えない。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "cafeteria.md",
+                "start": 3,
+                "end": 3,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 80,
+            "payload_chars": 681,
+            "payload_utf8_bytes": 901
+          }
+        },
+        {
+          "annotation": {
+            "id": 5,
+            "query": "食堂能刷卡或者用电子钱包付款吗？",
+            "topic": "independent public documents",
+            "relevant": [
+              {
+                "path": "cafeteria.md",
+                "start": 4,
+                "end": 4
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-d1c066921f6d9e44a359bc8c",
+              "material-b774117b317cc87f099ea1ad",
+              "material-031860f5f2f39b4730a2b6a4"
+            ],
+            "sources": [
+              {
+                "source_id": "material-d1c066921f6d9e44a359bc8c",
+                "relative_path": "cafeteria.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 支払い：食券は現金だけで購入する。カードや電子マネーは使えない。",
+                "heading": "架空研修棟食堂の利用メモ",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-b774117b317cc87f099ea1ad",
+                "relative_path": "cafeteria.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 菜单：每天提供两种套餐，其中一种不含肉。",
+                "heading": "架空研修棟食堂の利用メモ",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-031860f5f2f39b4730a2b6a4",
+                "relative_path": "cafeteria.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 営業日：月曜日から金曜日。土日と祝日は休み。",
+                "heading": "架空研修棟食堂の利用メモ",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-d1c066921f6d9e44a359bc8c\", \"relative_path\": \"cafeteria.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 支払い：食券は現金だけで購入する。カードや電子マネーは使えない。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-b774117b317cc87f099ea1ad\", \"relative_path\": \"cafeteria.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 菜单：每天提供两种套餐，其中一种不含肉。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-031860f5f2f39b4730a2b6a4\", \"relative_path\": \"cafeteria.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 営業日：月曜日から金曜日。土日と祝日は休み。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "cafeteria.md",
+                "start": 4,
+                "end": 4,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 80,
+            "payload_chars": 681,
+            "payload_utf8_bytes": 901
+          }
+        },
+        {
+          "annotation": {
+            "id": 6,
+            "query": "食堂には肉を使わない食事はありますか？",
+            "topic": "independent public documents",
+            "relevant": [
+              {
+                "path": "cafeteria.md",
+                "start": 5,
+                "end": 5
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-b774117b317cc87f099ea1ad",
+              "material-d1c066921f6d9e44a359bc8c",
+              "material-031860f5f2f39b4730a2b6a4"
+            ],
+            "sources": [
+              {
+                "source_id": "material-b774117b317cc87f099ea1ad",
+                "relative_path": "cafeteria.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 菜单：每天提供两种套餐，其中一种不含肉。",
+                "heading": "架空研修棟食堂の利用メモ",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-d1c066921f6d9e44a359bc8c",
+                "relative_path": "cafeteria.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 支払い：食券は現金だけで購入する。カードや電子マネーは使えない。",
+                "heading": "架空研修棟食堂の利用メモ",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-031860f5f2f39b4730a2b6a4",
+                "relative_path": "cafeteria.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 営業日：月曜日から金曜日。土日と祝日は休み。",
+                "heading": "架空研修棟食堂の利用メモ",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-b774117b317cc87f099ea1ad\", \"relative_path\": \"cafeteria.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 菜单：每天提供两种套餐，其中一种不含肉。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-d1c066921f6d9e44a359bc8c\", \"relative_path\": \"cafeteria.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 支払い：食券は現金だけで購入する。カードや電子マネーは使えない。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-031860f5f2f39b4730a2b6a4\", \"relative_path\": \"cafeteria.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 営業日：月曜日から金曜日。土日と祝日は休み。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "cafeteria.md",
+                "start": 5,
+                "end": 5,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 80,
+            "payload_chars": 681,
+            "payload_utf8_bytes": 901
+          }
+        },
+        {
+          "annotation": {
+            "id": 7,
+            "query": "Orionにアップロードしたテストファイルは、いつ消えますか？",
+            "topic": "independent public documents",
+            "relevant": [
+              {
+                "path": "project.md",
+                "start": 3,
+                "end": 3
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-065ae87134cb2e238d8e3aac",
+              "material-bf05409aa1c7ce65691ed6af",
+              "material-b3a567c3f6cd84e741bea5b6",
+              "material-8e064c15453954a54ae5125c"
+            ],
+            "sources": [
+              {
+                "source_id": "material-065ae87134cb2e238d8e3aac",
+                "relative_path": "project.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 数据保留：上传的测试文件在七天后自动删除。",
+                "heading": "架空Orionプロジェクトの仕様",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-bf05409aa1c7ce65691ed6af",
+                "relative_path": "equipment.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 返却期限：利用した日の十七時。",
+                "heading": "架空工房の機材貸出",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-b3a567c3f6cd84e741bea5b6",
+                "relative_path": "project.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 連絡：不具合を見つけたら、管理画面の問い合わせフォームから報告する。",
+                "heading": "架空Orionプロジェクトの仕様",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-8e064c15453954a54ae5125c",
+                "relative_path": "project.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 容量：一回のアップロードは最大20MB。",
+                "heading": "架空Orionプロジェクトの仕様",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-065ae87134cb2e238d8e3aac\", \"relative_path\": \"project.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 数据保留：上传的测试文件在七天后自动删除。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-bf05409aa1c7ce65691ed6af\", \"relative_path\": \"equipment.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 返却期限：利用した日の十七時。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-b3a567c3f6cd84e741bea5b6\", \"relative_path\": \"project.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 連絡：不具合を見つけたら、管理画面の問い合わせフォームから報告する。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-8e064c15453954a54ae5125c\", \"relative_path\": \"project.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 容量：一回のアップロードは最大20MB。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "project.md",
+                "start": 3,
+                "end": 3,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 98,
+            "payload_chars": 886,
+            "payload_utf8_bytes": 1142
+          }
+        },
+        {
+          "annotation": {
+            "id": 8,
+            "query": "Orion单次最多能上传多大的文件？",
+            "topic": "independent public documents",
+            "relevant": [
+              {
+                "path": "project.md",
+                "start": 4,
+                "end": 4
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-065ae87134cb2e238d8e3aac",
+              "material-8e064c15453954a54ae5125c"
+            ],
+            "sources": [
+              {
+                "source_id": "material-065ae87134cb2e238d8e3aac",
+                "relative_path": "project.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 数据保留：上传的测试文件在七天后自动删除。",
+                "heading": "架空Orionプロジェクトの仕様",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-8e064c15453954a54ae5125c",
+                "relative_path": "project.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 容量：一回のアップロードは最大20MB。",
+                "heading": "架空Orionプロジェクトの仕様",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-065ae87134cb2e238d8e3aac\", \"relative_path\": \"project.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 数据保留：上传的测试文件在七天后自动删除。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-8e064c15453954a54ae5125c\", \"relative_path\": \"project.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 容量：一回のアップロードは最大20MB。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "project.md",
+                "start": 4,
+                "end": 4,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 45,
+            "payload_chars": 466,
+            "payload_utf8_bytes": 584
+          }
+        },
+        {
+          "annotation": {
+            "id": 9,
+            "query": "Where should I report a bug in Orion?",
+            "topic": "independent public documents",
+            "relevant": [
+              {
+                "path": "project.md",
+                "start": 5,
+                "end": 5
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-b3a567c3f6cd84e741bea5b6"
+            ],
+            "sources": [
+              {
+                "source_id": "material-b3a567c3f6cd84e741bea5b6",
+                "relative_path": "project.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 連絡：不具合を見つけたら、管理画面の問い合わせフォームから報告する。",
+                "heading": "架空Orionプロジェクトの仕様",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-b3a567c3f6cd84e741bea5b6\", \"relative_path\": \"project.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 連絡：不具合を見つけたら、管理画面の問い合わせフォームから報告する。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "project.md",
+                "start": 5,
+                "end": 5,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 36,
+            "payload_chars": 271,
+            "payload_utf8_bytes": 361
+          }
+        },
+        {
+          "annotation": {
+            "id": 10,
+            "query": "工房的设备最晚要提前多久预约？",
+            "topic": "independent public documents",
+            "relevant": [
+              {
+                "path": "equipment.md",
+                "start": 3,
+                "end": 3
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-24cb730f75eb97a04d048f30",
+              "material-bf05409aa1c7ce65691ed6af",
+              "material-bf218949913966e6cb1010a8"
+            ],
+            "sources": [
+              {
+                "source_id": "material-24cb730f75eb97a04d048f30",
+                "relative_path": "equipment.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 貸出受付：利用日の前日までに予約する。",
+                "heading": "架空工房の機材貸出",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-bf05409aa1c7ce65691ed6af",
+                "relative_path": "equipment.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 返却期限：利用した日の十七時。",
+                "heading": "架空工房の機材貸出",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-bf218949913966e6cb1010a8",
+                "relative_path": "event.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。閉会の案内として、忘れ物は受付で十四日間保管し、受け取りには整理番号が必要と説明した。",
+                "heading": "架空展示イベントの運営記録",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-24cb730f75eb97a04d048f30\", \"relative_path\": \"equipment.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 貸出受付：利用日の前日までに予約する。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-bf05409aa1c7ce65691ed6af\", \"relative_path\": \"equipment.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 返却期限：利用した日の十七時。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-bf218949913966e6cb1010a8\", \"relative_path\": \"event.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。閉会の案内として、忘れ物は受付で十四日間保管し、受け取りには整理番号が必要と説明した。\", \"heading\": \"架空展示イベントの運営記録\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "equipment.md",
+                "start": 3,
+                "end": 3,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 537,
+            "payload_chars": 1129,
+            "payload_utf8_bytes": 2257
+          }
+        },
+        {
+          "annotation": {
+            "id": 11,
+            "query": "工房借的设备最晚几点还？",
+            "topic": "independent public documents",
+            "relevant": [
+              {
+                "path": "equipment.md",
+                "start": 4,
+                "end": 4
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-bf05409aa1c7ce65691ed6af",
+              "material-24cb730f75eb97a04d048f30",
+              "material-9e7f05339215976d12a31f03"
+            ],
+            "sources": [
+              {
+                "source_id": "material-bf05409aa1c7ce65691ed6af",
+                "relative_path": "equipment.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 返却期限：利用した日の十七時。",
+                "heading": "架空工房の機材貸出",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-24cb730f75eb97a04d048f30",
+                "relative_path": "equipment.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 貸出受付：利用日の前日までに予約する。",
+                "heading": "架空工房の機材貸出",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-9e7f05339215976d12a31f03",
+                "relative_path": "library.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 借阅规则：每次最多借三本，借期十四天。",
+                "heading": "架空中央図書室の案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-bf05409aa1c7ce65691ed6af\", \"relative_path\": \"equipment.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 返却期限：利用した日の十七時。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-24cb730f75eb97a04d048f30\", \"relative_path\": \"equipment.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 貸出受付：利用日の前日までに予約する。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-9e7f05339215976d12a31f03\", \"relative_path\": \"library.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 借阅规则：每次最多借三本，借期十四天。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "equipment.md",
+                "start": 4,
+                "end": 4,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 59,
+            "payload_chars": 650,
+            "payload_utf8_bytes": 812
+          }
+        },
+        {
+          "annotation": {
+            "id": 12,
+            "query": "What items belong in the equipment return box?",
+            "topic": "independent public documents",
+            "relevant": [
+              {
+                "path": "equipment.md",
+                "start": 5,
+                "end": 5
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-a6ea8b4cb1ccb899878cccec",
+              "material-bf05409aa1c7ce65691ed6af",
+              "material-38a1840c43a1eabf4237a395"
+            ],
+            "sources": [
+              {
+                "source_id": "material-a6ea8b4cb1ccb899878cccec",
+                "relative_path": "equipment.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 内容物：箱には本体、ケーブル、説明書の三点を入れる。",
+                "heading": "架空工房の機材貸出",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-bf05409aa1c7ce65691ed6af",
+                "relative_path": "equipment.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 返却期限：利用した日の十七時。",
+                "heading": "架空工房の機材貸出",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-38a1840c43a1eabf4237a395",
+                "relative_path": "library.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 返却：閉館中は入口右側の返却箱に入れる。",
+                "heading": "架空中央図書室の案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-a6ea8b4cb1ccb899878cccec\", \"relative_path\": \"equipment.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 内容物：箱には本体、ケーブル、説明書の三点を入れる。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-bf05409aa1c7ce65691ed6af\", \"relative_path\": \"equipment.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 返却期限：利用した日の十七時。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-38a1840c43a1eabf4237a395\", \"relative_path\": \"library.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 返却：閉館中は入口右側の返却箱に入れる。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "equipment.md",
+                "start": 5,
+                "end": 5,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 67,
+            "payload_chars": 658,
+            "payload_utf8_bytes": 836
+          }
+        },
+        {
+          "annotation": {
+            "id": 13,
+            "query": "展示活动的失物会保管多久，领取时要提供什么？",
+            "topic": "independent public documents",
+            "relevant": [
+              {
+                "path": "event.md",
+                "start": 3,
+                "end": 3
+              }
+            ],
+            "forbidden": []
+          },
+          "result": {
+            "source_ids": [
+              "material-bf218949913966e6cb1010a8",
+              "material-bf05409aa1c7ce65691ed6af",
+              "material-065ae87134cb2e238d8e3aac"
+            ],
+            "sources": [
+              {
+                "source_id": "material-bf218949913966e6cb1010a8",
+                "relative_path": "event.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。閉会の案内として、忘れ物は受付で十四日間保管し、受け取りには整理番号が必要と説明した。",
+                "heading": "架空展示イベントの運営記録",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-bf05409aa1c7ce65691ed6af",
+                "relative_path": "equipment.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 返却期限：利用した日の十七時。",
+                "heading": "架空工房の機材貸出",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-065ae87134cb2e238d8e3aac",
+                "relative_path": "project.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 数据保留：上传的测试文件在七天后自动删除。",
+                "heading": "架空Orionプロジェクトの仕様",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-bf218949913966e6cb1010a8\", \"relative_path\": \"event.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。閉会の案内として、忘れ物は受付で十四日間保管し、受け取りには整理番号が必要と説明した。\", \"heading\": \"架空展示イベントの運営記録\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-bf05409aa1c7ce65691ed6af\", \"relative_path\": \"equipment.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 返却期限：利用した日の十七時。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-065ae87134cb2e238d8e3aac\", \"relative_path\": \"project.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 数据保留：上传的测试文件在七天后自动删除。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [
+              {
+                "path": "event.md",
+                "start": 3,
+                "end": 3,
+                "covered": true
+              }
+            ],
+            "relevant_ranges_covered": 1,
+            "relevant_ranges_expected": 1,
+            "all_relevant_ranges_covered": true,
+            "forbidden_rule_applicable": false,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": false,
+            "body_chars": 539,
+            "payload_chars": 1136,
+            "payload_utf8_bytes": 2272
+          }
+        },
+        {
+          "annotation": {
+            "id": 14,
+            "query": "図書室の年間会費はいくらですか？",
+            "topic": "independent public documents",
+            "relevant": [],
+            "forbidden": [],
+            "forbid_all_sources": true
+          },
+          "result": {
+            "source_ids": [
+              "material-9e7f05339215976d12a31f03",
+              "material-6fddfa588f702a77bf4ebb46",
+              "material-38a1840c43a1eabf4237a395"
+            ],
+            "sources": [
+              {
+                "source_id": "material-9e7f05339215976d12a31f03",
+                "relative_path": "library.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 借阅规则：每次最多借三本，借期十四天。",
+                "heading": "架空中央図書室の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-6fddfa588f702a77bf4ebb46",
+                "relative_path": "library.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 延期：没有预约者时，可以在到期前办理一次延期。",
+                "heading": "架空中央図書室の案内",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-38a1840c43a1eabf4237a395",
+                "relative_path": "library.md",
+                "start_line": 5,
+                "end_line": 5,
+                "text": "- 返却：閉館中は入口右側の返却箱に入れる。",
+                "heading": "架空中央図書室の案内",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-9e7f05339215976d12a31f03\", \"relative_path\": \"library.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 借阅规则：每次最多借三本，借期十四天。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-6fddfa588f702a77bf4ebb46\", \"relative_path\": \"library.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 延期：没有预约者时，可以在到期前办理一次延期。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-38a1840c43a1eabf4237a395\", \"relative_path\": \"library.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 返却：閉館中は入口右側の返却箱に入れる。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [],
+            "relevant_ranges_covered": 0,
+            "relevant_ranges_expected": 0,
+            "all_relevant_ranges_covered": null,
+            "forbidden_rule_applicable": true,
+            "forbidden_violations": [
+              {
+                "rule": "no source is relevant to this question",
+                "source_ids": [
+                  "material-9e7f05339215976d12a31f03",
+                  "material-6fddfa588f702a77bf4ebb46",
+                  "material-38a1840c43a1eabf4237a395"
+                ]
+              }
+            ],
+            "failure_reasons": [
+              "Sent forbidden annotated range no source is relevant to this question"
+            ],
+            "forbidden_free": false,
+            "empty_sources": false,
+            "body_chars": 68,
+            "payload_chars": 657,
+            "payload_utf8_bytes": 841
+          }
+        },
+        {
+          "annotation": {
+            "id": 15,
+            "query": "Orionのログインパスワードを教えてください。",
+            "topic": "independent public documents",
+            "relevant": [],
+            "forbidden": [],
+            "forbid_all_sources": true
+          },
+          "result": {
+            "source_ids": [
+              "material-8e064c15453954a54ae5125c"
+            ],
+            "sources": [
+              {
+                "source_id": "material-8e064c15453954a54ae5125c",
+                "relative_path": "project.md",
+                "start_line": 4,
+                "end_line": 4,
+                "text": "- 容量：一回のアップロードは最大20MB。",
+                "heading": "架空Orionプロジェクトの仕様",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-8e064c15453954a54ae5125c\", \"relative_path\": \"project.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 容量：一回のアップロードは最大20MB。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [],
+            "relevant_ranges_covered": 0,
+            "relevant_ranges_expected": 0,
+            "all_relevant_ranges_covered": null,
+            "forbidden_rule_applicable": true,
+            "forbidden_violations": [
+              {
+                "rule": "no source is relevant to this question",
+                "source_ids": [
+                  "material-8e064c15453954a54ae5125c"
+                ]
+              }
+            ],
+            "failure_reasons": [
+              "Sent forbidden annotated range no source is relevant to this question"
+            ],
+            "forbidden_free": false,
+            "empty_sources": false,
+            "body_chars": 22,
+            "payload_chars": 257,
+            "payload_utf8_bytes": 311
+          }
+        },
+        {
+          "annotation": {
+            "id": 16,
+            "query": "研修棟食堂の営業時間は何時から何時までですか？",
+            "topic": "independent public documents",
+            "relevant": [],
+            "forbidden": [],
+            "forbid_all_sources": true
+          },
+          "result": {
+            "source_ids": [
+              "material-031860f5f2f39b4730a2b6a4",
+              "material-24cb730f75eb97a04d048f30",
+              "material-bf218949913966e6cb1010a8"
+            ],
+            "sources": [
+              {
+                "source_id": "material-031860f5f2f39b4730a2b6a4",
+                "relative_path": "cafeteria.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 営業日：月曜日から金曜日。土日と祝日は休み。",
+                "heading": "架空研修棟食堂の利用メモ",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-24cb730f75eb97a04d048f30",
+                "relative_path": "equipment.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "- 貸出受付：利用日の前日までに予約する。",
+                "heading": "架空工房の機材貸出",
+                "owner_hint": "unverified"
+              },
+              {
+                "source_id": "material-bf218949913966e6cb1010a8",
+                "relative_path": "event.md",
+                "start_line": 3,
+                "end_line": 3,
+                "text": "会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。閉会の案内として、忘れ物は受付で十四日間保管し、受け取りには整理番号が必要と説明した。",
+                "heading": "架空展示イベントの運営記録",
+                "owner_hint": "unverified"
+              }
+            ],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-031860f5f2f39b4730a2b6a4\", \"relative_path\": \"cafeteria.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 営業日：月曜日から金曜日。土日と祝日は休み。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-24cb730f75eb97a04d048f30\", \"relative_path\": \"equipment.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 貸出受付：利用日の前日までに予約する。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-bf218949913966e6cb1010a8\", \"relative_path\": \"event.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。閉会の案内として、忘れ物は受付で十四日間保管し、受け取りには整理番号が必要と説明した。\", \"heading\": \"架空展示イベントの運営記録\", \"owner_hint\": \"unverified\"}]}",
+            "relevant_ranges": [],
+            "relevant_ranges_covered": 0,
+            "relevant_ranges_expected": 0,
+            "all_relevant_ranges_covered": null,
+            "forbidden_rule_applicable": true,
+            "forbidden_violations": [
+              {
+                "rule": "no source is relevant to this question",
+                "source_ids": [
+                  "material-031860f5f2f39b4730a2b6a4",
+                  "material-24cb730f75eb97a04d048f30",
+                  "material-bf218949913966e6cb1010a8"
+                ]
+              }
+            ],
+            "failure_reasons": [
+              "Sent forbidden annotated range no source is relevant to this question"
+            ],
+            "forbidden_free": false,
+            "empty_sources": false,
+            "body_chars": 544,
+            "payload_chars": 1139,
+            "payload_utf8_bytes": 2287
+          }
+        },
+        {
+          "annotation": {
+            "id": 17,
+            "query": "这个周末东京会下雨吗？",
+            "topic": "independent public documents",
+            "relevant": [],
+            "forbidden": [],
+            "forbid_all_sources": true
+          },
+          "result": {
+            "source_ids": [],
+            "sources": [],
+            "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+            "relevant_ranges": [],
+            "relevant_ranges_covered": 0,
+            "relevant_ranges_expected": 0,
+            "all_relevant_ranges_covered": null,
+            "forbidden_rule_applicable": true,
+            "forbidden_violations": [],
+            "failure_reasons": [],
+            "forbidden_free": true,
+            "empty_sources": true,
+            "body_chars": 0,
+            "payload_chars": 51,
+            "payload_utf8_bytes": 51
+          }
+        }
+      ],
+      "summary": {
+        "covered": 13,
+        "expected": 13,
+        "empty": 1,
+        "no_data": 4,
+        "mean_payload_chars": 693.6470588235294
+      }
+    }
+  }
+}

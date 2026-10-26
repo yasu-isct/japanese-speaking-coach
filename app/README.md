@@ -57,6 +57,16 @@
 
 命令中的 `--materials` 优先于上次选择；单独传这个参数不会改掉已记住的选择。窗口里选择或重新读取后，目录路径会保存在用户数据区的 `settings.json`，文件内容不会写入设置。
 
+#### 可选：让不同说法也能找到资料
+
+如果提问是日语、笔记是中文，或问题换了说法，可以开启**本地多语言查找**。它需要一次准备约128MB的官方模型；软件不会自行下载，普通启动仍用关键词查找。准备步骤见 [本地检索说明](../docs/local-semantic-materials.md)。准备好后：
+
+```powershell
+.\jsc-live.bat --semantic-model "D:\我的模型\multilingual-minilm"
+```
+
+资料窗口会显示“已开启本地多语言查找”。选择新文件夹或重新读取时会沿用它，不需要重启模型；文件仍只在本机建立索引，命中的片段才发给回答API。找不到模型时会提示并继续使用关键词查找。换个说法能查到更多内容，但相关资料也可能没写所问细节，回答仍可能遗漏条件；请结合出处使用。这项模式目前需在启动命令中指定，尚未记住开关。
+
 从旧版 `profile.md` 导入时：
 
 ```powershell
@@ -220,6 +230,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | `--import-profile 文件` | 把明确指定的旧资料复制到资料区，保留原文件且不覆盖目标，然后退出 |
 | `--review-session 存档文件夹` | 只在本机生成复盘页和 Anki 文件，完成后退出 |
 | `--review-window` | 只打开复盘窗口，不启动录音、识别或 API |
+| `--semantic-model 模型文件夹` | 可选本地多语言资料查找；模型需预先准备，不自动下载 |
 | `--review-output 新文件夹` | 自选复盘输出位置，不覆盖已有文件夹 |
 | `--anki-layout basic / fields` | 默认 Basic 双面卡；fields 用四字段自建笔记类型 |
 | `--suggest-timeout 3` | 几秒没到算超时 |
@@ -245,9 +256,9 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | 接话建议，一问一答 10 句（deepseek-flash） | 最后一句字幕 → 建议显示：中位数 2.43 s，最大 2.63 s；其中等待停顿 0.82 s、API 往返 1.55 s（首字 0.85 s）、渲染 72 ms（`tests/live_suggest/e2e-dialogue-*`） |
 | 接话建议，独白 3 段 11 个片段 | 只请求 3 次，每次回应整段；2.49 / 2.65 / 3.09 s（`tests/live_suggest/e2e-monologue-*`） |
 
-单元测试：在 `japanese-speaking-coach` 目录下运行 `python -m unittest discover -s tests`，不需要显卡和网络。2026-10-26 本轮共219项：218通过，1项因系统不允许创建符号链接而跳过，另有链接属性和越界路径测试通过。
+单元测试：在 `japanese-speaking-coach` 目录下运行 `python -m unittest discover -s tests`，不需要显卡和网络。2026-10-26 本轮共230项：229通过，1项因系统不允许创建符号链接而跳过，另有链接属性和越界路径测试通过。
 
-开发侧的通用资料自然问法与本机语义检索原型见 [检索对照记录](../docs/retrieval-prototype-20261026.md)。目前应用仍用关键词检索；原型工具需显式提供已下载模型，不会自动联网或改变日常启动。
+开发侧的早期检索原型见 [D-029对照记录](../docs/retrieval-prototype-20261026.md)，当前可选模式与阶段结果见 [本地检索说明](../docs/local-semantic-materials.md)。默认启动仍用关键词查找。
 
 开发评测默认在后台隐藏窗口，避免挡住正在使用的其它软件。`tools/e2e_suggest.py` 和 `tools/benchmark_overlay.py` 只在显式加 `--show-window` 时显示测试窗；Windows 下该窗口会鼠标穿透、不抢焦点。后台的 Canvas 完成耗时不是实际可见显示延迟，两种结果会分别标记。截图还须显式指定输出路径；提前结束的运行会标记未完成并返回非零退出码。
 

@@ -91,7 +91,9 @@ class MaterialsWindow:
     def _load(self, folder):
         try:
             self.results.put((True, self.controller.reload(folder)))
-        except (OSError, ValueError):
+        except ValueError as exc:
+            self.results.put((False, str(exc)))
+        except OSError:
             self.results.put((False, "这个文件夹无法读取，已保留原资料。请检查路径、权限，或选择其它文件夹。"))
 
     def _poll(self):

@@ -23,6 +23,7 @@ Outputs (in tests/live_suggest/):
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import queue
@@ -186,9 +187,12 @@ def main() -> int:
     source = p.add_mutually_exclusive_group()
     source.add_argument("--profile", type=Path, help="explicit test profile; default: empty, never read private profile.md")
     source.add_argument("--materials", type=Path, help="explicit test materials folder; never discover the default user folder")
+    p.add_argument("--semantic-model", type=Path, help="prepared local model; requires explicit --materials")
     p.add_argument("--show-window", action="store_true", help="explicit Windows passive preview; default stays hidden")
     p.add_argument("--no-screenshot", action="store_true", help="disable screenshots even with --show-window")
     cli = p.parse_args()
+    if cli.semantic_model and cli.materials is None:
+        p.error("--semantic-model requires explicit --materials")
     if cli.screenshot and not cli.show_window and not cli.no_screenshot:
         p.error("--screenshot requires --show-window")
     sys.stdout.reconfigure(encoding="utf-8")
@@ -196,8 +200,11 @@ def main() -> int:
     demo = Path(tempfile.gettempdir()) / "jsc_e2e_suggest.wav"
     build_wav(synthesize(SCENARIOS[cli.scenario], cli.voice), cli.gap, cli.inner_gap, demo)
     if cli.materials is not None:
-        from jsc_live.materials import MaterialsStore
-        suggester = Suggester(materials=MaterialsStore(cli.materials))
+        from jsc_live.semantic_materials import open_materials
+        store, warning = open_materials(cli.materials, cli.semantic_model)
+        if warning:
+            p.error("Requested local multilingual model is unavailable; refusing an accidental keyword-only test")
+        suggester = Suggester(materials=store)
     else:
         suggester = Suggester(profile=load_profile(cli.profile) if cli.profile else "")
     args = argparse.Namespace(source="file", file=str(demo), realtime=True, device=None,
@@ -247,6 +254,12 @@ def main() -> int:
     count = sum(bool(line.strip()) for line in saved.read_text(encoding="utf-8").splitlines())
     expected = len(SCENARIOS[cli.scenario])
     completed = finished.is_set() and count == expected
+    metadata = {"completed": completed, "expected_turns": expected, "recorded_turns": count,
+                "input_kind": "public synthetic TTS", "show_window": cli.show_window,
+                "retrieval": "local_multilingual_hybrid" if cli.semantic_model else "keywords_or_explicit_profile",
+                "source_sha256": {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in
+                                  ("app/jsc_live/suggest.py", "app/jsc_live/semantic_materials.py")}}
+    (OUT_DIR / f"e2e-{cli.scenario}-{stamp}-run.json").write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
     summarize(saved, OUT_DIR / f"e2e-{cli.scenario}-{stamp}.md", suggester.model, cli.gap, cli.scenario, cli.inner_gap,
               completed=completed, expected_turns=expected, show_window=cli.show_window)
     return 0 if completed else 2

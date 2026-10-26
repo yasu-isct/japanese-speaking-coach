@@ -2,7 +2,6 @@
 from __future__ import annotations
 from pathlib import Path
 import threading
-from .materials import MaterialsStore
 from .settings import remember_materials
 
 
@@ -19,6 +18,9 @@ class MaterialsController:
                       ("invalid_utf8", "file_read_error", "file_changed", "file_size_or_type_limit", "unsafe_path", "total_chars_limit"))
         limited = any(diagnostics.get(key) for key in ("index_limit_reached", "scan_limit_reached", "depth_limit_reached"))
         message = f"已读取 {diagnostics.get('indexed_files', 0)} 个文件。"
+        if diagnostics.get("semantic_enabled"):
+            message += (" 本地语义查找暂不可用，已回到关键词查找。" if store.semantic_failed.is_set() else
+                        " 已开启本地多语言查找，支持不同说法；相关片段不一定包含答案。")
         if skipped or limited:
             message += " 部分资料未读取：请检查UTF-8编码、文件大小或目录层数。"
         if diagnostics.get("missing_root"):
@@ -34,7 +36,10 @@ class MaterialsController:
         """Run from a background worker. Existing suggestions retain old sources."""
         with self._reload_lock:
             selected = Path(folder).expanduser().absolute() if folder is not None else self.client.materials.root
-            store = MaterialsStore(selected)
+            try:
+                store = self.client.materials.rebuild(selected)
+            except RuntimeError:
+                raise ValueError("本地资料索引暂不可用，已保留原资料。请重试，或重启后使用关键词查找。") from None
             if any(store.diagnostics.get(key) for key in ("missing_root", "unsafe_root", "root_read_error")):
                 raise ValueError("这个文件夹无法读取，已保留原资料。请选择实际存在的文件夹。")
             if store.diagnostics.get("directory_read_error") and not store.chunks:
