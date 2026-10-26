@@ -1,0 +1,2178 @@
+{
+  "phase": "baseline",
+  "commit": "187b7b5",
+  "api_calls": 0,
+  "private_data_read": false,
+  "input_hashes": {
+    "queries.json": "759de7eca18b98287b167acb7e1059fabf52a08d4d72c5c35ca6ae8fa94917e5",
+    "corpus_manifest": "dc6a9292af3adfa3f73facceed2f3f6a1b8f638e77d13c06cdeaa99b439e1be7"
+  },
+  "materials_sha256": "a6a984efaa7449ed18d1c85f1c3f31328f98c9adb85a0fc2e463094ce635b330",
+  "summary": {
+    "relevant_covered": 5,
+    "relevant_expected": 16,
+    "no_data_empty": 2,
+    "no_data_cases": 4,
+    "query_times": {
+      "samples": 20,
+      "p50_ms": 0.06864999999999999,
+      "p95_ms": 0.0986
+    },
+    "mean_payload_chars": 215.3
+  },
+  "cases": [
+    {
+      "annotation": {
+        "id": 1,
+        "query": "レポートはどんなファイルで出せばいいですか？",
+        "topic": "Japanese paraphrase: submission format",
+        "relevant": [
+          {
+            "path": "course.md",
+            "start": 6,
+            "end": 6
+          }
+        ],
+        "forbidden": []
+      },
+      "result": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "course.md",
+            "start": 6,
+            "end": 6,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range course.md:6-6"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:なフ",
+          "cjk:ァイ",
+          "cjk:イル",
+          "cjk:ファ",
+          "cjk:ポー",
+          "cjk:レポ",
+          "cjk:ート",
+          "cjk:出せ"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 2,
+        "query": "自然言語処理の宿題はいつまでですか？",
+        "topic": "Japanese query of Chinese deadline",
+        "relevant": [
+          {
+            "path": "course.md",
+            "start": 5,
+            "end": 5
+          }
+        ],
+        "forbidden": []
+      },
+      "result": {
+        "source_ids": [
+          "material-2cc11aa50cfab5142ddf7575"
+        ],
+        "sources": [
+          {
+            "source_id": "material-2cc11aa50cfab5142ddf7575",
+            "relative_path": "course.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "対象：文章を単語や形態素に分ける処理を学ぶ入門授業。",
+            "heading": "自然言語処理・授業案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-2cc11aa50cfab5142ddf7575\", \"relative_path\": \"course.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"対象：文章を単語や形態素に分ける処理を学ぶ入門授業。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "course.md",
+            "start": 5,
+            "end": 5,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range course.md:5-5"
+        ],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 26,
+        "payload_chars": 255,
+        "payload_utf8_bytes": 329
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:処理",
+          "cjk:宿題",
+          "cjk:然言",
+          "cjk:自然",
+          "cjk:言語",
+          "cjk:語処"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [
+          {
+            "score": 6.947355137229111,
+            "matched_terms": [
+              "cjk:処理",
+              "cjk:然言",
+              "cjk:自然",
+              "cjk:言語",
+              "cjk:語処"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.8333333333333334,
+            "source_id": "material-df697be132dcdeafe31e6b10",
+            "relative_path": "course.md",
+            "start_line": 5,
+            "end_line": 5,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 6.947355137229111,
+            "matched_terms": [
+              "cjk:処理",
+              "cjk:然言",
+              "cjk:自然",
+              "cjk:言語",
+              "cjk:語処"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.8333333333333334,
+            "source_id": "material-7ff1bee742ed06973aeede83",
+            "relative_path": "course.md",
+            "start_line": 6,
+            "end_line": 6,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 6.842253664109385,
+            "matched_terms": [
+              "cjk:処理",
+              "cjk:然言",
+              "cjk:自然",
+              "cjk:言語",
+              "cjk:語処"
+            ],
+            "body_matched_terms": [
+              "cjk:処理"
+            ],
+            "query_coverage": 0.8333333333333334,
+            "source_id": "material-2cc11aa50cfab5142ddf7575",
+            "relative_path": "course.md",
+            "start_line": 3,
+            "end_line": 3,
+            "reason": "selected"
+          },
+          {
+            "score": 6.341334335338518,
+            "matched_terms": [
+              "cjk:処理",
+              "cjk:然言",
+              "cjk:自然",
+              "cjk:言語",
+              "cjk:語処"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.8333333333333334,
+            "source_id": "material-470c588a7a940ee94044321d",
+            "relative_path": "course.md",
+            "start_line": 7,
+            "end_line": 7,
+            "reason": "no_body_evidence"
+          }
+        ],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 3,
+        "query": "自然言語処理ではどんな内容を参考にしますか？",
+        "topic": "Japanese query of Chinese references",
+        "relevant": [
+          {
+            "path": "course.md",
+            "start": 7,
+            "end": 7
+          }
+        ],
+        "forbidden": []
+      },
+      "result": {
+        "source_ids": [
+          "material-470c588a7a940ee94044321d",
+          "material-2cc11aa50cfab5142ddf7575"
+        ],
+        "sources": [
+          {
+            "source_id": "material-470c588a7a940ee94044321d",
+            "relative_path": "course.md",
+            "start_line": 7,
+            "end_line": 7,
+            "text": "- 参考资料：分词、词性标注和简单的检索评价。",
+            "heading": "自然言語処理・授業案内",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-2cc11aa50cfab5142ddf7575",
+            "relative_path": "course.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "対象：文章を単語や形態素に分ける処理を学ぶ入門授業。",
+            "heading": "自然言語処理・授業案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-470c588a7a940ee94044321d\", \"relative_path\": \"course.md\", \"start_line\": 7, \"end_line\": 7, \"text\": \"- 参考资料：分词、词性标注和简单的检索评价。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-2cc11aa50cfab5142ddf7575\", \"relative_path\": \"course.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"対象：文章を単語や形態素に分ける処理を学ぶ入門授業。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "course.md",
+            "start": 7,
+            "end": 7,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 49,
+        "payload_chars": 458,
+        "payload_utf8_bytes": 596
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:な内",
+          "cjk:内容",
+          "cjk:処理",
+          "cjk:参考",
+          "cjk:然言",
+          "cjk:自然",
+          "cjk:言語",
+          "cjk:語処"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [
+          {
+            "score": 8.657901467192996,
+            "matched_terms": [
+              "cjk:処理",
+              "cjk:参考",
+              "cjk:然言",
+              "cjk:自然",
+              "cjk:言語",
+              "cjk:語処"
+            ],
+            "body_matched_terms": [
+              "cjk:参考"
+            ],
+            "query_coverage": 0.75,
+            "source_id": "material-470c588a7a940ee94044321d",
+            "relative_path": "course.md",
+            "start_line": 7,
+            "end_line": 7,
+            "reason": "selected"
+          },
+          {
+            "score": 6.947355137229111,
+            "matched_terms": [
+              "cjk:処理",
+              "cjk:然言",
+              "cjk:自然",
+              "cjk:言語",
+              "cjk:語処"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.625,
+            "source_id": "material-df697be132dcdeafe31e6b10",
+            "relative_path": "course.md",
+            "start_line": 5,
+            "end_line": 5,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 6.947355137229111,
+            "matched_terms": [
+              "cjk:処理",
+              "cjk:然言",
+              "cjk:自然",
+              "cjk:言語",
+              "cjk:語処"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.625,
+            "source_id": "material-7ff1bee742ed06973aeede83",
+            "relative_path": "course.md",
+            "start_line": 6,
+            "end_line": 6,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 6.842253664109385,
+            "matched_terms": [
+              "cjk:処理",
+              "cjk:然言",
+              "cjk:自然",
+              "cjk:言語",
+              "cjk:語処"
+            ],
+            "body_matched_terms": [
+              "cjk:処理"
+            ],
+            "query_coverage": 0.625,
+            "source_id": "material-2cc11aa50cfab5142ddf7575",
+            "relative_path": "course.md",
+            "start_line": 3,
+            "end_line": 3,
+            "reason": "selected"
+          },
+          {
+            "score": 2.490354923981096,
+            "matched_terms": [
+              "cjk:内容"
+            ],
+            "body_matched_terms": [
+              "cjk:内容"
+            ],
+            "query_coverage": 0.125,
+            "source_id": "material-8cd413926774b463c32ed432",
+            "relative_path": "article.md",
+            "start_line": 3,
+            "end_line": 3,
+            "reason": "low_query_coverage"
+          }
+        ],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 4,
+        "query": "What is the deadline for the natural language processing assignment?",
+        "topic": "English query of Chinese deadline",
+        "relevant": [
+          {
+            "path": "course.md",
+            "start": 5,
+            "end": 5
+          }
+        ],
+        "forbidden": []
+      },
+      "result": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "course.md",
+            "start": 5,
+            "end": 5,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range course.md:5-5"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "diagnostics": {
+        "query_terms": [
+          "word:assignment",
+          "word:deadline",
+          "word:for",
+          "word:is",
+          "word:language",
+          "word:natural",
+          "word:processing",
+          "word:the",
+          "word:what"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 5,
+        "query": "打ち合わせの前に準備する資料を教えてください。",
+        "topic": "Japanese paraphrase: meeting preparation",
+        "relevant": [
+          {
+            "path": "meeting.md",
+            "start": 4,
+            "end": 4
+          }
+        ],
+        "forbidden": []
+      },
+      "result": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "meeting.md",
+            "start": 4,
+            "end": 4,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range meeting.md:4-4"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:ち合",
+          "cjk:る資",
+          "cjk:備す",
+          "cjk:合わ",
+          "cjk:打ち",
+          "cjk:教え",
+          "cjk:準備",
+          "cjk:資料"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [
+          {
+            "score": 2.490354923981096,
+            "matched_terms": [
+              "cjk:準備"
+            ],
+            "body_matched_terms": [
+              "cjk:準備"
+            ],
+            "query_coverage": 0.125,
+            "source_id": "material-1a169af29ada669b05cdad6f",
+            "relative_path": "meeting.md",
+            "start_line": 4,
+            "end_line": 4,
+            "reason": "low_query_coverage"
+          }
+        ],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 6,
+        "query": "製品レビューの開催日はいつですか？",
+        "topic": "Japanese paraphrase: meeting date",
+        "relevant": [
+          {
+            "path": "meeting.md",
+            "start": 3,
+            "end": 3
+          }
+        ],
+        "forbidden": []
+      },
+      "result": {
+        "source_ids": [
+          "material-4abdd2fbc9bd881e3a7fa88d"
+        ],
+        "sources": [
+          {
+            "source_id": "material-4abdd2fbc9bd881e3a7fa88d",
+            "relative_path": "meeting.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 開催：2026年11月2日、オンライン。",
+            "heading": "製品レビュー会議の案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-4abdd2fbc9bd881e3a7fa88d\", \"relative_path\": \"meeting.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 開催：2026年11月2日、オンライン。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "meeting.md",
+            "start": 3,
+            "end": 3,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 22,
+        "payload_chars": 252,
+        "payload_utf8_bytes": 300
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:ビュ",
+          "cjk:ュー",
+          "cjk:レビ",
+          "cjk:催日",
+          "cjk:品レ",
+          "cjk:製品",
+          "cjk:開催"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [
+          {
+            "score": 9.862312822275873,
+            "matched_terms": [
+              "cjk:ビュ",
+              "cjk:ュー",
+              "cjk:レビ",
+              "cjk:品レ",
+              "cjk:製品",
+              "cjk:開催"
+            ],
+            "body_matched_terms": [
+              "cjk:開催"
+            ],
+            "query_coverage": 0.8571428571428571,
+            "source_id": "material-4abdd2fbc9bd881e3a7fa88d",
+            "relative_path": "meeting.md",
+            "start_line": 3,
+            "end_line": 3,
+            "reason": "selected"
+          },
+          {
+            "score": 7.223485178565294,
+            "matched_terms": [
+              "cjk:ビュ",
+              "cjk:ュー",
+              "cjk:レビ",
+              "cjk:品レ",
+              "cjk:製品"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.7142857142857143,
+            "source_id": "material-1fa067f0f6dc5ad51c27ed14",
+            "relative_path": "meeting.md",
+            "start_line": 5,
+            "end_line": 5,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 6.817058296937239,
+            "matched_terms": [
+              "cjk:ビュ",
+              "cjk:ュー",
+              "cjk:レビ",
+              "cjk:品レ",
+              "cjk:製品"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.7142857142857143,
+            "source_id": "material-1a169af29ada669b05cdad6f",
+            "relative_path": "meeting.md",
+            "start_line": 4,
+            "end_line": 4,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 6.127531445081259,
+            "matched_terms": [
+              "cjk:ビュ",
+              "cjk:ュー",
+              "cjk:レビ",
+              "cjk:品レ",
+              "cjk:製品"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.7142857142857143,
+            "source_id": "material-2c80b66e659ed73de5b4b466",
+            "relative_path": "meeting.md",
+            "start_line": 6,
+            "end_line": 6,
+            "reason": "no_body_evidence"
+          }
+        ],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 7,
+        "query": "评审会的参会者有哪些？",
+        "topic": "Chinese query of Japanese participants",
+        "relevant": [
+          {
+            "path": "meeting.md",
+            "start": 5,
+            "end": 5
+          }
+        ],
+        "forbidden": []
+      },
+      "result": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "meeting.md",
+            "start": 5,
+            "end": 5,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range meeting.md:5-5"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:会的",
+          "cjk:会者",
+          "cjk:参会",
+          "cjk:哪些",
+          "cjk:审会",
+          "cjk:有哪",
+          "cjk:的参",
+          "cjk:者有",
+          "cjk:评审"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [
+          {
+            "score": 2.2384623163576274,
+            "matched_terms": [
+              "cjk:评审"
+            ],
+            "body_matched_terms": [
+              "cjk:评审"
+            ],
+            "query_coverage": 0.1111111111111111,
+            "source_id": "material-2c80b66e659ed73de5b4b466",
+            "relative_path": "meeting.md",
+            "start_line": 6,
+            "end_line": 6,
+            "reason": "low_query_coverage"
+          }
+        ],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 8,
+        "query": "レビュー会議のURLが使えません。どこで新しいものを探せますか？",
+        "topic": "Japanese query of Chinese meeting URL",
+        "relevant": [
+          {
+            "path": "meeting.md",
+            "start": 6,
+            "end": 6
+          }
+        ],
+        "forbidden": []
+      },
+      "result": {
+        "source_ids": [
+          "material-1a169af29ada669b05cdad6f"
+        ],
+        "sources": [
+          {
+            "source_id": "material-1a169af29ada669b05cdad6f",
+            "relative_path": "meeting.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 事前準備：会議までに、提案書と直近の利用統計を用意する。",
+            "heading": "製品レビュー会議の案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-1a169af29ada669b05cdad6f\", \"relative_path\": \"meeting.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 事前準備：会議までに、提案書と直近の利用統計を用意する。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "meeting.md",
+            "start": 6,
+            "end": 6,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range meeting.md:6-6"
+        ],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 30,
+        "payload_chars": 260,
+        "payload_utf8_bytes": 338
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:ビュ",
+          "cjk:ュー",
+          "cjk:レビ",
+          "cjk:ー会",
+          "cjk:会議",
+          "cjk:使え",
+          "cjk:探せ",
+          "cjk:新し",
+          "word:url"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [
+          {
+            "score": 7.313350798284704,
+            "matched_terms": [
+              "cjk:ビュ",
+              "cjk:ュー",
+              "cjk:レビ",
+              "cjk:ー会",
+              "cjk:会議"
+            ],
+            "body_matched_terms": [
+              "cjk:会議"
+            ],
+            "query_coverage": 0.5555555555555556,
+            "source_id": "material-1a169af29ada669b05cdad6f",
+            "relative_path": "meeting.md",
+            "start_line": 4,
+            "end_line": 4,
+            "reason": "selected"
+          },
+          {
+            "score": 7.223485178565294,
+            "matched_terms": [
+              "cjk:ビュ",
+              "cjk:ュー",
+              "cjk:レビ",
+              "cjk:ー会",
+              "cjk:会議"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.5555555555555556,
+            "source_id": "material-4abdd2fbc9bd881e3a7fa88d",
+            "relative_path": "meeting.md",
+            "start_line": 3,
+            "end_line": 3,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 7.223485178565294,
+            "matched_terms": [
+              "cjk:ビュ",
+              "cjk:ュー",
+              "cjk:レビ",
+              "cjk:ー会",
+              "cjk:会議"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.5555555555555556,
+            "source_id": "material-1fa067f0f6dc5ad51c27ed14",
+            "relative_path": "meeting.md",
+            "start_line": 5,
+            "end_line": 5,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 6.127531445081259,
+            "matched_terms": [
+              "cjk:ビュ",
+              "cjk:ュー",
+              "cjk:レビ",
+              "cjk:ー会",
+              "cjk:会議"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.5555555555555556,
+            "source_id": "material-2c80b66e659ed73de5b4b466",
+            "relative_path": "meeting.md",
+            "start_line": 6,
+            "end_line": 6,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 2.4003194961494922,
+            "matched_terms": [
+              "cjk:使え"
+            ],
+            "body_matched_terms": [
+              "cjk:使え"
+            ],
+            "query_coverage": 0.1111111111111111,
+            "source_id": "material-a6011cb650d5690ad2e8cdd9",
+            "relative_path": "article.md",
+            "start_line": 5,
+            "end_line": 5,
+            "reason": "low_query_coverage"
+          }
+        ],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 9,
+        "query": "録音機を起動するには、どのボタンをどれくらい押せばよいですか？",
+        "topic": "Japanese paraphrase: powering a device",
+        "relevant": [
+          {
+            "path": "manual.md",
+            "start": 3,
+            "end": 3
+          }
+        ],
+        "forbidden": []
+      },
+      "result": {
+        "source_ids": [
+          "material-67f1444ae7bbaa5a2fe9c111"
+        ],
+        "sources": [
+          {
+            "source_id": "material-67f1444ae7bbaa5a2fe9c111",
+            "relative_path": "manual.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 電源：右側のボタンを二秒押す。",
+            "heading": "録音機・录音设备の操作マニュアル",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-67f1444ae7bbaa5a2fe9c111\", \"relative_path\": \"manual.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 電源：右側のボタンを二秒押す。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "manual.md",
+            "start": 3,
+            "end": 3,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 17,
+        "payload_chars": 251,
+        "payload_utf8_bytes": 313
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:い押",
+          "cjk:タン",
+          "cjk:ボタ",
+          "cjk:動す",
+          "cjk:押せ",
+          "cjk:起動",
+          "cjk:録音",
+          "cjk:音機"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [
+          {
+            "score": 7.435289999905438,
+            "matched_terms": [
+              "cjk:タン",
+              "cjk:ボタ",
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [
+              "cjk:タン",
+              "cjk:ボタ"
+            ],
+            "query_coverage": 0.5,
+            "source_id": "material-67f1444ae7bbaa5a2fe9c111",
+            "relative_path": "manual.md",
+            "start_line": 3,
+            "end_line": 3,
+            "reason": "selected"
+          },
+          {
+            "score": 2.8230597203273136,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [
+              "cjk:録音"
+            ],
+            "query_coverage": 0.25,
+            "source_id": "material-3f06fb4ea57c568e2829c4e0",
+            "relative_path": "manual.md",
+            "start_line": 4,
+            "end_line": 4,
+            "reason": "below_relative_score"
+          },
+          {
+            "score": 2.506871841912634,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [
+              "cjk:録音"
+            ],
+            "query_coverage": 0.25,
+            "source_id": "material-850d820e19d9c963f1e8ed9a",
+            "relative_path": "manual.md",
+            "start_line": 5,
+            "end_line": 5,
+            "reason": "below_relative_score"
+          },
+          {
+            "score": 2.4053565151060683,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.25,
+            "source_id": "material-707ce44c1c90ad1b5883af3b",
+            "relative_path": "manual.md",
+            "start_line": 7,
+            "end_line": 7,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 1.6609591334922296,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.25,
+            "source_id": "material-e56b061dd6af33adeb908bba",
+            "relative_path": "manual.md",
+            "start_line": 6,
+            "end_line": 6,
+            "reason": "no_body_evidence"
+          }
+        ],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 10,
+        "query": "青い表示灯は何を意味しますか？",
+        "topic": "Japanese paraphrase: recording indicator",
+        "relevant": [
+          {
+            "path": "manual.md",
+            "start": 4,
+            "end": 4
+          }
+        ],
+        "forbidden": []
+      },
+      "result": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "manual.md",
+            "start": 4,
+            "end": 4,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range manual.md:4-4"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:い表",
+          "cjk:味し",
+          "cjk:意味",
+          "cjk:示灯",
+          "cjk:表示",
+          "cjk:青い"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [
+          {
+            "score": 2.587407998149778,
+            "matched_terms": [
+              "cjk:青い"
+            ],
+            "body_matched_terms": [
+              "cjk:青い"
+            ],
+            "query_coverage": 0.16666666666666666,
+            "source_id": "material-3f06fb4ea57c568e2829c4e0",
+            "relative_path": "manual.md",
+            "start_line": 4,
+            "end_line": 4,
+            "reason": "low_query_coverage"
+          }
+        ],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 11,
+        "query": "録音機の赤色LEDが点滅しています。対応を教えてください。",
+        "topic": "Japanese paraphrase: battery indicator",
+        "relevant": [
+          {
+            "path": "manual.md",
+            "start": 5,
+            "end": 5
+          }
+        ],
+        "forbidden": []
+      },
+      "result": {
+        "source_ids": [
+          "material-850d820e19d9c963f1e8ed9a",
+          "material-3f06fb4ea57c568e2829c4e0"
+        ],
+        "sources": [
+          {
+            "source_id": "material-850d820e19d9c963f1e8ed9a",
+            "relative_path": "manual.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。",
+            "heading": "録音機・录音设备の操作マニュアル",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-3f06fb4ea57c568e2829c4e0",
+            "relative_path": "manual.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 青いランプ：録音中。",
+            "heading": "録音機・录音设备の操作マニュアル",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-850d820e19d9c963f1e8ed9a\", \"relative_path\": \"manual.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-3f06fb4ea57c568e2829c4e0\", \"relative_path\": \"manual.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 青いランプ：録音中。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "manual.md",
+            "start": 5,
+            "end": 5,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 43,
+        "payload_chars": 462,
+        "payload_utf8_bytes": 604
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:対応",
+          "cjk:教え",
+          "cjk:滅し",
+          "cjk:点滅",
+          "cjk:赤色",
+          "cjk:録音",
+          "cjk:音機",
+          "word:led"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [
+          {
+            "score": 4.7453341582702615,
+            "matched_terms": [
+              "cjk:点滅",
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [
+              "cjk:点滅",
+              "cjk:録音"
+            ],
+            "query_coverage": 0.375,
+            "source_id": "material-850d820e19d9c963f1e8ed9a",
+            "relative_path": "manual.md",
+            "start_line": 5,
+            "end_line": 5,
+            "reason": "selected"
+          },
+          {
+            "score": 2.8230597203273136,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [
+              "cjk:録音"
+            ],
+            "query_coverage": 0.25,
+            "source_id": "material-3f06fb4ea57c568e2829c4e0",
+            "relative_path": "manual.md",
+            "start_line": 4,
+            "end_line": 4,
+            "reason": "selected"
+          },
+          {
+            "score": 2.4053565151060683,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.25,
+            "source_id": "material-707ce44c1c90ad1b5883af3b",
+            "relative_path": "manual.md",
+            "start_line": 7,
+            "end_line": 7,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 2.359382087421535,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.25,
+            "source_id": "material-67f1444ae7bbaa5a2fe9c111",
+            "relative_path": "manual.md",
+            "start_line": 3,
+            "end_line": 3,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 1.6609591334922296,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.25,
+            "source_id": "material-e56b061dd6af33adeb908bba",
+            "relative_path": "manual.md",
+            "start_line": 6,
+            "end_line": 6,
+            "reason": "no_body_evidence"
+          }
+        ],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 12,
+        "query": "録音機の容量がいっぱいです。保存済みの音声はどうしますか？",
+        "topic": "Japanese query of Chinese storage instructions",
+        "relevant": [
+          {
+            "path": "manual.md",
+            "start": 6,
+            "end": 6
+          }
+        ],
+        "forbidden": []
+      },
+      "result": {
+        "source_ids": [
+          "material-3f06fb4ea57c568e2829c4e0",
+          "material-850d820e19d9c963f1e8ed9a"
+        ],
+        "sources": [
+          {
+            "source_id": "material-3f06fb4ea57c568e2829c4e0",
+            "relative_path": "manual.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 青いランプ：録音中。",
+            "heading": "録音機・录音设备の操作マニュアル",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-850d820e19d9c963f1e8ed9a",
+            "relative_path": "manual.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。",
+            "heading": "録音機・录音设备の操作マニュアル",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-3f06fb4ea57c568e2829c4e0\", \"relative_path\": \"manual.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 青いランプ：録音中。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-850d820e19d9c963f1e8ed9a\", \"relative_path\": \"manual.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "manual.md",
+            "start": 6,
+            "end": 6,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range manual.md:6-6"
+        ],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 43,
+        "payload_chars": 462,
+        "payload_utf8_bytes": 604
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:保存",
+          "cjk:存済",
+          "cjk:容量",
+          "cjk:済み",
+          "cjk:録音",
+          "cjk:音声",
+          "cjk:音機"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [
+          {
+            "score": 2.8230597203273136,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [
+              "cjk:録音"
+            ],
+            "query_coverage": 0.2857142857142857,
+            "source_id": "material-3f06fb4ea57c568e2829c4e0",
+            "relative_path": "manual.md",
+            "start_line": 4,
+            "end_line": 4,
+            "reason": "selected"
+          },
+          {
+            "score": 2.506871841912634,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [
+              "cjk:録音"
+            ],
+            "query_coverage": 0.2857142857142857,
+            "source_id": "material-850d820e19d9c963f1e8ed9a",
+            "relative_path": "manual.md",
+            "start_line": 5,
+            "end_line": 5,
+            "reason": "selected"
+          },
+          {
+            "score": 2.4053565151060683,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.2857142857142857,
+            "source_id": "material-707ce44c1c90ad1b5883af3b",
+            "relative_path": "manual.md",
+            "start_line": 7,
+            "end_line": 7,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 2.359382087421535,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.2857142857142857,
+            "source_id": "material-67f1444ae7bbaa5a2fe9c111",
+            "relative_path": "manual.md",
+            "start_line": 3,
+            "end_line": 3,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 1.6609591334922296,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.2857142857142857,
+            "source_id": "material-e56b061dd6af33adeb908bba",
+            "relative_path": "manual.md",
+            "start_line": 6,
+            "end_line": 6,
+            "reason": "no_body_evidence"
+          }
+        ],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 13,
+        "query": "What should I do when the red light on the recorder blinks?",
+        "topic": "English query of Japanese battery instructions",
+        "relevant": [
+          {
+            "path": "manual.md",
+            "start": 5,
+            "end": 5
+          }
+        ],
+        "forbidden": []
+      },
+      "result": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "manual.md",
+            "start": 5,
+            "end": 5,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range manual.md:5-5"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "diagnostics": {
+        "query_terms": [
+          "word:blinks",
+          "word:do",
+          "word:light",
+          "word:on",
+          "word:recorder",
+          "word:red",
+          "word:should",
+          "word:the",
+          "word:what",
+          "word:when"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 14,
+        "query": "复习之间留出间隔有什么好处？",
+        "topic": "Chinese query of Japanese learning article",
+        "relevant": [
+          {
+            "path": "article.md",
+            "start": 3,
+            "end": 3
+          }
+        ],
+        "forbidden": []
+      },
+      "result": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "article.md",
+            "start": 3,
+            "end": 3,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range article.md:3-3"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:么好",
+          "cjk:之间",
+          "cjk:习之",
+          "cjk:出间",
+          "cjk:复习",
+          "cjk:好处",
+          "cjk:有什",
+          "cjk:留出",
+          "cjk:间留",
+          "cjk:间隔",
+          "cjk:隔有"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 15,
+        "query": "まとめ読みはどういう目的なら使えますか？",
+        "topic": "Japanese paraphrase: reading method",
+        "relevant": [
+          {
+            "path": "article.md",
+            "start": 5,
+            "end": 5
+          }
+        ],
+        "forbidden": []
+      },
+      "result": {
+        "source_ids": [
+          "material-a6011cb650d5690ad2e8cdd9"
+        ],
+        "sources": [
+          {
+            "source_id": "material-a6011cb650d5690ad2e8cdd9",
+            "relative_path": "article.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "一度にまとめて読む方法は、短い時間で全体を見る目的には使えるが、長期の記憶とは分けて考える。",
+            "heading": "学習記事：復習の間隔",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-a6011cb650d5690ad2e8cdd9\", \"relative_path\": \"article.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"一度にまとめて読む方法は、短い時間で全体を見る目的には使えるが、長期の記憶とは分けて考える。\", \"heading\": \"学習記事：復習の間隔\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "article.md",
+            "start": 5,
+            "end": 5,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 46,
+        "payload_chars": 275,
+        "payload_utf8_bytes": 387
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:う目",
+          "cjk:め読",
+          "cjk:ら使",
+          "cjk:使え",
+          "cjk:的な",
+          "cjk:目的",
+          "cjk:読み"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [
+          {
+            "score": 4.8006389922989845,
+            "matched_terms": [
+              "cjk:使え",
+              "cjk:目的"
+            ],
+            "body_matched_terms": [
+              "cjk:使え",
+              "cjk:目的"
+            ],
+            "query_coverage": 0.2857142857142857,
+            "source_id": "material-a6011cb650d5690ad2e8cdd9",
+            "relative_path": "article.md",
+            "start_line": 5,
+            "end_line": 5,
+            "reason": "selected"
+          }
+        ],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 16,
+        "query": "録音機を水に濡らしても大丈夫ですか？",
+        "topic": "Japanese paraphrase: water precaution",
+        "relevant": [
+          {
+            "path": "manual.md",
+            "start": 7,
+            "end": 7
+          }
+        ],
+        "forbidden": []
+      },
+      "result": {
+        "source_ids": [
+          "material-3f06fb4ea57c568e2829c4e0",
+          "material-850d820e19d9c963f1e8ed9a"
+        ],
+        "sources": [
+          {
+            "source_id": "material-3f06fb4ea57c568e2829c4e0",
+            "relative_path": "manual.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 青いランプ：録音中。",
+            "heading": "録音機・录音设备の操作マニュアル",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-850d820e19d9c963f1e8ed9a",
+            "relative_path": "manual.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。",
+            "heading": "録音機・录音设备の操作マニュアル",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-3f06fb4ea57c568e2829c4e0\", \"relative_path\": \"manual.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 青いランプ：録音中。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-850d820e19d9c963f1e8ed9a\", \"relative_path\": \"manual.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "manual.md",
+            "start": 7,
+            "end": 7,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range manual.md:7-7"
+        ],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 43,
+        "payload_chars": 462,
+        "payload_utf8_bytes": 604
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:丈夫",
+          "cjk:大丈",
+          "cjk:濡ら",
+          "cjk:録音",
+          "cjk:音機"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [
+          {
+            "score": 2.8230597203273136,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [
+              "cjk:録音"
+            ],
+            "query_coverage": 0.4,
+            "source_id": "material-3f06fb4ea57c568e2829c4e0",
+            "relative_path": "manual.md",
+            "start_line": 4,
+            "end_line": 4,
+            "reason": "selected"
+          },
+          {
+            "score": 2.506871841912634,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [
+              "cjk:録音"
+            ],
+            "query_coverage": 0.4,
+            "source_id": "material-850d820e19d9c963f1e8ed9a",
+            "relative_path": "manual.md",
+            "start_line": 5,
+            "end_line": 5,
+            "reason": "selected"
+          },
+          {
+            "score": 2.4053565151060683,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.4,
+            "source_id": "material-707ce44c1c90ad1b5883af3b",
+            "relative_path": "manual.md",
+            "start_line": 7,
+            "end_line": 7,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 2.359382087421535,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.4,
+            "source_id": "material-67f1444ae7bbaa5a2fe9c111",
+            "relative_path": "manual.md",
+            "start_line": 3,
+            "end_line": 3,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 1.6609591334922296,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.4,
+            "source_id": "material-e56b061dd6af33adeb908bba",
+            "relative_path": "manual.md",
+            "start_line": 6,
+            "end_line": 6,
+            "reason": "no_body_evidence"
+          }
+        ],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 17,
+        "query": "大学近くの駐車場は一時間いくらですか？",
+        "topic": "No parking information",
+        "relevant": [],
+        "forbidden": [],
+        "forbid_all_sources": true
+      },
+      "result": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:一時",
+          "cjk:大学",
+          "cjk:学近",
+          "cjk:時間",
+          "cjk:車場",
+          "cjk:近く",
+          "cjk:間い",
+          "cjk:駐車",
+          "concept:school"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [
+          {
+            "score": 2.4003194961494922,
+            "matched_terms": [
+              "cjk:時間"
+            ],
+            "body_matched_terms": [
+              "cjk:時間"
+            ],
+            "query_coverage": 0.1111111111111111,
+            "source_id": "material-a6011cb650d5690ad2e8cdd9",
+            "relative_path": "article.md",
+            "start_line": 5,
+            "end_line": 5,
+            "reason": "low_query_coverage"
+          }
+        ],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 18,
+        "query": "明日の東京は雨ですか？",
+        "topic": "No weather information",
+        "relevant": [],
+        "forbidden": [],
+        "forbid_all_sources": true
+      },
+      "result": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:明日",
+          "cjk:東京"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 19,
+        "query": "会議の参加費はいくらですか？",
+        "topic": "Meeting exists but no fee information",
+        "relevant": [],
+        "forbidden": [],
+        "forbid_all_sources": true
+      },
+      "result": {
+        "source_ids": [
+          "material-1fa067f0f6dc5ad51c27ed14"
+        ],
+        "sources": [
+          {
+            "source_id": "material-1fa067f0f6dc5ad51c27ed14",
+            "relative_path": "meeting.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 参加者：開発担当とデザイン担当。",
+            "heading": "製品レビュー会議の案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-1fa067f0f6dc5ad51c27ed14\", \"relative_path\": \"meeting.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 参加者：開発担当とデザイン担当。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": "no source is relevant to this question",
+            "source_ids": [
+              "material-1fa067f0f6dc5ad51c27ed14"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Sent forbidden annotated range no source is relevant to this question"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 18,
+        "payload_chars": 248,
+        "payload_utf8_bytes": 302
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:会議",
+          "cjk:加費",
+          "cjk:参加"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [
+          {
+            "score": 4.083524679423638,
+            "matched_terms": [
+              "cjk:会議",
+              "cjk:参加"
+            ],
+            "body_matched_terms": [
+              "cjk:参加"
+            ],
+            "query_coverage": 0.6666666666666666,
+            "source_id": "material-1fa067f0f6dc5ad51c27ed14",
+            "relative_path": "meeting.md",
+            "start_line": 5,
+            "end_line": 5,
+            "reason": "selected"
+          },
+          {
+            "score": 1.8597041607349127,
+            "matched_terms": [
+              "cjk:会議"
+            ],
+            "body_matched_terms": [
+              "cjk:会議"
+            ],
+            "query_coverage": 0.3333333333333333,
+            "source_id": "material-1a169af29ada669b05cdad6f",
+            "relative_path": "meeting.md",
+            "start_line": 4,
+            "end_line": 4,
+            "reason": "below_relative_score"
+          },
+          {
+            "score": 1.4446970357130589,
+            "matched_terms": [
+              "cjk:会議"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.3333333333333333,
+            "source_id": "material-4abdd2fbc9bd881e3a7fa88d",
+            "relative_path": "meeting.md",
+            "start_line": 3,
+            "end_line": 3,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 1.2255062890162518,
+            "matched_terms": [
+              "cjk:会議"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.3333333333333333,
+            "source_id": "material-2c80b66e659ed73de5b4b466",
+            "relative_path": "meeting.md",
+            "start_line": 6,
+            "end_line": 6,
+            "reason": "no_body_evidence"
+          }
+        ],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    },
+    {
+      "annotation": {
+        "id": 20,
+        "query": "録音機をBluetoothで接続する方法は？",
+        "topic": "Device exists but no Bluetooth information",
+        "relevant": [],
+        "forbidden": [],
+        "forbid_all_sources": true
+      },
+      "result": {
+        "source_ids": [
+          "material-3f06fb4ea57c568e2829c4e0",
+          "material-850d820e19d9c963f1e8ed9a"
+        ],
+        "sources": [
+          {
+            "source_id": "material-3f06fb4ea57c568e2829c4e0",
+            "relative_path": "manual.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 青いランプ：録音中。",
+            "heading": "録音機・录音设备の操作マニュアル",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-850d820e19d9c963f1e8ed9a",
+            "relative_path": "manual.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。",
+            "heading": "録音機・录音设备の操作マニュアル",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-3f06fb4ea57c568e2829c4e0\", \"relative_path\": \"manual.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 青いランプ：録音中。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-850d820e19d9c963f1e8ed9a\", \"relative_path\": \"manual.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": "no source is relevant to this question",
+            "source_ids": [
+              "material-3f06fb4ea57c568e2829c4e0",
+              "material-850d820e19d9c963f1e8ed9a"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Sent forbidden annotated range no source is relevant to this question"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 43,
+        "payload_chars": 462,
+        "payload_utf8_bytes": 604
+      },
+      "diagnostics": {
+        "query_terms": [
+          "cjk:る方",
+          "cjk:接続",
+          "cjk:方法",
+          "cjk:続す",
+          "cjk:録音",
+          "cjk:音機",
+          "word:bluetooth"
+        ],
+        "minimum_query_coverage": 0.2,
+        "minimum_relative_score": 0.5,
+        "requires_body_evidence": true,
+        "candidates": [
+          {
+            "score": 2.8230597203273136,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [
+              "cjk:録音"
+            ],
+            "query_coverage": 0.2857142857142857,
+            "source_id": "material-3f06fb4ea57c568e2829c4e0",
+            "relative_path": "manual.md",
+            "start_line": 4,
+            "end_line": 4,
+            "reason": "selected"
+          },
+          {
+            "score": 2.506871841912634,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [
+              "cjk:録音"
+            ],
+            "query_coverage": 0.2857142857142857,
+            "source_id": "material-850d820e19d9c963f1e8ed9a",
+            "relative_path": "manual.md",
+            "start_line": 5,
+            "end_line": 5,
+            "reason": "selected"
+          },
+          {
+            "score": 2.4053565151060683,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.2857142857142857,
+            "source_id": "material-707ce44c1c90ad1b5883af3b",
+            "relative_path": "manual.md",
+            "start_line": 7,
+            "end_line": 7,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 2.359382087421535,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.2857142857142857,
+            "source_id": "material-67f1444ae7bbaa5a2fe9c111",
+            "relative_path": "manual.md",
+            "start_line": 3,
+            "end_line": 3,
+            "reason": "no_body_evidence"
+          },
+          {
+            "score": 2.3134665175522398,
+            "matched_terms": [
+              "cjk:方法"
+            ],
+            "body_matched_terms": [
+              "cjk:方法"
+            ],
+            "query_coverage": 0.14285714285714285,
+            "source_id": "material-31ecd3f04f30ba9410cdd945",
+            "relative_path": "article.md",
+            "start_line": 7,
+            "end_line": 7,
+            "reason": "low_query_coverage"
+          },
+          {
+            "score": 1.8952651887454073,
+            "matched_terms": [
+              "cjk:方法"
+            ],
+            "body_matched_terms": [
+              "cjk:方法"
+            ],
+            "query_coverage": 0.14285714285714285,
+            "source_id": "material-a6011cb650d5690ad2e8cdd9",
+            "relative_path": "article.md",
+            "start_line": 5,
+            "end_line": 5,
+            "reason": "low_query_coverage"
+          },
+          {
+            "score": 1.6609591334922296,
+            "matched_terms": [
+              "cjk:録音",
+              "cjk:音機"
+            ],
+            "body_matched_terms": [],
+            "query_coverage": 0.2857142857142857,
+            "source_id": "material-e56b061dd6af33adeb908bba",
+            "relative_path": "manual.md",
+            "start_line": 6,
+            "end_line": 6,
+            "reason": "no_body_evidence"
+          }
+        ],
+        "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+      }
+    }
+  ],
+  "limitation": "Fixed author-written diagnostic. Retrieval overlap, not generated answer quality or general accuracy. Single cold query timing."
+}

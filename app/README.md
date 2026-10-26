@@ -247,6 +247,8 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 
 单元测试：在 `japanese-speaking-coach` 目录下运行 `python -m unittest discover -s tests`，不需要显卡和网络。2026-10-26 本轮共219项：218通过，1项因系统不允许创建符号链接而跳过，另有链接属性和越界路径测试通过。
 
+开发侧的通用资料自然问法与本机语义检索原型见 [检索对照记录](../docs/retrieval-prototype-20261026.md)。目前应用仍用关键词检索；原型工具需显式提供已下载模型，不会自动联网或改变日常启动。
+
 开发评测默认在后台隐藏窗口，避免挡住正在使用的其它软件。`tools/e2e_suggest.py` 和 `tools/benchmark_overlay.py` 只在显式加 `--show-window` 时显示测试窗；Windows 下该窗口会鼠标穿透、不抢焦点。后台的 Canvas 完成耗时不是实际可见显示延迟，两种结果会分别标记。截图还须显式指定输出路径；提前结束的运行会标记未完成并返回非零退出码。
 
 界面截图优先用 `python tools/capture_ui_iteration.py --offscreen --label check`，在所有显示器之外绘制窗口，仅捕获本进程的窗口内容，不截取桌面。展示回放用 `python tools/capture_showcase.py --render-saved --materials tests/fixtures/materials/general/data`；它只读取固定的公开虚构文档和已有TTS结果，输出到新的本地目录，不调用API、不触碰使用者资料。生成的画面不能当作新的速度测量。
