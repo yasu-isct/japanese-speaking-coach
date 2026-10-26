@@ -151,7 +151,9 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--suggest", action="store_true", help="show 3 reply suggestions (API settings in .env)")
     p.add_argument("--partner", help="who you are talking to, e.g. 上司 / 老师 / 店员 / 朋友 (helps politeness)")
     p.add_argument("--materials", type=Path, help="external folder of UTF-8 .md/.txt reference documents")
-    p.add_argument("--semantic-model", type=Path, help="opt in to local multilingual materials search using a prepared model folder; no automatic download")
+    retrieval = p.add_mutually_exclusive_group()
+    retrieval.add_argument("--semantic-model", type=Path, help="use this prepared local model instead of saved retrieval settings; no automatic download")
+    retrieval.add_argument("--keywords-only", action="store_true", help="use keyword retrieval for this run without changing saved preferences")
     p.add_argument("--init-materials", action="store_true", help="create the materials folder and exit; no API call")
     p.add_argument("--import-profile", type=Path, help="copy an old profile to external materials without overwriting, then exit")
     p.add_argument("--review-session", type=Path, help="export a local session review and Anki cards, then exit without API/audio")
@@ -216,13 +218,15 @@ def main(argv: list[str] | None = None) -> None:
         return
 
     suggester = None
+    model_path = None
     if args.suggest:
         from .suggest import Suggester
         from .semantic_materials import open_materials
-        from .settings import selected_materials
+        from .settings import selected_materials, selected_semantic_model
 
         try:
-            store, model_warning = open_materials(selected_materials(args.materials), args.semantic_model)
+            model_path = selected_semantic_model(args.semantic_model, keywords_only=args.keywords_only)
+            store, model_warning = open_materials(selected_materials(args.materials), model_path)
             if model_warning:
                 print(f"[资料] {model_warning} 本次继续使用关键词查找。", flush=True)
             suggester = Suggester(partner=args.partner, materials=store)
@@ -285,7 +289,7 @@ def main(argv: list[str] | None = None) -> None:
     materials_controller = None
     if suggester and suggester.materials is not None:
         from .material_control import MaterialsController
-        materials_controller = MaterialsController(suggester)
+        materials_controller = MaterialsController(suggester, model_directory=model_path)
 
     window = SubtitleWindow(events, font_size=args.font_size, history=args.history,
                             suggestion_timeout=args.suggest_timeout,

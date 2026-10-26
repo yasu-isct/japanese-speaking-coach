@@ -4,7 +4,10 @@ import json
 import os
 from pathlib import Path
 import tempfile
+import threading
 from .materials import default_materials_root
+
+_WRITE_LOCK = threading.Lock()
 
 
 def settings_path() -> Path:
@@ -30,6 +33,31 @@ def selected_materials(explicit: Path | None, path: Path | None = None) -> Path:
 
 
 def remember_materials(folder: Path, path: Path | None = None) -> None:
+    update_settings({"materials_directory": str(folder.resolve())}, path)
+
+
+def selected_semantic_model(explicit: Path | None, *, keywords_only: bool = False, path: Path | None = None) -> Path | None:
+    if keywords_only:
+        return None
+    if explicit is not None:
+        return explicit.expanduser().absolute()
+    saved = load_settings(path)
+    directory = saved.get("semantic_model_directory")
+    if saved.get("semantic_enabled") is True and isinstance(directory, str) and Path(directory).is_absolute():
+        return Path(directory)
+    return None
+
+
+def remember_semantic(enabled: bool, directory: Path, path: Path | None = None) -> None:
+    update_settings({"semantic_enabled": bool(enabled), "semantic_model_directory": str(directory.resolve())}, path)
+
+
+def update_settings(changes: dict, path: Path | None = None) -> None:
+    with _WRITE_LOCK:
+        _update_settings(changes, path)
+
+
+def _update_settings(changes: dict, path: Path | None = None) -> None:
     selected = path if path is not None else settings_path()
     if selected.exists():
         if selected.is_symlink() or selected.stat().st_size > 65536:
@@ -42,7 +70,7 @@ def remember_materials(folder: Path, path: Path | None = None) -> None:
             raise ValueError("设置文件格式不正确，未覆盖；资料只在本次使用。")
     else:
         value = {}
-    value["materials_directory"] = str(folder.resolve())
+    value.update(changes)
     selected.parent.mkdir(parents=True, exist_ok=True)
     temporary = None
     try:

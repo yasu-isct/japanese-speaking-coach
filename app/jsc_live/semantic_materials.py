@@ -47,6 +47,7 @@ class SemanticEncoder:
     def __init__(self, directory: Path):
         directory = Path(directory)
         verify_assets(directory)
+        self.directory = directory.resolve()
         try:
             import numpy as np
             import onnxruntime as ort

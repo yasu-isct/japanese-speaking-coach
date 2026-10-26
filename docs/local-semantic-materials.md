@@ -1,6 +1,8 @@
 # 可选的本地多语言资料查找
 
-这项模式帮助“问法不同、语言不同”时找回资料。实际回答仍由原来的API生成，并显示当时提供的文件与行号。不会自动开启，不会扫描私人存档，也不会把全部资料上传。
+这项模式帮助“问法不同、语言不同”时找回资料。实际回答仍由原来的API生成，并显示当时提供的文件与行号。首次默认关闭，之后沿用你保存的选择；不会扫描私人存档，也不会把全部资料上传。
+
+D-031已增加窗口入口：普通启动后点“资料→多语言查找…”，可下载并开启、选择已有模型或关闭；开关和位置记在用户数据区，下次启动沿用。只在首次默认关键词；不会因打开窗口或普通启动而下载。
 
 ## 准备与启动
 
@@ -9,7 +11,9 @@
 - [onnx/model_quint8_avx2.onnx](https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/onnx/model_quint8_avx2.onnx)：放在模型目录的 `onnx` 子文件夹。
 - [tokenizer.json](https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer.json)：放在模型目录。
 
-应用会检查文件大小和官方SHA-256，不接受其它权重。现有应用依赖带有onnxruntime、tokenizers及numpy，无需安装PyTorch或新的界面框架。当前模型在CPU上运行，使用两线程。
+也可以点窗口里的“下载并开启（约128MB）”，默认保存到 `%LOCALAPPDATA%\JapaneseSpeakingCoach\models\multilingual-minilm-e8f8c211`。应用检查文件大小和官方SHA-256；完整验证后才替换缓存文件，取消或失败会清理本次临时文件，已有可用文件直接复用。取消在当前读取或本机步骤结束后生效。
+
+现有应用依赖带有onnxruntime、tokenizers及numpy，无需安装PyTorch或新的界面框架。当前模型在CPU上运行，使用两线程。
 
 ```powershell
 .\jsc-live.bat --suggest --materials "D:\我的资料" --semantic-model "D:\我的模型\multilingual-minilm"
@@ -17,7 +21,9 @@
 
 本机开发副本已放在仓库忽略目录 `logs/goal/models/multilingual-minilm/`，作者可用这个完整路径试用，无需再下载。模型权重不在Git提交中。
 
-模型首次加载约1.3秒（本机D-029测量）。之后选择或刷新资料会重新建索引，复用同一模型；当前回答仍保留原出处。模型缺失或损坏会回到关键词查找，推理失败也保留关键词功能；刷新失败保留整个旧索引并给出提示。检索开关尚未保存，普通双击启动仍用关键词模式。
+模型首次加载约1.3秒（本机D-029测量）。之后选择或刷新资料会重新建索引，复用同一模型；当前回答仍保留原出处。启动时模型缺失或损坏会回到关键词查找，推理失败也保留关键词功能；窗口切换或刷新失败保留整个旧索引并给出提示。开关与模型路径会保存，损坏的设置文件不会覆盖，此时仅本次生效。
+
+命令行指定模型优先于保存值；`--keywords-only`可临时关闭，两者互斥，命令本身不改偏好。仍需带`--suggest`开启回答，例如 `jsc-live.bat --suggest --keywords-only`。
 
 ## 本轮验证（D-030）
 
@@ -49,4 +55,12 @@
 python tools/eval_semantic_materials.py --model-dir logs/goal/models/multilingual-minilm
 ```
 
-这条命令只读固定公开语料、只在本机检索，不调用API。付费问答验收工具默认不执行，需显式 `--run-api` 并先核对每日预算。下一步仍需更大资料库、首次准备和开关的窗口入口、PDF/Word支持、真实课堂阅读与可见延迟验收。
+这条命令只读固定公开语料、只在本机检索，不调用API。付费问答验收工具默认不执行，需显式 `--run-api` 并先核对每日预算。下一步仍需更大资料库、PDF/Word支持、真实课堂阅读与可见延迟验收。
+
+## 窗口操作与下载检查（D-031）
+
+开启→关闭→复用完整缓存再开启均在真实本机模型上完成，偏好存入临时文件再重新读取；未改真实用户设置。47个固定问题的资料载荷与D-030逐字一致。单次窗口开启至轮询收到结果1285.79ms，按保存路径重新载入模型及索引913.53ms（已热的文件缓存条件）；47次本地查找及序列化p50/p95为3.19/4.50ms，不是API或端到端延迟。
+
+网络传输只访问固定官方文件：ONNX读取首块即取消，未发布目标文件，临时文件清理；9,081,518字节的tokenizer完整下载并通过官方哈希。118MB ONNX沿用此前已下载且验证的缓存，没有重新全量下载。默认打开窗口不联网，资料不会在模型准备中发送。
+
+245项检查（244通过、1项系统权限跳过），新增15项涵盖校验、大小限制、取消清理、缓存复用、切换失败保留、偏好优先级和UI后台状态。画面与证据见 `docs/ui-model-settings-20261026.md`、`tests/live_suggest/model-controls-20261026.json`；没有新增生成API、真人或可见延迟结论。

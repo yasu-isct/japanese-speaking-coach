@@ -25,6 +25,8 @@ class MaterialsWindow:
     def __init__(self, master, family: str, materials_root: str, controller=None):
         self.materials_root = materials_root
         self.controller = controller
+        self.family = family
+        self.model_window = None
         self.results = queue.Queue()
         self.busy = False
         self.actions = []
@@ -43,7 +45,8 @@ class MaterialsWindow:
         if controller is not None:
             actions = ttk.Frame(header)
             actions.pack(anchor="w")
-            for text, command in (("选择资料文件夹…", self._choose), ("重新读取资料", self._reload)):
+            for text, command in (("选择资料文件夹…", self._choose), ("重新读取资料", self._reload),
+                                  ("多语言查找…", self._models)):
                 button = ttk.Button(actions, text=text, command=command)
                 button.pack(side="left", padx=(0, 8))
                 self.actions.append(button)
@@ -78,6 +81,15 @@ class MaterialsWindow:
             folder = filedialog.askdirectory(parent=self.top, title="选择愿意用于回答的资料文件夹", mustexist=True)
             if folder:
                 self._reload(folder)
+
+    def _models(self):
+        if self.controller is None or self.busy:
+            return
+        if self.model_window is None:
+            from .model_view import ModelWindow
+
+            self.model_window = ModelWindow(self.top, self.family, self.controller, on_change=self._show_current)
+        self.model_window.show()
 
     def _reload(self, folder=None):
         if self.controller is None or self.busy:

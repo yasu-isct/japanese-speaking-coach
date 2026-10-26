@@ -18,6 +18,10 @@
 
 `live-materials-semantic.png`（820×600）はD-030の有効状態。公開資料の索引を本機モデルで作り、本文は以前のTTS出典スナップショットを再表示している。画面外の自身のHWNDのみ捕獲し、前台を変えていない。新たな生成回答の画面ではない。SHAと来歴：`tests/live_suggest/semantic-stage-summary-20261026.json`。
 
+## 2026-10-26：本機モデルの準備と切替
+
+`live-model-settings.png`（640×520）と `live-materials-controls.png`（820×600）はD-031。公開資料・実際の本機モデル・一時的な設定ファイルで、切替と保存を確認した。設定窓には生成回答を含まない。資料窓の本文は保存済みTTS出典の再表示。全画面外、自身HWNDのみ、無加工。SHAと来歴：`tests/live_suggest/model-controls-20261026.json`。
+
 ## 2026-10-25：以前の画面と測定
 
 以下の旧素材は `tests/sample_dialogues.md` の10文をWindows Harukaで合成し、アプリのファイル入力で再生したもの。個人プロフィールは公開例のプレースホルダー。旧撮影スクリプトは現在の安全な再描画方式へ置き換え済み。

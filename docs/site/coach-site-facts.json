@@ -1,5 +1,5 @@
 {
-  "_note": "Updated 2026-10-26 through D-028. New reference screenshots replay the frozen 4-turn TTS output through app ed12b8f offscreen; they do not measure new latency. Earlier media and video remain explicitly dated 2026-10-25. Sources: docs/showcase-ja.md and tests/live_suggest/showcase-replay-20261026-200255.json. Local only; not deployed. D-027 adds folder selection and live refresh; materials window renders a public TTS source snapshot. D-028 adds a local archive picker and independent review launcher; review screenshot uses a public synthetic archive without audio. D-030 adds explicitly enabled local multilingual retrieval, full-text token windows, refresh/prefetch and a six-question answer stage; default remains lexical. Current test count is 230 (229 pass, 1 skip). Current hidden four-turn TTS p95 is 2752.5 ms; no new visible latency claim.",
+  "_note": "Updated through D-031, local only and not deployed. Model setup, toggle and saved preferences are now accessible in the materials UI. No automatic download; first run uses keywords, later launches honour the saved choice. D-030 provides the fixed retrieval/answer/TTS measurements. Earlier images and video retain their dated provenance; new settings images use public materials and temporary preferences.",
   "status": {
     "ja": "開発中：外部資料による返答とローカル復習を追加",
     "zh": "开发中：已增加外部资料回答和本地复盘",
@@ -11,11 +11,11 @@
     "en": "A Japanese conversation coach for the moment you are mid-conversation — GPU real-time subtitles plus reply suggestions built from the Skill's rules"
   },
   "number": {
-    "value": "36/36 ranges · 230 checks",
+    "value": "36/36 ranges · 245 checks",
     "label": {
-      "ja": "47の固定質問中36の目標範囲を取得（開発用データ含む）。回答正答率ではない。230テスト中229成功・1スキップ。",
-      "zh": "47个固定问题中的36个目标片段全部找到（含开发数据）；不是回答正确率。230项检查，229通过、1跳过。",
-      "en": "36/36 target ranges retrieved across 47 fixed questions, including development data; not answer accuracy. 230 checks: 229 pass, 1 skip."
+      "ja": "47の固定質問中36の目標範囲を取得（開発用データ含む）。回答正答率ではない。245テスト中244成功・1スキップ。",
+      "zh": "47个固定问题中的36个目标片段全部找到（含开发数据）；不是回答正确率。245项检查，244通过、1跳过。",
+      "en": "36/36 target ranges retrieved across 47 fixed questions, including development data; not answer accuracy. 245 checks: 244 pass, 1 skip."
     },
     "href": "https://github.com/yasu-isct/japanese-speaking-coach/blob/main/docs/showcase-ja.md"
   },
@@ -69,6 +69,11 @@
       "ja": "任意のローカル多言語検索で、言い換えや他言語の資料を探す",
       "zh": "可选本地多语言查找，支持不同问法与跨语言资料",
       "en": "Opt in to local multilingual retrieval for paraphrases and cross-language documents"
+    },
+    {
+      "ja": "画面でローカル検索モデルを準備・切替し、選択を保存する",
+      "zh": "在窗口准备和切换本地检索模型，并记住选择",
+      "en": "Prepare and switch the local retrieval model in the UI and remember the choice"
     }
   ],
   "media": [
@@ -151,6 +156,22 @@
         "en": "Review picker exporting two subtitles, two reply turns and two cards from a fictional archive"
       },
       "caption": "公開架空データ・音声なし・画面外描画（2026-10-26、D-028）；APIや速度の再測定ではない"
+    },
+    {
+      "src": "/media/coach/live-model-settings.png",
+      "width": 640,
+      "height": 520,
+      "label": {
+        "ja": "本機モデルの設定",
+        "zh": "本地模型设置",
+        "en": "Local model settings"
+      },
+      "alt": {
+        "ja": "本機多言語検索の状態、モデル位置、切替・ダウンロードボタン",
+        "zh": "本地多语言查找状态、模型位置、切换和下载按钮",
+        "en": "Local multilingual search status, model location, toggle and download actions"
+      },
+      "caption": "公開資料・実際の本機モデル・一時設定、画面外描画（2026-10-26、D-031）；新しい回答や可視速度の証拠ではない"
     }
   ],
   "demo_video": {
