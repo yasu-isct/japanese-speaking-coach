@@ -15,11 +15,25 @@ class MaterialsController:
         self.client = client
         self.settings_path = settings_path
         self._reload_lock = threading.Lock()
+        self.startup = None
         self.model_home = model_home if model_home is not None else default_model_root()
         active = getattr(getattr(client.materials, "encoder", None), "directory", None)
         saved = load_settings(settings_path).get("semantic_model_directory")
         saved = Path(saved) if isinstance(saved, str) and Path(saved).is_absolute() else None
         self.model_directory = Path(model_directory or active or saved or self.model_home)
+
+    def start_initial(self, model_directory=None):
+        from .material_startup import MaterialsStartup
+
+        if self.startup is not None:
+            raise RuntimeError("Initial materials loading can only start once")
+        self.startup = MaterialsStartup(self, model_directory)
+        self.startup.thread.start()
+        return self.startup
+
+    def cancel_initial(self, *, silent=False):
+        if self.startup is not None:
+            self.startup.cancel(silent=silent)
 
     @contextmanager
     def _operation(self, cancel):
@@ -52,6 +66,7 @@ class MaterialsController:
         from .model_setup import _cancelled
         from .semantic_materials import SemanticEncoder, SemanticMaterialsStore, SemanticUnavailable
 
+        self.cancel_initial(silent=True)
         notify = progress or (lambda message: None)
         with self._operation(cancel):
             _cancelled(cancel)
@@ -111,7 +126,9 @@ class MaterialsController:
         issues = [dict(issue) for issue in store.document_issues]
         if issues:
             message += " 有文档未完整读取，原因见下方。"
-        if diagnostics.get("missing_root"):
+        if diagnostics.get("not_loaded"):
+            message = "资料尚未读取，当前回答不参考文件。可重新读取，或选择其它资料文件夹。"
+        elif diagnostics.get("missing_root"):
             message = "资料文件夹还不存在，请选择已有文件夹。"
         elif diagnostics.get("unsafe_root") or diagnostics.get("root_read_error"):
             message = "资料文件夹无法读取，请选择实际存在且可访问的文件夹。"
@@ -122,6 +139,7 @@ class MaterialsController:
 
     def reload(self, folder: str | Path | None = None, *, progress=None, cancel=None) -> dict:
         """Run from a background worker. Existing suggestions retain old sources."""
+        self.cancel_initial(silent=True)
         with self._operation(cancel):
             selected = Path(folder).expanduser().absolute() if folder is not None else self.client.materials.root
             try:

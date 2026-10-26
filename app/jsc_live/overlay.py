@@ -62,6 +62,7 @@ class SubtitleWindow:
         self.show_meanings = True
         self.materials_root = materials_root
         self.materials_controller = materials_controller
+        self.materials_notice = ""
         self.materials_window = None
         self.review_window = None
         self.recording = False
@@ -189,6 +190,12 @@ class SubtitleWindow:
     # --- event loop --------------------------------------------------------
     def _poll(self) -> None:
         changed = False
+        controller = getattr(self, "materials_controller", None)
+        startup = getattr(controller, "startup", None)
+        notice = startup.snapshot()["notice"] if startup is not None else ""
+        if notice != getattr(self, "materials_notice", ""):
+            self.materials_notice = notice
+            changed = True
         try:
             while True:
                 kind, uid, segments = self.events.get_nowait()
@@ -370,6 +377,11 @@ class SubtitleWindow:
             self.root.geometry(f"{self.width}x{TOOLBAR_H}+{self.left}+{self.bottom - TOOLBAR_H}")
             return
         y = TOOLBAR_H + 6
+        notice = getattr(self, "materials_notice", "")
+        if notice:
+            item = c.create_text(pad, y, text=notice, width=max_w, font=self.toolbar_font,
+                                 fill=FG_MEANING, anchor="nw")
+            y = c.bbox(item)[3] + 6
         blocks = [(segs, color) for _, segs, color in self.lines]
         if self.partial:
             blocks.append((self.partial[1], FG_PARTIAL))
@@ -395,6 +407,8 @@ class SubtitleWindow:
 
     def close(self) -> None:
         self.closed = True
+        if getattr(self, "materials_controller", None) is not None:
+            self.materials_controller.cancel_initial(silent=True)
         self.root.destroy()
 
     def run(self) -> None:

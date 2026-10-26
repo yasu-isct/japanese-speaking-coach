@@ -217,7 +217,8 @@ class MaterialsStore:
     """
 
     def __init__(self, root: str | Path | None = None, *, limits: MaterialsLimits | None = None,
-                 tokenizer: Callable[[str], Iterable[str]] = tokenize, progress=None, cancel=None) -> None:
+                 tokenizer: Callable[[str], Iterable[str]] = tokenize, progress=None, cancel=None,
+                 _read_files: bool = True) -> None:
         self.root = Path(root) if root is not None else default_materials_root()
         self.limits = limits or MaterialsLimits()
         self._tokenizer = tokenizer
@@ -226,7 +227,9 @@ class MaterialsStore:
         document_issues: list[dict] = []
         announce(progress, "正在查看资料文件夹…", cancel)
         try:
-            if not self.root.exists():
+            if not _read_files:
+                counts["not_loaded"] = 1
+            elif not self.root.exists():
                 counts["missing_root"] += 1
             elif _is_link(self.root) or not self.root.is_dir():
                 counts["unsafe_root"] += 1
@@ -319,6 +322,11 @@ class MaterialsStore:
         self._average_length = sum(self._lengths) / len(self._lengths) if self._lengths else 1.0
         self._document_frequency = Counter(term for terms in self._terms for term in terms)
         check_cancel(cancel)
+
+    @classmethod
+    def empty(cls, root):
+        """Create a startup placeholder without touching the selected folder."""
+        return cls(root, _read_files=False)
 
     def rebuild(self, root, *, progress=None, cancel=None):
         """Create a new snapshot with the same limits and retrieval configuration."""

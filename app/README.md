@@ -48,7 +48,7 @@
    - 回答用了资料时，理由会显示文件名与行号，Word用正文段落或表格行，PDF用页码；点工具栏「资料」可查看本轮实际发送的片段。检索命中和模型声明引用会分别标记。
    - 换文件夹或重新读取时，正在生成的回答仍保留原片段和出处，下一次请求才用新资料。文件夹无法访问时继续使用原资料；个别文件损坏会跳过并提示。
    - 检索和模型都可能漏掉信息或引用不当；这是参考回答，仍需结合当前谈话判断。
-   - Word/PDF文件最多10MB，PDF最多80页，md/txt仍为64KB；资料默认最多128文件、40万正文字、2048片段；单份Word/PDF最多提取10万字，超过容量会提示。多语言模式的大资料库初次建立索引可能较慢（100份合成资料约24秒），当前启动仍会等待，窗口刷新可取消。容量实测见 [资料容量记录](../docs/materials-capacity-20261026.md)。格式限制见 [外部文档读取](../docs/external-documents.md)。旧.doc或扫描件目前请先转为docx/纯文字。PDF读取需要pypdf 6.21.2，已列入应用依赖；若提示缺失，在本应用Python环境运行 `python -m pip install pypdf==6.21.2`。
+   - Word/PDF文件最多10MB，PDF最多80页，md/txt仍为64KB；资料默认最多128文件、40万正文字、2048片段；单份Word/PDF最多提取10万字，超过容量会提示。多语言模式的大资料库初次建立索引可能较慢（100份合成资料约24秒），启动时先显示字幕窗口，后台读取资料；主窗说明资料是否就绪。关键词先可用，多语言准备期间继续用关键词；点“资料”可以取消。初期尚未读到资料时，建议暂不参考文件；模型失败会保留关键词。命令行`--no-window`为稳定回放仍先读完资料。启动对照见 [后台启动记录](../docs/materials-startup-20261026.md)。容量实测见 [资料容量记录](../docs/materials-capacity-20261026.md)。格式限制见 [外部文档读取](../docs/external-documents.md)。旧.doc或扫描件目前请先转为docx/纯文字。PDF读取需要pypdf 6.21.2，已列入应用依赖；若提示缺失，在本应用Python环境运行 `python -m pip install pypdf==6.21.2`。
 
 有自己的资料文件夹时：
 
@@ -266,7 +266,7 @@ D:\ClaudeProject\japanese-speaking-coach\jsc-live.bat --source mic --suggest --p
 | 接话建议，一问一答 10 句（deepseek-flash） | 最后一句字幕 → 建议显示：中位数 2.43 s，最大 2.63 s；其中等待停顿 0.82 s、API 往返 1.55 s（首字 0.85 s）、渲染 72 ms（`tests/live_suggest/e2e-dialogue-*`） |
 | 接话建议，独白 3 段 11 个片段 | 只请求 3 次，每次回应整段；2.49 / 2.65 / 3.09 s（`tests/live_suggest/e2e-monologue-*`） |
 
-单元测试：在 `japanese-speaking-coach` 目录下运行 `python -m unittest discover -s tests`，不需要显卡和网络。2026-10-26 本轮共289项：288通过，1项因系统不允许创建符号链接而跳过，另有链接属性和越界路径测试通过。
+单元测试：在 `japanese-speaking-coach` 目录下运行 `python -m unittest discover -s tests`，不需要显卡和网络。2026-10-26 本轮共302项：301通过，1项因系统不允许创建符号链接而跳过，另有链接属性和越界路径测试通过。
 
 开发侧的早期检索原型见 [D-029对照记录](../docs/retrieval-prototype-20261026.md)，当前可选模式与阶段结果见 [本地检索说明](../docs/local-semantic-materials.md)。首次启动用关键词；之后沿用在窗口里保存的选择。
 

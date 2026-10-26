@@ -1,0 +1,15 @@
+{
+  "kind": "Real main startup, fixed public 100-file library; audio/ASR and API worker replaced. Not whole application readiness or visible latency.",
+  "api_calls": 0,
+  "private_data_read": false,
+  "real_user_settings_changed": false,
+  "asr_worker_dispatched_ms": 22085.35499998834,
+  "window_constructor_entered_ms": 22107.8656000318,
+  "window_constructed_ms": 22329.096700064838,
+  "all_materials_ready_ms": 22365.327700041234,
+  "pump_ticks": 0,
+  "maximum_pump_gap_ms": 0,
+  "indexed_chunks": 1600,
+  "foreground_unchanged": true,
+  "captures": "logs\\ui-iterations\\startup-before-20261026-222621"
+}

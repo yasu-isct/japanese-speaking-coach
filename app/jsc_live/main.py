@@ -219,17 +219,28 @@ def main(argv: list[str] | None = None) -> None:
 
     suggester = None
     model_path = None
+    materials_controller = None
     if args.suggest:
         from .suggest import Suggester
-        from .semantic_materials import open_materials
+        from .materials import MaterialsStore
+        from .material_control import MaterialsController
         from .settings import selected_materials, selected_semantic_model
 
         try:
             model_path = selected_semantic_model(args.semantic_model, keywords_only=args.keywords_only)
-            store, model_warning = open_materials(selected_materials(args.materials), model_path)
-            if model_warning:
-                print(f"[资料] {model_warning} 本次继续使用关键词查找。", flush=True)
+            materials_root = selected_materials(args.materials)
+            if args.no_window:  # Keep CLI/file evaluation startup deterministic.
+                from .semantic_materials import open_materials
+
+                store, model_warning = open_materials(materials_root, model_path)
+                if model_warning:
+                    print(f"[资料] {model_warning} 本次继续使用关键词查找。", flush=True)
+            else:
+                store = MaterialsStore.empty(materials_root)
             suggester = Suggester(partner=args.partner, materials=store)
+            materials_controller = MaterialsController(suggester, model_directory=model_path)
+            if not args.no_window:
+                materials_controller.start_initial(model_path)
             print(f"[资料] {suggester.materials.root}（{len(suggester.materials.chunks)} 个片段）；"
                   "本轮查到的相关片段会随问题发给 API。", flush=True)
             if args.materials is None and (Path(__file__).resolve().parents[2] / "profile.md").is_file():
@@ -286,22 +297,21 @@ def main(argv: list[str] | None = None) -> None:
     def make_history(root, family):
         return HistoryWindow(root, history_furigana, lookup, family, on_lookup=record_lookup)
 
-    materials_controller = None
-    if suggester and suggester.materials is not None:
-        from .material_control import MaterialsController
-        materials_controller = MaterialsController(suggester, model_directory=model_path)
-
-    window = SubtitleWindow(events, font_size=args.font_size, history=args.history,
-                            suggestion_timeout=args.suggest_timeout,
-                            on_suggestion_drawn=suggestion_drawn,
-                            history_window=None if args.no_history else make_history,
-                            materials_root=str(suggester.materials.root) if suggester and suggester.materials is not None else None,
-                            materials_controller=materials_controller,
-                            mode="full" if suggester else "subtitles")
     try:
+        window = SubtitleWindow(events, font_size=args.font_size, history=args.history,
+                                suggestion_timeout=args.suggest_timeout,
+                                on_suggestion_drawn=suggestion_drawn,
+                                history_window=None if args.no_history else make_history,
+                                materials_root=str(suggester.materials.root) if suggester and suggester.materials is not None else None,
+                                materials_controller=materials_controller,
+                                mode="full" if suggester else "subtitles")
         window.run()
     finally:
         stop.set()
+        if materials_controller is not None:
+            materials_controller.cancel_initial(silent=True)
+            if materials_controller.startup is not None:
+                materials_controller.startup.thread.join(timeout=.5)
         thread.join(timeout=5)  # let the worker close the session archive (meta.json, index.tsv)
 
 

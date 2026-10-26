@@ -1,5 +1,5 @@
 {
-  "_note": "Updated through D-034, local only, not deployed. 100 synthetic files / 1600 paragraphs now fully indexed, with refresh progress and cancellation. Identifier queries test capacity, not answer accuracy. Full semantic indexing takes about 24 seconds; startup still blocks. Prior 67 source payloads are unchanged. No new API or visible-latency evidence.",
+  "_note": "Updated through D-035, local only, not deployed. GUI materials startup is asynchronous: keywords first, then optional local semantic search, with progress/cancel and honest readiness notices. With audio/API isolated and 100 synthetic files, offscreen window construction changed from 22.33s to 0.36s; total materials readiness still took about 25s. This is not whole-app readiness, real-speaker or visible-latency evidence. No new generated answers.",
   "status": {
     "ja": "開発中：外部資料による返答とローカル復習を追加",
     "zh": "开发中：已增加外部资料回答和本地复盘",
@@ -11,11 +11,11 @@
     "en": "A Japanese conversation coach for the moment you are mid-conversation — GPU real-time subtitles plus reply suggestions built from the Skill's rules"
   },
   "number": {
-    "value": "36/36 ranges · 289 checks",
+    "value": "36/36 ranges · 302 checks",
     "label": {
-      "ja": "47の固定質問中36の目標範囲を取得（開発用データ含む）。回答正答率ではない。289テスト中288成功・1スキップ。",
-      "zh": "47个固定问题中的36个目标片段全部找到（含开发数据）；不是回答正确率。289项检查，288通过、1跳过。",
-      "en": "36/36 target ranges retrieved across 47 fixed questions, including development data; not answer accuracy. 289 checks: 288 pass, 1 skip."
+      "ja": "47の固定質問中36の目標範囲を取得（開発用データ含む）。回答正答率ではない。302テスト中301成功・1スキップ。",
+      "zh": "47个固定问题中的36个目标片段全部找到（含开发数据）；不是回答正确率。302项检查，301通过、1跳过。",
+      "en": "36/36 target ranges retrieved across 47 fixed questions, including development data; not answer accuracy. 302 checks: 301 pass, 1 skip."
     },
     "href": "https://github.com/yasu-isct/japanese-speaking-coach/blob/main/docs/showcase-ja.md"
   },
@@ -220,6 +220,22 @@
         "en": "Synthetic materials loading count and cancel button"
       },
       "caption": "公開架空100資料、16/100で一時停止したレイアウト確認（2026-10-26、D-034）。画面外描画、生成APIなし、速度測定とは別"
+    },
+    {
+      "src": "/media/coach/live-materials-startup.png",
+      "width": 900,
+      "height": 149,
+      "label": {
+        "ja": "資料のバックグラウンド準備",
+        "zh": "资料后台准备",
+        "en": "Background materials startup"
+      },
+      "alt": {
+        "ja": "キーワード資料を使用しながら多言語索引を準備する合成画面",
+        "zh": "关键词资料已可用、多语言仍在准备的合成启动画面",
+        "en": "Synthetic startup with keywords ready while semantic retrieval is loading"
+      },
+      "caption": "架空100資料・音声/ASR/APIを隔離（2026-10-26、D-035）。画面外自身HWND、全アプリ起動や可視速度の証拠ではない"
     }
   ],
   "demo_video": {

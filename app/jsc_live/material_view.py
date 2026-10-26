@@ -31,6 +31,8 @@ class MaterialsWindow:
         self.model_window = None
         self.results = queue.Queue()
         self.busy = False
+        self._startup_busy = False
+        self._startup_seen = None
         self.cancel = threading.Event()
         self._last_sources = ([], [], None)
         self.actions = []
@@ -71,6 +73,7 @@ class MaterialsWindow:
         self.text.pack(fill="both", expand=True)
         self.text.configure(state="disabled")
         self._show_current()
+        self._sync_startup()
         self.top.after(100, self._poll)
 
     def _show_current(self):
@@ -79,6 +82,11 @@ class MaterialsWindow:
             self.materials_root = info["root"]
             self.folder.configure(text=f"当前资料文件夹：{self.materials_root}")
             self.status.configure(text=info["message"])
+            startup = getattr(self.controller, "startup", None)
+            if startup is not None:
+                state = startup.snapshot()
+                if state["busy"] or state["notice"]:
+                    self.status.configure(text=state["message"])
 
     def _resize(self, event):
         if event.widget is self.top:
@@ -125,14 +133,49 @@ class MaterialsWindow:
             self.results.put((False, "读取未完成，当前对话继续使用原资料。请重试或选择其它文件夹。"))
 
     def _cancel(self):
+        if getattr(self, "_startup_busy", False) and not self.busy:
+            self.controller.cancel_initial()
+            self.cancel_button.configure(state="disabled")
+            self.status.configure(text="正在停止资料准备，字幕继续可用…")
+            return
         self.cancel.set()
         self.cancel_button.configure(state="disabled")
         self.status.configure(text="正在取消，当前对话继续使用原资料…")
 
     def _close(self):
-        if self.busy:
+        if self.busy or getattr(self, "_startup_busy", False):
             self._cancel()
         self.top.withdraw()
+
+    def _sync_startup(self):
+        job = getattr(self.controller, "startup", None)
+        if job is None or self.busy:
+            return
+        info = job.snapshot()
+        if info == self._startup_seen:
+            return
+        was_busy = self._startup_busy
+        self._startup_seen = info
+        self._startup_busy = info["busy"]
+        if info["busy"]:
+            if not was_busy:
+                self.progress_row.pack(fill="x", before=self.status, pady=(6, 0))
+                self.progress.start(15)
+                self.cancel_button.configure(state="normal")
+            for action in self.actions:
+                action.configure(state="disabled")
+            self.status.configure(text=info["message"])
+        else:
+            if was_busy:
+                self.progress.stop()
+                self.progress_row.pack_forget()
+                self.cancel_button.configure(state="disabled")
+                for action in self.actions:
+                    action.configure(state="normal")
+                self._show_current()
+                self._render_sources()
+            if info["notice"]:
+                self.status.configure(text=info["message"])
 
     def _poll(self):
         try:
@@ -158,6 +201,7 @@ class MaterialsWindow:
                     self.status.configure(text=result)
         except queue.Empty:
             pass
+        self._sync_startup()
         try:
             self.top.after(100, self._poll)
         except tk.TclError:

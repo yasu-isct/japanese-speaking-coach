@@ -43,3 +43,6 @@
 
 
 `live-materials-progress.png`（820×600）はD-034。固定100份架空講義の読み込み進捗を16/100で一時停止したレイアウト検証用画面。生成APIなし、画面外自身HWNDのみ、無加工、前台不変。速度の証拠ではない。SHAと来歴：`tests/live_suggest/materials-scale-stage-20261026.json`。
+
+
+`live-materials-startup.png`（900×149）はD-035。100份架空資料で、キーワードが使える状態から多言語索引を準備する実際のUI状態。音声/ASR/APIは隔離し、字幕部分は合成起動テスト文字。画面外自身HWNDのみ、前台不変、無加工。全アプリの起動時間や可視速度の証拠ではない。SHAと来歴：`tests/live_suggest/materials-startup-stage-20261026.json`。

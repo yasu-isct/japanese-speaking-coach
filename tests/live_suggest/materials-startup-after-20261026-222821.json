@@ -1,0 +1,23 @@
+{
+  "kind": "Real main startup, fixed public 100-file library; audio/ASR and API worker replaced. Not whole application readiness or visible latency.",
+  "api_calls": 0,
+  "private_data_read": false,
+  "real_user_settings_changed": false,
+  "asr_worker_dispatched_ms": 130.54459996055812,
+  "window_constructor_entered_ms": 152.53760002087802,
+  "window_constructed_ms": 358.01580001134425,
+  "keywords_available_ms": 915.8574000466615,
+  "startup_result": {
+    "busy": false,
+    "ready": true,
+    "phase": "done",
+    "message": "已读取 100 个文件。 已开启本地多语言查找，支持不同说法；相关片段不一定包含答案。",
+    "notice": ""
+  },
+  "all_materials_ready_ms": 24820.264099980704,
+  "pump_ticks": 2179,
+  "maximum_pump_gap_ms": 538.2228998932987,
+  "indexed_chunks": 1600,
+  "foreground_unchanged": true,
+  "captures": "logs\\ui-iterations\\startup-after-20261026-222756"
+}
