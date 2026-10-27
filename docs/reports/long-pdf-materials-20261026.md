@@ -34,7 +34,7 @@
 - 完整上下文基线：`long-pdf-before-context-20261026-224345.json`。
 - 改后：`long-pdf-after-{keywords,semantic}-20261026-*.json`。
 - 旧67问：`long-pdf-regression-20261026-224728.json`。
-- 截图SHA与汇总：`long-pdf-stage-20261026.json`；六项自评：`docs/ui-long-pdf-20261026.md`。
+- 截图SHA与汇总：`long-pdf-stage-20261026.json`；六项自评：`docs/reports/ui-long-pdf-20261026.md`。
 
 复现：`python tools/eval_long_pdf.py --label verify --semantic-model logs/goal/models/multilingual-minilm`。不传模型则仅关键词。只读固定公开语料，0生成API、无网络/录音和真实设置修改。
 

@@ -21,7 +21,7 @@ class ReviewTest(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
-        self.root = Path(self.temp.name)
+        self.root = Path(self.temp.name).resolve()  # Windows may give the short 8.3 form (ABCDEF~1); the app resolves paths
         self.session = self.root / "session"
         shutil.copytree(FIXTURE, self.session)
 

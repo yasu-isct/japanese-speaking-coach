@@ -34,7 +34,7 @@
 - `tests/live_suggest/materials-scale-after-20261026-221419.json`
 - `tests/live_suggest/materials-scale-semantic-after-20261026-221443.json`
 - `tests/live_suggest/materials-scale-cancel-20261026-221635.json`
-- 截图来历与汇总：`materials-scale-stage-20261026.json`；界面自评：`docs/ui-materials-progress-20261026.md`。
+- 截图来历与汇总：`materials-scale-stage-20261026.json`；界面自评：`docs/reports/ui-materials-progress-20261026.md`。
 
 在仓库根运行`python tools/eval_materials_scale.py --label verify`，只生成/读取固定公开样本目录`logs/goal/public-scale-fixture-v1`，遇到不同内容拒绝覆盖。追加`--semantic-model logs/goal/models/multilingual-minilm`可使用已经准备好的本机模型，不会下载。
 

@@ -8,7 +8,7 @@
 
 `tools/capture_showcase.py --render-saved --materials tests/fixtures/materials/general/data` で再現可能。ウィンドウは全モニターの外側に配置し、入力透過・非アクティブを維持して自身のHWNDだけをPrintWindowで描画。デスクトップのピクセルは取得せず、APIも呼ばない。画像は無加工。これは保存済みTTS結果のUI再描画であり、新たなリアルタイム速度測定ではない。来歴とハッシュ：`tests/live_suggest/showcase-replay-20261026-200255.json`。
 
-`live-materials.png`（820×600）はD-027の資料管理窓。上と同じ公開TTS回答の参考片段を表示し、明示した公開fixtureの索引を読み込んだ画面。自身のHWNDを画面外で描画し、個人資料や新しいAPI応答は使っていない。ソースと画像のSHA-256：`tests/live_suggest/material-ui-20261026-201649.json`。改前後のチェックは `docs/ui-materials-20261026.md`。
+`live-materials.png`（820×600）はD-027の資料管理窓。上と同じ公開TTS回答の参考片段を表示し、明示した公開fixtureの索引を読み込んだ画面。自身のHWNDを画面外で描画し、個人資料や新しいAPI応答は使っていない。ソースと画像のSHA-256：`tests/live_suggest/material-ui-20261026-201649.json`。改前後のチェックは `docs/reports/ui-materials-20261026.md`。
 
 ## 2026-10-26：会話アーカイブの選択と復習
 
@@ -50,4 +50,4 @@
 
 `live-materials-long-pdf.png`（820×600）はD-036。固定架空PDFの音声課題に関する実際のローカル検索と、合成引用状態。物理ページと今回の抽出ブロック番号を表示する。画面外自身HWNDのみ、前台不変、無加工。生成API・真人体験・可視速度の証拠ではない。SHAと来歴：`tests/live_suggest/long-pdf-stage-20261026.json`。
 
-`live-document-answer.png`（900×584）はD-037。架空Wordの欠席連絡規則に対する保存済み生成回答（final、absence）を現在のUIで再描画。画面外自身HWNDのみ、前台不変、無加工。新規APIなし、可視速度・真人体験の証拠ではない。原始出力、画像SHA、前後/狭幅の問題：`tests/live_suggest/document-answer-stage-20261026.json`、`docs/document-answers-20261026.md`。
+`live-document-answer.png`（900×584）はD-037。架空Wordの欠席連絡規則に対する保存済み生成回答（final、absence）を現在のUIで再描画。画面外自身HWNDのみ、前台不変、無加工。新規APIなし、可視速度・真人体験の証拠ではない。原始出力、画像SHA、前後/狭幅の問題：`tests/live_suggest/document-answer-stage-20261026.json`、`docs/reports/document-answers-20261026.md`。

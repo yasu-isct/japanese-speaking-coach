@@ -28,6 +28,6 @@
 
 复现命令：`python tools/eval_materials_startup.py --label verify --model logs/goal/models/multilingual-minilm`。明确参数才运行，仅固定公开资料和已准备模型，不联网/生成/录音。输出到`tests/live_suggest/`和`logs/ui-iterations/`；不会自动打开交互窗口或浏览器。
 
-界面自评见`docs/ui-materials-startup-20261026.md`；截图SHA及测试汇总见`tests/live_suggest/materials-startup-stage-20261026.json`。本步没有改检索排序、参考片段额度或生成提示，个人事实实验保持冻结。
+界面自评见`docs/reports/ui-materials-startup-20261026.md`；截图SHA及测试汇总见`tests/live_suggest/materials-startup-stage-20261026.json`。本步没有改检索排序、参考片段额度或生成提示，个人事实实验保持冻结。
 
 **仍未解决**：多语言索引本身约24秒、约0.54秒的最大合成UI泵间隔、真实ASR并行、长PDF主题混合与跨语言漏查。后台资料准备期间的真实课堂体验需最终集中验收，不能把0.36秒写成全应用就绪或真人延迟。

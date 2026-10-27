@@ -28,7 +28,7 @@ class DownloadTest(unittest.TestCase):
     def setUp(self):
         temp = tempfile.TemporaryDirectory()
         self.addCleanup(temp.cleanup)
-        self.root = Path(temp.name)
+        self.root = Path(temp.name).resolve()  # Windows may give the short 8.3 form (ABCDEF~1); the app resolves paths
         self.data = b"synthetic official bytes"
         self.assets = {"onnx/model.onnx": (len(self.data), hashlib.sha256(self.data).hexdigest())}
         patcher = patch("jsc_live.model_setup.ASSETS", self.assets)
@@ -107,7 +107,7 @@ class ModelModeTest(unittest.TestCase):
     def setUp(self):
         temp = tempfile.TemporaryDirectory()
         self.addCleanup(temp.cleanup)
-        self.root = Path(temp.name)
+        self.root = Path(temp.name).resolve()  # Windows may give the short 8.3 form (ABCDEF~1); the app resolves paths
         self.folder = self.root / "materials"
         self.folder.mkdir()
         (self.folder / "note.md").write_text("Synthetic course instructions", encoding="utf-8")
