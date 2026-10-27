@@ -397,6 +397,25 @@ class TurnTest(unittest.TestCase):
         self.assertTrue(result.replies[0].star)
 
 
+class SpeakableRuleTest(unittest.TestCase):
+    """D-038: on-the-spot choices are answered, only background facts become 【】 blanks."""
+
+    def test_both_prompts_separate_choices_from_background_facts(self):
+        for prompt in (build_system_prompt("", external_materials=True), build_system_prompt("")):
+            self.assertIn("当场自己决定或自己清楚的事", prompt)
+            self.assertIn("不留【】", prompt)
+            self.assertIn("可说「<另一种回答的日语>」", prompt)
+            # The over-blanking instruction from D-023 must be gone.
+            self.assertNotIn("【持っています／持っていません】", prompt)
+            self.assertNotIn("【参加できます／参加できません】", prompt)
+
+    def test_app_prompt_keeps_background_blanks_and_colloquial_markers(self):
+        prompt = build_system_prompt("", external_materials=True)
+        self.assertIn("日本に来て【期間】です", prompt)
+        self.assertIn("「【時間】からです」", prompt)
+        self.assertIn("「ってか」", prompt)
+
+
 class EnvTest(unittest.TestCase):
     def test_load_env(self):
         import tempfile

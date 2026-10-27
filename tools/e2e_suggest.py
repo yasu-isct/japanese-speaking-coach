@@ -205,8 +205,14 @@ def main() -> int:
         if warning:
             p.error("Requested local multilingual model is unavailable; refusing an accidental keyword-only test")
         suggester = Suggester(materials=store)
+    elif cli.profile:
+        suggester = Suggester(profile=load_profile(cli.profile))
     else:
-        suggester = Suggester(profile=load_profile(cli.profile) if cli.profile else "")
+        # Default = what the app does when the learner has added no materials: the
+        # external-materials prompt with an empty folder (D-038). The legacy profile
+        # prompt is only used with an explicit --profile.
+        from jsc_live.materials import MaterialsStore
+        suggester = Suggester(materials=MaterialsStore(root=tempfile.mkdtemp(prefix="jsc-empty-materials-")))
     args = argparse.Namespace(source="file", file=str(demo), realtime=True, device=None,
                               model=DEFAULT_MODEL, device_type="auto",
                               furigana="graded", end_silence=0.6, no_partial=False, turn_gap=0.8)
