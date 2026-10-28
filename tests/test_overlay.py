@@ -51,8 +51,9 @@ class RecordingCanvas:
         return self.items[item - 1]["bbox"]
 
 
-def display(star=0, show_meanings=True):
+def display(star=0, show_meanings=True, details=True):
     win = SubtitleWindow.__new__(SubtitleWindow)
+    win.show_details = details  # existing checks cover the full (详情) view; glance view has its own tests
     win.width = 380
     win.mode = "full"
     win.show_meanings = show_meanings
@@ -156,6 +157,50 @@ class OverlaySuggestionTest(unittest.TestCase):
                 win._draw_toolbar()
                 actions = [item["text"] for item in win.canvas.items if item.get("tags") == "btn:meanings"]
                 self.assertEqual(actions, [label] if label else [])
+
+
+
+class GlanceViewTest(unittest.TestCase):
+    """D-039: in the default glance view only the ⭐ reply is shown in full."""
+
+    def long_display(self):
+        win = display(star=0, details=False)
+        for reply in win.suggestion["payload"]["replies"]:
+            reply["segments"] = [Segment("長い返事です。" * 12)]
+        return win
+
+    def texts(self, win):
+        return [item["text"] for item in win.canvas.items]
+
+    def test_other_replies_take_one_line_and_hide_their_meaning(self):
+        win = self.long_display()
+        win._draw_suggestion(0, 10, 360)
+        texts = self.texts(win)
+        self.assertIn("MEANING0 " * 15, texts)          # ⭐ reply keeps its meaning
+        self.assertNotIn("MEANING1 " * 15, texts)
+        self.assertNotIn("MEANING2 " * 15, texts)
+        self.assertEqual(texts.count("…"), 2)          # each other reply is cut once
+        self.assertIn("⚠ 对此对象不要用", texts)          # the warning is never hidden
+
+    def test_reason_is_cut_to_one_line(self):
+        win = self.long_display()
+        win._draw_suggestion(0, 10, 360)
+        reason = next(t for t in self.texts(win) if t.startswith("理由："))
+        self.assertTrue(reason.endswith("…"))
+        self.assertLessEqual(win.meaning_font.measure(reason), 360)
+
+    def test_glance_view_is_shorter_than_details_view(self):
+        glance, full = self.long_display(), display(star=0, details=True)
+        for reply in full.suggestion["payload"]["replies"]:
+            reply["segments"] = [Segment("長い返事です。" * 12)]
+        self.assertLess(glance._draw_suggestion(0, 10, 360), full._draw_suggestion(0, 10, 360))
+
+    def test_clip_text_keeps_short_text_unchanged(self):
+        font = FakeFont(6, 16)
+        self.assertEqual(SubtitleWindow._clip_text("短い", 100, font), "短い")
+        clipped = SubtitleWindow._clip_text("あ" * 50, 60, font)
+        self.assertTrue(clipped.endswith("…"))
+        self.assertLessEqual(font.measure(clipped), 60)
 
 
 if __name__ == "__main__":

@@ -43,6 +43,27 @@ KIND = {1: "choice", 2: "choice", 3: "choice", 4: "other", 5: "choice", 6: "choi
         15: "other", 16: "other", 17: "other", 18: "other", 19: "fact", 20: "other"}
 JAPANESE_QUOTE = re.compile(r"「[^」]*[぀-ヿ一-鿿][^」]*」")
 PASSES = 2
+PUNCT = re.compile(r"[\s。、，,．.？?！!…「」『』（）()・〜~ー]")
+
+
+def is_question(text: str) -> bool:
+    return bool(re.search(r"[？?]\s*$|か[。]?\s*$|っけ[。？?]?\s*$", text.strip()))
+
+
+def echoes(reply: str, said: str) -> bool:
+    """An exact copy of the other person's sentence, or their question asked back (D-039).
+
+    Following the other person's wording to answer (お疲れ様です。はい、もう上がりです) is natural
+    Japanese and is not counted.
+    """
+    import difflib
+
+    r, s = PUNCT.sub("", reply), PUNCT.sub("", said)
+    if not s:
+        return False
+    if r == s:
+        return True
+    return is_question(said) and is_question(reply) and difflib.SequenceMatcher(None, r, s).ratio() >= 0.8
 
 
 def pct(values, q):
@@ -105,6 +126,7 @@ def main() -> None:
         "sayable_replies": f"{sum(not blank(x['text']) for x in sayable)}/{len(sayable)}",
         "choice_reason_offers_other_answer": f"{sum(offers_other_answer(r) for r in choice)}/{len(choice)}",
         "fact_items_with_blank": f"{sum(any(blank(x['text']) for x in r['replies']) for r in fact)}/{len(fact)}",
+        "replies_echoing_the_other_person": f"{sum(echoes(x['text'], r['sentence']) for r in rows for x in r['replies'])}/{sum(len(r['replies']) for r in rows)}",
         "star_matches_expected": f"{sum(r['star'] == r['expected'] for r in rows)}/{len(rows)}",
         "star_chosen_by_model": f"{sum(not r['star_inferred'] for r in rows)}/{len(rows)}",
         "complete": f"{sum(bool(r['complete']) for r in rows)}/{len(rows)}",

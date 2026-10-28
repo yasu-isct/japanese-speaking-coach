@@ -1,0 +1,34 @@
+[
+ {
+  "payload": "meal",
+  "width": 900,
+  "details": 866,
+  "glance": 652,
+  "glance_with_cap": 652,
+  "screen_height": 1600
+ },
+ {
+  "payload": "meal",
+  "width": 650,
+  "details": 1126,
+  "glance": 777,
+  "glance_with_cap": 777,
+  "screen_height": 1600
+ },
+ {
+  "payload": "shift",
+  "width": 900,
+  "details": 733,
+  "glance": 599,
+  "glance_with_cap": 599,
+  "screen_height": 1600
+ },
+ {
+  "payload": "shift",
+  "width": 650,
+  "details": 963,
+  "glance": 749,
+  "glance_with_cap": 749,
+  "screen_height": 1600
+ }
+]

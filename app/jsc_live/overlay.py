@@ -13,6 +13,11 @@ A toolbar row at the top: 「● 录音中」 while the run is archived; opacity
 In full mode, 收起中文 / 展开中文 toggles meanings and the recommendation reason;
 warnings stay visible. The recommended reply is bold and labelled ⭐ 推荐.
 
+Glance view (default, D-039): in a conversation there are only seconds to look, so the ⭐
+reply is shown in full with its meaning, the other two replies and the reason take one
+line each (cut with …), and older subtitle lines give way when the window would grow
+past half the screen (the history window keeps them all). 详情 shows everything.
+
 With reply suggestions on, a second area under the subtitles shows "…" while
 the API is working, the three replies (⭐ = recommended) as they stream in,
 and a timeout notice if nothing arrived within the time limit.
@@ -60,6 +65,7 @@ class SubtitleWindow:
         self.alpha = alpha
         self.mode = mode
         self.show_meanings = True
+        self.show_details = False  # glance view by default (D-039)
         self.materials_root = materials_root
         self.materials_controller = materials_controller
         self.materials_notice = ""
@@ -130,6 +136,9 @@ class SubtitleWindow:
             self.redraw()
         elif name == "meanings":
             self.show_meanings = not self.show_meanings
+            self.redraw()
+        elif name == "details":
+            self.show_details = not self.show_details
             self.redraw()
         elif name == "review":
             from .review_view import ReviewWindow
@@ -280,7 +289,11 @@ class SubtitleWindow:
                                        fill=FG_RUBY if r["star"] else FG_MEANING, anchor="nw")
             label_bottom = c.bbox(label_item)[3]
             color = FG_FINAL if r["star"] else FG_PARTIAL
-            for row in self._layout(r["segments"], reply_w, font, self.sugg_ruby_font):
+            rows = self._layout(r["segments"], reply_w, font, self.sugg_ruby_font)
+            glance = not self.show_details and not r["star"]
+            if glance and len(rows) > 1:
+                rows = [self._with_ellipsis(rows[0], reply_w, font)]
+            for row in rows:
                 x = pad + label_w
                 for text, ruby, w in row:
                     base_w = font.measure(text)
@@ -296,17 +309,43 @@ class SubtitleWindow:
                 item = c.create_text(pad + label_w, y, text="⚠ 对此对象不要用", font=self.meaning_font,
                                      fill=FG_WARN, anchor="nw", width=reply_w)
                 y = c.bbox(item)[3] + 2
-            if self.show_meanings and r["meaning"]:
+            if self.show_meanings and r["meaning"] and not glance:
                 item = c.create_text(pad + label_w, y, text=r["meaning"], font=self.meaning_font,
                                      fill=FG_MEANING, anchor="nw", width=reply_w)
                 y = c.bbox(item)[3] + 2
             y += 6
         if self.show_meanings and payload.get("reason"):
-            item = c.create_text(pad, y, text="理由：" + payload["reason"], font=self.meaning_font,
+            reason = "理由：" + payload["reason"]
+            if not self.show_details:
+                reason = self._clip_text(reason, max_w, self.meaning_font)
+            item = c.create_text(pad, y, text=reason, font=self.meaning_font,
                                  fill=FG_MEANING, anchor="nw", width=max_w)
             x0, y0, x1, y1 = c.bbox(item)
             y = y1 + 4
         return y
+
+    @staticmethod
+    def _clip_text(text: str, max_w: int, font) -> str:
+        """The longest prefix that fits on one line, with … when something was cut."""
+        if font.measure(text) <= max_w:
+            return text
+        while text and font.measure(text + "…") > max_w:
+            text = text[:-1]
+        return text + "…"
+
+    @staticmethod
+    def _with_ellipsis(row, max_w: int, font):
+        """First layout row of a reply, shortened so a trailing … fits."""
+        row = list(row)
+        ell = font.measure("…")
+        while row and sum(w for _, _, w in row) + ell > max_w:
+            text, ruby, w = row[-1]
+            if ruby is None and len(text) > 1:
+                text = text[:-1]
+                row[-1] = (text, None, font.measure(text))
+            else:
+                row.pop()
+        return row + [("…", None, ell)]
 
     # --- layout ------------------------------------------------------------
     def _layout(self, segments: list[Segment], max_w: int, base_font=None,
@@ -349,6 +388,7 @@ class SubtitleWindow:
         buttons = [("alpha-", "透明 −", False), ("alpha+", "透明 +", False), ("review", "复盘", False),
                    ("history", "历史", bool(self.history_window and self.history_window.visible)),
                    ("meanings", "收起中文" if self.show_meanings else "展开中文", self.show_meanings),
+                   ("details", "详情", self.show_details),
                    ("collapsed", "收起", self.mode == "collapsed"), ("subtitles", "字幕", self.mode == "subtitles"),
                    ("full", "完整", self.mode == "full"), ("close", "✕", False)]
         if not self.history_window:
@@ -356,7 +396,7 @@ class SubtitleWindow:
         if getattr(self, "materials_root", None) is not None:
             buttons.insert(2, ("sources", "资料", False))
         if self.mode != "full":
-            buttons = [b for b in buttons if b[0] != "meanings"]
+            buttons = [b for b in buttons if b[0] not in ("meanings", "details")]
         x = self.width
         for name, label, active in reversed(buttons):
             w = self.toolbar_font.measure(label) + 16
@@ -367,6 +407,17 @@ class SubtitleWindow:
                           fill=FG_FINAL, tags=f"btn:{name}")
 
     def redraw(self) -> None:
+        # Glance view keeps the window under half the screen: drop the oldest subtitle lines
+        # (never below two) before anything else; the history window still has every line.
+        limit = self.root.winfo_screenheight() // 2
+        keep = len(self.lines)
+        while True:
+            height = self._redraw(keep)
+            if self.show_details or height <= limit or keep <= 2:
+                return
+            keep -= 1
+
+    def _redraw(self, keep_lines: int) -> int:
         c = self.canvas
         c.delete("all")
         pad = 16
@@ -375,14 +426,15 @@ class SubtitleWindow:
         if self.mode == "collapsed":
             c.configure(height=TOOLBAR_H)
             self.root.geometry(f"{self.width}x{TOOLBAR_H}+{self.left}+{self.bottom - TOOLBAR_H}")
-            return
+            return TOOLBAR_H
         y = TOOLBAR_H + 6
         notice = getattr(self, "materials_notice", "")
         if notice:
             item = c.create_text(pad, y, text=notice, width=max_w, font=self.toolbar_font,
                                  fill=FG_MEANING, anchor="nw")
             y = c.bbox(item)[3] + 6
-        blocks = [(segs, color) for _, segs, color in self.lines]
+        shown = self.lines[-keep_lines:] if keep_lines < len(self.lines) else self.lines
+        blocks = [(segs, color) for _, segs, color in shown]
         if self.partial:
             blocks.append((self.partial[1], FG_PARTIAL))
         if not blocks and self.status:
@@ -404,6 +456,7 @@ class SubtitleWindow:
         height = max(y + pad - 6, TOOLBAR_H + self.ruby_h + self.base_h + pad)
         c.configure(height=height)
         self.root.geometry(f"{self.width}x{int(height)}+{self.left}+{self.bottom - int(height)}")
+        return int(height)
 
     def close(self) -> None:
         self.closed = True
