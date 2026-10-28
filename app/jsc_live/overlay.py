@@ -46,6 +46,24 @@ TOOLBAR_H = 26
 MODES = ("collapsed", "subtitles", "full")
 
 
+SENTENCE_END = "。！？!?"
+
+
+def split_first_sentence(segments: list[Segment]) -> tuple[list[Segment], list[Segment]]:
+    """(segments of the first sentence, the rest). Ruby words are never split."""
+    head: list[Segment] = []
+    for i, seg in enumerate(segments):
+        if seg.ruby is None:
+            cut = next((k for k, ch in enumerate(seg.text) if ch in SENTENCE_END), None)
+            if cut is not None:
+                first, rest = seg.text[:cut + 1], seg.text[cut + 1:]
+                head.append(Segment(first))
+                tail = ([Segment(rest)] if rest.strip() else []) + list(segments[i + 1:])
+                return head, tail
+        head.append(seg)
+    return head, []
+
+
 def enable_dpi_awareness() -> None:
     """Render at native resolution on high-DPI screens (otherwise Windows blurs the text)."""
     try:
@@ -289,20 +307,29 @@ class SubtitleWindow:
                                        fill=FG_RUBY if r["star"] else FG_MEANING, anchor="nw")
             label_bottom = c.bbox(label_item)[3]
             color = FG_FINAL if r["star"] else FG_PARTIAL
-            rows = self._layout(r["segments"], reply_w, font, self.sugg_ruby_font)
             glance = not self.show_details and not r["star"]
-            if glance and len(rows) > 1:
-                rows = [self._with_ellipsis(rows[0], reply_w, font)]
-            for row in rows:
-                x = pad + label_w
-                for text, ruby, w in row:
-                    base_w = font.measure(text)
-                    if ruby:
-                        c.create_text(x + w / 2, y, text=ruby, font=self.sugg_ruby_font, fill=FG_RUBY, anchor="n")
-                    c.create_text(x + (w - base_w) / 2, y + ruby_h, text=text, font=font,
-                                  fill=color, anchor="nw")
-                    x += w
-                y += ruby_h + base_h
+            # The ⭐ reply leads with its conclusion (D-040): that sentence is bold on its own
+            # line(s); conditions and exceptions follow in the regular weight.
+            if r["star"]:
+                head, tail = split_first_sentence(r["segments"])
+                blocks = [(head, font)] + ([(tail, self.sugg_font)] if tail else [])
+            else:
+                blocks = [(r["segments"], font)]
+            for segments, block_font in blocks:
+                rows = self._layout(segments, reply_w, block_font, self.sugg_ruby_font)
+                if glance and len(rows) > 1:
+                    rows = [self._with_ellipsis(rows[0], reply_w, block_font)]
+                row_h = block_font.metrics("linespace")
+                for row in rows:
+                    x = pad + label_w
+                    for text, ruby, w in row:
+                        base_w = block_font.measure(text)
+                        if ruby:
+                            c.create_text(x + w / 2, y, text=ruby, font=self.sugg_ruby_font, fill=FG_RUBY, anchor="n")
+                        c.create_text(x + (w - base_w) / 2, y + ruby_h, text=text, font=block_font,
+                                      fill=color, anchor="nw")
+                        x += w
+                    y += ruby_h + row_h
             y = max(y, label_bottom)
             # Warnings describe whether a reply is appropriate, so never fold them with translations.
             if r["warn"]:

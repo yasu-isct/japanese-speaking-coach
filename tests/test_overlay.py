@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "app"))
 
 from jsc_live.furigana import Segment  # noqa: E402
-from jsc_live.overlay import SubtitleWindow  # noqa: E402
+from jsc_live.overlay import SubtitleWindow, split_first_sentence  # noqa: E402
 
 
 class FakeFont:
@@ -201,6 +201,28 @@ class GlanceViewTest(unittest.TestCase):
         clipped = SubtitleWindow._clip_text("あ" * 50, 60, font)
         self.assertTrue(clipped.endswith("…"))
         self.assertLessEqual(font.measure(clipped), 60)
+
+class ConclusionFirstTest(unittest.TestCase):
+    """D-040: the ⭐ reply's first sentence (its conclusion) is bold, the rest regular."""
+
+    def test_split_keeps_ruby_words_whole(self):
+        segs = [Segment("昼ご飯は"), Segment("用意", "ようい"), Segment("できません。食べる場所は"), Segment("窓側", "まどがわ"), Segment("です。")]
+        head, tail = split_first_sentence(segs)
+        self.assertEqual("".join(x.text for x in head), "昼ご飯は用意できません。")
+        self.assertEqual("".join(x.text for x in tail), "食べる場所は窓側です。")
+        self.assertEqual([x.ruby for x in tail if x.ruby], ["まどがわ"])
+
+    def test_single_sentence_has_no_tail(self):
+        head, tail = split_first_sentence([Segment("はい、お願いします。")])
+        self.assertEqual(tail, [])
+
+    def test_conclusion_bold_and_conditions_regular(self):
+        win = display(star=0, details=False)
+        win.suggestion["payload"]["replies"][0]["segments"] = [Segment("結論です。条件はこちらです。")]
+        win._draw_suggestion(0, 10, 360)
+        fonts = {item["text"]: item["font"] for item in win.canvas.items}
+        self.assertIs(fonts["結論です。"], win.sugg_star_font)
+        self.assertIs(fonts["条件はこちらです。"], win.sugg_font)
 
 
 if __name__ == "__main__":

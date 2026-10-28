@@ -1,0 +1,691 @@
+{
+  "purpose": "Bounded document-answering stage; agent review required, not general accuracy or visible latency.",
+  "label": "conclusion-after2",
+  "fixture_manifest": {
+    "provenance": "Eight public fictional document cases frozen before D-037 generation tests; seven available, one missing detail. Renewal is a known D-030 regression.",
+    "sha256": {
+      "tests/fixtures/materials/document-stage/answer-cases.json": "f72c8ed6203afd118ec88f98df263a4c8d12555d1eb9f1f58095fe9ff6e42d8c",
+      "tests/fixtures/materials/long_pdf/data/handbook.pdf": "98c822822a65e1326402d65f5a6c0b6de1b36740494659f6d4d89d8f70f56a24",
+      "tests/fixtures/materials/documents/data/course.docx": "2dcd30af100362576688572af7be1e717d3893c8b98dadaea5f2a9e64bfb25ad",
+      "tests/fixtures/materials/documents/data/readme.txt": "4ee3cb08d139cc7ab4b8d39032968705a2a1ed70929d2effb2ec859697a4b5b3",
+      "tests/fixtures/materials/documents/data/workshop.docx": "e803172236bbe9e00aef8ff4c2cf1f666d257c98be06f07d4ff257a81e4dbe4f",
+      "tests/fixtures/materials/general-independent/data/cafeteria.md": "612df8a37d6469ad721f683249c4e132af137511e38e6f2dd746414f2dd19b36",
+      "tests/fixtures/materials/general-independent/data/equipment.md": "de3ad48b3fa901e20077e12508a8dbe7698ed05af41ad08273360f94774e059e",
+      "tests/fixtures/materials/general-independent/data/event.md": "21146d45bc80563cf78e48e5f23fcf9b2e06e837524cfd3ab06198c016aca016",
+      "tests/fixtures/materials/general-independent/data/library.md": "ff68104073cba485edddae033e984db877ae183c6222fca8ee86fa0fb5d5616b",
+      "tests/fixtures/materials/general-independent/data/project.md": "097a5061afa23239841aff36fb9cb5ea29263053b7e4021613efa093c4e65c15"
+    }
+  },
+  "api_model": "deepseek-flash",
+  "thinking": "disabled",
+  "temperature": 0.3,
+  "max_tokens": 400,
+  "maximum_requests": 8,
+  "warmup_requests": 0,
+  "retries": 0,
+  "private_data_read": false,
+  "real_user_settings_changed": false,
+  "source_sha256": {
+    "app/jsc_live/suggest.py": "a1289ab88f5c388169e61dba806d3b5f1fb0869067d0ec00fe684a5d38f03b09",
+    "app/jsc_live/pdf_worker.py": "0fd543914908fd25a0cc04ce7f8b11b5f5d938c3b7bdec84ef8aa5445480792f",
+    "app/jsc_live/semantic_materials.py": "4aef7e95fb69d059077607013cdaa9ae0df170c5e7ae9af29722ab614f81b791"
+  },
+  "results": [
+    {
+      "case": {
+        "id": "press",
+        "corpus": "long_pdf",
+        "query": "ヒートプレスを掃除する前に何分待ちますか？何を使いますか？",
+        "answer_available": true,
+        "required_facts": [
+          "关闭电源后等待15分钟",
+          "使用提供的布",
+          "不要用湿海绵"
+        ],
+        "source": "handbook.pdf:第2页・片段3"
+      },
+      "raw": "推荐|丁寧\n丁寧|電源を切ってから十五分待ちます。掃除には備え付けの布を使ってください。|关掉电源后等十五分钟。清洁时请用配备的布。\nカジュアル|電源切ってから十五分待って、付属の布で掃除するんだよ。|关掉电源后等十五分钟，用附带的布清洁。\nかんたん|電源を切って、十五分待ちます。それから、備え付けの布で掃除します。|关掉电源，等十五分钟。然后用配备的布清洁。\n理由|对方用です・ます体提问，按同等礼貌程度回答；手册写明关机后等十五分钟、用配备的布而非湿海绵[S2]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "電源を切ってから十五分待ちます。掃除には備え付けの布を使ってください。",
+          "meaning": "关掉电源后等十五分钟。清洁时请用配备的布。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "電源切ってから十五分待って、付属の布で掃除するんだよ。",
+          "meaning": "关掉电源后等十五分钟，用附带的布清洁。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "電源を切って、十五分待ちます。それから、備え付けの布で掃除します。",
+          "meaning": "关掉电源，等十五分钟。然后用配备的布清洁。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用です・ます体提问，按同等礼貌程度回答；手册写明关机后等十五分钟、用配备的布而非湿海绵[handbook.pdf:第2页・片段3]。",
+      "complete": true,
+      "error_kind": null,
+      "star_inferred": false,
+      "recommended_style": "丁寧",
+      "api_ms": 1830.6896998547018,
+      "first_token_ms": 793.4967998880893,
+      "retrieval_ms": 0.002300133928656578,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-dbf124976a2aa62dab912625",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 5,
+          "text": "作品保管\n刚完成的作品需要在晾干架上放置至少三十分钟，确认表面干燥后才能装袋。不能当天带走的作品可以免费保管三\n天。请在作品背面贴上报名编号，不要只写名字。领取时携带报名确认邮件，在下午两点到五点之间到一楼前台办\n理。如需他人代领，请提前发送授权邮件，并写明代领人的姓名。超过三天仍未领取的作品，请先联系工作人员确\n认保管位置，不要直接进入储藏室寻找。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第4页・片段5",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-c9f4dc86ad4c90b5f34eabe1",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 6,
+          "text": "Hot equipment\nThe heat press may be used only after completing the safety induction. Tie back long hair and keep drinks on the\nshelf outside the working area. Set the timer before lowering the handle. Never reach under the plate while the\nindicator light is on. After switching it off, wait fifteen minutes before cleaning the plate. Use the supplied cloth, not\na wet sponge. If the temperature display is blank, stop work and contact the technician rather than guessing the\ntemperature.",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页・片段3",
+          "id": "S2"
+        },
+        {
+          "source_id": "material-7be9f299152e524aeea467c9",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 6,
+          "text": "Finished work\nAllow printed fabric to dry on the marked rack before packing it. Collect finished work within seven days of the\nworkshop. Small items are kept in the numbered blue boxes; large items are stored behind the screen. Reception\nis open from 11:00 to 16:00, Tuesday through Saturday. Bring the collection slip, or send written permission if\nsomeone else will collect the work. After seven days, contact reception to arrange storage rather than assuming\nthe item is still on the rack.",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页・片段6",
+          "id": "S3"
+        }
+      ],
+      "cited_source_ids": [
+        "material-c9f4dc86ad4c90b5f34eabe1"
+      ]
+    },
+    {
+      "case": {
+        "id": "booking",
+        "corpus": "long_pdf",
+        "query": "スタジオの予約はいつまで無料で変更できますか？その後の料金は？",
+        "answer_available": true,
+        "required_facts": [
+          "前一天17点前免费更改",
+          "之后500日元",
+          "运营方关闭建筑时除外"
+        ],
+        "source": "handbook.pdf:第2页・片段4"
+      },
+      "raw": "推荐|丁寧\n丁寧|前日の17時までは無料で変更できます。それ以降は500円かかりますが、施設が閉鎖された場合は例外です。|到前一天17点为止可以免费更改。之后需付500日元，但设施关闭时例外。\nカジュアル|前日の17時までは無料で変えられるよ。それ以降は500円かかるけど、施設が閉まってたときは別だよ。|到前一天17点为止可以免费改。之后要500日元，不过设施关闭时另算。\nかんたん|前の日の17時までは無料です。そのあとは500円です。でも、施設が閉まったときはちがいます。|前一天17点前免费。之后是500日元。不过设施关闭时不一样。\n理由|资料写明前一天17点前免费更改、之后500日元，设施关闭时例外[S1]；对方用です・ます提问，按同等礼貌程度回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "前日の17時までは無料で変更できます。それ以降は500円かかりますが、施設が閉鎖された場合は例外です。",
+          "meaning": "到前一天17点为止可以免费更改。之后需付500日元，但设施关闭时例外。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "前日の17時までは無料で変えられるよ。それ以降は500円かかるけど、施設が閉まってたときは別だよ。",
+          "meaning": "到前一天17点为止可以免费改。之后要500日元，不过设施关闭时另算。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "前の日の17時までは無料です。そのあとは500円です。でも、施設が閉まったときはちがいます。",
+          "meaning": "前一天17点前免费。之后是500日元。不过设施关闭时不一样。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "资料写明前一天17点前免费更改、之后500日元，设施关闭时例外[handbook.pdf:第2页・片段4]；对方用です・ます提问，按同等礼貌程度回答。",
+      "complete": true,
+      "error_kind": null,
+      "star_inferred": false,
+      "recommended_style": "丁寧",
+      "api_ms": 2120.3666999936104,
+      "first_token_ms": 789.1232999972999,
+      "retrieval_ms": 0.00209989957511425,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-65f382da9ad2a826b58b2260",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 5,
+          "text": "Changing a booking\nA studio booking can be changed without a fee until 17:00 on the preceding day. Open the original confirmation\nmessage and use its change link. Changes after this deadline cost 500 yen unless the building has been closed\nby the operator. A different participant cannot take over the booking without written approval. When cancelling a\ngroup booking, tell the other members yourself; the system sends the confirmation only to the original organiser.",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页・片段4",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-8d6027f2beba25c22c078869",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 6,
+          "text": "Using the shared studio\nThe studio is a shared workspace for workshops and independent practice. A booking reserves a work area, not\nexclusive use of the entire room. Keep conversations quiet when another group is recording. Personal belongings\nshould stay under the table rather than in the corridor. The last group of the day checks the windows and\nswitches off the lights. Report damaged furniture through the maintenance form so that the next group does not\nhave to discover the problem.",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页・片段2",
+          "id": "S2"
+        },
+        {
+          "source_id": "material-8a9c4788c6e0f38fc3444c64",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 6,
+          "text": "Reserving a recorder\nAudio recorders can be reserved through the equipment calendar. A reservation is provisional until the\ncoordinator confirms it by email. Each pair may borrow one recorder for three days. Collect it from the east office\nbetween 10:00 and 15:00 on a weekday, and check the battery before leaving. Borrowers must return the\nrecorder to the same office before noon on the fourth day. If that office is closed, contact the coordinator; do not\nleave equipment outside the door.",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第1页・片段3",
+          "id": "S3"
+        }
+      ],
+      "cited_source_ids": [
+        "material-65f382da9ad2a826b58b2260"
+      ]
+    },
+    {
+      "case": {
+        "id": "meal",
+        "corpus": "long_pdf",
+        "query": "昼ご飯は用意してもらえますか？どこで食べられますか？",
+        "answer_available": true,
+        "required_facts": [
+          "不提供午餐，需自带或自行购买",
+          "只能在靠窗的两张桌子用餐"
+        ],
+        "source": "handbook.pdf:第4页・片段4"
+      },
+      "raw": "推荐|丁寧\n丁寧|昼食の用意はできませんが、教室の窓側の二つのテーブルで食べられます。|午餐我们没法准备，不过可以在教室靠窗的两张桌子那里吃。|\nカジュアル|昼ご飯は用意できないけど、教室の窓側のテーブルなら食べられるよ。|午饭没法准备，不过在教室靠窗的桌子那儿可以吃。|\nかんたん|昼ご飯は用意できません。でも、教室の窓側のテーブルで食べられます。|午饭没法准备。不过可以在教室靠窗的桌子那里吃。|\n理由|对方用「〜ますか」礼貌提问，用丁寧回答；手册写明不提供午餐、只有靠窗两张桌子可用餐[S1]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "昼食の用意はできませんが、教室の窓側の二つのテーブルで食べられます。",
+          "meaning": "午餐我们没法准备，不过可以在教室靠窗的两张桌子那里吃。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "昼ご飯は用意できないけど、教室の窓側のテーブルなら食べられるよ。",
+          "meaning": "午饭没法准备，不过在教室靠窗的桌子那儿可以吃。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "昼ご飯は用意できません。でも、教室の窓側のテーブルで食べられます。",
+          "meaning": "午饭没法准备。不过可以在教室靠窗的桌子那里吃。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用「〜ますか」礼貌提问，用丁寧回答；手册写明不提供午餐、只有靠窗两张桌子可用餐[handbook.pdf:第4页・片段4]。",
+      "complete": true,
+      "error_kind": null,
+      "star_inferred": false,
+      "recommended_style": "丁寧",
+      "api_ms": 1798.8306998740882,
+      "first_token_ms": 625.9528000373393,
+      "retrieval_ms": 0.002600019797682762,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-aa5eef86d013ec1f75968c89",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 5,
+          "text": "午休与饮食\n午休时间为中午十二点到下午一点。现场不提供午餐，请自备便当，或者到附近商店购买。教室内只有靠窗的两张\n桌子可以用餐，其余区域需要保持干净，避免食物接触颜料。饮用水可以在走廊补充，但请使用带盖的水杯。吃完\n之后，把食物垃圾放入楼梯旁的分类垃圾桶。对食物过敏的参加者应自行确认所购买食品的成分，现场工作人员无\n法代替商店确认配料。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第4页・片段4",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-93b8d11f0838013059568696",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 5,
+          "text": "発表の日\n最終発表では、一人五分の説明のあと、二分間の質問時間を設けます。スライドは六枚以内にまとめ、発表前日\nの午後六時までにPDFで提出してください。音声や動画を使う人は、自分の端末だけで再生できる形も用意して\nください。発表順は当日の受付で案内します。聞き手は、良かった点ともっと聞きたい点を一つずつ記録します\n。発表者は質問にすぐ答えられないとき、後で調べて共有すると伝えても構いません。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页・片段6",
+          "id": "S2"
+        }
+      ],
+      "cited_source_ids": [
+        "material-aa5eef86d013ec1f75968c89"
+      ]
+    },
+    {
+      "case": {
+        "id": "storage",
+        "corpus": "long_pdf",
+        "query": "ワークショップの作品は何日預けられて、何時に受け取れますか？",
+        "answer_available": true,
+        "required_facts": [
+          "可免费保管3天",
+          "下午2点到5点领取"
+        ],
+        "source": "handbook.pdf:第4页・片段5"
+      },
+      "raw": "推荐|丁寧\n丁寧|無料で三日間預かれます。受け取りは午後二時から五時まで、一階の受付です。|可以免费保管三天。领取时间是下午两点到五点，在一楼前台。\nカジュアル|無料で三日間預かってもらえるよ。受け取りは午後二時から五時まで、一階の受付で。|可以免费保管三天。领取时间是下午两点到五点，在一楼前台。\nかんたん|三日間、無料で預かれます。受け取りは午後二時から五時までです。|可以免费保管三天。领取时间是下午两点到五点。\n理由|对方用了です・ます体，按同等礼貌程度回答；保管天数和领取时间见手册[S1]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "無料で三日間預かれます。受け取りは午後二時から五時まで、一階の受付です。",
+          "meaning": "可以免费保管三天。领取时间是下午两点到五点，在一楼前台。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "無料で三日間預かってもらえるよ。受け取りは午後二時から五時まで、一階の受付で。",
+          "meaning": "可以免费保管三天。领取时间是下午两点到五点，在一楼前台。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "三日間、無料で預かれます。受け取りは午後二時から五時までです。",
+          "meaning": "可以免费保管三天。领取时间是下午两点到五点。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用了です・ます体，按同等礼貌程度回答；保管天数和领取时间见手册[handbook.pdf:第4页・片段5]。",
+      "complete": true,
+      "error_kind": null,
+      "star_inferred": false,
+      "recommended_style": "丁寧",
+      "api_ms": 1805.0922001712024,
+      "first_token_ms": 883.5768999997526,
+      "retrieval_ms": 0.002699904143810272,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-dbf124976a2aa62dab912625",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 5,
+          "text": "作品保管\n刚完成的作品需要在晾干架上放置至少三十分钟，确认表面干燥后才能装袋。不能当天带走的作品可以免费保管三\n天。请在作品背面贴上报名编号，不要只写名字。领取时携带报名确认邮件，在下午两点到五点之间到一楼前台办\n理。如需他人代领，请提前发送授权邮件，并写明代领人的姓名。超过三天仍未领取的作品，请先联系工作人员确\n认保管位置，不要直接进入储藏室寻找。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第4页・片段5",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-af3289d45ba396c7f89969aa",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 5,
+          "text": "活动安排\n本工作坊面向希望尝试手工制作的初学者。上午先介绍工具的使用方法，再由参与者独立完成练习。讲师示范时请\n把手中的工具放在桌面上，以便看清步骤。如果没有听懂，可以请讲师放慢速度或再次演示。下午的制作可以根据\n个人进度调整，不要求所有人同时完成。活动最后会安排交流时间，请介绍自己尝试的方法以及制作过程中遇到的\n困难。这里重视练习与分享，不进行作品排名。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第4页・片段2",
+          "id": "S2"
+        },
+        {
+          "source_id": "material-7be9f299152e524aeea467c9",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 6,
+          "text": "Finished work\nAllow printed fabric to dry on the marked rack before packing it. Collect finished work within seven days of the\nworkshop. Small items are kept in the numbered blue boxes; large items are stored behind the screen. Reception\nis open from 11:00 to 16:00, Tuesday through Saturday. Bring the collection slip, or send written permission if\nsomeone else will collect the work. After seven days, contact reception to arrange storage rather than assuming\nthe item is still on the rack.",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页・片段6",
+          "id": "S3"
+        }
+      ],
+      "cited_source_ids": [
+        "material-dbf124976a2aa62dab912625"
+      ]
+    },
+    {
+      "case": {
+        "id": "absence",
+        "corpus": "documents",
+        "query": "欠席連絡はいつまでに、どうやって行いますか？",
+        "answer_available": true,
+        "required_facts": [
+          "课程开始2小时前",
+          "写在学习网站的联系栏",
+          "不需要打电话"
+        ],
+        "source": "course.docx:第5段"
+      },
+      "raw": "推荐|丁寧\n丁寧|授業開始の二時間前までに、学習サイトの連絡欄へ書いてください。電話は不要です。|请在课程开始前两小时之前，在学习网站的联络栏里填写。不需要打电话。\nカジュアル|授業開始の2時間前までに、学習サイトの連絡欄に書いてね。電話はいらないよ。|要在课程开始前两小时之前，在学习网站的联络栏里写一下哦。不用打电话。\nかんたん|授業の2時間前までに、学習サイトの連絡欄に書いてください。電話はいりません。|请在课程开始前两小时，在学习网站的联络栏里填写。不需要打电话。\n理由|课程说明写了缺席联络的截止时间和方式[S1]，对方用です／ます体提问，用丁寧回答。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "授業開始の二時間前までに、学習サイトの連絡欄へ書いてください。電話は不要です。",
+          "meaning": "请在课程开始前两小时之前，在学习网站的联络栏里填写。不需要打电话。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "授業開始の2時間前までに、学習サイトの連絡欄に書いてね。電話はいらないよ。",
+          "meaning": "要在课程开始前两小时之前，在学习网站的联络栏里写一下哦。不用打电话。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "授業の2時間前までに、学習サイトの連絡欄に書いてください。電話はいりません。",
+          "meaning": "请在课程开始前两小时，在学习网站的联络栏里填写。不需要打电话。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "课程说明写了缺席联络的截止时间和方式[course.docx:第5段]，对方用です／ます体提问，用丁寧回答。",
+      "complete": true,
+      "error_kind": null,
+      "star_inferred": false,
+      "recommended_style": "丁寧",
+      "api_ms": 1788.268700009212,
+      "first_token_ms": 751.8479998689145,
+      "retrieval_ms": 0.001800013706088066,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-466e9f1fb0939f32a5037a83",
+          "relative_path": "course.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "欠席する場合は、授業開始の二時間前までに学習サイトの連絡欄へ書いてください。電話は不要です。",
+          "heading": "架空の公開講座：提出案内 / 欠席連絡",
+          "owner_hint": "unverified",
+          "location": "第5段",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-af5c84a262d06d2125766cd1",
+          "relative_path": "course.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "欠席連絡",
+          "heading": "架空の公開講座：提出案内 / 欠席連絡",
+          "owner_hint": "unverified",
+          "location": "第4段",
+          "id": "S2"
+        },
+        {
+          "source_id": "material-5140bb546bebe8f9b69655d2",
+          "relative_path": "workshop.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "预约取消请在前一天晚上八点前通过预约网站办理；当天取消不退还材料费。",
+          "heading": "架空の工作教室・参加案内 / 取消规则",
+          "owner_hint": "unverified",
+          "location": "第7段",
+          "id": "S3"
+        }
+      ],
+      "cited_source_ids": [
+        "material-466e9f1fb0939f32a5037a83"
+      ]
+    },
+    {
+      "case": {
+        "id": "cancel",
+        "corpus": "documents",
+        "query": "予約をキャンセルするには、いつまでに何をすればいいですか？当日のキャンセルはどうなりますか？",
+        "answer_available": true,
+        "required_facts": [
+          "前一天20点前",
+          "通过预约网站办理",
+          "当天取消不退材料费"
+        ],
+        "source": "workshop.docx:第7段"
+      },
+      "raw": "推荐|丁寧\n丁寧|前日(ぜんじつ)の夜(よる)八時(はちじ)までに、予約(よやく)サイトでキャンセルしてください。当日(とうじつ)のキャンセルは材料費(ざいりょうひ)が返(かえ)りません。|请在前一天晚上八点前通过预约网站取消。当天取消不退材料费。\nカジュアル|前日(ぜんじつ)の夜(よる)八時(はちじ)までに予約(よやく)サイトでキャンセルしてね。当日(とうじつ)は材料費(ざいりょうひ)は返(かえ)ってこないよ。|前一天晚上八点前在预约网站上取消哦。当天的话材料费不退。\nかんたん|前日(ぜんじつ)の夜(よる)八時(はちじ)までに、予約(よやく)サイトでキャンセルしてください。当日(とうじつ)はお金(かね)が返(かえ)りません。|请在前一天晚上八点前在预约网站取消。当天钱不退。\n理由|对方用了「〜ですか」「〜ますか」，按同等礼貌程度回答；取消规则见工作教室参加指南[S1]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "前日の夜八時までに、予約サイトでキャンセルしてください。当日のキャンセルは材料費が返りません。",
+          "meaning": "请在前一天晚上八点前通过预约网站取消。当天取消不退材料费。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "前日の夜八時までに予約サイトでキャンセルしてね。当日は材料費は返ってこないよ。",
+          "meaning": "前一天晚上八点前在预约网站上取消哦。当天的话材料费不退。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "前日の夜八時までに、予約サイトでキャンセルしてください。当日はお金が返りません。",
+          "meaning": "请在前一天晚上八点前在预约网站取消。当天钱不退。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用了「〜ですか」「〜ますか」，按同等礼貌程度回答；取消规则见工作教室参加指南[workshop.docx:第7段]。",
+      "complete": true,
+      "error_kind": null,
+      "star_inferred": false,
+      "recommended_style": "丁寧",
+      "api_ms": 2352.2971000056714,
+      "first_token_ms": 884.1019000392407,
+      "retrieval_ms": 0.00200001522898674,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-5140bb546bebe8f9b69655d2",
+          "relative_path": "workshop.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "预约取消请在前一天晚上八点前通过预约网站办理；当天取消不退还材料费。",
+          "heading": "架空の工作教室・参加案内 / 取消规则",
+          "owner_hint": "unverified",
+          "location": "第7段",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-69f58ba20a784207c986b056",
+          "relative_path": "workshop.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "完成した作品は乾燥のため三日間預かります。受取は水曜日以降、午後一時から五時までです。",
+          "heading": "架空の工作教室・参加案内 / 作品の受取",
+          "owner_hint": "unverified",
+          "location": "第5段",
+          "id": "S2"
+        },
+        {
+          "source_id": "material-596bc994a36604355b0cc8fc",
+          "relative_path": "course.docx",
+          "start_line": 1,
+          "end_line": 1,
+          "text": "録音機 | 当日中に返却。予約は前日の正午までです。",
+          "heading": "架空の公開講座：提出案内 / 機材の貸出 / 機材 | 貸出条件",
+          "owner_hint": "unverified",
+          "location": "表1・第3行",
+          "id": "S3"
+        }
+      ],
+      "cited_source_ids": [
+        "material-5140bb546bebe8f9b69655d2"
+      ]
+    },
+    {
+      "case": {
+        "id": "renewal",
+        "corpus": "general-independent",
+        "query": "図書室の本はどんな条件で貸出期間を延ばせますか？",
+        "answer_available": true,
+        "required_facts": [
+          "没有预约者",
+          "在到期前办理",
+          "只能延期1次"
+        ],
+        "source": "library.md:4",
+        "note": "Known simple-reply condition omission from D-030; retained regression case, not unseen."
+      },
+      "raw": "推荐|丁寧\n丁寧|予約が入っていなければ、返却期限の前に一度だけ延長できます。|如果没有其他人预约，可以在到期前办理一次延期。\nカジュアル|予約が入ってなければ、期限の前に一回だけ延長できるよ。|如果没有其他人预约，可以在到期前办一次延期。\nかんたん|予約がなければ、期限の前に一度だけ延長できます。|如果没有预约，可以在到期前办一次延期。\n理由|对方用です／ます体提问，按同等礼貌程度回答；延期条件见资料[S2]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "予約が入っていなければ、返却期限の前に一度だけ延長できます。",
+          "meaning": "如果没有其他人预约，可以在到期前办理一次延期。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "予約が入ってなければ、期限の前に一回だけ延長できるよ。",
+          "meaning": "如果没有其他人预约，可以在到期前办一次延期。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "予約がなければ、期限の前に一度だけ延長できます。",
+          "meaning": "如果没有预约，可以在到期前办一次延期。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用です／ます体提问，按同等礼貌程度回答；延期条件见资料[library.md:4]。",
+      "complete": true,
+      "error_kind": null,
+      "star_inferred": false,
+      "recommended_style": "丁寧",
+      "api_ms": 1297.9951000306755,
+      "first_token_ms": 516.5816000662744,
+      "retrieval_ms": 0.001700129359960556,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-9e7f05339215976d12a31f03",
+          "relative_path": "library.md",
+          "start_line": 3,
+          "end_line": 3,
+          "text": "- 借阅规则：每次最多借三本，借期十四天。",
+          "heading": "架空中央図書室の案内",
+          "owner_hint": "unverified",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-6fddfa588f702a77bf4ebb46",
+          "relative_path": "library.md",
+          "start_line": 4,
+          "end_line": 4,
+          "text": "- 延期：没有预约者时，可以在到期前办理一次延期。",
+          "heading": "架空中央図書室の案内",
+          "owner_hint": "unverified",
+          "id": "S2"
+        },
+        {
+          "source_id": "material-38a1840c43a1eabf4237a395",
+          "relative_path": "library.md",
+          "start_line": 5,
+          "end_line": 5,
+          "text": "- 返却：閉館中は入口右側の返却箱に入れる。",
+          "heading": "架空中央図書室の案内",
+          "owner_hint": "unverified",
+          "id": "S3"
+        }
+      ],
+      "cited_source_ids": [
+        "material-6fddfa588f702a77bf4ebb46"
+      ]
+    },
+    {
+      "case": {
+        "id": "equipment_missing",
+        "corpus": "long_pdf",
+        "query": "ヒートプレスのメーカーと型番を教えてください。",
+        "answer_available": false,
+        "required_facts": [
+          "明确说明所查资料没有厂家与型号",
+          "不以【】空栏代替资料缺失说明",
+          "不编造品牌/型号或声称保密"
+        ],
+        "source": null
+      },
+      "raw": "推荐|丁寧\n丁寧|申し訳ありませんが、ヒートプレスのメーカーと型番は資料に書かれていません。|不好意思，资料里没有写热压机的厂家和型号。\nカジュアル|ごめん、ヒートプレスのメーカーと型番は資料に書いてないよ。|抱歉，资料里没写热压机的厂家和型号。\nかんたん|すみません、ヒートプレスのメーカーと型番は資料にありません。|不好意思，资料里没有热压机的厂家和型号。\n理由|对方用「〜てください」的丁寧说法，按同等礼貌程度回答；本轮资料只讲资料共享规则，没有厂家和型号的信息[S1][S2]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "申し訳ありませんが、ヒートプレスのメーカーと型番は資料に書かれていません。",
+          "meaning": "不好意思，资料里没有写热压机的厂家和型号。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "ごめん、ヒートプレスのメーカーと型番は資料に書いてないよ。",
+          "meaning": "抱歉，资料里没写热压机的厂家和型号。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "すみません、ヒートプレスのメーカーと型番は資料にありません。",
+          "meaning": "不好意思，资料里没有热压机的厂家和型号。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用「〜てください」的丁寧说法，按同等礼貌程度回答；本轮资料只讲资料共享规则，没有厂家和型号的信息[handbook.pdf:第3页・片段4][handbook.pdf:第4页・片段1]。",
+      "complete": true,
+      "error_kind": null,
+      "star_inferred": false,
+      "recommended_style": "丁寧",
+      "api_ms": 1580.254100030288,
+      "first_token_ms": 781.4659001305699,
+      "retrieval_ms": 0.00200001522898674,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-c8c550b89ca05eca5fc02031",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 5,
+          "text": "資料の共有\n授業で配った資料は、参加者が自分で復習するために使えます。友人に内容を説明することは構いませんが、資\n料そのものを公開サイトへ掲載するときは事前に許可を取ってください。写真の一部に他の参加者が写っている\n場合は、その人の同意も必要です。共有するときは、資料の作成日と講座名を残してください。更新前の説明が\n広まらないよう、古い版を使っていることに気づいたら、担当者に最新版の場所を確認してください。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页・片段4",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-28b969e27a43cba8efd18c6b",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 2,
+          "text": "JSC / PUBLIC SYNTHETIC LONG-PAGE RETRIEVAL FIXTURE\n架空工作坊：参加须知",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第4页・片段1",
+          "id": "S2"
+        }
+      ],
+      "cited_source_ids": [
+        "material-c8c550b89ca05eca5fc02031",
+        "material-28b969e27a43cba8efd18c6b"
+      ]
+    }
+  ],
+  "completed": true
+}
