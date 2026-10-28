@@ -26,8 +26,8 @@ import argparse
 import hashlib
 import json
 import math
+import os
 import queue
-import shutil
 import statistics
 import subprocess
 import sys
@@ -176,6 +176,14 @@ def summarize(log_path: Path, md_path: Path, model: str, gap: float, scenario: s
     print("\n".join(lines))
 
 
+def without_temp_dir(text: str) -> str:
+    """Replace the temp folder (long and 8.3 short form, JSON-escaped or not) with <temp>."""
+    forms = {tempfile.gettempdir(), os.path.realpath(tempfile.gettempdir())}
+    for form in sorted(forms, key=len, reverse=True):
+        for spelled in (form, json.dumps(form)[1:-1]):
+            text = text.replace(spelled, "<temp>")
+    return text
+
 def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--voice", default="Haruka")
@@ -256,7 +264,9 @@ def main() -> int:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     stamp = log_path.parent.name if log_path.name == "suggestions.jsonl" else log_path.stem.replace("live-", "")
     saved = OUT_DIR / f"e2e-{cli.scenario}-{stamp}.jsonl"
-    shutil.copy(log_path, saved)
+    # The empty materials folder lives in the user's temp folder, whose path contains the
+    # user name: keep it out of the saved evidence.
+    saved.write_text(without_temp_dir(log_path.read_text(encoding="utf-8")), encoding="utf-8")
     count = sum(bool(line.strip()) for line in saved.read_text(encoding="utf-8").splitlines())
     expected = len(SCENARIOS[cli.scenario])
     completed = finished.is_set() and count == expected

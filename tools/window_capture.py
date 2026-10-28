@@ -48,6 +48,14 @@ def capture_owned_window(root, out: Path) -> dict:
     This can block while the window paints. Use only in explicit developer
     captures, after timed work; it is not a latency measurement.
     """
+    return grab_owned_window(root, out)
+
+
+def grab_owned_window(root, out: Path | None = None):
+    """Same as capture_owned_window; with out=None return the RGB array instead of saving.
+
+    Used for frame-by-frame recording of an offscreen window (tools/capture_latest_showcase.py).
+    """
     import numpy as np
 
     user, gdi = _apis()
@@ -96,6 +104,8 @@ def capture_owned_window(root, out: Path) -> dict:
         # is ever accepted, even if the caller's window was destroyed meanwhile.
         if not user.GetWindowThreadProcessId(hwnd, ctypes.byref(owner)) or owner.value != os.getpid():
             raise RuntimeError("Window ownership changed during capture")
+        if out is None:
+            return rgb
         out = Path(out)
         if out.exists():
             raise FileExistsError("Capture destination already exists")

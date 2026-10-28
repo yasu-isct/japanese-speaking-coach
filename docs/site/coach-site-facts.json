@@ -1,280 +1,124 @@
 {
-  "_note": "Updated through D-037, local only, not deployed. Eight fixed public document questions: full frozen checklist coverage 8/24 to 15/24 replies; retrospective question-essentials coverage 13/24 to 21/24. Agent review, not overall correctness or blind evaluation. Exceptions, speaker role, simple tone, length and narrow-window density remain unresolved. Four-turn public TTS hidden Canvas p95 2.608 s; visible 3 s acceptance remains unmet.",
+  "_note": "Hand-off for the coach entry in the site's src/content/works.ts (same field names). Media: docs/images/showcase-*.png/webm and live-history-lookup.png, captured 2026-10-28 offscreen from public TTS runs / fictional documents (no personal data); copy them to public/media/coach/ unchanged. Numbers: tests/live_suggest/e2e-dialogue-20261028-150334.md, docs/status.md.",
   "status": {
-    "ja": "開発中：外部資料による返答とローカル復習を追加",
-    "zh": "开发中：已增加外部资料回答和本地复盘",
-    "en": "In development: external-document answers and local session review added"
+    "ja": "開発中（第2段階：字幕・返答候補・資料参照・復習が動作）",
+    "zh": "开发中（第二阶段：字幕、接话建议、资料参考、复盘都能运行）",
+    "en": "In development (phase 2: subtitles, replies, document answers and review working)"
   },
   "tagline": {
-    "ja": "会話の最中に「聞き取る・返す・覚える」を支える日本語コーチ——GPU のリアルタイム字幕と、Skill の規則で作る返答候補",
-    "zh": "在对话中支撑\"听懂、接上、记住\"的日语教练——GPU 实时字幕＋按 Skill 规则生成的接话建议",
-    "en": "A Japanese conversation coach for the moment you are mid-conversation — GPU real-time subtitles plus reply suggestions built from the Skill's rules"
+    "ja": "日本語の会話中に、ふりがな付き字幕と「そのまま言える」返答候補を出す Windows アプリです。推奨の返答は結論を先に示し、自分の授業資料から出典付きで答えることもできます。",
+    "zh": "在日语对话中显示带假名的字幕和「能直接说出口」的接话建议的 Windows 应用；推荐的那条先说结论，也能参考自己的课程资料并注明出处。",
+    "en": "A Windows app that shows furigana subtitles and replies you can say as they are during a Japanese conversation; the recommended reply leads with its conclusion and can answer from your own course documents with a citation."
   },
   "number": {
-    "value": "36/36 ranges · 317 checks",
+    "value": "2.21 s · 102/102 · 328 tests",
     "label": {
-      "ja": "47の固定質問中36の目標範囲を取得（開発用データ含む）。回答正答率ではない。317テスト中316成功・1スキップ。",
-      "zh": "47个固定问题中的36个目标片段全部找到（含开发数据）；不是回答正确率。317项检查，316通过、1跳过。",
-      "en": "36/36 target ranges retrieved across 47 fixed questions, including development data; not answer accuracy. 317 checks: 316 pass, 1 skip."
+      "ja": "最後の字幕から返答候補の表示まで p50 2.21 秒（p95 2.50 秒、TTS 10文、RTX 5060 Laptop GPU、音声入力からの総遅延ではない）。そのまま言える返答 102/102（20文×2）。単体テスト328件（CPU上のロジック、会話の自然さの評価ではない）。",
+      "zh": "最后一句字幕到接话建议 p50 2.21 秒（p95 2.50，TTS 10 句，RTX 5060）；能直接说出口的回复 102/102（20 句×2）；单元测试 328 个",
+      "en": "last subtitle to reply suggestions p50 2.21 s (p95 2.50, 10 TTS sentences, RTX 5060 Laptop); replies sayable as they are 102/102 (20 sentences × 2); 328 unit tests"
     },
     "href": "https://github.com/yasu-isct/japanese-speaking-coach/blob/main/docs/showcase-ja.md"
   },
   "verification": {
-    "ja": "D-037の4段TTSは非表示Canvas p95 2.608秒。可視3秒は未達。8問の回答確認では例外の主体・話者の役割・簡単版の自然さ・長い表示に課題が残り、第三者試用は未実施。",
-    "zh": "D-037四段TTS隐藏Canvas p95 2.608秒，可见3秒仍未通过。八题回答检查仍有例外主体、说话角色、简易日语与长文排版问题，尚无第三方试用。",
-    "en": "D-037 four-turn TTS hidden Canvas p95: 2.608 s; visible 3 s acceptance remains unmet. Eight-question review retains failures in exception scope, speaker role, simple Japanese and long-answer layout. No third-party trial yet."
+    "ja": "数字は TTS 音声と文字の評価で測りました（n=10、20文×2、架空資料8問）。私自身が実際の動画と89分のオンライン授業で使い、見つかった問題を D-013〜D-041 に記録して直しました。最新版の実会話での確認、第三者の試用、日本語母語話者のレビューは未実施です。",
+    "zh": "数字来自 TTS 语音和文字评测（n=10、20 句×2、虚构资料 8 题）。作者本人在真实视频和一节 89 分钟的线上课里用过，发现的问题记录在 D-013〜D-041 并已修正。最新版的真实对话确认、第三方试用、母语者审阅尚未进行。",
+    "en": "Numbers come from TTS audio and text evaluations (n=10, 20 sentences × 2, 8 fictional document questions). The author used it on real videos and an 89-minute online class and fixed what broke (D-013–D-041). The latest version has not yet been checked in a real conversation; no third-party trial or native review yet."
   },
   "change": {
-    "ja": "2 文の録音だけで認識モデルを替え、後で 1 文まるごと捏造する失敗を見つけた。次は少数の結果で決めず、保存した実音声で再生して確かめてから変える。",
-    "zh": "只凭 2 句录音就换了识别模型，后来才发现它会把一整段话编成套话。下次不凭少量结果下结论，先用保存的真实录音重放确认再改。",
-    "en": "I switched the recognition model on just two recorded sentences and only later found it could replace a whole sentence with a stock phrase. Next time: replay saved real audio before changing anything."
+    "ja": "別のエージェントに任せた期間、「作り話をしない」を一つの指標だけで最適化した結果、返答が「【参加できます／参加できません】」のような空欄だらけになり、そのまま言えなくなりました。しかも評価は実際に使うプロンプトとは別の経路を測っていました。次は、変更ごとに「そのまま言えるか」を必ず併せて測り、実運用と同じ経路で評価します。",
+    "zh": "交给另一个 agent 推进时，只按「不编造」一个指标优化，结果回复满是【参加できます／参加できません】这类空格，没法直接说出口；而且评测测的不是实际使用的那套提示词。下次每次改动都同时测「能不能直接说」，并用和正式运行相同的路径评测。",
+    "en": "While another agent worked on it, optimising one metric (\"never invent facts\") filled the replies with blanks like 【参加できます／参加できません】 — no longer sayable — and the evaluation measured a different prompt path from the one the app uses. Next time: measure sayability with every change, on the same path as the real app."
   },
   "points": [
     {
-      "ja": "字幕を読む——難しい漢字にだけふりがな",
-      "zh": "看字幕——只给难的汉字注假名",
-      "en": "Read the subtitles — furigana only on the hard kanji"
+      "ja": "ふりがな付きの字幕を読みます。",
+      "zh": "看带假名的字幕",
+      "en": "Read subtitles with furigana"
     },
     {
-      "ja": "⭐の候補を確認し、必要な欄を補って話す",
-      "zh": "看⭐推荐，补全必要字段后开口",
-      "en": "Check the recommended reply, fill any needed fields, then speak"
+      "ja": "⭐ の返答を、太字の結論から口に出します。",
+      "zh": "从加粗的结论开始，把 ⭐ 那条说出口",
+      "en": "Say the ⭐ reply, starting from its bold conclusion"
     },
     {
-      "ja": "履歴で単語を選び、読みと意味を確かめる",
-      "zh": "在历史里选中单词，确认读音和意思",
-      "en": "Pick a word in the history to check its reading and meaning"
-    },
-    {
-      "ja": "外部の授業・会議資料から関連部分を探し、出典付きで返す",
-      "zh": "检索外部课程、会议等资料，回答显示出处",
-      "en": "Retrieve relevant course or meeting notes and answer with source locations"
-    },
-    {
-      "ja": "保存済みの会話を復習し、実際に調べた語をAnkiへ書き出す",
-      "zh": "从存档复盘，并把实际查过的词导出到Anki",
-      "en": "Review archived conversations and export looked-up words to Anki"
-    },
-    {
-      "ja": "資料フォルダーを画面で選び、再起動せず読み直す",
-      "zh": "在窗口选择资料文件夹，无需重启即可重新读取",
-      "en": "Choose a materials folder in the UI and reload it without restarting"
-    },
-    {
-      "ja": "会話を一覧から選び、音声認識を起動せず課後に復習する",
-      "zh": "在列表选择存档，课后独立启动复盘",
-      "en": "Choose an archive and review after class without starting live transcription"
-    },
-    {
-      "ja": "任意のローカル多言語検索で、言い換えや他言語の資料を探す",
-      "zh": "可选本地多语言查找，支持不同问法与跨语言资料",
-      "en": "Opt in to local multilingual retrieval for paraphrases and cross-language documents"
-    },
-    {
-      "ja": "画面でローカル検索モデルを準備・切替し、選択を保存する",
-      "zh": "在窗口准备和切换本地检索模型，并记住选择",
-      "en": "Prepare and switch the local retrieval model in the UI and remember the choice"
+      "ja": "授業資料にもとづく回答と出典を確かめます。",
+      "zh": "确认根据课程资料的回答和出处",
+      "en": "Check answers drawn from your course documents, with their source"
     }
   ],
   "media": [
     {
-      "src": "/media/coach/live-reference-answer.png",
+      "src": "/media/coach/showcase-conversation.png",
       "width": 900,
-      "height": 419,
+      "height": 468,
       "label": {
-        "ja": "外部資料と返答",
-        "zh": "外部资料与回答",
-        "en": "Reference-backed replies"
+        "ja": "01 / 会話中の返答候補",
+        "zh": "01 / 对话中的接话建议",
+        "en": "01 / Replies mid-conversation"
       },
       "alt": {
-        "ja": "架空の授業案内に基づくPDF提出の返答とcourse.mdの行番号",
-        "zh": "依据虚构课程说明回答PDF提交格式，理由显示course.md行号",
-        "en": "PDF submission answer from a fictional course note with a course.md line citation"
+        "ja": "字幕ウィンドウ：店員の「こちら温めますか」に対し、⭐ 丁寧「はい、お願いします。」を太字で表示。ほかの2案は1行、カジュアルに ⚠、最下行にもう一方の言い方「いえ、大丈夫です」",
+        "zh": "字幕窗：对店员「こちら温めますか」，⭐ 丁寧「はい、お願いします。」加粗显示；另两条各一行，カジュアル带 ⚠，最下面一行是另一种说法「いえ、大丈夫です」",
+        "en": "Subtitle window: to a clerk's \"shall I heat this?\", the ⭐ polite reply in bold; the other two on one line each, a ⚠ on casual, and the other answer \"no, it's fine\" ready below"
       },
-      "caption": "保存済みTTS結果の現UIへの再描画・個人情報なし（2026-10-26、app ed12b8f）；新たな速度測定ではない"
+      "caption": {
+        "ja": "TTS 音声または公開の架空資料で実行したアプリの画面です。人の会話の録音・個人情報は含みません（2026-10-28）。",
+        "zh": "TTS 语音或公开虚构资料运行的应用画面，不含真人对话录音和个人信息（2026-10-28）。",
+        "en": "App screens from a TTS / fictional-document run; no recordings of people, no personal data (2026-10-28)."
+      }
     },
     {
-      "src": "/media/coach/live-subtitle-suggest.png",
+      "src": "/media/coach/showcase-document.png",
       "width": 900,
-      "height": 565,
+      "height": 420,
       "label": {
-        "ja": "01 / 字幕と返答候補",
-        "zh": "01 / 字幕与接话建议",
-        "en": "01 / Subtitles and replies"
+        "ja": "02 / 資料にもとづく回答",
+        "zh": "02 / 根据资料回答",
+        "en": "02 / Answer from documents"
       },
       "alt": {
-        "ja": "字幕ウィンドウ：ふりがな付きの日本語字幕 3 文と、丁寧・カジュアル・かんたんの返答候補（⭐ 一つ、カジュアルに ⚠）",
-        "zh": "字幕窗：三句带假名的日语字幕，以及丁寧・カジュアル・かんたん三条回复（一个 ⭐，カジュアル带 ⚠）",
-        "en": "Subtitle window: three Japanese subtitle lines with furigana and three replies — polite, casual, simplest — one ⭐ and a ⚠ on casual"
+        "ja": "架空の講座ハンドブックにもとづく回答：結論「昼食は用意していません…」を太字、食べられる場所は次の行、理由に出典",
+        "zh": "根据虚构的课程手册回答：结论「昼食は用意していません…」加粗，可用餐地点在下一行，理由里注明出处",
+        "en": "Answer from a fictional course handbook: the conclusion (no lunch provided) in bold, where to eat on the next line, the source in the reason"
       },
-      "caption": "TTS 音声による再生・個人情報なし（2026-10-25、commit 3ba4bea）"
+      "caption": {
+        "ja": "TTS 音声または公開の架空資料で実行したアプリの画面です。人の会話の録音・個人情報は含みません（2026-10-28）。",
+        "zh": "TTS 语音或公开虚构资料运行的应用画面，不含真人对话录音和个人信息（2026-10-28）。",
+        "en": "App screens from a TTS / fictional-document run; no recordings of people, no personal data (2026-10-28)."
+      }
     },
     {
       "src": "/media/coach/live-history-lookup.png",
+      "placement": "supporting",
       "width": 424,
       "height": 1007,
       "label": {
-        "ja": "02 / 履歴と単語",
-        "zh": "02 / 历史与查词",
-        "en": "02 / History and lookup"
+        "ja": "03 / 履歴と単語",
+        "zh": "03 / 历史与查词",
+        "en": "03 / History and lookup"
       },
       "alt": {
         "ja": "字幕履歴ウィンドウ：「可能」を選ぶと読み【かのう】と文脈上の意味が出る",
         "zh": "字幕历史窗：选中「可能」后显示读音【かのう】和这句话里的意思",
         "en": "History window: selecting 可能 shows its reading (かのう) and its meaning in this sentence"
       },
-      "caption": "TTS 音声による再生・個人情報なし（2026-10-25、commit 3ba4bea）"
-    },
-    {
-      "src": "/media/coach/live-archive.png",
-      "width": 1262,
-      "height": 711,
-      "label": {
-        "ja": "03 / 録音の保存",
-        "zh": "03 / 录音存档",
-        "en": "03 / Session archive"
-      },
-      "alt": {
-        "ja": "録音版を閉じたあとに開く保存フォルダ：clips、meta、stream、suggestions、transcript（ナビゲーション欄は塗りつぶし）",
-        "zh": "录音版关闭后自动打开的存档文件夹：clips、meta、stream、suggestions、transcript（导航栏已涂掉）",
-        "en": "Session folder opened after the recording version closes: clips, meta, stream, suggestions, transcript (navigation pane blanked)"
-      },
-      "caption": "TTS 音声による再生・個人情報なし。左のナビゲーション欄は個人情報のため塗りつぶし（2026-10-25）"
-    },
-    {
-      "src": "/media/coach/live-review-picker.png",
-      "width": 780,
-      "height": 570,
-      "label": {
-        "ja": "アーカイブから復習",
-        "zh": "从存档复盘",
-        "en": "Archive review"
-      },
-      "alt": {
-        "ja": "架空の会話から2字幕・2回答・2カードを書き出した復習ウィンドウ",
-        "zh": "虚构会话生成2条字幕、2轮建议和2张卡片的复盘窗口",
-        "en": "Review picker exporting two subtitles, two reply turns and two cards from a fictional archive"
-      },
-      "caption": "公開架空データ・音声なし・画面外描画（2026-10-26、D-028）；APIや速度の再測定ではない"
-    },
-    {
-      "src": "/media/coach/live-model-settings.png",
-      "width": 640,
-      "height": 520,
-      "label": {
-        "ja": "本機モデルの設定",
-        "zh": "本地模型设置",
-        "en": "Local model settings"
-      },
-      "alt": {
-        "ja": "本機多言語検索の状態、モデル位置、切替・ダウンロードボタン",
-        "zh": "本地多语言查找状态、模型位置、切换和下载按钮",
-        "en": "Local multilingual search status, model location, toggle and download actions"
-      },
-      "caption": "公開資料・実際の本機モデル・一時設定、画面外描画（2026-10-26、D-031）；新しい回答や可視速度の証拠ではない"
-    },
-    {
-      "src": "/media/coach/live-materials-docx.png",
-      "width": 820,
-      "height": 600,
-      "label": {
-        "ja": "Word資料の検索",
-        "zh": "Word资料查找",
-        "en": "Word material search"
-      },
-      "alt": {
-        "ja": "架空Wordの表から取り出した文章と表行の出典",
-        "zh": "虚构Word表格中的片段与表格行出处",
-        "en": "A passage from a fictional Word table with its row location"
-      },
-      "caption": "公開架空Word・検索/引用状態の合成表示（2026-10-26、D-032）、画面外描画。生成API・可視速度の証拠ではない"
-    },
-    {
-      "src": "/media/coach/live-materials-pdf.png",
-      "width": 820,
-      "height": 600,
-      "label": {
-        "ja": "PDFの資料とページ",
-        "zh": "PDF资料与页码",
-        "en": "PDF sources and pages"
-      },
-      "alt": {
-        "ja": "架空PDFの提出案内と物理ページ番号",
-        "zh": "虚构PDF讲义的提交说明与物理页码",
-        "en": "A fictional PDF course passage and its physical page number"
-      },
-      "caption": "公開架空PDF・検索/引用状態の合成表示（2026-10-26、D-033）、画面外描画。生成API・可視速度の証拠ではない"
-    },
-    {
-      "src": "/media/coach/live-materials-progress.png",
-      "width": 820,
-      "height": 600,
-      "label": {
-        "ja": "資料読み込みの進捗",
-        "zh": "资料读取进度",
-        "en": "Materials loading progress"
-      },
-      "alt": {
-        "ja": "架空資料の読み込み数と取消ボタン",
-        "zh": "合成资料的读取数量与取消按钮",
-        "en": "Synthetic materials loading count and cancel button"
-      },
-      "caption": "公開架空100資料、16/100で一時停止したレイアウト確認（2026-10-26、D-034）。画面外描画、生成APIなし、速度測定とは別"
-    },
-    {
-      "src": "/media/coach/live-materials-startup.png",
-      "width": 900,
-      "height": 149,
-      "label": {
-        "ja": "資料のバックグラウンド準備",
-        "zh": "资料后台准备",
-        "en": "Background materials startup"
-      },
-      "alt": {
-        "ja": "キーワード資料を使用しながら多言語索引を準備する合成画面",
-        "zh": "关键词资料已可用、多语言仍在准备的合成启动画面",
-        "en": "Synthetic startup with keywords ready while semantic retrieval is loading"
-      },
-      "caption": "架空100資料・音声/ASR/APIを隔離（2026-10-26、D-035）。画面外自身HWND、全アプリ起動や可視速度の証拠ではない"
-    },
-    {
-      "src": "/media/coach/live-materials-long-pdf.png",
-      "width": 820,
-      "height": 600,
-      "label": {
-        "ja": "長いPDFの資料",
-        "zh": "长PDF资料片段",
-        "en": "Focused long-PDF sources"
-      },
-      "alt": {
-        "ja": "音声課題の節から始まる資料と物理ページ・断片番号",
-        "zh": "从音声课题小节开始的资料及物理页与片段号",
-        "en": "A course assignment section with physical page and extraction-block citation"
-      },
-      "caption": "架空PDF・検索/引用状態の合成表示（2026-10-26、D-036）。画面外自身HWND、生成API・可視速度の証拠ではない"
-    },
-    {
-      "src": "/media/coach/live-document-answer.png",
-      "width": 900,
-      "height": 584,
-      "label": {
-        "ja": "文書の規則から返答",
-        "zh": "根据文档规定回答",
-        "en": "Answers from document rules"
-      },
-      "alt": {
-        "ja": "架空Wordの欠席期限と連絡欄を含む三つの回答",
-        "zh": "包含虚构Word请假截止时间和联系栏的三条回答",
-        "en": "Three saved answers with a fictional course absence deadline and contact field"
-      },
-      "caption": "公開架空Word・保存済み生成回答の画面外再描画（2026-10-26、D-037）。可視速度・一般的な正答率の証拠ではない"
+      "caption": {
+        "ja": "TTS 音声で実行したアプリの画面です。個人情報は含みません（2026-10-25）。",
+        "zh": "TTS 语音运行的应用画面，不含个人信息（2026-10-25）。",
+        "en": "App screen from a TTS run; no personal data (2026-10-25)."
+      }
     }
   ],
   "demo_video": {
-    "src": "/media/coach/live-demo.webm",
+    "src": "/media/coach/showcase-demo.webm",
     "width": 900,
-    "height": 760,
-    "seconds": 26,
-    "caption": "TTS 音声による再生・個人情報なし。無音、背景は無地の板（2026-10-25、commit 3ba4bea）"
+    "height": 724,
+    "seconds": 25,
+    "poster": "/media/coach/showcase-conversation.png",
+    "caption": {
+      "ja": "TTS 音声による新しい実行を、アプリ自身のウィンドウだけ録画した25秒の無音動画です（2026-10-28）。",
+      "zh": "用 TTS 语音重新运行、只录应用自己窗口的 25 秒无声视频（2026-10-28）。",
+      "en": "A silent 25-second recording of only the app's own window during a fresh TTS run (2026-10-28)."
+    }
   }
 }

@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "app"))
 
 from jsc_live.furigana import Segment  # noqa: E402
-from jsc_live.overlay import SubtitleWindow, split_first_sentence  # noqa: E402
+from jsc_live.overlay import SubtitleWindow, other_answer, split_first_sentence  # noqa: E402
 
 
 class FakeFont:
@@ -223,6 +223,21 @@ class ConclusionFirstTest(unittest.TestCase):
         fonts = {item["text"]: item["font"] for item in win.canvas.items}
         self.assertIs(fonts["結論です。"], win.sugg_star_font)
         self.assertIs(fonts["条件はこちらです。"], win.sugg_font)
+
+class OtherAnswerTest(unittest.TestCase):
+    """D-041: the glance view shows the ready-made other answer instead of the rationale."""
+
+    def test_extracts_the_other_answer(self):
+        reason = "对方是店员，用丁寧回答；若不需要加热，可说「いえ、大丈夫です」。"
+        self.assertEqual(other_answer(reason), "若不需要加热，可说「いえ、大丈夫です」")
+        self.assertEqual(other_answer("对方用了です/ます。"), "")
+
+    def test_glance_view_shows_it(self):
+        win = display(star=0, details=False)
+        win.suggestion["payload"]["reason"] = "对方是店员；若不需要，可说「いいえ、結構です」。"
+        win._draw_suggestion(0, 10, 360)
+        texts = [item["text"] for item in win.canvas.items]
+        self.assertIn("另一种说法：若不需要，可说「いいえ、結構です」", texts)
 
 
 if __name__ == "__main__":

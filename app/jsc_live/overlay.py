@@ -49,6 +49,14 @@ MODES = ("collapsed", "subtitles", "full")
 SENTENCE_END = "。！？!?"
 
 
+def other_answer(reason: str) -> str:
+    """「若…，可说「…」」 from a recommendation reason (the last one), or ''."""
+    import re
+
+    found = re.findall(r"(?:若|如果)[^。；;]*?[，,、]?\s*可(?:以)?说「[^」]+」", reason)
+    return found[-1] if found else ""
+
+
 def split_first_sentence(segments: list[Segment]) -> tuple[list[Segment], list[Segment]]:
     """(segments of the first sentence, the rest). Ruby words are never split."""
     head: list[Segment] = []
@@ -344,7 +352,10 @@ class SubtitleWindow:
         if self.show_meanings and payload.get("reason"):
             reason = "理由：" + payload["reason"]
             if not self.show_details:
-                reason = self._clip_text(reason, max_w, self.meaning_font)
+                # In a conversation the other answer (「若…，可说「…」」) is what can be used right
+                # away, so the glance view shows it instead of the style rationale (D-041).
+                other = other_answer(payload["reason"])
+                reason = self._clip_text("另一种说法：" + other if other else reason, max_w, self.meaning_font)
             item = c.create_text(pad, y, text=reason, font=self.meaning_font,
                                  fill=FG_MEANING, anchor="nw", width=max_w)
             x0, y0, x1, y1 = c.bbox(item)
