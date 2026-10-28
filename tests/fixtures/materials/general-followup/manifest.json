@@ -1,0 +1,9 @@
+{
+  "frozen_at": "2026-10-26T20:38:27.520153",
+  "sha256": {
+    "queries.json": "759de7eca18b98287b167acb7e1059fabf52a08d4d72c5c35ca6ae8fa94917e5",
+    "corpus_manifest": "dc6a9292af3adfa3f73facceed2f3f6a1b8f638e77d13c06cdeaa99b439e1be7"
+  },
+  "baseline_commit": "187b7b5",
+  "public_synthetic_only": true
+}

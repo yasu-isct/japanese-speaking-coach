@@ -1,0 +1,665 @@
+{
+  "provenance": "Frozen synthetic long-page retrieval. Evidence coverage, not generated-answer accuracy.",
+  "api_calls": 0,
+  "private_data_read": false,
+  "mode": "semantic",
+  "sha256": {
+    "data/handbook.pdf": "98c822822a65e1326402d65f5a6c0b6de1b36740494659f6d4d89d8f70f56a24",
+    "queries.json": "51f8f4fddb5e13b4820cbdc62493efab39b681ea8796db9321ac460c2321a50a",
+    "content.json": "1882e314eaf2f63cc16ca06ac6ea8391ac2c71d0a2a1cc52aceb8eedd0d741bf"
+  },
+  "diagnostics": {
+    "scanned_entries": 1,
+    "files_considered": 1,
+    "indexed_files": 1,
+    "indexed_chars": 7330,
+    "indexed_chunks": 12,
+    "semantic_enabled": 1,
+    "semantic_windows": 33
+  },
+  "issues": [],
+  "build_ms": 1902.9536000452936,
+  "search_p50_ms": 3.74324998119846,
+  "search_p95_ms": 4.723699996247888,
+  "atomic_coverage": 16,
+  "combined_coverage": 16,
+  "whole_section_coverage": 9,
+  "mean_selected_characters": 1370.875,
+  "total": 16,
+  "rows": [
+    {
+      "id": "recorder",
+      "query": "録音機は何日借りられて、いつまでに返しますか？",
+      "path": "handbook.pdf",
+      "page": 1,
+      "needles": [
+        "three days",
+        "before noon on the fourth day"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": false,
+      "selected_characters": 1780,
+      "sources": [
+        {
+          "source_id": "material-b24f962b51aa5b50f921357d",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 19,
+          "text": "JSC / PUBLIC SYNTHETIC LONG-PAGE RETRIEVAL FIXTURE\n公開講座の参加と課題\n講座の進め方\nこの講座では、身近な出来事について調べたことを短い日本語で説明する練習をします。最初に全体の流れを聞\nき、次に二人組で資料を読みます。分からない言葉はその場で質問して構いません。発表の上手さだけでなく、\n相手の説明を聞いて内容を確認する姿勢も大切にします。授業の終わりには、自分が理解できた点と次回確かめ\nたい点を一つずつノートに書いてください。ノートは本人の学習に使うもので、毎回提出する必要はありません\n。\n音声課題の作り方\n音声課題では、選んだ記事の内容を二分以上四分以内で紹介してください。文章を全部読み上げるのではなく、\n重要だと思った点を自分の言葉で説明します。録音場所に大きな雑音がないか、提出前に一度再生して確認して\nください。ファイルはWAV形式にし、木曜日の午後八時までに提出フォームへ送ります。容量は一つのファイ\nルにつき二十MB以下です。体調不良などで間に合わない場合は、締切前に担当者へ連絡して延長の相談をして\nください。\n資料の共有\n授業で配った資料は、参加者が自分で復習するために使えます。友人に内容を説明することは構いませんが、資\n料そのものを公開サイトへ掲載するときは事前に許可を取ってください。写真の一部に他の参加者が写っている\n場合は、その人の同意も必要です。共有するときは、資料の作成日と講座名を残してください。更新前の説明が\n広まらないよう、古い版を使っていることに気づいたら、担当者に最新版の場所を確認してください。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页"
+        },
+        {
+          "source_id": "material-e3fe6618167c5c4488631709",
+          "relative_path": "handbook.pdf",
+          "start_line": 11,
+          "end_line": 17,
+          "text": "coordinator confirms it by email. Each pair may borrow one recorder for three days. Collect it from the east office\nbetween 10:00 and 15:00 on a weekday, and check the battery before leaving. Borrowers must return the\nrecorder to the same office before noon on the fourth day. If that office is closed, contact the coordinator; do not\nleave equipment outside the door.\nInterview consent\nAsk for written permission before turning on a recorder. A person may agree to take part in the conversation while\nrefusing recording; in that case, take written notes only. Explain how the notes will be used and where they will be",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第1页"
+        },
+        {
+          "source_id": "material-71904011f651e1f4cb2bb286",
+          "relative_path": "handbook.pdf",
+          "start_line": 20,
+          "end_line": 31,
+          "text": "欠席した日の復習\n欠席した場合は、翌日の正午以降に学習ページで当日の要点を確認できます。録画は全員に公開されるものでは\nありません。配布資料を読んでも分からない点は、質問フォームに具体的なページ番号と一緒に書いてください\n。個別の補講は原則として行いませんが、次回の授業前に質問できる時間があります。病気で二回以上続けて休\nむ場合は、提出物の予定を調整するため、できるだけ早く運営窓口へ知らせてください。\n発表の日\n最終発表では、一人五分の説明のあと、二分間の質問時間を設けます。スライドは六枚以内にまとめ、発表前日\nの午後六時までにPDFで提出してください。音声や動画を使う人は、自分の端末だけで再生できる形も用意して\nください。発表順は当日の受付で案内します。聞き手は、良かった点ともっと聞きたい点を一つずつ記録します\n。発表者は質問にすぐ答えられないとき、後で調べて共有すると伝えても構いません。\nFictional information only - no real organisation or person\n3",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页"
+        }
+      ]
+    },
+    {
+      "id": "consent",
+      "query": "録音には同意していない人と話す場合はどうしますか？",
+      "path": "handbook.pdf",
+      "page": 1,
+      "needles": [
+        "refusing recording",
+        "written notes only"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": false,
+      "selected_characters": 1780,
+      "sources": [
+        {
+          "source_id": "material-b24f962b51aa5b50f921357d",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 19,
+          "text": "JSC / PUBLIC SYNTHETIC LONG-PAGE RETRIEVAL FIXTURE\n公開講座の参加と課題\n講座の進め方\nこの講座では、身近な出来事について調べたことを短い日本語で説明する練習をします。最初に全体の流れを聞\nき、次に二人組で資料を読みます。分からない言葉はその場で質問して構いません。発表の上手さだけでなく、\n相手の説明を聞いて内容を確認する姿勢も大切にします。授業の終わりには、自分が理解できた点と次回確かめ\nたい点を一つずつノートに書いてください。ノートは本人の学習に使うもので、毎回提出する必要はありません\n。\n音声課題の作り方\n音声課題では、選んだ記事の内容を二分以上四分以内で紹介してください。文章を全部読み上げるのではなく、\n重要だと思った点を自分の言葉で説明します。録音場所に大きな雑音がないか、提出前に一度再生して確認して\nください。ファイルはWAV形式にし、木曜日の午後八時までに提出フォームへ送ります。容量は一つのファイ\nルにつき二十MB以下です。体調不良などで間に合わない場合は、締切前に担当者へ連絡して延長の相談をして\nください。\n資料の共有\n授業で配った資料は、参加者が自分で復習するために使えます。友人に内容を説明することは構いませんが、資\n料そのものを公開サイトへ掲載するときは事前に許可を取ってください。写真の一部に他の参加者が写っている\n場合は、その人の同意も必要です。共有するときは、資料の作成日と講座名を残してください。更新前の説明が\n広まらないよう、古い版を使っていることに気づいたら、担当者に最新版の場所を確認してください。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页"
+        },
+        {
+          "source_id": "material-71904011f651e1f4cb2bb286",
+          "relative_path": "handbook.pdf",
+          "start_line": 20,
+          "end_line": 31,
+          "text": "欠席した日の復習\n欠席した場合は、翌日の正午以降に学習ページで当日の要点を確認できます。録画は全員に公開されるものでは\nありません。配布資料を読んでも分からない点は、質問フォームに具体的なページ番号と一緒に書いてください\n。個別の補講は原則として行いませんが、次回の授業前に質問できる時間があります。病気で二回以上続けて休\nむ場合は、提出物の予定を調整するため、できるだけ早く運営窓口へ知らせてください。\n発表の日\n最終発表では、一人五分の説明のあと、二分間の質問時間を設けます。スライドは六枚以内にまとめ、発表前日\nの午後六時までにPDFで提出してください。音声や動画を使う人は、自分の端末だけで再生できる形も用意して\nください。発表順は当日の受付で案内します。聞き手は、良かった点ともっと聞きたい点を一つずつ記録します\n。発表者は質問にすぐ答えられないとき、後で調べて共有すると伝えても構いません。\nFictional information only - no real organisation or person\n3",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页"
+        },
+        {
+          "source_id": "material-e3fe6618167c5c4488631709",
+          "relative_path": "handbook.pdf",
+          "start_line": 11,
+          "end_line": 17,
+          "text": "coordinator confirms it by email. Each pair may borrow one recorder for three days. Collect it from the east office\nbetween 10:00 and 15:00 on a weekday, and check the battery before leaving. Borrowers must return the\nrecorder to the same office before noon on the fourth day. If that office is closed, contact the coordinator; do not\nleave equipment outside the door.\nInterview consent\nAsk for written permission before turning on a recorder. A person may agree to take part in the conversation while\nrefusing recording; in that case, take written notes only. Explain how the notes will be used and where they will be",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第1页"
+        }
+      ]
+    },
+    {
+      "id": "expenses",
+      "query": "交通費の上限と、領収書を出す期限を教えてください。",
+      "path": "handbook.pdf",
+      "page": 1,
+      "needles": [
+        "2400 yen",
+        "ten calendar days"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": false,
+      "selected_characters": 1296,
+      "sources": [
+        {
+          "source_id": "material-32194124c941925b99784f1f",
+          "relative_path": "handbook.pdf",
+          "start_line": 18,
+          "end_line": 24,
+          "text": "stored. Participants may ask to remove their interview until five days after the visit. Send removal requests to the\ncoordinator using the participant code, without putting names in the email subject. Later requests will be\nconsidered individually.\nTravel expenses\nKeep the original train ticket receipts and write the visit date on the back. Reimbursement covers the least\nexpensive reasonable public transport route, up to 2400 yen per person for each visit. Taxi fares require written\napproval before the journey. Submit the expense form within ten calendar days of the visit, with the receipts",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第1页"
+        },
+        {
+          "source_id": "material-6d8e56fc749b6619260a82d5",
+          "relative_path": "handbook.pdf",
+          "start_line": 25,
+          "end_line": 34,
+          "text": "attached. Missing receipts cannot be replaced by a bank statement. Ask the office before paying for any unusual\ntravel arrangement.\nWhat to submit\nSubmit the fieldwork report as a PDF by Wednesday at 18:00. The report should contain a question, a description\nof the method, a short analysis and a reflection. Keep the main text between 1200 and 1600 words; references do\nnot count toward this limit. Include the participant codes in quotations, and remove names and contact\ninformation. A late report needs an extension agreed before the original deadline. Sending a message after the\ndeadline does not automatically create an extension.\nFictional information only - no real organisation or person\n1",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第1页"
+        }
+      ]
+    },
+    {
+      "id": "report",
+      "query": "調査レポートの締切と語数の条件は何ですか？",
+      "path": "handbook.pdf",
+      "page": 1,
+      "needles": [
+        "Wednesday at 18:00",
+        "1200 and 1600 words",
+        "references do not count"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": true,
+      "selected_characters": 1398,
+      "sources": [
+        {
+          "source_id": "material-b24f962b51aa5b50f921357d",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 19,
+          "text": "JSC / PUBLIC SYNTHETIC LONG-PAGE RETRIEVAL FIXTURE\n公開講座の参加と課題\n講座の進め方\nこの講座では、身近な出来事について調べたことを短い日本語で説明する練習をします。最初に全体の流れを聞\nき、次に二人組で資料を読みます。分からない言葉はその場で質問して構いません。発表の上手さだけでなく、\n相手の説明を聞いて内容を確認する姿勢も大切にします。授業の終わりには、自分が理解できた点と次回確かめ\nたい点を一つずつノートに書いてください。ノートは本人の学習に使うもので、毎回提出する必要はありません\n。\n音声課題の作り方\n音声課題では、選んだ記事の内容を二分以上四分以内で紹介してください。文章を全部読み上げるのではなく、\n重要だと思った点を自分の言葉で説明します。録音場所に大きな雑音がないか、提出前に一度再生して確認して\nください。ファイルはWAV形式にし、木曜日の午後八時までに提出フォームへ送ります。容量は一つのファイ\nルにつき二十MB以下です。体調不良などで間に合わない場合は、締切前に担当者へ連絡して延長の相談をして\nください。\n資料の共有\n授業で配った資料は、参加者が自分で復習するために使えます。友人に内容を説明することは構いませんが、資\n料そのものを公開サイトへ掲載するときは事前に許可を取ってください。写真の一部に他の参加者が写っている\n場合は、その人の同意も必要です。共有するときは、資料の作成日と講座名を残してください。更新前の説明が\n広まらないよう、古い版を使っていることに気づいたら、担当者に最新版の場所を確認してください。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页"
+        },
+        {
+          "source_id": "material-6d8e56fc749b6619260a82d5",
+          "relative_path": "handbook.pdf",
+          "start_line": 25,
+          "end_line": 34,
+          "text": "attached. Missing receipts cannot be replaced by a bank statement. Ask the office before paying for any unusual\ntravel arrangement.\nWhat to submit\nSubmit the fieldwork report as a PDF by Wednesday at 18:00. The report should contain a question, a description\nof the method, a short analysis and a reflection. Keep the main text between 1200 and 1600 words; references do\nnot count toward this limit. Include the participant codes in quotations, and remove names and contact\ninformation. A late report needs an extension agreed before the original deadline. Sending a message after the\ndeadline does not automatically create an extension.\nFictional information only - no real organisation or person\n1",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第1页"
+        }
+      ]
+    },
+    {
+      "id": "press",
+      "query": "ヒートプレスを掃除する前に何分待ちますか？何を使いますか？",
+      "path": "handbook.pdf",
+      "page": 2,
+      "needles": [
+        "fifteen minutes",
+        "supplied cloth",
+        "not a wet sponge"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": false,
+      "selected_characters": 1293,
+      "sources": [
+        {
+          "source_id": "material-664c63183b1712d7e836b2cb",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 20,
+          "text": "JSC / PUBLIC SYNTHETIC LONG-PAGE RETRIEVAL FIXTURE\n架空工作坊：参加须知\n活动安排\n本工作坊面向希望尝试手工制作的初学者。上午先介绍工具的使用方法，再由参与者独立完成练习。讲师示范时请\n把手中的工具放在桌面上，以便看清步骤。如果没有听懂，可以请讲师放慢速度或再次演示。下午的制作可以根据\n个人进度调整，不要求所有人同时完成。活动最后会安排交流时间，请介绍自己尝试的方法以及制作过程中遇到的\n困难。这里重视练习与分享，不进行作品排名。\n材料与费用\n报名费用包含基础纸张、颜料和现场工具的使用，不包含额外的木框。需要木框的参加者可以在签到时选择购买，\n每个八百日元。购买前请先确认尺寸，开封后不能退换。工具只限在教室内使用，不能带回家。如果中途发现材料\n不足，请向助教领取，不要自行打开储藏柜。活动结束时，剩余的普通纸张可以带走；未使用的专用材料要放回指\n定的回收盒，供下一次课程使用。\n午休与饮食\n午休时间为中午十二点到下午一点。现场不提供午餐，请自备便当，或者到附近商店购买。教室内只有靠窗的两张\n桌子可以用餐，其余区域需要保持干净，避免食物接触颜料。饮用水可以在走廊补充，但请使用带盖的水杯。吃完\n之后，把食物垃圾放入楼梯旁的分类垃圾桶。对食物过敏的参加者应自行确认所购买食品的成分，现场工作人员无\n法代替商店确认配料。\n作品保管\n刚完成的作品需要在晾干架上放置至少三十分钟，确认表面干燥后才能装袋。不能当天带走的作品可以免费保管三\n天。请在作品背面贴上报名编号，不要只写名字。领取时携带报名确认邮件，在下午两点到五点之间到一楼前台办",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第4页"
+        },
+        {
+          "source_id": "material-a8b0275486666eba3b76df58",
+          "relative_path": "handbook.pdf",
+          "start_line": 11,
+          "end_line": 17,
+          "text": "shelf outside the working area. Set the timer before lowering the handle. Never reach under the plate while the\nindicator light is on. After switching it off, wait fifteen minutes before cleaning the plate. Use the supplied cloth, not\na wet sponge. If the temperature display is blank, stop work and contact the technician rather than guessing the\ntemperature.\nChanging a booking\nA studio booking can be changed without a fee until 17:00 on the preceding day. Open the original confirmation\nmessage and use its change link. Changes after this deadline cost 500 yen unless the building has been closed",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页"
+        }
+      ]
+    },
+    {
+      "id": "booking",
+      "query": "スタジオの予約はいつまで無料で変更できますか？その後の料金は？",
+      "path": "handbook.pdf",
+      "page": 2,
+      "needles": [
+        "17:00 on the preceding day",
+        "500 yen"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": false,
+      "selected_characters": 1602,
+      "sources": [
+        {
+          "source_id": "material-a8b0275486666eba3b76df58",
+          "relative_path": "handbook.pdf",
+          "start_line": 11,
+          "end_line": 17,
+          "text": "shelf outside the working area. Set the timer before lowering the handle. Never reach under the plate while the\nindicator light is on. After switching it off, wait fifteen minutes before cleaning the plate. Use the supplied cloth, not\na wet sponge. If the temperature display is blank, stop work and contact the technician rather than guessing the\ntemperature.\nChanging a booking\nA studio booking can be changed without a fee until 17:00 on the preceding day. Open the original confirmation\nmessage and use its change link. Changes after this deadline cost 500 yen unless the building has been closed",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页"
+        },
+        {
+          "source_id": "material-7e3a4ea6409a4bc660070f53",
+          "relative_path": "handbook.pdf",
+          "start_line": 21,
+          "end_line": 29,
+          "text": "理。如需他人代领，请提前发送授权邮件，并写明代领人的姓名。超过三天仍未领取的作品，请先联系工作人员确\n认保管位置，不要直接进入储藏室寻找。\n更改与取消\n如果无法参加，请尽早通过报名确认邮件中的链接取消。活动开始四十八小时以前取消，可以退还全部报名费；之\n后取消不退款，但可以申请把名额转给一位朋友。转让必须在活动前一天的下午四点以前由工作人员确认，不能在\n签到时临时更换。若活动因主办方原因取消，会主动通知报名者，并说明退款安排。交通延误导致迟到时，请发邮\n件告知预计到达时间，不需要重新报名。\nFictional information only - no real organisation or person\n4",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第4页"
+        },
+        {
+          "source_id": "material-664c63183b1712d7e836b2cb",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 20,
+          "text": "JSC / PUBLIC SYNTHETIC LONG-PAGE RETRIEVAL FIXTURE\n架空工作坊：参加须知\n活动安排\n本工作坊面向希望尝试手工制作的初学者。上午先介绍工具的使用方法，再由参与者独立完成练习。讲师示范时请\n把手中的工具放在桌面上，以便看清步骤。如果没有听懂，可以请讲师放慢速度或再次演示。下午的制作可以根据\n个人进度调整，不要求所有人同时完成。活动最后会安排交流时间，请介绍自己尝试的方法以及制作过程中遇到的\n困难。这里重视练习与分享，不进行作品排名。\n材料与费用\n报名费用包含基础纸张、颜料和现场工具的使用，不包含额外的木框。需要木框的参加者可以在签到时选择购买，\n每个八百日元。购买前请先确认尺寸，开封后不能退换。工具只限在教室内使用，不能带回家。如果中途发现材料\n不足，请向助教领取，不要自行打开储藏柜。活动结束时，剩余的普通纸张可以带走；未使用的专用材料要放回指\n定的回收盒，供下一次课程使用。\n午休与饮食\n午休时间为中午十二点到下午一点。现场不提供午餐，请自备便当，或者到附近商店购买。教室内只有靠窗的两张\n桌子可以用餐，其余区域需要保持干净，避免食物接触颜料。饮用水可以在走廊补充，但请使用带盖的水杯。吃完\n之后，把食物垃圾放入楼梯旁的分类垃圾桶。对食物过敏的参加者应自行确认所购买食品的成分，现场工作人员无\n法代替商店确认配料。\n作品保管\n刚完成的作品需要在晾干架上放置至少三十分钟，确认表面干燥后才能装袋。不能当天带走的作品可以免费保管三\n天。请在作品背面贴上报名编号，不要只写名字。领取时携带报名确认邮件，在下午两点到五点之间到一楼前台办",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第4页"
+        }
+      ]
+    },
+    {
+      "id": "network",
+      "query": "スタジオのWi-Fiコードが使えません。どうすればいいですか？",
+      "path": "handbook.pdf",
+      "page": 2,
+      "needles": [
+        "date and room",
+        "replacement code",
+        "Do not restart"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": false,
+      "selected_characters": 694,
+      "sources": [
+        {
+          "source_id": "material-6aad43341ec36533f04e4e9c",
+          "relative_path": "handbook.pdf",
+          "start_line": 18,
+          "end_line": 24,
+          "text": "by the operator. A different participant cannot take over the booking without written approval. When cancelling a\ngroup booking, tell the other members yourself; the system sends the confirmation only to the original organiser.\nNetwork access\nThe studio wireless network uses a temporary access code printed on the booking sheet. The code expires at the\nend of the booked time and must not be shared with people outside the group. If the code is rejected, first check\nthe date and room on the sheet. Then ask reception for a replacement code. Do not restart the ceiling-mounted\naccess point or change the network settings. Offline editing software can still be used while reception investigates",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页"
+        }
+      ]
+    },
+    {
+      "id": "collection",
+      "query": "スタジオの完成品はいつ、どこで受け取れますか？",
+      "path": "handbook.pdf",
+      "page": 2,
+      "needles": [
+        "seven days",
+        "11:00 to 16:00",
+        "Tuesday through Saturday"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": true,
+      "selected_characters": 1726,
+      "sources": [
+        {
+          "source_id": "material-51281cd7e4515a5a0470fbdf",
+          "relative_path": "handbook.pdf",
+          "start_line": 25,
+          "end_line": 33,
+          "text": "the connection.\nFinished work\nAllow printed fabric to dry on the marked rack before packing it. Collect finished work within seven days of the\nworkshop. Small items are kept in the numbered blue boxes; large items are stored behind the screen. Reception\nis open from 11:00 to 16:00, Tuesday through Saturday. Bring the collection slip, or send written permission if\nsomeone else will collect the work. After seven days, contact reception to arrange storage rather than assuming\nthe item is still on the rack.\nFictional information only - no real organisation or person\n2",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页"
+        },
+        {
+          "source_id": "material-664c63183b1712d7e836b2cb",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 20,
+          "text": "JSC / PUBLIC SYNTHETIC LONG-PAGE RETRIEVAL FIXTURE\n架空工作坊：参加须知\n活动安排\n本工作坊面向希望尝试手工制作的初学者。上午先介绍工具的使用方法，再由参与者独立完成练习。讲师示范时请\n把手中的工具放在桌面上，以便看清步骤。如果没有听懂，可以请讲师放慢速度或再次演示。下午的制作可以根据\n个人进度调整，不要求所有人同时完成。活动最后会安排交流时间，请介绍自己尝试的方法以及制作过程中遇到的\n困难。这里重视练习与分享，不进行作品排名。\n材料与费用\n报名费用包含基础纸张、颜料和现场工具的使用，不包含额外的木框。需要木框的参加者可以在签到时选择购买，\n每个八百日元。购买前请先确认尺寸，开封后不能退换。工具只限在教室内使用，不能带回家。如果中途发现材料\n不足，请向助教领取，不要自行打开储藏柜。活动结束时，剩余的普通纸张可以带走；未使用的专用材料要放回指\n定的回收盒，供下一次课程使用。\n午休与饮食\n午休时间为中午十二点到下午一点。现场不提供午餐，请自备便当，或者到附近商店购买。教室内只有靠窗的两张\n桌子可以用餐，其余区域需要保持干净，避免食物接触颜料。饮用水可以在走廊补充，但请使用带盖的水杯。吃完\n之后，把食物垃圾放入楼梯旁的分类垃圾桶。对食物过敏的参加者应自行确认所购买食品的成分，现场工作人员无\n法代替商店确认配料。\n作品保管\n刚完成的作品需要在晾干架上放置至少三十分钟，确认表面干燥后才能装袋。不能当天带走的作品可以免费保管三\n天。请在作品背面贴上报名编号，不要只写名字。领取时携带报名确认邮件，在下午两点到五点之间到一楼前台办",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第4页"
+        },
+        {
+          "source_id": "material-71904011f651e1f4cb2bb286",
+          "relative_path": "handbook.pdf",
+          "start_line": 20,
+          "end_line": 31,
+          "text": "欠席した日の復習\n欠席した場合は、翌日の正午以降に学習ページで当日の要点を確認できます。録画は全員に公開されるものでは\nありません。配布資料を読んでも分からない点は、質問フォームに具体的なページ番号と一緒に書いてください\n。個別の補講は原則として行いませんが、次回の授業前に質問できる時間があります。病気で二回以上続けて休\nむ場合は、提出物の予定を調整するため、できるだけ早く運営窓口へ知らせてください。\n発表の日\n最終発表では、一人五分の説明のあと、二分間の質問時間を設けます。スライドは六枚以内にまとめ、発表前日\nの午後六時までにPDFで提出してください。音声や動画を使う人は、自分の端末だけで再生できる形も用意して\nください。発表順は当日の受付で案内します。聞き手は、良かった点ともっと聞きたい点を一つずつ記録します\n。発表者は質問にすぐ答えられないとき、後で調べて共有すると伝えても構いません。\nFictional information only - no real organisation or person\n3",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页"
+        }
+      ]
+    },
+    {
+      "id": "audio",
+      "query": "音声課題の形式、締切、容量を教えてください。",
+      "path": "handbook.pdf",
+      "page": 3,
+      "needles": [
+        "WAV形式",
+        "木曜日の午後八時",
+        "二十MB以下"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": true,
+      "selected_characters": 1162,
+      "sources": [
+        {
+          "source_id": "material-b24f962b51aa5b50f921357d",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 19,
+          "text": "JSC / PUBLIC SYNTHETIC LONG-PAGE RETRIEVAL FIXTURE\n公開講座の参加と課題\n講座の進め方\nこの講座では、身近な出来事について調べたことを短い日本語で説明する練習をします。最初に全体の流れを聞\nき、次に二人組で資料を読みます。分からない言葉はその場で質問して構いません。発表の上手さだけでなく、\n相手の説明を聞いて内容を確認する姿勢も大切にします。授業の終わりには、自分が理解できた点と次回確かめ\nたい点を一つずつノートに書いてください。ノートは本人の学習に使うもので、毎回提出する必要はありません\n。\n音声課題の作り方\n音声課題では、選んだ記事の内容を二分以上四分以内で紹介してください。文章を全部読み上げるのではなく、\n重要だと思った点を自分の言葉で説明します。録音場所に大きな雑音がないか、提出前に一度再生して確認して\nください。ファイルはWAV形式にし、木曜日の午後八時までに提出フォームへ送ります。容量は一つのファイ\nルにつき二十MB以下です。体調不良などで間に合わない場合は、締切前に担当者へ連絡して延長の相談をして\nください。\n資料の共有\n授業で配った資料は、参加者が自分で復習するために使えます。友人に内容を説明することは構いませんが、資\n料そのものを公開サイトへ掲載するときは事前に許可を取ってください。写真の一部に他の参加者が写っている\n場合は、その人の同意も必要です。共有するときは、資料の作成日と講座名を残してください。更新前の説明が\n広まらないよう、古い版を使っていることに気づいたら、担当者に最新版の場所を確認してください。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页"
+        },
+        {
+          "source_id": "material-71904011f651e1f4cb2bb286",
+          "relative_path": "handbook.pdf",
+          "start_line": 20,
+          "end_line": 31,
+          "text": "欠席した日の復習\n欠席した場合は、翌日の正午以降に学習ページで当日の要点を確認できます。録画は全員に公開されるものでは\nありません。配布資料を読んでも分からない点は、質問フォームに具体的なページ番号と一緒に書いてください\n。個別の補講は原則として行いませんが、次回の授業前に質問できる時間があります。病気で二回以上続けて休\nむ場合は、提出物の予定を調整するため、できるだけ早く運営窓口へ知らせてください。\n発表の日\n最終発表では、一人五分の説明のあと、二分間の質問時間を設けます。スライドは六枚以内にまとめ、発表前日\nの午後六時までにPDFで提出してください。音声や動画を使う人は、自分の端末だけで再生できる形も用意して\nください。発表順は当日の受付で案内します。聞き手は、良かった点ともっと聞きたい点を一つずつ記録します\n。発表者は質問にすぐ答えられないとき、後で調べて共有すると伝えても構いません。\nFictional information only - no real organisation or person\n3",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页"
+        }
+      ]
+    },
+    {
+      "id": "sharing",
+      "query": "配布資料を公開サイトに載せてもいいですか？",
+      "path": "handbook.pdf",
+      "page": 3,
+      "needles": [
+        "事前に許可",
+        "その人の同意"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": true,
+      "selected_characters": 1162,
+      "sources": [
+        {
+          "source_id": "material-b24f962b51aa5b50f921357d",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 19,
+          "text": "JSC / PUBLIC SYNTHETIC LONG-PAGE RETRIEVAL FIXTURE\n公開講座の参加と課題\n講座の進め方\nこの講座では、身近な出来事について調べたことを短い日本語で説明する練習をします。最初に全体の流れを聞\nき、次に二人組で資料を読みます。分からない言葉はその場で質問して構いません。発表の上手さだけでなく、\n相手の説明を聞いて内容を確認する姿勢も大切にします。授業の終わりには、自分が理解できた点と次回確かめ\nたい点を一つずつノートに書いてください。ノートは本人の学習に使うもので、毎回提出する必要はありません\n。\n音声課題の作り方\n音声課題では、選んだ記事の内容を二分以上四分以内で紹介してください。文章を全部読み上げるのではなく、\n重要だと思った点を自分の言葉で説明します。録音場所に大きな雑音がないか、提出前に一度再生して確認して\nください。ファイルはWAV形式にし、木曜日の午後八時までに提出フォームへ送ります。容量は一つのファイ\nルにつき二十MB以下です。体調不良などで間に合わない場合は、締切前に担当者へ連絡して延長の相談をして\nください。\n資料の共有\n授業で配った資料は、参加者が自分で復習するために使えます。友人に内容を説明することは構いませんが、資\n料そのものを公開サイトへ掲載するときは事前に許可を取ってください。写真の一部に他の参加者が写っている\n場合は、その人の同意も必要です。共有するときは、資料の作成日と講座名を残してください。更新前の説明が\n広まらないよう、古い版を使っていることに気づいたら、担当者に最新版の場所を確認してください。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页"
+        },
+        {
+          "source_id": "material-71904011f651e1f4cb2bb286",
+          "relative_path": "handbook.pdf",
+          "start_line": 20,
+          "end_line": 31,
+          "text": "欠席した日の復習\n欠席した場合は、翌日の正午以降に学習ページで当日の要点を確認できます。録画は全員に公開されるものでは\nありません。配布資料を読んでも分からない点は、質問フォームに具体的なページ番号と一緒に書いてください\n。個別の補講は原則として行いませんが、次回の授業前に質問できる時間があります。病気で二回以上続けて休\nむ場合は、提出物の予定を調整するため、できるだけ早く運営窓口へ知らせてください。\n発表の日\n最終発表では、一人五分の説明のあと、二分間の質問時間を設けます。スライドは六枚以内にまとめ、発表前日\nの午後六時までにPDFで提出してください。音声や動画を使う人は、自分の端末だけで再生できる形も用意して\nください。発表順は当日の受付で案内します。聞き手は、良かった点ともっと聞きたい点を一つずつ記録します\n。発表者は質問にすぐ答えられないとき、後で調べて共有すると伝えても構いません。\nFictional information only - no real organisation or person\n3",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页"
+        }
+      ]
+    },
+    {
+      "id": "absent",
+      "query": "休んだ授業の要点はいつから見られますか？",
+      "path": "handbook.pdf",
+      "page": 3,
+      "needles": [
+        "翌日の正午以降",
+        "学習ページ"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": true,
+      "selected_characters": 1162,
+      "sources": [
+        {
+          "source_id": "material-71904011f651e1f4cb2bb286",
+          "relative_path": "handbook.pdf",
+          "start_line": 20,
+          "end_line": 31,
+          "text": "欠席した日の復習\n欠席した場合は、翌日の正午以降に学習ページで当日の要点を確認できます。録画は全員に公開されるものでは\nありません。配布資料を読んでも分からない点は、質問フォームに具体的なページ番号と一緒に書いてください\n。個別の補講は原則として行いませんが、次回の授業前に質問できる時間があります。病気で二回以上続けて休\nむ場合は、提出物の予定を調整するため、できるだけ早く運営窓口へ知らせてください。\n発表の日\n最終発表では、一人五分の説明のあと、二分間の質問時間を設けます。スライドは六枚以内にまとめ、発表前日\nの午後六時までにPDFで提出してください。音声や動画を使う人は、自分の端末だけで再生できる形も用意して\nください。発表順は当日の受付で案内します。聞き手は、良かった点ともっと聞きたい点を一つずつ記録します\n。発表者は質問にすぐ答えられないとき、後で調べて共有すると伝えても構いません。\nFictional information only - no real organisation or person\n3",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页"
+        },
+        {
+          "source_id": "material-b24f962b51aa5b50f921357d",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 19,
+          "text": "JSC / PUBLIC SYNTHETIC LONG-PAGE RETRIEVAL FIXTURE\n公開講座の参加と課題\n講座の進め方\nこの講座では、身近な出来事について調べたことを短い日本語で説明する練習をします。最初に全体の流れを聞\nき、次に二人組で資料を読みます。分からない言葉はその場で質問して構いません。発表の上手さだけでなく、\n相手の説明を聞いて内容を確認する姿勢も大切にします。授業の終わりには、自分が理解できた点と次回確かめ\nたい点を一つずつノートに書いてください。ノートは本人の学習に使うもので、毎回提出する必要はありません\n。\n音声課題の作り方\n音声課題では、選んだ記事の内容を二分以上四分以内で紹介してください。文章を全部読み上げるのではなく、\n重要だと思った点を自分の言葉で説明します。録音場所に大きな雑音がないか、提出前に一度再生して確認して\nください。ファイルはWAV形式にし、木曜日の午後八時までに提出フォームへ送ります。容量は一つのファイ\nルにつき二十MB以下です。体調不良などで間に合わない場合は、締切前に担当者へ連絡して延長の相談をして\nください。\n資料の共有\n授業で配った資料は、参加者が自分で復習するために使えます。友人に内容を説明することは構いませんが、資\n料そのものを公開サイトへ掲載するときは事前に許可を取ってください。写真の一部に他の参加者が写っている\n場合は、その人の同意も必要です。共有するときは、資料の作成日と講座名を残してください。更新前の説明が\n広まらないよう、古い版を使っていることに気づいたら、担当者に最新版の場所を確認してください。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页"
+        }
+      ]
+    },
+    {
+      "id": "slides",
+      "query": "最終発表のスライドは何枚までで、いつ提出しますか？",
+      "path": "handbook.pdf",
+      "page": 3,
+      "needles": [
+        "六枚以内",
+        "前日の午後六時",
+        "PDF"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": true,
+      "selected_characters": 1162,
+      "sources": [
+        {
+          "source_id": "material-71904011f651e1f4cb2bb286",
+          "relative_path": "handbook.pdf",
+          "start_line": 20,
+          "end_line": 31,
+          "text": "欠席した日の復習\n欠席した場合は、翌日の正午以降に学習ページで当日の要点を確認できます。録画は全員に公開されるものでは\nありません。配布資料を読んでも分からない点は、質問フォームに具体的なページ番号と一緒に書いてください\n。個別の補講は原則として行いませんが、次回の授業前に質問できる時間があります。病気で二回以上続けて休\nむ場合は、提出物の予定を調整するため、できるだけ早く運営窓口へ知らせてください。\n発表の日\n最終発表では、一人五分の説明のあと、二分間の質問時間を設けます。スライドは六枚以内にまとめ、発表前日\nの午後六時までにPDFで提出してください。音声や動画を使う人は、自分の端末だけで再生できる形も用意して\nください。発表順は当日の受付で案内します。聞き手は、良かった点ともっと聞きたい点を一つずつ記録します\n。発表者は質問にすぐ答えられないとき、後で調べて共有すると伝えても構いません。\nFictional information only - no real organisation or person\n3",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页"
+        },
+        {
+          "source_id": "material-b24f962b51aa5b50f921357d",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 19,
+          "text": "JSC / PUBLIC SYNTHETIC LONG-PAGE RETRIEVAL FIXTURE\n公開講座の参加と課題\n講座の進め方\nこの講座では、身近な出来事について調べたことを短い日本語で説明する練習をします。最初に全体の流れを聞\nき、次に二人組で資料を読みます。分からない言葉はその場で質問して構いません。発表の上手さだけでなく、\n相手の説明を聞いて内容を確認する姿勢も大切にします。授業の終わりには、自分が理解できた点と次回確かめ\nたい点を一つずつノートに書いてください。ノートは本人の学習に使うもので、毎回提出する必要はありません\n。\n音声課題の作り方\n音声課題では、選んだ記事の内容を二分以上四分以内で紹介してください。文章を全部読み上げるのではなく、\n重要だと思った点を自分の言葉で説明します。録音場所に大きな雑音がないか、提出前に一度再生して確認して\nください。ファイルはWAV形式にし、木曜日の午後八時までに提出フォームへ送ります。容量は一つのファイ\nルにつき二十MB以下です。体調不良などで間に合わない場合は、締切前に担当者へ連絡して延長の相談をして\nください。\n資料の共有\n授業で配った資料は、参加者が自分で復習するために使えます。友人に内容を説明することは構いませんが、資\n料そのものを公開サイトへ掲載するときは事前に許可を取ってください。写真の一部に他の参加者が写っている\n場合は、その人の同意も必要です。共有するときは、資料の作成日と講座名を残してください。更新前の説明が\n広まらないよう、古い版を使っていることに気づいたら、担当者に最新版の場所を確認してください。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页"
+        }
+      ]
+    },
+    {
+      "id": "frame",
+      "query": "ワークショップの木枠代は参加費に含まれていますか？",
+      "path": "handbook.pdf",
+      "page": 4,
+      "needles": [
+        "不包含额外的木框",
+        "每个八百日元"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": true,
+      "selected_characters": 1263,
+      "sources": [
+        {
+          "source_id": "material-664c63183b1712d7e836b2cb",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 20,
+          "text": "JSC / PUBLIC SYNTHETIC LONG-PAGE RETRIEVAL FIXTURE\n架空工作坊：参加须知\n活动安排\n本工作坊面向希望尝试手工制作的初学者。上午先介绍工具的使用方法，再由参与者独立完成练习。讲师示范时请\n把手中的工具放在桌面上，以便看清步骤。如果没有听懂，可以请讲师放慢速度或再次演示。下午的制作可以根据\n个人进度调整，不要求所有人同时完成。活动最后会安排交流时间，请介绍自己尝试的方法以及制作过程中遇到的\n困难。这里重视练习与分享，不进行作品排名。\n材料与费用\n报名费用包含基础纸张、颜料和现场工具的使用，不包含额外的木框。需要木框的参加者可以在签到时选择购买，\n每个八百日元。购买前请先确认尺寸，开封后不能退换。工具只限在教室内使用，不能带回家。如果中途发现材料\n不足，请向助教领取，不要自行打开储藏柜。活动结束时，剩余的普通纸张可以带走；未使用的专用材料要放回指\n定的回收盒，供下一次课程使用。\n午休与饮食\n午休时间为中午十二点到下午一点。现场不提供午餐，请自备便当，或者到附近商店购买。教室内只有靠窗的两张\n桌子可以用餐，其余区域需要保持干净，避免食物接触颜料。饮用水可以在走廊补充，但请使用带盖的水杯。吃完\n之后，把食物垃圾放入楼梯旁的分类垃圾桶。对食物过敏的参加者应自行确认所购买食品的成分，现场工作人员无\n法代替商店确认配料。\n作品保管\n刚完成的作品需要在晾干架上放置至少三十分钟，确认表面干燥后才能装袋。不能当天带走的作品可以免费保管三\n天。请在作品背面贴上报名编号，不要只写名字。领取时携带报名确认邮件，在下午两点到五点之间到一楼前台办",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第4页"
+        },
+        {
+          "source_id": "material-51281cd7e4515a5a0470fbdf",
+          "relative_path": "handbook.pdf",
+          "start_line": 25,
+          "end_line": 33,
+          "text": "the connection.\nFinished work\nAllow printed fabric to dry on the marked rack before packing it. Collect finished work within seven days of the\nworkshop. Small items are kept in the numbered blue boxes; large items are stored behind the screen. Reception\nis open from 11:00 to 16:00, Tuesday through Saturday. Bring the collection slip, or send written permission if\nsomeone else will collect the work. After seven days, contact reception to arrange storage rather than assuming\nthe item is still on the rack.\nFictional information only - no real organisation or person\n2",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页"
+        }
+      ]
+    },
+    {
+      "id": "meal",
+      "query": "昼ご飯は用意してもらえますか？どこで食べられますか？",
+      "path": "handbook.pdf",
+      "page": 4,
+      "needles": [
+        "不提供午餐",
+        "自备便当",
+        "靠窗的两张桌子"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": true,
+      "selected_characters": 1156,
+      "sources": [
+        {
+          "source_id": "material-664c63183b1712d7e836b2cb",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 20,
+          "text": "JSC / PUBLIC SYNTHETIC LONG-PAGE RETRIEVAL FIXTURE\n架空工作坊：参加须知\n活动安排\n本工作坊面向希望尝试手工制作的初学者。上午先介绍工具的使用方法，再由参与者独立完成练习。讲师示范时请\n把手中的工具放在桌面上，以便看清步骤。如果没有听懂，可以请讲师放慢速度或再次演示。下午的制作可以根据\n个人进度调整，不要求所有人同时完成。活动最后会安排交流时间，请介绍自己尝试的方法以及制作过程中遇到的\n困难。这里重视练习与分享，不进行作品排名。\n材料与费用\n报名费用包含基础纸张、颜料和现场工具的使用，不包含额外的木框。需要木框的参加者可以在签到时选择购买，\n每个八百日元。购买前请先确认尺寸，开封后不能退换。工具只限在教室内使用，不能带回家。如果中途发现材料\n不足，请向助教领取，不要自行打开储藏柜。活动结束时，剩余的普通纸张可以带走；未使用的专用材料要放回指\n定的回收盒，供下一次课程使用。\n午休与饮食\n午休时间为中午十二点到下午一点。现场不提供午餐，请自备便当，或者到附近商店购买。教室内只有靠窗的两张\n桌子可以用餐，其余区域需要保持干净，避免食物接触颜料。饮用水可以在走廊补充，但请使用带盖的水杯。吃完\n之后，把食物垃圾放入楼梯旁的分类垃圾桶。对食物过敏的参加者应自行确认所购买食品的成分，现场工作人员无\n法代替商店确认配料。\n作品保管\n刚完成的作品需要在晾干架上放置至少三十分钟，确认表面干燥后才能装袋。不能当天带走的作品可以免费保管三\n天。请在作品背面贴上报名编号，不要只写名字。领取时携带报名确认邮件，在下午两点到五点之间到一楼前台办",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第4页"
+        },
+        {
+          "source_id": "material-71904011f651e1f4cb2bb286",
+          "relative_path": "handbook.pdf",
+          "start_line": 20,
+          "end_line": 31,
+          "text": "欠席した日の復習\n欠席した場合は、翌日の正午以降に学習ページで当日の要点を確認できます。録画は全員に公開されるものでは\nありません。配布資料を読んでも分からない点は、質問フォームに具体的なページ番号と一緒に書いてください\n。個別の補講は原則として行いませんが、次回の授業前に質問できる時間があります。病気で二回以上続けて休\nむ場合は、提出物の予定を調整するため、できるだけ早く運営窓口へ知らせてください。\n発表の日\n最終発表では、一人五分の説明のあと、二分間の質問時間を設けます。スライドは六枚以内にまとめ、発表前日\nの午後六時までにPDFで提出してください。音声や動画を使う人は、自分の端末だけで再生できる形も用意して\nください。発表順は当日の受付で案内します。聞き手は、良かった点ともっと聞きたい点を一つずつ記録します\n。発表者は質問にすぐ答えられないとき、後で調べて共有すると伝えても構いません。\nFictional information only - no real organisation or person\n3",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页"
+        }
+      ]
+    },
+    {
+      "id": "storage",
+      "query": "ワークショップの作品は何日預けられて、何時に受け取れますか？",
+      "path": "handbook.pdf",
+      "page": 4,
+      "needles": [
+        "免费保管三天",
+        "下午两点到五点",
+        "一楼前台"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": false,
+      "selected_characters": 1726,
+      "sources": [
+        {
+          "source_id": "material-664c63183b1712d7e836b2cb",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 20,
+          "text": "JSC / PUBLIC SYNTHETIC LONG-PAGE RETRIEVAL FIXTURE\n架空工作坊：参加须知\n活动安排\n本工作坊面向希望尝试手工制作的初学者。上午先介绍工具的使用方法，再由参与者独立完成练习。讲师示范时请\n把手中的工具放在桌面上，以便看清步骤。如果没有听懂，可以请讲师放慢速度或再次演示。下午的制作可以根据\n个人进度调整，不要求所有人同时完成。活动最后会安排交流时间，请介绍自己尝试的方法以及制作过程中遇到的\n困难。这里重视练习与分享，不进行作品排名。\n材料与费用\n报名费用包含基础纸张、颜料和现场工具的使用，不包含额外的木框。需要木框的参加者可以在签到时选择购买，\n每个八百日元。购买前请先确认尺寸，开封后不能退换。工具只限在教室内使用，不能带回家。如果中途发现材料\n不足，请向助教领取，不要自行打开储藏柜。活动结束时，剩余的普通纸张可以带走；未使用的专用材料要放回指\n定的回收盒，供下一次课程使用。\n午休与饮食\n午休时间为中午十二点到下午一点。现场不提供午餐，请自备便当，或者到附近商店购买。教室内只有靠窗的两张\n桌子可以用餐，其余区域需要保持干净，避免食物接触颜料。饮用水可以在走廊补充，但请使用带盖的水杯。吃完\n之后，把食物垃圾放入楼梯旁的分类垃圾桶。对食物过敏的参加者应自行确认所购买食品的成分，现场工作人员无\n法代替商店确认配料。\n作品保管\n刚完成的作品需要在晾干架上放置至少三十分钟，确认表面干燥后才能装袋。不能当天带走的作品可以免费保管三\n天。请在作品背面贴上报名编号，不要只写名字。领取时携带报名确认邮件，在下午两点到五点之间到一楼前台办",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第4页"
+        },
+        {
+          "source_id": "material-51281cd7e4515a5a0470fbdf",
+          "relative_path": "handbook.pdf",
+          "start_line": 25,
+          "end_line": 33,
+          "text": "the connection.\nFinished work\nAllow printed fabric to dry on the marked rack before packing it. Collect finished work within seven days of the\nworkshop. Small items are kept in the numbered blue boxes; large items are stored behind the screen. Reception\nis open from 11:00 to 16:00, Tuesday through Saturday. Bring the collection slip, or send written permission if\nsomeone else will collect the work. After seven days, contact reception to arrange storage rather than assuming\nthe item is still on the rack.\nFictional information only - no real organisation or person\n2",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页"
+        },
+        {
+          "source_id": "material-71904011f651e1f4cb2bb286",
+          "relative_path": "handbook.pdf",
+          "start_line": 20,
+          "end_line": 31,
+          "text": "欠席した日の復習\n欠席した場合は、翌日の正午以降に学習ページで当日の要点を確認できます。録画は全員に公開されるものでは\nありません。配布資料を読んでも分からない点は、質問フォームに具体的なページ番号と一緒に書いてください\n。個別の補講は原則として行いませんが、次回の授業前に質問できる時間があります。病気で二回以上続けて休\nむ場合は、提出物の予定を調整するため、できるだけ早く運営窓口へ知らせてください。\n発表の日\n最終発表では、一人五分の説明のあと、二分間の質問時間を設けます。スライドは六枚以内にまとめ、発表前日\nの午後六時までにPDFで提出してください。音声や動画を使う人は、自分の端末だけで再生できる形も用意して\nください。発表順は当日の受付で案内します。聞き手は、良かった点ともっと聞きたい点を一つずつ記録します\n。発表者は質問にすぐ答えられないとき、後で調べて共有すると伝えても構いません。\nFictional information only - no real organisation or person\n3",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页"
+        }
+      ]
+    },
+    {
+      "id": "cancel",
+      "query": "ワークショップをキャンセルした場合、いつまで全額返金されますか？",
+      "path": "handbook.pdf",
+      "page": 4,
+      "needles": [
+        "四十八小时以前",
+        "全部报名费"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": true,
+      "selected_characters": 1572,
+      "sources": [
+        {
+          "source_id": "material-7e3a4ea6409a4bc660070f53",
+          "relative_path": "handbook.pdf",
+          "start_line": 21,
+          "end_line": 29,
+          "text": "理。如需他人代领，请提前发送授权邮件，并写明代领人的姓名。超过三天仍未领取的作品，请先联系工作人员确\n认保管位置，不要直接进入储藏室寻找。\n更改与取消\n如果无法参加，请尽早通过报名确认邮件中的链接取消。活动开始四十八小时以前取消，可以退还全部报名费；之\n后取消不退款，但可以申请把名额转给一位朋友。转让必须在活动前一天的下午四点以前由工作人员确认，不能在\n签到时临时更换。若活动因主办方原因取消，会主动通知报名者，并说明退款安排。交通延误导致迟到时，请发邮\n件告知预计到达时间，不需要重新报名。\nFictional information only - no real organisation or person\n4",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第4页"
+        },
+        {
+          "source_id": "material-51281cd7e4515a5a0470fbdf",
+          "relative_path": "handbook.pdf",
+          "start_line": 25,
+          "end_line": 33,
+          "text": "the connection.\nFinished work\nAllow printed fabric to dry on the marked rack before packing it. Collect finished work within seven days of the\nworkshop. Small items are kept in the numbered blue boxes; large items are stored behind the screen. Reception\nis open from 11:00 to 16:00, Tuesday through Saturday. Bring the collection slip, or send written permission if\nsomeone else will collect the work. After seven days, contact reception to arrange storage rather than assuming\nthe item is still on the rack.\nFictional information only - no real organisation or person\n2",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第2页"
+        },
+        {
+          "source_id": "material-664c63183b1712d7e836b2cb",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 20,
+          "text": "JSC / PUBLIC SYNTHETIC LONG-PAGE RETRIEVAL FIXTURE\n架空工作坊：参加须知\n活动安排\n本工作坊面向希望尝试手工制作的初学者。上午先介绍工具的使用方法，再由参与者独立完成练习。讲师示范时请\n把手中的工具放在桌面上，以便看清步骤。如果没有听懂，可以请讲师放慢速度或再次演示。下午的制作可以根据\n个人进度调整，不要求所有人同时完成。活动最后会安排交流时间，请介绍自己尝试的方法以及制作过程中遇到的\n困难。这里重视练习与分享，不进行作品排名。\n材料与费用\n报名费用包含基础纸张、颜料和现场工具的使用，不包含额外的木框。需要木框的参加者可以在签到时选择购买，\n每个八百日元。购买前请先确认尺寸，开封后不能退换。工具只限在教室内使用，不能带回家。如果中途发现材料\n不足，请向助教领取，不要自行打开储藏柜。活动结束时，剩余的普通纸张可以带走；未使用的专用材料要放回指\n定的回收盒，供下一次课程使用。\n午休与饮食\n午休时间为中午十二点到下午一点。现场不提供午餐，请自备便当，或者到附近商店购买。教室内只有靠窗的两张\n桌子可以用餐，其余区域需要保持干净，避免食物接触颜料。饮用水可以在走廊补充，但请使用带盖的水杯。吃完\n之后，把食物垃圾放入楼梯旁的分类垃圾桶。对食物过敏的参加者应自行确认所购买食品的成分，现场工作人员无\n法代替商店确认配料。\n作品保管\n刚完成的作品需要在晾干架上放置至少三十分钟，确认表面干燥后才能装袋。不能当天带走的作品可以免费保管三\n天。请在作品背面贴上报名编号，不要只写名字。领取时携带报名确认邮件，在下午两点到五点之间到一楼前台办",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第4页"
+        }
+      ]
+    }
+  ]
+}

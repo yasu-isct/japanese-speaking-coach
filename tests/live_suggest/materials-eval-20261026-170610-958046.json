@@ -1,0 +1,2464 @@
+{
+  "created_at": "2026-10-26T17:06:10.958046+09:00",
+  "kind": "public_fictional_local_retrieval_evaluation",
+  "suite": "general",
+  "phase": "after",
+  "api_requests": 0,
+  "source_hashes": {
+    "manifest_sha256": "dc6a9292af3adfa3f73facceed2f3f6a1b8f638e77d13c06cdeaa99b439e1be7",
+    "evaluator_sha256": "3079532174cae58f71a7df64e794703cf98344a21e73f0075956201cbeb4ad48",
+    "materials_sha256": "a6a984efaa7449ed18d1c85f1c3f31328f98c9adb85a0fc2e463094ce635b330"
+  },
+  "fixture_manifest": {
+    "version": 1,
+    "frozen_at": "2026-10-26T17:01:28.283444+09:00",
+    "description": "Frozen before retrieval changes; public fictional general-document diagnostic only",
+    "sha256": {
+      "queries.json": "106131ad3c16bf7bdae342a951b36a913fe868b68ac05943011c30cf1957bb7a",
+      "data/article.md": "a92f0574d95e665cd845043e3506eb9ecafbe7558702c9bf6d157b196795627b",
+      "data/course.md": "9866e300a1fab1daac3c12c9a4ffdf2b4fe6cdae375e56ef23cc5e4ff569d90d",
+      "data/manual.md": "862a6c1fa9280fbfcb96d736376773c5b3320450d6116048051dde4ff83f3932",
+      "data/meeting.md": "b145ed435e60ec7ef1ff51561e288ee73b9db0c202f400b53fe9eba4768defd0"
+    }
+  },
+  "conditions": {
+    "whole_profile": "Old material-sending strategy with no configured basic profile: empty materials; general documents were not retrieved",
+    "bm25": "Current default MaterialsStore.search(query), then prompt_data(hits); one immutable snapshot, no reranking or answer generation",
+    "limits": {
+      "max_files": 64,
+      "max_file_bytes": 65536,
+      "max_total_chars": 100000,
+      "max_chunks": 256,
+      "max_chunk_chars": 700,
+      "max_results": 4,
+      "max_result_chars": 1800,
+      "max_query_chars": 2000,
+      "max_scan_entries": 2048,
+      "max_depth": 4
+    },
+    "index_build_ms": 10.4433,
+    "index_diagnostics": {
+      "scanned_entries": 4,
+      "files_considered": 4,
+      "indexed_files": 4,
+      "indexed_chars": 508,
+      "indexed_chunks": 16
+    },
+    "timing_repetitions_per_case": 20,
+    "timing": "One untimed warm-up per query; fixed serial case order; p50=median, p95=nearest-rank; baseline retrieval=0 by definition; payload preparation excludes disk reads, index construction, scoring, output writing and network"
+  },
+  "metric_definitions": {
+    "relevant_range_recall": "Number of fully covered annotated path/line ranges divided by all relevant ranges; coverage may be the union of multiple sent chunks",
+    "complete_recall_cases": "Questions with every relevant range covered; excludes questions with no relevant data",
+    "forbidden_free_cases": "No overlap with specified forbidden ranges and no sources for forbid_all_sources questions; counts only questions with a prohibition rule",
+    "empty_for_no_data_cases": "No sources sent where the fixture says no source establishes the requested fact",
+    "body_chars": "Python Unicode character count of sent source bodies, including preserved whitespace",
+    "payload_chars": "Exact material payload Unicode characters; BM25 includes JSON provenance and empty-envelope overhead, whole_profile is raw profile body",
+    "local_retrieval": "Current search() duration only; excludes indexing, serialization, model and voice latency"
+  },
+  "summary": {
+    "whole_profile": {
+      "cases": 10,
+      "relevant_range_recall": {
+        "covered": 0,
+        "expected": 7,
+        "rate": 0.0
+      },
+      "complete_recall_cases": {
+        "passed": 0,
+        "applicable": 7
+      },
+      "forbidden_free_cases": {
+        "passed": 3,
+        "applicable": 3
+      },
+      "empty_for_no_data_cases": {
+        "passed": 3,
+        "applicable": 3
+      },
+      "body_chars": {
+        "total": 0,
+        "mean_per_question": 0.0
+      },
+      "payload_chars": {
+        "total": 0,
+        "mean_per_question": 0.0
+      },
+      "payload_utf8_bytes_total": 0,
+      "local_retrieval": {
+        "samples": 200,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0
+      },
+      "local_payload_preparation": {
+        "samples": 200,
+        "p50_ms": 0.0001,
+        "p95_ms": 0.0001
+      }
+    },
+    "bm25": {
+      "cases": 10,
+      "relevant_range_recall": {
+        "covered": 7,
+        "expected": 7,
+        "rate": 1.0
+      },
+      "complete_recall_cases": {
+        "passed": 7,
+        "applicable": 7
+      },
+      "forbidden_free_cases": {
+        "passed": 3,
+        "applicable": 3
+      },
+      "empty_for_no_data_cases": {
+        "passed": 3,
+        "applicable": 3
+      },
+      "body_chars": {
+        "total": 269,
+        "mean_per_question": 26.9
+      },
+      "payload_chars": {
+        "total": 2583,
+        "mean_per_question": 258.3
+      },
+      "payload_utf8_bytes_total": 3313,
+      "local_retrieval": {
+        "samples": 200,
+        "p50_ms": 0.07245,
+        "p95_ms": 0.0946
+      },
+      "local_payload_preparation": {
+        "samples": 200,
+        "p50_ms": 0.08315,
+        "p95_ms": 0.1143
+      }
+    }
+  },
+  "safety_diagnostics": {
+    "empty_library": {
+      "passed": true,
+      "diagnostics": {
+        "indexed_chunks": 0
+      }
+    },
+    "path_escape": {
+      "passed": true,
+      "diagnostics": {
+        "unsafe_path": 1
+      },
+      "method": "Direct read guard given a synthetic file outside its allowed root; no links created",
+      "limitation": "This is not an OS-level junction race or sandbox security proof"
+    }
+  },
+  "cases": [
+    {
+      "id": 1,
+      "query": "自然言語処理の授業では、どの形式で提出しますか？",
+      "topic": "课程说明・日语",
+      "annotation": {
+        "id": 1,
+        "query": "自然言語処理の授業では、どの形式で提出しますか？",
+        "topic": "课程说明・日语",
+        "relevant": [
+          {
+            "path": "course.md",
+            "start": 6,
+            "end": 6
+          }
+        ],
+        "forbidden": []
+      },
+      "whole_profile": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "",
+        "relevant_ranges": [
+          {
+            "path": "course.md",
+            "start": 6,
+            "end": 6,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range course.md:6-6"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 0,
+        "payload_utf8_bytes": 0,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0002,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-7ff1bee742ed06973aeede83",
+          "material-2cc11aa50cfab5142ddf7575"
+        ],
+        "sources": [
+          {
+            "source_id": "material-7ff1bee742ed06973aeede83",
+            "relative_path": "course.md",
+            "start_line": 6,
+            "end_line": 6,
+            "text": "- 提出形式：分析結果をPDFにまとめて提出する。",
+            "heading": "自然言語処理・授業案内",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-2cc11aa50cfab5142ddf7575",
+            "relative_path": "course.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "対象：文章を単語や形態素に分ける処理を学ぶ入門授業。",
+            "heading": "自然言語処理・授業案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-7ff1bee742ed06973aeede83\", \"relative_path\": \"course.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 提出形式：分析結果をPDFにまとめて提出する。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-2cc11aa50cfab5142ddf7575\", \"relative_path\": \"course.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"対象：文章を単語や形態素に分ける処理を学ぶ入門授業。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "course.md",
+            "start": 6,
+            "end": 6,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 51,
+        "payload_chars": 460,
+        "payload_utf8_bytes": 596,
+        "retrieval_ms_samples": [
+          0.1061,
+          0.0977,
+          0.0946,
+          0.0927,
+          0.0991,
+          0.0915,
+          0.1095,
+          0.0913,
+          0.0949,
+          0.0903,
+          0.0898,
+          0.0889,
+          0.0929,
+          0.0889,
+          0.0909,
+          0.0887,
+          0.0885,
+          0.0892,
+          0.087,
+          0.0859
+        ],
+        "preparation_ms_samples": [
+          0.1294,
+          0.1201,
+          0.1143,
+          0.111,
+          0.1178,
+          0.1095,
+          0.1282,
+          0.11,
+          0.1126,
+          0.1081,
+          0.1073,
+          0.1066,
+          0.1102,
+          0.1083,
+          0.1084,
+          0.106,
+          0.1063,
+          0.1067,
+          0.1049,
+          0.1036
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:処理",
+            "cjk:出し",
+            "cjk:形式",
+            "cjk:授業",
+            "cjk:提出",
+            "cjk:然言",
+            "cjk:自然",
+            "cjk:言語",
+            "cjk:語処"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 14.315655612427925,
+              "matched_terms": [
+                "cjk:処理",
+                "cjk:形式",
+                "cjk:授業",
+                "cjk:提出",
+                "cjk:然言",
+                "cjk:自然",
+                "cjk:言語",
+                "cjk:語処"
+              ],
+              "body_matched_terms": [
+                "cjk:形式",
+                "cjk:提出"
+              ],
+              "query_coverage": 0.8888888888888888,
+              "source_id": "material-7ff1bee742ed06973aeede83",
+              "relative_path": "course.md",
+              "start_line": 6,
+              "end_line": 6,
+              "reason": "selected"
+            },
+            {
+              "score": 8.611439859947955,
+              "matched_terms": [
+                "cjk:処理",
+                "cjk:授業",
+                "cjk:然言",
+                "cjk:自然",
+                "cjk:言語",
+                "cjk:語処"
+              ],
+              "body_matched_terms": [
+                "cjk:処理",
+                "cjk:授業"
+              ],
+              "query_coverage": 0.6666666666666666,
+              "source_id": "material-2cc11aa50cfab5142ddf7575",
+              "relative_path": "course.md",
+              "start_line": 3,
+              "end_line": 3,
+              "reason": "selected"
+            },
+            {
+              "score": 8.336826164674934,
+              "matched_terms": [
+                "cjk:処理",
+                "cjk:授業",
+                "cjk:然言",
+                "cjk:自然",
+                "cjk:言語",
+                "cjk:語処"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.6666666666666666,
+              "source_id": "material-df697be132dcdeafe31e6b10",
+              "relative_path": "course.md",
+              "start_line": 5,
+              "end_line": 5,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 7.609601202406221,
+              "matched_terms": [
+                "cjk:処理",
+                "cjk:授業",
+                "cjk:然言",
+                "cjk:自然",
+                "cjk:言語",
+                "cjk:語処"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.6666666666666666,
+              "source_id": "material-470c588a7a940ee94044321d",
+              "relative_path": "course.md",
+              "start_line": 7,
+              "end_line": 7,
+              "reason": "no_body_evidence"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 2,
+      "query": "自然语言处理课的作业截止是什么时候？",
+      "topic": "课程截止・中文",
+      "annotation": {
+        "id": 2,
+        "query": "自然语言处理课的作业截止是什么时候？",
+        "topic": "课程截止・中文",
+        "relevant": [
+          {
+            "path": "course.md",
+            "start": 5,
+            "end": 5
+          }
+        ],
+        "forbidden": []
+      },
+      "whole_profile": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "",
+        "relevant_ranges": [
+          {
+            "path": "course.md",
+            "start": 5,
+            "end": 5,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range course.md:5-5"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 0,
+        "payload_utf8_bytes": 0,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-df697be132dcdeafe31e6b10"
+        ],
+        "sources": [
+          {
+            "source_id": "material-df697be132dcdeafe31e6b10",
+            "relative_path": "course.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 作业截止：2026年11月5日18点。",
+            "heading": "自然言語処理・授業案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-df697be132dcdeafe31e6b10\", \"relative_path\": \"course.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 作业截止：2026年11月5日18点。\", \"heading\": \"自然言語処理・授業案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "course.md",
+            "start": 5,
+            "end": 5,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 21,
+        "payload_chars": 250,
+        "payload_utf8_bytes": 292,
+        "retrieval_ms_samples": [
+          0.0874,
+          0.0814,
+          0.0784,
+          0.0785,
+          0.0781,
+          0.0765,
+          0.0771,
+          0.0758,
+          0.0763,
+          0.077,
+          0.0766,
+          0.0759,
+          0.0769,
+          0.077,
+          0.0768,
+          0.0767,
+          0.0762,
+          0.0769,
+          0.0761,
+          0.0766
+        ],
+        "preparation_ms_samples": [
+          0.0999,
+          0.0926,
+          0.0896,
+          0.0893,
+          0.0888,
+          0.0871,
+          0.0877,
+          0.0862,
+          0.0866,
+          0.0872,
+          0.0869,
+          0.0863,
+          0.0872,
+          0.0873,
+          0.087,
+          0.087,
+          0.0868,
+          0.0869,
+          0.0865,
+          0.0868
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:业截",
+            "cjk:么时",
+            "cjk:作业",
+            "cjk:处理",
+            "cjk:截止",
+            "cjk:时候",
+            "cjk:是什",
+            "cjk:止是",
+            "cjk:然语",
+            "cjk:理课",
+            "cjk:的作",
+            "cjk:自然",
+            "cjk:言处",
+            "cjk:语言",
+            "cjk:课的"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 9.003332896171674,
+              "matched_terms": [
+                "cjk:业截",
+                "cjk:作业",
+                "cjk:截止",
+                "cjk:自然"
+              ],
+              "body_matched_terms": [
+                "cjk:业截",
+                "cjk:作业",
+                "cjk:截止"
+              ],
+              "query_coverage": 0.26666666666666666,
+              "source_id": "material-df697be132dcdeafe31e6b10",
+              "relative_path": "course.md",
+              "start_line": 5,
+              "end_line": 5,
+              "reason": "selected"
+            },
+            {
+              "score": 1.7866702584869047,
+              "matched_terms": [
+                "cjk:处理"
+              ],
+              "body_matched_terms": [
+                "cjk:处理"
+              ],
+              "query_coverage": 0.06666666666666667,
+              "source_id": "material-e56b061dd6af33adeb908bba",
+              "relative_path": "manual.md",
+              "start_line": 6,
+              "end_line": 6,
+              "reason": "low_query_coverage"
+            },
+            {
+              "score": 1.3894710274458222,
+              "matched_terms": [
+                "cjk:自然"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.06666666666666667,
+              "source_id": "material-7ff1bee742ed06973aeede83",
+              "relative_path": "course.md",
+              "start_line": 6,
+              "end_line": 6,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 1.2682668670677035,
+              "matched_terms": [
+                "cjk:自然"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.06666666666666667,
+              "source_id": "material-2cc11aa50cfab5142ddf7575",
+              "relative_path": "course.md",
+              "start_line": 3,
+              "end_line": 3,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 1.2682668670677035,
+              "matched_terms": [
+                "cjk:自然"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.06666666666666667,
+              "source_id": "material-470c588a7a940ee94044321d",
+              "relative_path": "course.md",
+              "start_line": 7,
+              "end_line": 7,
+              "reason": "no_body_evidence"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 3,
+      "query": "レビュー会議に参加する前に、何を用意しますか？",
+      "topic": "会议事前准备・日语",
+      "annotation": {
+        "id": 3,
+        "query": "レビュー会議に参加する前に、何を用意しますか？",
+        "topic": "会议事前准备・日语",
+        "relevant": [
+          {
+            "path": "meeting.md",
+            "start": 4,
+            "end": 4
+          }
+        ],
+        "forbidden": []
+      },
+      "whole_profile": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "",
+        "relevant_ranges": [
+          {
+            "path": "meeting.md",
+            "start": 4,
+            "end": 4,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range meeting.md:4-4"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 0,
+        "payload_utf8_bytes": 0,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0002,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0,
+          0.0002,
+          0.0002,
+          0.0002,
+          0.0002
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-1fa067f0f6dc5ad51c27ed14",
+          "material-1a169af29ada669b05cdad6f"
+        ],
+        "sources": [
+          {
+            "source_id": "material-1fa067f0f6dc5ad51c27ed14",
+            "relative_path": "meeting.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 参加者：開発担当とデザイン担当。",
+            "heading": "製品レビュー会議の案内",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-1a169af29ada669b05cdad6f",
+            "relative_path": "meeting.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 事前準備：会議までに、提案書と直近の利用統計を用意する。",
+            "heading": "製品レビュー会議の案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-1fa067f0f6dc5ad51c27ed14\", \"relative_path\": \"meeting.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 参加者：開発担当とデザイン担当。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-1a169af29ada669b05cdad6f\", \"relative_path\": \"meeting.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 事前準備：会議までに、提案書と直近の利用統計を用意する。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "meeting.md",
+            "start": 4,
+            "end": 4,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 48,
+        "payload_chars": 459,
+        "payload_utf8_bytes": 591,
+        "retrieval_ms_samples": [
+          0.088,
+          0.0867,
+          0.0866,
+          0.0904,
+          0.0877,
+          0.0874,
+          0.0891,
+          0.0913,
+          0.0861,
+          0.0886,
+          0.0858,
+          0.0879,
+          0.0865,
+          0.0863,
+          0.0864,
+          0.2515,
+          0.2583,
+          0.2137,
+          0.1953,
+          0.1204
+        ],
+        "preparation_ms_samples": [
+          0.1063,
+          0.106,
+          0.1516,
+          0.1087,
+          0.106,
+          0.1057,
+          0.1069,
+          0.1088,
+          0.1037,
+          0.1061,
+          0.1032,
+          0.1056,
+          0.104,
+          0.1038,
+          0.1038,
+          0.3161,
+          0.3079,
+          0.2573,
+          0.236,
+          0.1396
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:る前",
+            "cjk:ビュ",
+            "cjk:ュー",
+            "cjk:レビ",
+            "cjk:ー会",
+            "cjk:会議",
+            "cjk:加す",
+            "cjk:参加",
+            "cjk:意し",
+            "cjk:用意"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 9.862312822275873,
+              "matched_terms": [
+                "cjk:ビュ",
+                "cjk:ュー",
+                "cjk:レビ",
+                "cjk:ー会",
+                "cjk:会議",
+                "cjk:参加"
+              ],
+              "body_matched_terms": [
+                "cjk:参加"
+              ],
+              "query_coverage": 0.6,
+              "source_id": "material-1fa067f0f6dc5ad51c27ed14",
+              "relative_path": "meeting.md",
+              "start_line": 5,
+              "end_line": 5,
+              "reason": "selected"
+            },
+            {
+              "score": 9.8037057222658,
+              "matched_terms": [
+                "cjk:ビュ",
+                "cjk:ュー",
+                "cjk:レビ",
+                "cjk:ー会",
+                "cjk:会議",
+                "cjk:用意"
+              ],
+              "body_matched_terms": [
+                "cjk:会議",
+                "cjk:用意"
+              ],
+              "query_coverage": 0.6,
+              "source_id": "material-1a169af29ada669b05cdad6f",
+              "relative_path": "meeting.md",
+              "start_line": 4,
+              "end_line": 4,
+              "reason": "selected"
+            },
+            {
+              "score": 7.223485178565294,
+              "matched_terms": [
+                "cjk:ビュ",
+                "cjk:ュー",
+                "cjk:レビ",
+                "cjk:ー会",
+                "cjk:会議"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.5,
+              "source_id": "material-4abdd2fbc9bd881e3a7fa88d",
+              "relative_path": "meeting.md",
+              "start_line": 3,
+              "end_line": 3,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 6.127531445081259,
+              "matched_terms": [
+                "cjk:ビュ",
+                "cjk:ュー",
+                "cjk:レビ",
+                "cjk:ー会",
+                "cjk:会議"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.5,
+              "source_id": "material-2c80b66e659ed73de5b4b466",
+              "relative_path": "meeting.md",
+              "start_line": 6,
+              "end_line": 6,
+              "reason": "no_body_evidence"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 4,
+      "query": "会议链接失效时在哪里找新链接？",
+      "topic": "会议入口・中文",
+      "annotation": {
+        "id": 4,
+        "query": "会议链接失效时在哪里找新链接？",
+        "topic": "会议入口・中文",
+        "relevant": [
+          {
+            "path": "meeting.md",
+            "start": 6,
+            "end": 6
+          }
+        ],
+        "forbidden": []
+      },
+      "whole_profile": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "",
+        "relevant_ranges": [
+          {
+            "path": "meeting.md",
+            "start": 6,
+            "end": 6,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range meeting.md:6-6"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 0,
+        "payload_utf8_bytes": 0,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-2c80b66e659ed73de5b4b466"
+        ],
+        "sources": [
+          {
+            "source_id": "material-2c80b66e659ed73de5b4b466",
+            "relative_path": "meeting.md",
+            "start_line": 6,
+            "end_line": 6,
+            "text": "- 会议链接失效：在团队知识库的「每周评审」页获取新链接。",
+            "heading": "製品レビュー会議の案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-2c80b66e659ed73de5b4b466\", \"relative_path\": \"meeting.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 会议链接失效：在团队知识库的「每周评审」页获取新链接。\", \"heading\": \"製品レビュー会議の案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "meeting.md",
+            "start": 6,
+            "end": 6,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 29,
+        "payload_chars": 259,
+        "payload_utf8_bytes": 335,
+        "retrieval_ms_samples": [
+          0.0654,
+          0.0649,
+          0.063,
+          0.0628,
+          0.0618,
+          0.0617,
+          0.0612,
+          0.0625,
+          0.0647,
+          0.0597,
+          0.0588,
+          0.0606,
+          0.0602,
+          0.0599,
+          0.0591,
+          0.0593,
+          0.0593,
+          0.059,
+          0.0585,
+          0.0584
+        ],
+        "preparation_ms_samples": [
+          0.0777,
+          0.0765,
+          0.0824,
+          0.0736,
+          0.0722,
+          0.0722,
+          0.0716,
+          0.0749,
+          0.0748,
+          0.0698,
+          0.0687,
+          0.0711,
+          0.0702,
+          0.0697,
+          0.0695,
+          0.0691,
+          0.069,
+          0.0688,
+          0.0683,
+          0.0682
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:会议",
+            "cjk:在哪",
+            "cjk:失效",
+            "cjk:找新",
+            "cjk:接失",
+            "cjk:效时",
+            "cjk:新链",
+            "cjk:时在",
+            "cjk:议链",
+            "cjk:里找",
+            "cjk:链接"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 14.347062465524623,
+              "matched_terms": [
+                "cjk:会议",
+                "cjk:失效",
+                "cjk:接失",
+                "cjk:新链",
+                "cjk:议链",
+                "cjk:链接"
+              ],
+              "body_matched_terms": [
+                "cjk:会议",
+                "cjk:失效",
+                "cjk:接失",
+                "cjk:新链",
+                "cjk:议链",
+                "cjk:链接"
+              ],
+              "query_coverage": 0.5454545454545454,
+              "source_id": "material-2c80b66e659ed73de5b4b466",
+              "relative_path": "meeting.md",
+              "start_line": 6,
+              "end_line": 6,
+              "reason": "selected"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 5,
+      "query": "録音機の赤いランプが点滅したら、どうすればいいですか？",
+      "topic": "手册故障提示・日语",
+      "annotation": {
+        "id": 5,
+        "query": "録音機の赤いランプが点滅したら、どうすればいいですか？",
+        "topic": "手册故障提示・日语",
+        "relevant": [
+          {
+            "path": "manual.md",
+            "start": 5,
+            "end": 5
+          }
+        ],
+        "forbidden": []
+      },
+      "whole_profile": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "",
+        "relevant_ranges": [
+          {
+            "path": "manual.md",
+            "start": 5,
+            "end": 5,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range manual.md:5-5"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 0,
+        "payload_utf8_bytes": 0,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-850d820e19d9c963f1e8ed9a",
+          "material-3f06fb4ea57c568e2829c4e0"
+        ],
+        "sources": [
+          {
+            "source_id": "material-850d820e19d9c963f1e8ed9a",
+            "relative_path": "manual.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。",
+            "heading": "録音機・录音设备の操作マニュアル",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-3f06fb4ea57c568e2829c4e0",
+            "relative_path": "manual.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 青いランプ：録音中。",
+            "heading": "録音機・录音设备の操作マニュアル",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-850d820e19d9c963f1e8ed9a\", \"relative_path\": \"manual.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 赤いランプが点滅：電池残量が少ない。録音を止めて充電する。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-3f06fb4ea57c568e2829c4e0\", \"relative_path\": \"manual.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 青いランプ：録音中。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "manual.md",
+            "start": 5,
+            "end": 5,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 43,
+        "payload_chars": 462,
+        "payload_utf8_bytes": 604,
+        "retrieval_ms_samples": [
+          0.0907,
+          0.0866,
+          0.085,
+          0.085,
+          0.0849,
+          0.0885,
+          0.0825,
+          0.0836,
+          0.0851,
+          0.0838,
+          0.0823,
+          0.083,
+          0.0817,
+          0.0826,
+          0.082,
+          0.0833,
+          0.0822,
+          0.0824,
+          0.0873,
+          0.083
+        ],
+        "preparation_ms_samples": [
+          0.1094,
+          0.1045,
+          0.1023,
+          0.1025,
+          0.102,
+          0.1056,
+          0.0993,
+          0.1009,
+          0.1063,
+          0.1007,
+          0.0992,
+          0.0996,
+          0.0986,
+          0.0993,
+          0.0988,
+          0.1006,
+          0.0992,
+          0.0991,
+          0.104,
+          0.0996
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:いラ",
+            "cjk:ラン",
+            "cjk:ンプ",
+            "cjk:滅し",
+            "cjk:点滅",
+            "cjk:赤い",
+            "cjk:録音",
+            "cjk:音機"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 12.286190232604678,
+              "matched_terms": [
+                "cjk:いラ",
+                "cjk:ラン",
+                "cjk:ンプ",
+                "cjk:点滅",
+                "cjk:赤い",
+                "cjk:録音",
+                "cjk:音機"
+              ],
+              "body_matched_terms": [
+                "cjk:いラ",
+                "cjk:ラン",
+                "cjk:ンプ",
+                "cjk:点滅",
+                "cjk:赤い",
+                "cjk:録音"
+              ],
+              "query_coverage": 0.875,
+              "source_id": "material-850d820e19d9c963f1e8ed9a",
+              "relative_path": "manual.md",
+              "start_line": 5,
+              "end_line": 5,
+              "reason": "selected"
+            },
+            {
+              "score": 8.952024196732964,
+              "matched_terms": [
+                "cjk:いラ",
+                "cjk:ラン",
+                "cjk:ンプ",
+                "cjk:録音",
+                "cjk:音機"
+              ],
+              "body_matched_terms": [
+                "cjk:いラ",
+                "cjk:ラン",
+                "cjk:ンプ",
+                "cjk:録音"
+              ],
+              "query_coverage": 0.625,
+              "source_id": "material-3f06fb4ea57c568e2829c4e0",
+              "relative_path": "manual.md",
+              "start_line": 4,
+              "end_line": 4,
+              "reason": "selected"
+            },
+            {
+              "score": 2.4053565151060683,
+              "matched_terms": [
+                "cjk:録音",
+                "cjk:音機"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.25,
+              "source_id": "material-707ce44c1c90ad1b5883af3b",
+              "relative_path": "manual.md",
+              "start_line": 7,
+              "end_line": 7,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 2.359382087421535,
+              "matched_terms": [
+                "cjk:録音",
+                "cjk:音機"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.25,
+              "source_id": "material-67f1444ae7bbaa5a2fe9c111",
+              "relative_path": "manual.md",
+              "start_line": 3,
+              "end_line": 3,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 1.6609591334922296,
+              "matched_terms": [
+                "cjk:録音",
+                "cjk:音機"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.25,
+              "source_id": "material-e56b061dd6af33adeb908bba",
+              "relative_path": "manual.md",
+              "start_line": 6,
+              "end_line": 6,
+              "reason": "no_body_evidence"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 6,
+      "query": "录音设备录满以后应该怎样处理？",
+      "topic": "手册步骤・中文",
+      "annotation": {
+        "id": 6,
+        "query": "录音设备录满以后应该怎样处理？",
+        "topic": "手册步骤・中文",
+        "relevant": [
+          {
+            "path": "manual.md",
+            "start": 6,
+            "end": 6
+          }
+        ],
+        "forbidden": []
+      },
+      "whole_profile": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "",
+        "relevant_ranges": [
+          {
+            "path": "manual.md",
+            "start": 6,
+            "end": 6,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range manual.md:6-6"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 0,
+        "payload_utf8_bytes": 0,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-e56b061dd6af33adeb908bba"
+        ],
+        "sources": [
+          {
+            "source_id": "material-e56b061dd6af33adeb908bba",
+            "relative_path": "manual.md",
+            "start_line": 6,
+            "end_line": 6,
+            "text": "- 录满后的处理：先将录音备份到电脑，确认备份完整后再删除设备中的旧录音。",
+            "heading": "録音機・录音设备の操作マニュアル",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-e56b061dd6af33adeb908bba\", \"relative_path\": \"manual.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 录满后的处理：先将录音备份到电脑，确认备份完整后再删除设备中的旧录音。\", \"heading\": \"録音機・录音设备の操作マニュアル\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "manual.md",
+            "start": 6,
+            "end": 6,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 37,
+        "payload_chars": 271,
+        "payload_utf8_bytes": 373,
+        "retrieval_ms_samples": [
+          0.0708,
+          0.0697,
+          0.0686,
+          0.0681,
+          0.0683,
+          0.0676,
+          0.0676,
+          0.0672,
+          0.0673,
+          0.068,
+          0.068,
+          0.069,
+          0.0674,
+          0.0663,
+          0.0662,
+          0.0682,
+          0.0663,
+          0.0668,
+          0.0664,
+          0.0664
+        ],
+        "preparation_ms_samples": [
+          0.0818,
+          0.0802,
+          0.079,
+          0.0784,
+          0.0784,
+          0.0781,
+          0.0778,
+          0.0771,
+          0.0772,
+          0.078,
+          0.078,
+          0.079,
+          0.0772,
+          0.0761,
+          0.0759,
+          0.078,
+          0.0762,
+          0.0767,
+          0.0761,
+          0.0762
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:以后",
+            "cjk:后应",
+            "cjk:处理",
+            "cjk:备录",
+            "cjk:录满",
+            "cjk:录音",
+            "cjk:样处",
+            "cjk:满以",
+            "cjk:设备",
+            "cjk:该怎",
+            "cjk:音设"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 7.141177692959145,
+              "matched_terms": [
+                "cjk:处理",
+                "cjk:录满",
+                "cjk:录音",
+                "cjk:设备",
+                "cjk:音设"
+              ],
+              "body_matched_terms": [
+                "cjk:处理",
+                "cjk:录满",
+                "cjk:录音",
+                "cjk:设备"
+              ],
+              "query_coverage": 0.45454545454545453,
+              "source_id": "material-e56b061dd6af33adeb908bba",
+              "relative_path": "manual.md",
+              "start_line": 6,
+              "end_line": 6,
+              "reason": "selected"
+            },
+            {
+              "score": 3.6080347726591024,
+              "matched_terms": [
+                "cjk:录音",
+                "cjk:设备",
+                "cjk:音设"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.2727272727272727,
+              "source_id": "material-3f06fb4ea57c568e2829c4e0",
+              "relative_path": "manual.md",
+              "start_line": 4,
+              "end_line": 4,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 3.6080347726591024,
+              "matched_terms": [
+                "cjk:录音",
+                "cjk:设备",
+                "cjk:音设"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.2727272727272727,
+              "source_id": "material-707ce44c1c90ad1b5883af3b",
+              "relative_path": "manual.md",
+              "start_line": 7,
+              "end_line": 7,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 3.5390731311323025,
+              "matched_terms": [
+                "cjk:录音",
+                "cjk:设备",
+                "cjk:音设"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.2727272727272727,
+              "source_id": "material-67f1444ae7bbaa5a2fe9c111",
+              "relative_path": "manual.md",
+              "start_line": 3,
+              "end_line": 3,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 3.1214442718275297,
+              "matched_terms": [
+                "cjk:录音",
+                "cjk:设备",
+                "cjk:音设"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.2727272727272727,
+              "source_id": "material-850d820e19d9c963f1e8ed9a",
+              "relative_path": "manual.md",
+              "start_line": 5,
+              "end_line": 5,
+              "reason": "no_body_evidence"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 7,
+      "query": "この記事で、間隔を空けて復習する利点は何と説明されていますか？",
+      "topic": "文章解释・日语",
+      "annotation": {
+        "id": 7,
+        "query": "この記事で、間隔を空けて復習する利点は何と説明されていますか？",
+        "topic": "文章解释・日语",
+        "relevant": [
+          {
+            "path": "article.md",
+            "start": 3,
+            "end": 3
+          }
+        ],
+        "forbidden": []
+      },
+      "whole_profile": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "",
+        "relevant_ranges": [
+          {
+            "path": "article.md",
+            "start": 3,
+            "end": 3,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range article.md:3-3"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 0,
+        "payload_utf8_bytes": 0,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-8cd413926774b463c32ed432"
+        ],
+        "sources": [
+          {
+            "source_id": "material-8cd413926774b463c32ed432",
+            "relative_path": "article.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "間隔を空けて復習すると、忘れかけた内容を思い出す練習になり、長く覚えやすくなる。",
+            "heading": "学習記事：復習の間隔",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-8cd413926774b463c32ed432\", \"relative_path\": \"article.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"間隔を空けて復習すると、忘れかけた内容を思い出す練習になり、長く覚えやすくなる。\", \"heading\": \"学習記事：復習の間隔\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "article.md",
+            "start": 3,
+            "end": 3,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 40,
+        "payload_chars": 269,
+        "payload_utf8_bytes": 369,
+        "retrieval_ms_samples": [
+          0.0785,
+          0.0808,
+          0.076,
+          0.0777,
+          0.0752,
+          0.0747,
+          0.0752,
+          0.0748,
+          0.075,
+          0.0746,
+          0.0744,
+          0.0743,
+          0.0746,
+          0.0744,
+          0.0741,
+          0.0745,
+          0.0745,
+          0.0751,
+          0.0757,
+          0.0748
+        ],
+        "preparation_ms_samples": [
+          0.0893,
+          0.0912,
+          0.0863,
+          0.0879,
+          0.0853,
+          0.0846,
+          0.0853,
+          0.0848,
+          0.089,
+          0.0844,
+          0.0842,
+          0.0841,
+          0.0846,
+          0.0843,
+          0.0839,
+          0.0843,
+          0.0843,
+          0.0851,
+          0.0855,
+          0.0847
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:て復",
+            "cjk:る利",
+            "cjk:利点",
+            "cjk:復習",
+            "cjk:明さ",
+            "cjk:空け",
+            "cjk:習す",
+            "cjk:記事",
+            "cjk:説明",
+            "cjk:間隔"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 13.51494972148045,
+              "matched_terms": [
+                "cjk:て復",
+                "cjk:復習",
+                "cjk:空け",
+                "cjk:習す",
+                "cjk:記事",
+                "cjk:間隔"
+              ],
+              "body_matched_terms": [
+                "cjk:て復",
+                "cjk:復習",
+                "cjk:空け",
+                "cjk:習す",
+                "cjk:間隔"
+              ],
+              "query_coverage": 0.6,
+              "source_id": "material-8cd413926774b463c32ed432",
+              "relative_path": "article.md",
+              "start_line": 3,
+              "end_line": 3,
+              "reason": "selected"
+            },
+            {
+              "score": 6.278193256612592,
+              "matched_terms": [
+                "cjk:復習",
+                "cjk:記事",
+                "cjk:間隔"
+              ],
+              "body_matched_terms": [
+                "cjk:記事"
+              ],
+              "query_coverage": 0.3,
+              "source_id": "material-31ecd3f04f30ba9410cdd945",
+              "relative_path": "article.md",
+              "start_line": 7,
+              "end_line": 7,
+              "reason": "below_relative_score"
+            },
+            {
+              "score": 4.687783263087085,
+              "matched_terms": [
+                "cjk:復習",
+                "cjk:記事",
+                "cjk:間隔"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.3,
+              "source_id": "material-a6011cb650d5690ad2e8cdd9",
+              "relative_path": "article.md",
+              "start_line": 5,
+              "end_line": 5,
+              "reason": "no_body_evidence"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 8,
+      "query": "复习的间隔应该是多少分钟？",
+      "topic": "文章未给出具体分钟数",
+      "annotation": {
+        "id": 8,
+        "query": "复习的间隔应该是多少分钟？",
+        "topic": "文章未给出具体分钟数",
+        "relevant": [],
+        "forbidden": [],
+        "forbid_all_sources": true
+      },
+      "whole_profile": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 0,
+        "payload_utf8_bytes": 0,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0
+        ]
+      },
+      "bm25": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51,
+        "retrieval_ms_samples": [
+          0.0457,
+          0.0456,
+          0.0457,
+          0.0479,
+          0.045,
+          0.0442,
+          0.0439,
+          0.0439,
+          0.0442,
+          0.0451,
+          0.0434,
+          0.0434,
+          0.0435,
+          0.0434,
+          0.0432,
+          0.0435,
+          0.0433,
+          0.0476,
+          0.0438,
+          0.0436
+        ],
+        "preparation_ms_samples": [
+          0.049,
+          0.0488,
+          0.0486,
+          0.0509,
+          0.048,
+          0.0471,
+          0.0467,
+          0.0467,
+          0.047,
+          0.0479,
+          0.0462,
+          0.0462,
+          0.0463,
+          0.0462,
+          0.046,
+          0.0463,
+          0.046,
+          0.0505,
+          0.0466,
+          0.0465
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:习的",
+            "cjk:分钟",
+            "cjk:复习",
+            "cjk:少分",
+            "cjk:是多",
+            "cjk:的间",
+            "cjk:该是",
+            "cjk:间隔",
+            "cjk:隔应"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 9,
+      "query": "活动场馆附近的停车费是多少？",
+      "topic": "文档中没有场馆或停车资料",
+      "annotation": {
+        "id": 9,
+        "query": "活动场馆附近的停车费是多少？",
+        "topic": "文档中没有场馆或停车资料",
+        "relevant": [],
+        "forbidden": [],
+        "forbid_all_sources": true
+      },
+      "whole_profile": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 0,
+        "payload_utf8_bytes": 0,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001
+        ]
+      },
+      "bm25": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51,
+        "retrieval_ms_samples": [
+          0.0495,
+          0.0484,
+          0.048,
+          0.0484,
+          0.0482,
+          0.0481,
+          0.0481,
+          0.0479,
+          0.0479,
+          0.0476,
+          0.0478,
+          0.0478,
+          0.0475,
+          0.0477,
+          0.0518,
+          0.0476,
+          0.0475,
+          0.0474,
+          0.0474,
+          0.0475
+        ],
+        "preparation_ms_samples": [
+          0.0525,
+          0.0514,
+          0.051,
+          0.0512,
+          0.0511,
+          0.051,
+          0.0509,
+          0.0508,
+          0.0508,
+          0.0504,
+          0.0506,
+          0.0506,
+          0.0503,
+          0.0506,
+          0.0546,
+          0.0504,
+          0.0503,
+          0.0503,
+          0.0502,
+          0.0503
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:停车",
+            "cjk:动场",
+            "cjk:场馆",
+            "cjk:是多",
+            "cjk:活动",
+            "cjk:的停",
+            "cjk:费是",
+            "cjk:车费",
+            "cjk:近的",
+            "cjk:附近",
+            "cjk:馆附"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 10,
+      "query": "このカメラのレンズは交換できますか？",
+      "topic": "文档中没有相机说明",
+      "annotation": {
+        "id": 10,
+        "query": "このカメラのレンズは交換できますか？",
+        "topic": "文档中没有相机说明",
+        "relevant": [],
+        "forbidden": [],
+        "forbid_all_sources": true
+      },
+      "whole_profile": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 0,
+        "payload_utf8_bytes": 0,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0
+        ]
+      },
+      "bm25": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51,
+        "retrieval_ms_samples": [
+          0.044,
+          0.0435,
+          0.0429,
+          0.0427,
+          0.0426,
+          0.0429,
+          0.043,
+          0.0426,
+          0.0427,
+          0.0426,
+          0.0425,
+          0.0426,
+          0.0427,
+          0.0426,
+          0.0425,
+          0.0429,
+          0.0428,
+          0.0429,
+          0.0426,
+          0.0431
+        ],
+        "preparation_ms_samples": [
+          0.0471,
+          0.0464,
+          0.0458,
+          0.0456,
+          0.0455,
+          0.0472,
+          0.0459,
+          0.0454,
+          0.0455,
+          0.0454,
+          0.0453,
+          0.0455,
+          0.0456,
+          0.0454,
+          0.0453,
+          0.0457,
+          0.0457,
+          0.0458,
+          0.0454,
+          0.0459
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:カメ",
+            "cjk:メラ",
+            "cjk:レン",
+            "cjk:ンズ",
+            "cjk:交換"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    }
+  ],
+  "limitations": [
+    "Retrieval coverage is not fact correctness, source ownership verification, or generated answer quality",
+    "Forbidden-range checks are strict sending-purity checks; a candidate being sent does not prove it will be misused",
+    "The annotations are finite and do not measure exhaustive semantic precision",
+    "All data is fictional; sixteen questions do not establish performance on a user's real corpus",
+    "Timing is for this small warm local snapshot and cannot establish end-to-end latency",
+    "Whole-profile and JSON payload sizes include their real differing metadata overhead; token counts are not estimated"
+  ]
+}

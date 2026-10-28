@@ -1,0 +1,143 @@
+{
+  "label": "before",
+  "generated_at": "2026-10-26T21:32:28.263761",
+  "corpus": "tests/fixtures/materials/documents/data",
+  "mode": "keywords",
+  "provenance": "Synthetic public test documents; no API, no people, not answer accuracy.",
+  "sha256": {
+    "course.docx": "2dcd30af100362576688572af7be1e717d3893c8b98dadaea5f2a9e64bfb25ad",
+    "readme.txt": "7f7bc3d407ccc19e61ebb0296284376932d9e2854e9fe169d95f9a546d040f8f",
+    "workshop.docx": "e803172236bbe9e00aef8ff4c2cf1f666d257c98be06f07d4ff257a81e4dbe4f"
+  },
+  "diagnostics": {
+    "scanned_entries": 3,
+    "files_considered": 1,
+    "indexed_files": 1,
+    "indexed_chars": 31,
+    "indexed_chunks": 1
+  },
+  "build_ms": 10.81859995611012,
+  "search_p50_ms": 0.04469999112188816,
+  "search_p95_ms": 0.1351999817416072,
+  "coverage": 0,
+  "total": 10,
+  "rows": [
+    {
+      "id": "submission",
+      "query": "録音課題はいつ、どの形式で提出しますか？",
+      "path": "course.docx",
+      "location": "第2段",
+      "needles": [
+        "金曜日",
+        "MP3"
+      ],
+      "covered": false,
+      "sources": []
+    },
+    {
+      "id": "duration",
+      "query": "録音は一人何分以内ですか？",
+      "path": "course.docx",
+      "location": "第3段",
+      "needles": [
+        "三分"
+      ],
+      "covered": false,
+      "sources": []
+    },
+    {
+      "id": "absence",
+      "query": "欠席連絡はどうしますか？",
+      "path": "course.docx",
+      "location": "第5段",
+      "needles": [
+        "二時間前",
+        "電話は不要"
+      ],
+      "covered": false,
+      "sources": []
+    },
+    {
+      "id": "microphone",
+      "query": "マイクの貸出条件を教えてください。",
+      "path": "course.docx",
+      "location": "表1・第2行",
+      "needles": [
+        "一週間",
+        "一階"
+      ],
+      "covered": false,
+      "sources": []
+    },
+    {
+      "id": "recorder",
+      "query": "録音機の予約はいつまでですか？",
+      "path": "course.docx",
+      "location": "表1・第3行",
+      "needles": [
+        "前日の正午"
+      ],
+      "covered": false,
+      "sources": []
+    },
+    {
+      "id": "clay",
+      "query": "粘土体験はいつ始まりますか？",
+      "path": "workshop.docx",
+      "location": "第2段",
+      "needles": [
+        "土曜日",
+        "午前十時"
+      ],
+      "covered": false,
+      "sources": []
+    },
+    {
+      "id": "clothes",
+      "query": "参加者は何を用意しますか？",
+      "path": "workshop.docx",
+      "location": "第3段",
+      "needles": [
+        "汚れてもよい服",
+        "エプロン"
+      ],
+      "covered": false,
+      "sources": []
+    },
+    {
+      "id": "pickup",
+      "query": "完成した作品はいつ受け取れますか？",
+      "path": "workshop.docx",
+      "location": "第5段",
+      "needles": [
+        "水曜日以降",
+        "午後一時"
+      ],
+      "covered": false,
+      "sources": []
+    },
+    {
+      "id": "cancel",
+      "query": "预约取消规则是什么？",
+      "path": "workshop.docx",
+      "location": "第7段",
+      "needles": [
+        "前一天晚上八点",
+        "不退还材料费"
+      ],
+      "covered": false,
+      "sources": []
+    },
+    {
+      "id": "cross_language",
+      "query": "予約をキャンセルするにはどうしますか？",
+      "path": "workshop.docx",
+      "location": "第7段",
+      "needles": [
+        "前一天晚上八点"
+      ],
+      "covered": false,
+      "sources": []
+    }
+  ]
+}

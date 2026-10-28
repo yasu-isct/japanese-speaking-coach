@@ -1,0 +1,1074 @@
+{
+  "reviewer": "Codex agent; no native-speaker or independent human review",
+  "review_timing": "Questions and source hashes frozen before API calls. These semantic scoring criteria were written retrospectively after inspecting outputs and applied equally to all five runs. Not a preregistered benchmark.",
+  "metric": "Coverage of the question essentials per reply, not overall answer correctness, usability, grammar, tone, or coverage of every fact in the fixture.",
+  "additional_strict_metric": "Full frozen required_facts checklist: explicitly include wet-sponge prohibition, free storage, and no phone call, even when the question does not ask these. Retained separately so the retrospective question-focused rubric does not hide omissions from the original checklist.",
+  "criteria": {
+    "press": "关机后等15分钟、使用配备的布；回答指定清洁工具即可，不要求另外重复湿海绵禁用。",
+    "booking": "前一天17点前免费、其后500日元、运营方关闭建筑时例外；只说建筑关闭而不说明责任方仍记遗漏。",
+    "meal": "不提供午餐、需自行准备、用餐范围限于窗边两张桌子；不要求同时枚举自带和购买两种办法。",
+    "storage": "保管3天、下午2点到5点领取；本题没问费用，未重复免费不扣所问条件，但不表示覆盖全部fixture列出的资料事实。",
+    "absence": "课程开始前2小时、学习网站的联系栏；正确指定入口即可，不要求另外复述不必电话。",
+    "cancel": "前一天20点、预约网站、当天不退材料费；只写网站或将材料费扩大到全部费用记遗漏。",
+    "renewal": "无预约者、到期前、仅一次。",
+    "equipment_missing": "三种说法都明确资料未记载厂商/型号；不能用个人字段占位或拒绝告知代替。"
+  },
+  "limitations": [
+    "Only eight development cases; known renewal regression included; one run per prompt with temperature 0.3, no significance claim.",
+    "Final prompt selected to remove the remaining contradictory length instruction, not to maximize this score. The preceding live_contract sample scored 22/24 versus final 21/24.",
+    "Source presence/citation validity alone is not evidence that the generated answer is supported."
+  ],
+  "runs": [
+    {
+      "label": "before",
+      "result": "document-answers-before-20261026-225624.json",
+      "sha256": "e884a1f3c05b396f6b4d7d1707c4dd07a9ce1a082a142b625c06e310168719fa",
+      "identical_questions_and_source_payloads": true,
+      "available_question_essentials": 10,
+      "available_reply_count": 21,
+      "missing_information_clear": 3,
+      "missing_reply_count": 3,
+      "total_essentials": 13,
+      "total_replies": 24,
+      "all_frozen_checklist_facts_present": 8,
+      "simple_available_essentials": 0,
+      "explicit_recommendation": 8,
+      "parser_complete": 8,
+      "api_p50_ms": 1876.8064000178128,
+      "api_p95_ms": 2711.151299998164,
+      "reply_at_most_two_sentences": 24,
+      "parsed_warnings": 9,
+      "reviews": [
+        {
+          "case_id": "press",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": "简易缺关机起点和配备的布。"
+            }
+          ]
+        },
+        {
+          "case_id": "booking",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": "缺运营关闭例外。"
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": "缺运营关闭例外。"
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": "缺运营关闭例外。"
+            }
+          ]
+        },
+        {
+          "case_id": "meal",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": "缺两张限定。"
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": "窗边范围过宽。"
+            }
+          ]
+        },
+        {
+          "case_id": "storage",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": "缺下午。"
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": "缺下午。"
+            }
+          ]
+        },
+        {
+          "case_id": "absence",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": "缺课程起点、学习网站联系栏。"
+            }
+          ]
+        },
+        {
+          "case_id": "cancel",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": "缺晚上、预约入口；材料费扩大为全部退款。"
+            }
+          ]
+        },
+        {
+          "case_id": "renewal",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": "缺到期前。"
+            }
+          ]
+        },
+        {
+          "case_id": "equipment_missing",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "added_rule",
+      "result": "document-answers-after-20261026-225934.json",
+      "sha256": "07b7824e6152e51a06d62bcad60c2e8b55a106947dc360b7fa12e082551a2f12",
+      "identical_questions_and_source_payloads": true,
+      "available_question_essentials": 11,
+      "available_reply_count": 21,
+      "missing_information_clear": 0,
+      "missing_reply_count": 3,
+      "total_essentials": 11,
+      "total_replies": 24,
+      "all_frozen_checklist_facts_present": 7,
+      "simple_available_essentials": 0,
+      "explicit_recommendation": 8,
+      "parser_complete": 8,
+      "api_p50_ms": 1994.3862999789417,
+      "api_p95_ms": 2285.9979000641033,
+      "reply_at_most_two_sentences": 24,
+      "parsed_warnings": 8,
+      "reviews": [
+        {
+          "case_id": "press",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "booking",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "meal",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "storage",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "absence",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "cancel",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "renewal",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "equipment_missing",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "style_contract",
+      "result": "document-answers-style-contract-20261026-230229.json",
+      "sha256": "f0541fc212df15565eefe07bf61e1f7c342d736a45ebaa615ed561c310c11a95",
+      "identical_questions_and_source_payloads": true,
+      "available_question_essentials": 15,
+      "available_reply_count": 21,
+      "missing_information_clear": 0,
+      "missing_reply_count": 3,
+      "total_essentials": 15,
+      "total_replies": 24,
+      "all_frozen_checklist_facts_present": 13,
+      "simple_available_essentials": 3,
+      "explicit_recommendation": 8,
+      "parser_complete": 8,
+      "api_p50_ms": 1895.918249967508,
+      "api_p95_ms": 2295.172500074841,
+      "reply_at_most_two_sentences": 24,
+      "parsed_warnings": 8,
+      "reviews": [
+        {
+          "case_id": "press",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "booking",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "meal",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "storage",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "absence",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "cancel",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "renewal",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "equipment_missing",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "live_contract",
+      "result": "document-answers-live-contract-20261026-230618.json",
+      "sha256": "6a01d9d217157693ba7ba05c6ee4f54ce4fe088f70f98d109dc4292b6cf401e4",
+      "identical_questions_and_source_payloads": true,
+      "available_question_essentials": 19,
+      "available_reply_count": 21,
+      "missing_information_clear": 3,
+      "missing_reply_count": 3,
+      "total_essentials": 22,
+      "total_replies": 24,
+      "all_frozen_checklist_facts_present": 16,
+      "simple_available_essentials": 5,
+      "explicit_recommendation": 8,
+      "parser_complete": 8,
+      "api_p50_ms": 1773.8277000607923,
+      "api_p95_ms": 2708.935600006953,
+      "reply_at_most_two_sentences": 22,
+      "parsed_warnings": 0,
+      "reviews": [
+        {
+          "case_id": "press",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "booking",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "meal",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "storage",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "absence",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "cancel",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "renewal",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "equipment_missing",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "final",
+      "result": "document-answers-final-20261026-230946.json",
+      "sha256": "a2754da65e84fc491a91629a17160ef2cb02f7bd672abdf6ffa4d1493502e570",
+      "identical_questions_and_source_payloads": true,
+      "available_question_essentials": 18,
+      "available_reply_count": 21,
+      "missing_information_clear": 3,
+      "missing_reply_count": 3,
+      "total_essentials": 21,
+      "total_replies": 24,
+      "all_frozen_checklist_facts_present": 15,
+      "simple_available_essentials": 6,
+      "explicit_recommendation": 8,
+      "parser_complete": 8,
+      "api_p50_ms": 1849.2707000114024,
+      "api_p95_ms": 2701.8393999896944,
+      "reply_at_most_two_sentences": 20,
+      "parsed_warnings": 0,
+      "reviews": [
+        {
+          "case_id": "press",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "booking",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": "仅说设施关闭，遗漏运营方这个主体。"
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": "仅说设施关闭，遗漏运营方这个主体。"
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": false,
+              "all_frozen_checklist_facts_present": false,
+              "comment": "仅说设施关闭，遗漏运营方这个主体。"
+            }
+          ]
+        },
+        {
+          "case_id": "meal",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "storage",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": false,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "absence",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "cancel",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "renewal",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "case_id": "equipment_missing",
+          "replies": [
+            {
+              "style": "丁寧",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "カジュアル",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            },
+            {
+              "style": "かんたん",
+              "question_essentials_present": true,
+              "all_frozen_checklist_facts_present": true,
+              "comment": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "remaining_quality_issues": [
+    "Final booking: all three omit operator as the closure actor, broadening the exception.",
+    "Final meal: all three have three sentences; repeated unavailable-lunch preface, service-provider voice, and awkward coordination in simple Japanese.",
+    "Final storage: polite and simple say the speaker can keep the work, rather than neutral document description.",
+    "Final cancel: simple has three sentences.",
+    "Transfer box and lost_property: recommended casual correct, but simple remains polite; final eight-question set was all polite and could not expose this.",
+    "Earlier added_rule turned missing material into refusal; style_contract used personal placeholders. Both failed raw outputs retained."
+  ],
+  "transfer_check": {
+    "result": "document-answers-transfer-20261026-231311.json",
+    "sha256": "41f3056004d3ddb30da959146cbb43b8d2b811cdb08f9eed06b591b5be922877",
+    "provenance": "Four questions constructed after final prompt on existing public sources. Not blind held-out and no baseline comparison.",
+    "available_question_essentials": "9/9 replies on three questions",
+    "missing_information_clear": "3/3 replies on one question; extra opening-day information is unasked but source-supported",
+    "recommended_style_matches": "4/4",
+    "boss_casual_warning": true,
+    "simple_tone_mismatch_cases": [
+      "box",
+      "lost_property"
+    ]
+  }
+}

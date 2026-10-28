@@ -1,0 +1,47 @@
+{
+  "decision": "D-037",
+  "baseline_commit": "2e01dd3",
+  "status": "Partial document answering improvement; quality and layout failures retained",
+  "review": "tests/live_suggest/document-answer-review-20261026.json",
+  "api_requests": 48,
+  "private_data_read": false,
+  "tests": {
+    "total": 317,
+    "passed": 316,
+    "skipped": 1,
+    "reason": "Windows symlink permission"
+  },
+  "generated_answers_source_sha256": {
+    "app/jsc_live/suggest.py": "7ccfb9ee602868fec119322a72befcbb2ac74b4c35dd78ea34dbcf2e5da8bf30",
+    "app/jsc_live/semantic_materials.py": "4aef7e95fb69d059077607013cdaa9ae0df170c5e7ae9af29722ab614f81b791",
+    "app/jsc_live/pdf_worker.py": "0fd543914908fd25a0cc04ce7f8b11b5f5d938c3b7bdec84ef8aa5445480792f"
+  },
+  "before": {
+    "total_essentials": 13,
+    "all_frozen_checklist_facts_present": 8,
+    "api_p50_ms": 1876.8064000178128,
+    "api_p95_ms": 2711.151299998164
+  },
+  "after": {
+    "total_essentials": 21,
+    "all_frozen_checklist_facts_present": 15,
+    "api_p50_ms": 1849.2707000114024,
+    "api_p95_ms": 2701.8393999896944
+  },
+  "tts_run": "tests/live_suggest/e2e-references-20261026-231024-run.json",
+  "offscreen_captures": [
+    "logs/ui-iterations/document-answers-20261026-231205/capture.json",
+    "logs/ui-iterations/document-answers-20261026-231413/capture.json"
+  ],
+  "public_image": {
+    "path": "docs/images/live-document-answer.png",
+    "width": 900,
+    "height": 584,
+    "sha256": "1b85fa0ec52ee8b713b79bb2921dac3534dc5f21d1af631149352692db98d139",
+    "input": "tests/live_suggest/document-answers-final-20261026-230946.json",
+    "case": "absence",
+    "kind": "saved public generated text, no new API or live latency"
+  },
+  "visible_latency_verified": false,
+  "real_user_verified": false
+}

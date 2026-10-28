@@ -1,0 +1,30 @@
+{
+  "baseline_commit": "495f555",
+  "kind": "local retrieval and refresh only; no API or visible latency measurement",
+  "identical_prompt_payloads": true,
+  "query_count": 10,
+  "cache_timings": {
+    "baseline": {
+      "n": 500,
+      "p50_ms": 0.0006,
+      "p95_ms": 0.0007
+    },
+    "current": {
+      "n": 500,
+      "p50_ms": 0.0006,
+      "p95_ms": 0.0007
+    }
+  },
+  "refresh": {
+    "before_kept_old_snapshot": true,
+    "after_reads_new_document": true,
+    "elapsed_ms": 5.16,
+    "preference_saved": true
+  },
+  "source_sha256": {
+    "app/jsc_live/suggest.py": "6d6b0089e083291d15d3af15432284726c4e51520bf309ecf4e27cce06ce635b",
+    "app/jsc_live/material_control.py": "29f4417c910c15174871a1d9c9acb67803a39673d8a618f55930b0310120dff0",
+    "app/jsc_live/settings.py": "6169b73a51c93665d5e38db930a99a550103ab1cbe89f5d628847b462bddf1c7"
+  },
+  "fixture_manifest_sha256": "dc6a9292af3adfa3f73facceed2f3f6a1b8f638e77d13c06cdeaa99b439e1be7"
+}

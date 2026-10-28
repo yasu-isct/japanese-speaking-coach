@@ -1,0 +1,22 @@
+{
+  "kind": "Actual local-model index cancellation and old-index concurrent searches; fixed public fixtures only",
+  "api_calls": 0,
+  "private_data_read": false,
+  "real_user_settings_changed": false,
+  "uncached_old_index_search_before": {
+    "samples": 10,
+    "p50_ms": 2.1011000499129295,
+    "p95_ms": 2.369199995882809
+  },
+  "uncached_old_index_search_during_build": {
+    "samples": 20,
+    "p50_ms": 43.945200042799115,
+    "p95_ms": 51.46620003506541
+  },
+  "cancel_to_worker_stop_ms": 54.56189997494221,
+  "old_snapshot_and_cache_retained": true,
+  "cancel_did_not_save_preferences": true,
+  "last_semantic_progress": "正在准备多语言查找：80/1600…",
+  "previous_payloads_identical": 67,
+  "limits": "One machine, short synthetic concurrent test; no ASR/API/visible latency claim."
+}

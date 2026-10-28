@@ -1,0 +1,361 @@
+{
+  "purpose": "Bounded document-answering stage; agent review required, not general accuracy or visible latency.",
+  "label": "transfer",
+  "fixture_manifest": {
+    "provenance": "Constructed after final D-037 prompt; existing sources and new question wording. Not a blind held-out test. Frozen before a single four-request run.",
+    "sha256": {
+      "tests/fixtures/materials/document-stage/transfer-cases.json": "02198a0022c38d58e80fd059415ef806848cecf872bb4e0fd0897a94a7323617",
+      "tests/fixtures/materials/general-independent/data/cafeteria.md": "612df8a37d6469ad721f683249c4e132af137511e38e6f2dd746414f2dd19b36",
+      "tests/fixtures/materials/general-independent/data/equipment.md": "de3ad48b3fa901e20077e12508a8dbe7698ed05af41ad08273360f94774e059e",
+      "tests/fixtures/materials/general-independent/data/event.md": "21146d45bc80563cf78e48e5f23fcf9b2e06e837524cfd3ab06198c016aca016",
+      "tests/fixtures/materials/general-independent/data/library.md": "ff68104073cba485edddae033e984db877ae183c6222fca8ee86fa0fb5d5616b",
+      "tests/fixtures/materials/general-independent/data/project.md": "097a5061afa23239841aff36fb9cb5ea29263053b7e4021613efa093c4e65c15"
+    }
+  },
+  "api_model": "deepseek-flash",
+  "thinking": "disabled",
+  "temperature": 0.3,
+  "max_tokens": 400,
+  "maximum_requests": 4,
+  "warmup_requests": 0,
+  "retries": 0,
+  "private_data_read": false,
+  "real_user_settings_changed": false,
+  "source_sha256": {
+    "app/jsc_live/suggest.py": "7ccfb9ee602868fec119322a72befcbb2ac74b4c35dd78ea34dbcf2e5da8bf30",
+    "app/jsc_live/pdf_worker.py": "0fd543914908fd25a0cc04ce7f8b11b5f5d938c3b7bdec84ef8aa5445480792f",
+    "app/jsc_live/semantic_materials.py": "4aef7e95fb69d059077607013cdaa9ae0df170c5e7ae9af29722ab614f81b791"
+  },
+  "results": [
+    {
+      "case": {
+        "id": "box",
+        "corpus": "general-independent",
+        "partner": "朋友",
+        "query": "返すとき、箱には何を入れるんだっけ？",
+        "answer_available": true,
+        "expected_style": "カジュアル",
+        "required_facts": [
+          "本体",
+          "线缆",
+          "说明书"
+        ]
+      },
+      "raw": "推荐|カジュアル\n丁寧|箱には本体、ケーブル、説明書の三点を入れてください。|请把主机、线缆和说明书这三样放进箱子里。\nカジュアル|箱には本体、ケーブル、説明書の三点を入れるんだよ。|箱子里要放主机、线缆和说明书这三样哦。\nかんたん|箱には本体とケーブルと説明書を入れてください。|请把主机、线缆和说明书放进箱子里。\n理由|对方用「〜んだっけ」这种朋友间的口语问法，用カジュアル回答；资料写明箱内放三样东西[S1]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "箱には本体、ケーブル、説明書の三点を入れてください。",
+          "meaning": "请把主机、线缆和说明书这三样放进箱子里。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "箱には本体、ケーブル、説明書の三点を入れるんだよ。",
+          "meaning": "箱子里要放主机、线缆和说明书这三样哦。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "箱には本体とケーブルと説明書を入れてください。",
+          "meaning": "请把主机、线缆和说明书放进箱子里。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用「〜んだっけ」这种朋友间的口语问法，用カジュアル回答；资料写明箱内放三样东西[equipment.md:5]。",
+      "complete": true,
+      "error_kind": null,
+      "star_inferred": false,
+      "recommended_style": "カジュアル",
+      "api_ms": 2137.6870000967756,
+      "first_token_ms": 1125.2578001003712,
+      "retrieval_ms": 0.00200001522898674,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-a6ea8b4cb1ccb899878cccec",
+          "relative_path": "equipment.md",
+          "start_line": 5,
+          "end_line": 5,
+          "text": "- 内容物：箱には本体、ケーブル、説明書の三点を入れる。",
+          "heading": "架空工房の機材貸出",
+          "owner_hint": "unverified",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-38a1840c43a1eabf4237a395",
+          "relative_path": "library.md",
+          "start_line": 5,
+          "end_line": 5,
+          "text": "- 返却：閉館中は入口右側の返却箱に入れる。",
+          "heading": "架空中央図書室の案内",
+          "owner_hint": "unverified",
+          "id": "S2"
+        }
+      ],
+      "cited_source_ids": [
+        "material-a6ea8b4cb1ccb899878cccec"
+      ]
+    },
+    {
+      "case": {
+        "id": "retention",
+        "corpus": "general-independent",
+        "partner": "上司",
+        "query": "アップロードしたテストファイルは何日たったら消えるの？",
+        "answer_available": true,
+        "expected_style": "丁寧",
+        "casual_warning": true,
+        "required_facts": [
+          "上传的测试文件七天后自动删除"
+        ]
+      },
+      "raw": "推荐|丁寧\n丁寧|アップロードしたテストファイルは、七日後に自動で削除されます。|上传的测试文件会在七天后自动删除。\nカジュアル|アップロードしたテストファイルは、七日後に自動で消えるよ。|上传的测试文件七天后会自动消失。|⚠ 对此对象不要用\nかんたん|テストファイルは七日で自動で消えます。|测试文件七天后自动删除。\n理由|你说明对方是上司，即使对方说话随意也用丁寧；资料写明七天后自动删除[S1]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "アップロードしたテストファイルは、七日後に自動で削除されます。",
+          "meaning": "上传的测试文件会在七天后自动删除。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "アップロードしたテストファイルは、七日後に自動で消えるよ。",
+          "meaning": "上传的测试文件七天后会自动消失。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "テストファイルは七日で自動で消えます。",
+          "meaning": "测试文件七天后自动删除。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "你说明对方是上司，即使对方说话随意也用丁寧；资料写明七天后自动删除[project.md:3]。",
+      "complete": true,
+      "error_kind": null,
+      "star_inferred": false,
+      "recommended_style": "丁寧",
+      "api_ms": 1264.845099998638,
+      "first_token_ms": 692.6734000444412,
+      "retrieval_ms": 0.004500034265220165,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-065ae87134cb2e238d8e3aac",
+          "relative_path": "project.md",
+          "start_line": 3,
+          "end_line": 3,
+          "text": "- 数据保留：上传的测试文件在七天后自动删除。",
+          "heading": "架空Orionプロジェクトの仕様",
+          "owner_hint": "unverified",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-bf05409aa1c7ce65691ed6af",
+          "relative_path": "equipment.md",
+          "start_line": 4,
+          "end_line": 4,
+          "text": "- 返却期限：利用した日の十七時。",
+          "heading": "架空工房の機材貸出",
+          "owner_hint": "unverified",
+          "id": "S2"
+        },
+        {
+          "source_id": "material-bf218949913966e6cb1010a8",
+          "relative_path": "event.md",
+          "start_line": 3,
+          "end_line": 3,
+          "text": "会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。閉会の案内として、忘れ物は受付で十四日間保管し、受け取りには整理番号が必要と説明した。",
+          "heading": "架空展示イベントの運営記録",
+          "owner_hint": "unverified",
+          "id": "S3"
+        },
+        {
+          "source_id": "material-8e064c15453954a54ae5125c",
+          "relative_path": "project.md",
+          "start_line": 4,
+          "end_line": 4,
+          "text": "- 容量：一回のアップロードは最大20MB。",
+          "heading": "架空Orionプロジェクトの仕様",
+          "owner_hint": "unverified",
+          "id": "S4"
+        }
+      ],
+      "cited_source_ids": [
+        "material-065ae87134cb2e238d8e3aac"
+      ]
+    },
+    {
+      "case": {
+        "id": "lost_property",
+        "corpus": "general-independent",
+        "partner": "朋友",
+        "query": "忘れ物はどこで何日間預かってくれるの？受け取りに何がいるの？",
+        "answer_available": true,
+        "expected_style": "カジュアル",
+        "required_facts": [
+          "前台保管14天",
+          "领取需要整理号码"
+        ]
+      },
+      "raw": "推荐|カジュアル\n丁寧|忘れ物は受付で十四日間保管され、受け取りには整理番号が必要だそうです。|听说失物在接待处保管十四天，领取时需要整理号码。\nカジュアル|忘れ物は受付で十四日間預かってくれて、受け取りには整理番号がいるって。|听说失物在接待处保管十四天，领取时需要整理号码。\nかんたん|忘れ物は受付で十四日間です。受け取りには整理番号が要ります。|失物在接待处保管十四天。领取需要整理号码。\n理由|对方用普通体问「〜の？」，是朋友间的说法；资料写明失物在接待处保管十四天、领取需整理番号[S1]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "忘れ物は受付で十四日間保管され、受け取りには整理番号が必要だそうです。",
+          "meaning": "听说失物在接待处保管十四天，领取时需要整理号码。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "忘れ物は受付で十四日間預かってくれて、受け取りには整理番号がいるって。",
+          "meaning": "听说失物在接待处保管十四天，领取时需要整理号码。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "忘れ物は受付で十四日間です。受け取りには整理番号が要ります。",
+          "meaning": "失物在接待处保管十四天。领取需要整理号码。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用普通体问「〜の？」，是朋友间的说法；资料写明失物在接待处保管十四天、领取需整理番号[event.md:3]。",
+      "complete": true,
+      "error_kind": null,
+      "star_inferred": false,
+      "recommended_style": "カジュアル",
+      "api_ms": 1837.505599949509,
+      "first_token_ms": 822.7317000273615,
+      "retrieval_ms": 0.016300007700920105,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-bf218949913966e6cb1010a8",
+          "relative_path": "event.md",
+          "start_line": 3,
+          "end_line": 3,
+          "text": "会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。閉会の案内として、忘れ物は受付で十四日間保管し、受け取りには整理番号が必要と説明した。",
+          "heading": "架空展示イベントの運営記録",
+          "owner_hint": "unverified",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-9e7f05339215976d12a31f03",
+          "relative_path": "library.md",
+          "start_line": 3,
+          "end_line": 3,
+          "text": "- 借阅规则：每次最多借三本，借期十四天。",
+          "heading": "架空中央図書室の案内",
+          "owner_hint": "unverified",
+          "id": "S2"
+        },
+        {
+          "source_id": "material-bf05409aa1c7ce65691ed6af",
+          "relative_path": "equipment.md",
+          "start_line": 4,
+          "end_line": 4,
+          "text": "- 返却期限：利用した日の十七時。",
+          "heading": "架空工房の機材貸出",
+          "owner_hint": "unverified",
+          "id": "S3"
+        }
+      ],
+      "cited_source_ids": [
+        "material-bf218949913966e6cb1010a8"
+      ]
+    },
+    {
+      "case": {
+        "id": "opening_missing",
+        "corpus": "general-independent",
+        "query": "食堂は何時に開きますか？",
+        "answer_available": false,
+        "expected_style": "丁寧",
+        "required_facts": [
+          "明确说明资料没有营业时刻",
+          "不以营业日期代替时刻答案",
+          "不虚构时刻"
+        ]
+      },
+      "raw": "推荐|丁寧\n丁寧|資料には食堂の開く時間は書かれていません。営業日は月曜日から金曜日で、土日と祝日は休みです。|资料里没有写食堂几点开门。营业日是周一到周五，周六周日和节假日休息。\nカジュアル|資料には食堂が開く時間は書いてないよ。営業日は月曜から金曜で、土日と祝日は休みだよ。|资料里没写食堂几点开门。营业日是周一到周五，周六周日和节假日休息。\nかんたん|資料には開く時間が書かれていません。月曜日から金曜日は開いていて、土日と祝日は休みです。|资料里没写开门时间。周一到周五开，周六周日和节假日休息。\n理由|对方用「〜ますか」，按同等礼貌程度回答；资料只写了营业日，没写开门时间[S1]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "資料には食堂の開く時間は書かれていません。営業日は月曜日から金曜日で、土日と祝日は休みです。",
+          "meaning": "资料里没有写食堂几点开门。营业日是周一到周五，周六周日和节假日休息。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "資料には食堂が開く時間は書いてないよ。営業日は月曜から金曜で、土日と祝日は休みだよ。",
+          "meaning": "资料里没写食堂几点开门。营业日是周一到周五，周六周日和节假日休息。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "資料には開く時間が書かれていません。月曜日から金曜日は開いていて、土日と祝日は休みです。",
+          "meaning": "资料里没写开门时间。周一到周五开，周六周日和节假日休息。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用「〜ますか」，按同等礼貌程度回答；资料只写了营业日，没写开门时间[cafeteria.md:3]。",
+      "complete": true,
+      "error_kind": null,
+      "star_inferred": false,
+      "recommended_style": "丁寧",
+      "api_ms": 2158.845099969767,
+      "first_token_ms": 983.6898000212386,
+      "retrieval_ms": 0.00409991480410099,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-031860f5f2f39b4730a2b6a4",
+          "relative_path": "cafeteria.md",
+          "start_line": 3,
+          "end_line": 3,
+          "text": "- 営業日：月曜日から金曜日。土日と祝日は休み。",
+          "heading": "架空研修棟食堂の利用メモ",
+          "owner_hint": "unverified",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-b774117b317cc87f099ea1ad",
+          "relative_path": "cafeteria.md",
+          "start_line": 5,
+          "end_line": 5,
+          "text": "- 菜单：每天提供两种套餐，其中一种不含肉。",
+          "heading": "架空研修棟食堂の利用メモ",
+          "owner_hint": "unverified",
+          "id": "S2"
+        },
+        {
+          "source_id": "material-bf218949913966e6cb1010a8",
+          "relative_path": "event.md",
+          "start_line": 3,
+          "end_line": 3,
+          "text": "会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。閉会の案内として、忘れ物は受付で十四日間保管し、受け取りには整理番号が必要と説明した。",
+          "heading": "架空展示イベントの運営記録",
+          "owner_hint": "unverified",
+          "id": "S3"
+        }
+      ],
+      "cited_source_ids": [
+        "material-031860f5f2f39b4730a2b6a4"
+      ]
+    }
+  ],
+  "completed": true
+}

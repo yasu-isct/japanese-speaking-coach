@@ -1,0 +1,11 @@
+{
+  "provenance": "Constructed after final D-037 prompt; existing sources and new question wording. Not a blind held-out test. Frozen before a single four-request run.",
+  "sha256": {
+    "tests/fixtures/materials/document-stage/transfer-cases.json": "02198a0022c38d58e80fd059415ef806848cecf872bb4e0fd0897a94a7323617",
+    "tests/fixtures/materials/general-independent/data/cafeteria.md": "612df8a37d6469ad721f683249c4e132af137511e38e6f2dd746414f2dd19b36",
+    "tests/fixtures/materials/general-independent/data/equipment.md": "de3ad48b3fa901e20077e12508a8dbe7698ed05af41ad08273360f94774e059e",
+    "tests/fixtures/materials/general-independent/data/event.md": "21146d45bc80563cf78e48e5f23fcf9b2e06e837524cfd3ab06198c016aca016",
+    "tests/fixtures/materials/general-independent/data/library.md": "ff68104073cba485edddae033e984db877ae183c6222fca8ee86fa0fb5d5616b",
+    "tests/fixtures/materials/general-independent/data/project.md": "097a5061afa23239841aff36fb9cb5ea29263053b7e4021613efa093c4e65c15"
+  }
+}

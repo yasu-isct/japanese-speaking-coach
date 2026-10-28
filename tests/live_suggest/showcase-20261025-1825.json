@@ -1,0 +1,43 @@
+{
+ "captured": "2026-10-25 18:25",
+ "input": "TTS (Windows Haruka), tests/sample_dialogues.md 10 sentences, --source file --realtime; no personal data",
+ "asr_model": "large-v3-turbo",
+ "api_model": "deepseek-flash",
+ "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+ "sentences_shown": 12,
+ "suggestion_screenshot": {
+  "warn": true,
+  "ruby": true,
+  "lines": 3
+ },
+ "suggestion_turns": 10,
+ "suggestions_done": 10,
+ "asr": {
+  "n": 10,
+  "p50_ms": 258,
+  "p95_ms": 333
+ },
+ "api_round_trip": {
+  "n": 10,
+  "p50_ms": 1565,
+  "p95_ms": 1986
+ },
+ "api_first_token": {
+  "n": 10,
+  "p50_ms": 741,
+  "p95_ms": 1196
+ },
+ "render": {
+  "n": 10,
+  "p50_ms": 71,
+  "p95_ms": 102
+ },
+ "last_subtitle_to_suggestion": {
+  "n": 10,
+  "p50_ms": 2461,
+  "p95_ms": 2899
+ },
+ "first_subtitle_after_speech_end_ms": 814,
+ "lookup_panel": "可能　【かのう】\n可能（かのう）：如果能行的话，指有空来上班。",
+ "session_folder": "20261025-182433"
+}

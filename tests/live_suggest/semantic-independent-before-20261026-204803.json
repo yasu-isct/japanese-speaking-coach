@@ -1,0 +1,2527 @@
+{
+  "summary": {
+    "lexical": {
+      "relevant_covered": 0,
+      "relevant_expected": 13,
+      "no_data_empty": 2,
+      "no_data_cases": 4,
+      "mean_payload_chars": 99.52941176470588
+    },
+    "semantic": {
+      "relevant_covered": 11,
+      "relevant_expected": 13,
+      "no_data_empty": 2,
+      "no_data_cases": 4,
+      "mean_payload_chars": 290.5882352941176
+    },
+    "hybrid": {
+      "relevant_covered": 11,
+      "relevant_expected": 13,
+      "no_data_empty": 1,
+      "no_data_cases": 4,
+      "mean_payload_chars": 327.2352941176471
+    }
+  },
+  "embedding_timing": {
+    "samples": 17,
+    "p50_ms": 3.1692,
+    "p95_ms": 5.0445
+  },
+  "cases": [
+    {
+      "annotation": {
+        "id": 1,
+        "query": "図書室では何冊を何日間借りられますか？",
+        "topic": "independent public documents",
+        "relevant": [
+          {
+            "path": "library.md",
+            "start": 3,
+            "end": 3
+          }
+        ],
+        "forbidden": []
+      },
+      "embedding_ms": 4.0828,
+      "top_similarities": [
+        {
+          "path": "library.md",
+          "line": 3,
+          "cosine": 0.77949
+        },
+        {
+          "path": "library.md",
+          "line": 4,
+          "cosine": 0.48086
+        },
+        {
+          "path": "library.md",
+          "line": 5,
+          "cosine": 0.37716
+        },
+        {
+          "path": "equipment.md",
+          "line": 3,
+          "cosine": 0.34966
+        },
+        {
+          "path": "cafeteria.md",
+          "line": 3,
+          "cosine": 0.30921
+        }
+      ],
+      "lexical": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "library.md",
+            "start": 3,
+            "end": 3,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range library.md:3-3"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "semantic": {
+        "source_ids": [
+          "material-9e7f05339215976d12a31f03"
+        ],
+        "sources": [
+          {
+            "source_id": "material-9e7f05339215976d12a31f03",
+            "relative_path": "library.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 借阅规则：每次最多借三本，借期十四天。",
+            "heading": "架空中央図書室の案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-9e7f05339215976d12a31f03\", \"relative_path\": \"library.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 借阅规则：每次最多借三本，借期十四天。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "library.md",
+            "start": 3,
+            "end": 3,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 21,
+        "payload_chars": 250,
+        "payload_utf8_bytes": 308
+      },
+      "hybrid": {
+        "source_ids": [
+          "material-9e7f05339215976d12a31f03"
+        ],
+        "sources": [
+          {
+            "source_id": "material-9e7f05339215976d12a31f03",
+            "relative_path": "library.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 借阅规则：每次最多借三本，借期十四天。",
+            "heading": "架空中央図書室の案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-9e7f05339215976d12a31f03\", \"relative_path\": \"library.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 借阅规则：每次最多借三本，借期十四天。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "library.md",
+            "start": 3,
+            "end": 3,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 21,
+        "payload_chars": 250,
+        "payload_utf8_bytes": 308
+      }
+    },
+    {
+      "annotation": {
+        "id": 2,
+        "query": "図書室の本はどんな条件で貸出期間を延ばせますか？",
+        "topic": "independent public documents",
+        "relevant": [
+          {
+            "path": "library.md",
+            "start": 4,
+            "end": 4
+          }
+        ],
+        "forbidden": []
+      },
+      "embedding_ms": 5.0445,
+      "top_similarities": [
+        {
+          "path": "library.md",
+          "line": 3,
+          "cosine": 0.81189
+        },
+        {
+          "path": "library.md",
+          "line": 4,
+          "cosine": 0.63995
+        },
+        {
+          "path": "library.md",
+          "line": 5,
+          "cosine": 0.4847
+        },
+        {
+          "path": "equipment.md",
+          "line": 3,
+          "cosine": 0.4096
+        },
+        {
+          "path": "equipment.md",
+          "line": 4,
+          "cosine": 0.36641
+        }
+      ],
+      "lexical": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "library.md",
+            "start": 4,
+            "end": 4,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range library.md:4-4"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "semantic": {
+        "source_ids": [
+          "material-9e7f05339215976d12a31f03"
+        ],
+        "sources": [
+          {
+            "source_id": "material-9e7f05339215976d12a31f03",
+            "relative_path": "library.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 借阅规则：每次最多借三本，借期十四天。",
+            "heading": "架空中央図書室の案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-9e7f05339215976d12a31f03\", \"relative_path\": \"library.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 借阅规则：每次最多借三本，借期十四天。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "library.md",
+            "start": 4,
+            "end": 4,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range library.md:4-4"
+        ],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 21,
+        "payload_chars": 250,
+        "payload_utf8_bytes": 308
+      },
+      "hybrid": {
+        "source_ids": [
+          "material-9e7f05339215976d12a31f03"
+        ],
+        "sources": [
+          {
+            "source_id": "material-9e7f05339215976d12a31f03",
+            "relative_path": "library.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 借阅规则：每次最多借三本，借期十四天。",
+            "heading": "架空中央図書室の案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-9e7f05339215976d12a31f03\", \"relative_path\": \"library.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 借阅规则：每次最多借三本，借期十四天。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "library.md",
+            "start": 4,
+            "end": 4,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range library.md:4-4"
+        ],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 21,
+        "payload_chars": 250,
+        "payload_utf8_bytes": 308
+      }
+    },
+    {
+      "annotation": {
+        "id": 3,
+        "query": "图书室关门后要把书还到哪里？",
+        "topic": "independent public documents",
+        "relevant": [
+          {
+            "path": "library.md",
+            "start": 5,
+            "end": 5
+          }
+        ],
+        "forbidden": []
+      },
+      "embedding_ms": 3.7653,
+      "top_similarities": [
+        {
+          "path": "library.md",
+          "line": 5,
+          "cosine": 0.78997
+        },
+        {
+          "path": "library.md",
+          "line": 3,
+          "cosine": 0.55695
+        },
+        {
+          "path": "library.md",
+          "line": 4,
+          "cosine": 0.55234
+        },
+        {
+          "path": "event.md",
+          "line": 3,
+          "cosine": 0.26611
+        },
+        {
+          "path": "project.md",
+          "line": 3,
+          "cosine": 0.25921
+        }
+      ],
+      "lexical": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "library.md",
+            "start": 5,
+            "end": 5,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range library.md:5-5"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "semantic": {
+        "source_ids": [
+          "material-38a1840c43a1eabf4237a395"
+        ],
+        "sources": [
+          {
+            "source_id": "material-38a1840c43a1eabf4237a395",
+            "relative_path": "library.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 返却：閉館中は入口右側の返却箱に入れる。",
+            "heading": "架空中央図書室の案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-38a1840c43a1eabf4237a395\", \"relative_path\": \"library.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 返却：閉館中は入口右側の返却箱に入れる。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "library.md",
+            "start": 5,
+            "end": 5,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 22,
+        "payload_chars": 251,
+        "payload_utf8_bytes": 311
+      },
+      "hybrid": {
+        "source_ids": [
+          "material-38a1840c43a1eabf4237a395"
+        ],
+        "sources": [
+          {
+            "source_id": "material-38a1840c43a1eabf4237a395",
+            "relative_path": "library.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 返却：閉館中は入口右側の返却箱に入れる。",
+            "heading": "架空中央図書室の案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-38a1840c43a1eabf4237a395\", \"relative_path\": \"library.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 返却：閉館中は入口右側の返却箱に入れる。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "library.md",
+            "start": 5,
+            "end": 5,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 22,
+        "payload_chars": 251,
+        "payload_utf8_bytes": 311
+      }
+    },
+    {
+      "annotation": {
+        "id": 4,
+        "query": "研修楼食堂周末营业吗？",
+        "topic": "independent public documents",
+        "relevant": [
+          {
+            "path": "cafeteria.md",
+            "start": 3,
+            "end": 3
+          }
+        ],
+        "forbidden": []
+      },
+      "embedding_ms": 2.9681,
+      "top_similarities": [
+        {
+          "path": "cafeteria.md",
+          "line": 3,
+          "cosine": 0.74929
+        },
+        {
+          "path": "cafeteria.md",
+          "line": 5,
+          "cosine": 0.53508
+        },
+        {
+          "path": "cafeteria.md",
+          "line": 4,
+          "cosine": 0.45007
+        },
+        {
+          "path": "equipment.md",
+          "line": 3,
+          "cosine": 0.43559
+        },
+        {
+          "path": "event.md",
+          "line": 3,
+          "cosine": 0.40087
+        }
+      ],
+      "lexical": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "cafeteria.md",
+            "start": 3,
+            "end": 3,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range cafeteria.md:3-3"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "semantic": {
+        "source_ids": [
+          "material-031860f5f2f39b4730a2b6a4"
+        ],
+        "sources": [
+          {
+            "source_id": "material-031860f5f2f39b4730a2b6a4",
+            "relative_path": "cafeteria.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 営業日：月曜日から金曜日。土日と祝日は休み。",
+            "heading": "架空研修棟食堂の利用メモ",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-031860f5f2f39b4730a2b6a4\", \"relative_path\": \"cafeteria.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 営業日：月曜日から金曜日。土日と祝日は休み。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "cafeteria.md",
+            "start": 3,
+            "end": 3,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 24,
+        "payload_chars": 257,
+        "payload_utf8_bytes": 325
+      },
+      "hybrid": {
+        "source_ids": [
+          "material-031860f5f2f39b4730a2b6a4"
+        ],
+        "sources": [
+          {
+            "source_id": "material-031860f5f2f39b4730a2b6a4",
+            "relative_path": "cafeteria.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 営業日：月曜日から金曜日。土日と祝日は休み。",
+            "heading": "架空研修棟食堂の利用メモ",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-031860f5f2f39b4730a2b6a4\", \"relative_path\": \"cafeteria.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 営業日：月曜日から金曜日。土日と祝日は休み。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "cafeteria.md",
+            "start": 3,
+            "end": 3,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 24,
+        "payload_chars": 257,
+        "payload_utf8_bytes": 325
+      }
+    },
+    {
+      "annotation": {
+        "id": 5,
+        "query": "食堂能刷卡或者用电子钱包付款吗？",
+        "topic": "independent public documents",
+        "relevant": [
+          {
+            "path": "cafeteria.md",
+            "start": 4,
+            "end": 4
+          }
+        ],
+        "forbidden": []
+      },
+      "embedding_ms": 3.1692,
+      "top_similarities": [
+        {
+          "path": "cafeteria.md",
+          "line": 4,
+          "cosine": 0.7594
+        },
+        {
+          "path": "cafeteria.md",
+          "line": 5,
+          "cosine": 0.5242
+        },
+        {
+          "path": "cafeteria.md",
+          "line": 3,
+          "cosine": 0.43711
+        },
+        {
+          "path": "equipment.md",
+          "line": 3,
+          "cosine": 0.3426
+        },
+        {
+          "path": "library.md",
+          "line": 4,
+          "cosine": 0.28736
+        }
+      ],
+      "lexical": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "cafeteria.md",
+            "start": 4,
+            "end": 4,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range cafeteria.md:4-4"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "semantic": {
+        "source_ids": [
+          "material-d1c066921f6d9e44a359bc8c"
+        ],
+        "sources": [
+          {
+            "source_id": "material-d1c066921f6d9e44a359bc8c",
+            "relative_path": "cafeteria.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 支払い：食券は現金だけで購入する。カードや電子マネーは使えない。",
+            "heading": "架空研修棟食堂の利用メモ",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-d1c066921f6d9e44a359bc8c\", \"relative_path\": \"cafeteria.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 支払い：食券は現金だけで購入する。カードや電子マネーは使えない。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "cafeteria.md",
+            "start": 4,
+            "end": 4,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 34,
+        "payload_chars": 267,
+        "payload_utf8_bytes": 355
+      },
+      "hybrid": {
+        "source_ids": [
+          "material-d1c066921f6d9e44a359bc8c"
+        ],
+        "sources": [
+          {
+            "source_id": "material-d1c066921f6d9e44a359bc8c",
+            "relative_path": "cafeteria.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 支払い：食券は現金だけで購入する。カードや電子マネーは使えない。",
+            "heading": "架空研修棟食堂の利用メモ",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-d1c066921f6d9e44a359bc8c\", \"relative_path\": \"cafeteria.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 支払い：食券は現金だけで購入する。カードや電子マネーは使えない。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "cafeteria.md",
+            "start": 4,
+            "end": 4,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 34,
+        "payload_chars": 267,
+        "payload_utf8_bytes": 355
+      }
+    },
+    {
+      "annotation": {
+        "id": 6,
+        "query": "食堂には肉を使わない食事はありますか？",
+        "topic": "independent public documents",
+        "relevant": [
+          {
+            "path": "cafeteria.md",
+            "start": 5,
+            "end": 5
+          }
+        ],
+        "forbidden": []
+      },
+      "embedding_ms": 3.4752,
+      "top_similarities": [
+        {
+          "path": "cafeteria.md",
+          "line": 5,
+          "cosine": 0.7385
+        },
+        {
+          "path": "cafeteria.md",
+          "line": 4,
+          "cosine": 0.45332
+        },
+        {
+          "path": "cafeteria.md",
+          "line": 3,
+          "cosine": 0.39024
+        },
+        {
+          "path": "library.md",
+          "line": 4,
+          "cosine": 0.13237
+        },
+        {
+          "path": "equipment.md",
+          "line": 3,
+          "cosine": 0.13179
+        }
+      ],
+      "lexical": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "cafeteria.md",
+            "start": 5,
+            "end": 5,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range cafeteria.md:5-5"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "semantic": {
+        "source_ids": [
+          "material-b774117b317cc87f099ea1ad"
+        ],
+        "sources": [
+          {
+            "source_id": "material-b774117b317cc87f099ea1ad",
+            "relative_path": "cafeteria.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 菜单：每天提供两种套餐，其中一种不含肉。",
+            "heading": "架空研修棟食堂の利用メモ",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-b774117b317cc87f099ea1ad\", \"relative_path\": \"cafeteria.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 菜单：每天提供两种套餐，其中一种不含肉。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "cafeteria.md",
+            "start": 5,
+            "end": 5,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 22,
+        "payload_chars": 255,
+        "payload_utf8_bytes": 319
+      },
+      "hybrid": {
+        "source_ids": [
+          "material-b774117b317cc87f099ea1ad"
+        ],
+        "sources": [
+          {
+            "source_id": "material-b774117b317cc87f099ea1ad",
+            "relative_path": "cafeteria.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 菜单：每天提供两种套餐，其中一种不含肉。",
+            "heading": "架空研修棟食堂の利用メモ",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-b774117b317cc87f099ea1ad\", \"relative_path\": \"cafeteria.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 菜单：每天提供两种套餐，其中一种不含肉。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "cafeteria.md",
+            "start": 5,
+            "end": 5,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 22,
+        "payload_chars": 255,
+        "payload_utf8_bytes": 319
+      }
+    },
+    {
+      "annotation": {
+        "id": 7,
+        "query": "Orionにアップロードしたテストファイルは、いつ消えますか？",
+        "topic": "independent public documents",
+        "relevant": [
+          {
+            "path": "project.md",
+            "start": 3,
+            "end": 3
+          }
+        ],
+        "forbidden": []
+      },
+      "embedding_ms": 3.3563,
+      "top_similarities": [
+        {
+          "path": "project.md",
+          "line": 3,
+          "cosine": 0.61401
+        },
+        {
+          "path": "equipment.md",
+          "line": 4,
+          "cosine": 0.43076
+        },
+        {
+          "path": "project.md",
+          "line": 5,
+          "cosine": 0.40583
+        },
+        {
+          "path": "project.md",
+          "line": 4,
+          "cosine": 0.34909
+        },
+        {
+          "path": "library.md",
+          "line": 4,
+          "cosine": 0.29645
+        }
+      ],
+      "lexical": {
+        "source_ids": [
+          "material-8e064c15453954a54ae5125c"
+        ],
+        "sources": [
+          {
+            "source_id": "material-8e064c15453954a54ae5125c",
+            "relative_path": "project.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 容量：一回のアップロードは最大20MB。",
+            "heading": "架空Orionプロジェクトの仕様",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-8e064c15453954a54ae5125c\", \"relative_path\": \"project.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 容量：一回のアップロードは最大20MB。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "project.md",
+            "start": 3,
+            "end": 3,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range project.md:3-3"
+        ],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 22,
+        "payload_chars": 257,
+        "payload_utf8_bytes": 311
+      },
+      "semantic": {
+        "source_ids": [
+          "material-065ae87134cb2e238d8e3aac"
+        ],
+        "sources": [
+          {
+            "source_id": "material-065ae87134cb2e238d8e3aac",
+            "relative_path": "project.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 数据保留：上传的测试文件在七天后自动删除。",
+            "heading": "架空Orionプロジェクトの仕様",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-065ae87134cb2e238d8e3aac\", \"relative_path\": \"project.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 数据保留：上传的测试文件在七天后自动删除。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "project.md",
+            "start": 3,
+            "end": 3,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 23,
+        "payload_chars": 258,
+        "payload_utf8_bytes": 322
+      },
+      "hybrid": {
+        "source_ids": [
+          "material-065ae87134cb2e238d8e3aac",
+          "material-8e064c15453954a54ae5125c"
+        ],
+        "sources": [
+          {
+            "source_id": "material-065ae87134cb2e238d8e3aac",
+            "relative_path": "project.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 数据保留：上传的测试文件在七天后自动删除。",
+            "heading": "架空Orionプロジェクトの仕様",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-8e064c15453954a54ae5125c",
+            "relative_path": "project.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 容量：一回のアップロードは最大20MB。",
+            "heading": "架空Orionプロジェクトの仕様",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-065ae87134cb2e238d8e3aac\", \"relative_path\": \"project.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 数据保留：上传的测试文件在七天后自动删除。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-8e064c15453954a54ae5125c\", \"relative_path\": \"project.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 容量：一回のアップロードは最大20MB。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "project.md",
+            "start": 3,
+            "end": 3,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 45,
+        "payload_chars": 466,
+        "payload_utf8_bytes": 584
+      }
+    },
+    {
+      "annotation": {
+        "id": 8,
+        "query": "Orion单次最多能上传多大的文件？",
+        "topic": "independent public documents",
+        "relevant": [
+          {
+            "path": "project.md",
+            "start": 4,
+            "end": 4
+          }
+        ],
+        "forbidden": []
+      },
+      "embedding_ms": 3.1302,
+      "top_similarities": [
+        {
+          "path": "project.md",
+          "line": 4,
+          "cosine": 0.56611
+        },
+        {
+          "path": "project.md",
+          "line": 3,
+          "cosine": 0.37004
+        },
+        {
+          "path": "project.md",
+          "line": 5,
+          "cosine": 0.33231
+        },
+        {
+          "path": "library.md",
+          "line": 3,
+          "cosine": 0.33026
+        },
+        {
+          "path": "equipment.md",
+          "line": 5,
+          "cosine": 0.2916
+        }
+      ],
+      "lexical": {
+        "source_ids": [
+          "material-065ae87134cb2e238d8e3aac"
+        ],
+        "sources": [
+          {
+            "source_id": "material-065ae87134cb2e238d8e3aac",
+            "relative_path": "project.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 数据保留：上传的测试文件在七天后自动删除。",
+            "heading": "架空Orionプロジェクトの仕様",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-065ae87134cb2e238d8e3aac\", \"relative_path\": \"project.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 数据保留：上传的测试文件在七天后自动删除。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "project.md",
+            "start": 4,
+            "end": 4,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range project.md:4-4"
+        ],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 23,
+        "payload_chars": 258,
+        "payload_utf8_bytes": 322
+      },
+      "semantic": {
+        "source_ids": [
+          "material-8e064c15453954a54ae5125c"
+        ],
+        "sources": [
+          {
+            "source_id": "material-8e064c15453954a54ae5125c",
+            "relative_path": "project.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 容量：一回のアップロードは最大20MB。",
+            "heading": "架空Orionプロジェクトの仕様",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-8e064c15453954a54ae5125c\", \"relative_path\": \"project.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 容量：一回のアップロードは最大20MB。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "project.md",
+            "start": 4,
+            "end": 4,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 22,
+        "payload_chars": 257,
+        "payload_utf8_bytes": 311
+      },
+      "hybrid": {
+        "source_ids": [
+          "material-8e064c15453954a54ae5125c",
+          "material-065ae87134cb2e238d8e3aac"
+        ],
+        "sources": [
+          {
+            "source_id": "material-8e064c15453954a54ae5125c",
+            "relative_path": "project.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 容量：一回のアップロードは最大20MB。",
+            "heading": "架空Orionプロジェクトの仕様",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-065ae87134cb2e238d8e3aac",
+            "relative_path": "project.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 数据保留：上传的测试文件在七天后自动删除。",
+            "heading": "架空Orionプロジェクトの仕様",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-8e064c15453954a54ae5125c\", \"relative_path\": \"project.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 容量：一回のアップロードは最大20MB。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-065ae87134cb2e238d8e3aac\", \"relative_path\": \"project.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 数据保留：上传的测试文件在七天后自动删除。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "project.md",
+            "start": 4,
+            "end": 4,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 45,
+        "payload_chars": 466,
+        "payload_utf8_bytes": 584
+      }
+    },
+    {
+      "annotation": {
+        "id": 9,
+        "query": "Where should I report a bug in Orion?",
+        "topic": "independent public documents",
+        "relevant": [
+          {
+            "path": "project.md",
+            "start": 5,
+            "end": 5
+          }
+        ],
+        "forbidden": []
+      },
+      "embedding_ms": 3.3681,
+      "top_similarities": [
+        {
+          "path": "project.md",
+          "line": 5,
+          "cosine": 0.53593
+        },
+        {
+          "path": "project.md",
+          "line": 3,
+          "cosine": 0.30239
+        },
+        {
+          "path": "project.md",
+          "line": 4,
+          "cosine": 0.2987
+        },
+        {
+          "path": "library.md",
+          "line": 4,
+          "cosine": 0.25564
+        },
+        {
+          "path": "equipment.md",
+          "line": 4,
+          "cosine": 0.23076
+        }
+      ],
+      "lexical": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "project.md",
+            "start": 5,
+            "end": 5,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range project.md:5-5"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "semantic": {
+        "source_ids": [
+          "material-b3a567c3f6cd84e741bea5b6"
+        ],
+        "sources": [
+          {
+            "source_id": "material-b3a567c3f6cd84e741bea5b6",
+            "relative_path": "project.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 連絡：不具合を見つけたら、管理画面の問い合わせフォームから報告する。",
+            "heading": "架空Orionプロジェクトの仕様",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-b3a567c3f6cd84e741bea5b6\", \"relative_path\": \"project.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 連絡：不具合を見つけたら、管理画面の問い合わせフォームから報告する。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "project.md",
+            "start": 5,
+            "end": 5,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 36,
+        "payload_chars": 271,
+        "payload_utf8_bytes": 361
+      },
+      "hybrid": {
+        "source_ids": [
+          "material-b3a567c3f6cd84e741bea5b6"
+        ],
+        "sources": [
+          {
+            "source_id": "material-b3a567c3f6cd84e741bea5b6",
+            "relative_path": "project.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 連絡：不具合を見つけたら、管理画面の問い合わせフォームから報告する。",
+            "heading": "架空Orionプロジェクトの仕様",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-b3a567c3f6cd84e741bea5b6\", \"relative_path\": \"project.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 連絡：不具合を見つけたら、管理画面の問い合わせフォームから報告する。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "project.md",
+            "start": 5,
+            "end": 5,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 36,
+        "payload_chars": 271,
+        "payload_utf8_bytes": 361
+      }
+    },
+    {
+      "annotation": {
+        "id": 10,
+        "query": "工房的设备最晚要提前多久预约？",
+        "topic": "independent public documents",
+        "relevant": [
+          {
+            "path": "equipment.md",
+            "start": 3,
+            "end": 3
+          }
+        ],
+        "forbidden": []
+      },
+      "embedding_ms": 3.0881,
+      "top_similarities": [
+        {
+          "path": "equipment.md",
+          "line": 3,
+          "cosine": 0.6127
+        },
+        {
+          "path": "equipment.md",
+          "line": 4,
+          "cosine": 0.59332
+        },
+        {
+          "path": "library.md",
+          "line": 4,
+          "cosine": 0.42894
+        },
+        {
+          "path": "cafeteria.md",
+          "line": 3,
+          "cosine": 0.38557
+        },
+        {
+          "path": "project.md",
+          "line": 3,
+          "cosine": 0.36621
+        }
+      ],
+      "lexical": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "equipment.md",
+            "start": 3,
+            "end": 3,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range equipment.md:3-3"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "semantic": {
+        "source_ids": [
+          "material-24cb730f75eb97a04d048f30",
+          "material-bf05409aa1c7ce65691ed6af"
+        ],
+        "sources": [
+          {
+            "source_id": "material-24cb730f75eb97a04d048f30",
+            "relative_path": "equipment.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 貸出受付：利用日の前日までに予約する。",
+            "heading": "架空工房の機材貸出",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-bf05409aa1c7ce65691ed6af",
+            "relative_path": "equipment.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 返却期限：利用した日の十七時。",
+            "heading": "架空工房の機材貸出",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-24cb730f75eb97a04d048f30\", \"relative_path\": \"equipment.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 貸出受付：利用日の前日までに予約する。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-bf05409aa1c7ce65691ed6af\", \"relative_path\": \"equipment.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 返却期限：利用した日の十七時。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "equipment.md",
+            "start": 3,
+            "end": 3,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 38,
+        "payload_chars": 449,
+        "payload_utf8_bytes": 553
+      },
+      "hybrid": {
+        "source_ids": [
+          "material-24cb730f75eb97a04d048f30",
+          "material-bf05409aa1c7ce65691ed6af"
+        ],
+        "sources": [
+          {
+            "source_id": "material-24cb730f75eb97a04d048f30",
+            "relative_path": "equipment.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 貸出受付：利用日の前日までに予約する。",
+            "heading": "架空工房の機材貸出",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-bf05409aa1c7ce65691ed6af",
+            "relative_path": "equipment.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 返却期限：利用した日の十七時。",
+            "heading": "架空工房の機材貸出",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-24cb730f75eb97a04d048f30\", \"relative_path\": \"equipment.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 貸出受付：利用日の前日までに予約する。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-bf05409aa1c7ce65691ed6af\", \"relative_path\": \"equipment.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 返却期限：利用した日の十七時。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "equipment.md",
+            "start": 3,
+            "end": 3,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 38,
+        "payload_chars": 449,
+        "payload_utf8_bytes": 553
+      }
+    },
+    {
+      "annotation": {
+        "id": 11,
+        "query": "工房借的设备最晚几点还？",
+        "topic": "independent public documents",
+        "relevant": [
+          {
+            "path": "equipment.md",
+            "start": 4,
+            "end": 4
+          }
+        ],
+        "forbidden": []
+      },
+      "embedding_ms": 3.03,
+      "top_similarities": [
+        {
+          "path": "equipment.md",
+          "line": 4,
+          "cosine": 0.64419
+        },
+        {
+          "path": "equipment.md",
+          "line": 3,
+          "cosine": 0.59183
+        },
+        {
+          "path": "library.md",
+          "line": 3,
+          "cosine": 0.43622
+        },
+        {
+          "path": "library.md",
+          "line": 4,
+          "cosine": 0.37105
+        },
+        {
+          "path": "project.md",
+          "line": 4,
+          "cosine": 0.36368
+        }
+      ],
+      "lexical": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "equipment.md",
+            "start": 4,
+            "end": 4,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range equipment.md:4-4"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "semantic": {
+        "source_ids": [
+          "material-bf05409aa1c7ce65691ed6af",
+          "material-24cb730f75eb97a04d048f30"
+        ],
+        "sources": [
+          {
+            "source_id": "material-bf05409aa1c7ce65691ed6af",
+            "relative_path": "equipment.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 返却期限：利用した日の十七時。",
+            "heading": "架空工房の機材貸出",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-24cb730f75eb97a04d048f30",
+            "relative_path": "equipment.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 貸出受付：利用日の前日までに予約する。",
+            "heading": "架空工房の機材貸出",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-bf05409aa1c7ce65691ed6af\", \"relative_path\": \"equipment.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 返却期限：利用した日の十七時。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-24cb730f75eb97a04d048f30\", \"relative_path\": \"equipment.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 貸出受付：利用日の前日までに予約する。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "equipment.md",
+            "start": 4,
+            "end": 4,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 38,
+        "payload_chars": 449,
+        "payload_utf8_bytes": 553
+      },
+      "hybrid": {
+        "source_ids": [
+          "material-bf05409aa1c7ce65691ed6af",
+          "material-24cb730f75eb97a04d048f30"
+        ],
+        "sources": [
+          {
+            "source_id": "material-bf05409aa1c7ce65691ed6af",
+            "relative_path": "equipment.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 返却期限：利用した日の十七時。",
+            "heading": "架空工房の機材貸出",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-24cb730f75eb97a04d048f30",
+            "relative_path": "equipment.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 貸出受付：利用日の前日までに予約する。",
+            "heading": "架空工房の機材貸出",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-bf05409aa1c7ce65691ed6af\", \"relative_path\": \"equipment.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 返却期限：利用した日の十七時。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-24cb730f75eb97a04d048f30\", \"relative_path\": \"equipment.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 貸出受付：利用日の前日までに予約する。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "equipment.md",
+            "start": 4,
+            "end": 4,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 38,
+        "payload_chars": 449,
+        "payload_utf8_bytes": 553
+      }
+    },
+    {
+      "annotation": {
+        "id": 12,
+        "query": "What items belong in the equipment return box?",
+        "topic": "independent public documents",
+        "relevant": [
+          {
+            "path": "equipment.md",
+            "start": 5,
+            "end": 5
+          }
+        ],
+        "forbidden": []
+      },
+      "embedding_ms": 2.7858,
+      "top_similarities": [
+        {
+          "path": "equipment.md",
+          "line": 5,
+          "cosine": 0.62571
+        },
+        {
+          "path": "equipment.md",
+          "line": 4,
+          "cosine": 0.42886
+        },
+        {
+          "path": "library.md",
+          "line": 5,
+          "cosine": 0.37073
+        },
+        {
+          "path": "equipment.md",
+          "line": 3,
+          "cosine": 0.30608
+        },
+        {
+          "path": "project.md",
+          "line": 5,
+          "cosine": 0.2969
+        }
+      ],
+      "lexical": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "equipment.md",
+            "start": 5,
+            "end": 5,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range equipment.md:5-5"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "semantic": {
+        "source_ids": [
+          "material-a6ea8b4cb1ccb899878cccec"
+        ],
+        "sources": [
+          {
+            "source_id": "material-a6ea8b4cb1ccb899878cccec",
+            "relative_path": "equipment.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 内容物：箱には本体、ケーブル、説明書の三点を入れる。",
+            "heading": "架空工房の機材貸出",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-a6ea8b4cb1ccb899878cccec\", \"relative_path\": \"equipment.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 内容物：箱には本体、ケーブル、説明書の三点を入れる。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "equipment.md",
+            "start": 5,
+            "end": 5,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 28,
+        "payload_chars": 258,
+        "payload_utf8_bytes": 328
+      },
+      "hybrid": {
+        "source_ids": [
+          "material-a6ea8b4cb1ccb899878cccec"
+        ],
+        "sources": [
+          {
+            "source_id": "material-a6ea8b4cb1ccb899878cccec",
+            "relative_path": "equipment.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 内容物：箱には本体、ケーブル、説明書の三点を入れる。",
+            "heading": "架空工房の機材貸出",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-a6ea8b4cb1ccb899878cccec\", \"relative_path\": \"equipment.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 内容物：箱には本体、ケーブル、説明書の三点を入れる。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "equipment.md",
+            "start": 5,
+            "end": 5,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 28,
+        "payload_chars": 258,
+        "payload_utf8_bytes": 328
+      }
+    },
+    {
+      "annotation": {
+        "id": 13,
+        "query": "展示活动的失物会保管多久，领取时要提供什么？",
+        "topic": "independent public documents",
+        "relevant": [
+          {
+            "path": "event.md",
+            "start": 3,
+            "end": 3
+          }
+        ],
+        "forbidden": []
+      },
+      "embedding_ms": 3.8998,
+      "top_similarities": [
+        {
+          "path": "equipment.md",
+          "line": 4,
+          "cosine": 0.56685
+        },
+        {
+          "path": "project.md",
+          "line": 3,
+          "cosine": 0.52715
+        },
+        {
+          "path": "equipment.md",
+          "line": 3,
+          "cosine": 0.46874
+        },
+        {
+          "path": "library.md",
+          "line": 3,
+          "cosine": 0.46459
+        },
+        {
+          "path": "equipment.md",
+          "line": 5,
+          "cosine": 0.44766
+        }
+      ],
+      "lexical": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "event.md",
+            "start": 3,
+            "end": 3,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range event.md:3-3"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "semantic": {
+        "source_ids": [
+          "material-bf05409aa1c7ce65691ed6af",
+          "material-065ae87134cb2e238d8e3aac",
+          "material-24cb730f75eb97a04d048f30",
+          "material-9e7f05339215976d12a31f03"
+        ],
+        "sources": [
+          {
+            "source_id": "material-bf05409aa1c7ce65691ed6af",
+            "relative_path": "equipment.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 返却期限：利用した日の十七時。",
+            "heading": "架空工房の機材貸出",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-065ae87134cb2e238d8e3aac",
+            "relative_path": "project.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 数据保留：上传的测试文件在七天后自动删除。",
+            "heading": "架空Orionプロジェクトの仕様",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-24cb730f75eb97a04d048f30",
+            "relative_path": "equipment.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 貸出受付：利用日の前日までに予約する。",
+            "heading": "架空工房の機材貸出",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-9e7f05339215976d12a31f03",
+            "relative_path": "library.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 借阅规则：每次最多借三本，借期十四天。",
+            "heading": "架空中央図書室の案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-bf05409aa1c7ce65691ed6af\", \"relative_path\": \"equipment.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 返却期限：利用した日の十七時。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-065ae87134cb2e238d8e3aac\", \"relative_path\": \"project.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 数据保留：上传的测试文件在七天后自动删除。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-24cb730f75eb97a04d048f30\", \"relative_path\": \"equipment.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 貸出受付：利用日の前日までに予約する。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-9e7f05339215976d12a31f03\", \"relative_path\": \"library.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 借阅规则：每次最多借三本，借期十四天。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "event.md",
+            "start": 3,
+            "end": 3,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range event.md:3-3"
+        ],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 82,
+        "payload_chars": 859,
+        "payload_utf8_bytes": 1085
+      },
+      "hybrid": {
+        "source_ids": [
+          "material-bf05409aa1c7ce65691ed6af",
+          "material-065ae87134cb2e238d8e3aac",
+          "material-24cb730f75eb97a04d048f30",
+          "material-9e7f05339215976d12a31f03"
+        ],
+        "sources": [
+          {
+            "source_id": "material-bf05409aa1c7ce65691ed6af",
+            "relative_path": "equipment.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 返却期限：利用した日の十七時。",
+            "heading": "架空工房の機材貸出",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-065ae87134cb2e238d8e3aac",
+            "relative_path": "project.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 数据保留：上传的测试文件在七天后自动删除。",
+            "heading": "架空Orionプロジェクトの仕様",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-24cb730f75eb97a04d048f30",
+            "relative_path": "equipment.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 貸出受付：利用日の前日までに予約する。",
+            "heading": "架空工房の機材貸出",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-9e7f05339215976d12a31f03",
+            "relative_path": "library.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 借阅规则：每次最多借三本，借期十四天。",
+            "heading": "架空中央図書室の案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-bf05409aa1c7ce65691ed6af\", \"relative_path\": \"equipment.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 返却期限：利用した日の十七時。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-065ae87134cb2e238d8e3aac\", \"relative_path\": \"project.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 数据保留：上传的测试文件在七天后自动删除。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-24cb730f75eb97a04d048f30\", \"relative_path\": \"equipment.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 貸出受付：利用日の前日までに予約する。\", \"heading\": \"架空工房の機材貸出\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-9e7f05339215976d12a31f03\", \"relative_path\": \"library.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 借阅规则：每次最多借三本，借期十四天。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "event.md",
+            "start": 3,
+            "end": 3,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range event.md:3-3"
+        ],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 82,
+        "payload_chars": 859,
+        "payload_utf8_bytes": 1085
+      }
+    },
+    {
+      "annotation": {
+        "id": 14,
+        "query": "図書室の年間会費はいくらですか？",
+        "topic": "independent public documents",
+        "relevant": [],
+        "forbidden": [],
+        "forbid_all_sources": true
+      },
+      "embedding_ms": 3.1268,
+      "top_similarities": [
+        {
+          "path": "library.md",
+          "line": 3,
+          "cosine": 0.5825
+        },
+        {
+          "path": "library.md",
+          "line": 5,
+          "cosine": 0.42946
+        },
+        {
+          "path": "library.md",
+          "line": 4,
+          "cosine": 0.42902
+        },
+        {
+          "path": "event.md",
+          "line": 3,
+          "cosine": 0.2349
+        },
+        {
+          "path": "project.md",
+          "line": 4,
+          "cosine": 0.21452
+        }
+      ],
+      "lexical": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "semantic": {
+        "source_ids": [
+          "material-9e7f05339215976d12a31f03"
+        ],
+        "sources": [
+          {
+            "source_id": "material-9e7f05339215976d12a31f03",
+            "relative_path": "library.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 借阅规则：每次最多借三本，借期十四天。",
+            "heading": "架空中央図書室の案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-9e7f05339215976d12a31f03\", \"relative_path\": \"library.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 借阅规则：每次最多借三本，借期十四天。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": "no source is relevant to this question",
+            "source_ids": [
+              "material-9e7f05339215976d12a31f03"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Sent forbidden annotated range no source is relevant to this question"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 21,
+        "payload_chars": 250,
+        "payload_utf8_bytes": 308
+      },
+      "hybrid": {
+        "source_ids": [
+          "material-9e7f05339215976d12a31f03"
+        ],
+        "sources": [
+          {
+            "source_id": "material-9e7f05339215976d12a31f03",
+            "relative_path": "library.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 借阅规则：每次最多借三本，借期十四天。",
+            "heading": "架空中央図書室の案内",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-9e7f05339215976d12a31f03\", \"relative_path\": \"library.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 借阅规则：每次最多借三本，借期十四天。\", \"heading\": \"架空中央図書室の案内\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": "no source is relevant to this question",
+            "source_ids": [
+              "material-9e7f05339215976d12a31f03"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Sent forbidden annotated range no source is relevant to this question"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 21,
+        "payload_chars": 250,
+        "payload_utf8_bytes": 308
+      }
+    },
+    {
+      "annotation": {
+        "id": 15,
+        "query": "Orionのログインパスワードを教えてください。",
+        "topic": "independent public documents",
+        "relevant": [],
+        "forbidden": [],
+        "forbid_all_sources": true
+      },
+      "embedding_ms": 3.1287,
+      "top_similarities": [
+        {
+          "path": "project.md",
+          "line": 5,
+          "cosine": 0.33617
+        },
+        {
+          "path": "library.md",
+          "line": 3,
+          "cosine": 0.27926
+        },
+        {
+          "path": "project.md",
+          "line": 4,
+          "cosine": 0.23373
+        },
+        {
+          "path": "project.md",
+          "line": 3,
+          "cosine": 0.21567
+        },
+        {
+          "path": "library.md",
+          "line": 5,
+          "cosine": 0.20614
+        }
+      ],
+      "lexical": {
+        "source_ids": [
+          "material-8e064c15453954a54ae5125c"
+        ],
+        "sources": [
+          {
+            "source_id": "material-8e064c15453954a54ae5125c",
+            "relative_path": "project.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 容量：一回のアップロードは最大20MB。",
+            "heading": "架空Orionプロジェクトの仕様",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-8e064c15453954a54ae5125c\", \"relative_path\": \"project.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 容量：一回のアップロードは最大20MB。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": "no source is relevant to this question",
+            "source_ids": [
+              "material-8e064c15453954a54ae5125c"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Sent forbidden annotated range no source is relevant to this question"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 22,
+        "payload_chars": 257,
+        "payload_utf8_bytes": 311
+      },
+      "semantic": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "hybrid": {
+        "source_ids": [
+          "material-8e064c15453954a54ae5125c"
+        ],
+        "sources": [
+          {
+            "source_id": "material-8e064c15453954a54ae5125c",
+            "relative_path": "project.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 容量：一回のアップロードは最大20MB。",
+            "heading": "架空Orionプロジェクトの仕様",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-8e064c15453954a54ae5125c\", \"relative_path\": \"project.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 容量：一回のアップロードは最大20MB。\", \"heading\": \"架空Orionプロジェクトの仕様\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": "no source is relevant to this question",
+            "source_ids": [
+              "material-8e064c15453954a54ae5125c"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Sent forbidden annotated range no source is relevant to this question"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 22,
+        "payload_chars": 257,
+        "payload_utf8_bytes": 311
+      }
+    },
+    {
+      "annotation": {
+        "id": 16,
+        "query": "研修棟食堂の営業時間は何時から何時までですか？",
+        "topic": "independent public documents",
+        "relevant": [],
+        "forbidden": [],
+        "forbid_all_sources": true
+      },
+      "embedding_ms": 3.5969,
+      "top_similarities": [
+        {
+          "path": "cafeteria.md",
+          "line": 3,
+          "cosine": 0.73959
+        },
+        {
+          "path": "equipment.md",
+          "line": 3,
+          "cosine": 0.4816
+        },
+        {
+          "path": "cafeteria.md",
+          "line": 5,
+          "cosine": 0.46209
+        },
+        {
+          "path": "event.md",
+          "line": 3,
+          "cosine": 0.46102
+        },
+        {
+          "path": "library.md",
+          "line": 4,
+          "cosine": 0.44925
+        }
+      ],
+      "lexical": {
+        "source_ids": [
+          "material-031860f5f2f39b4730a2b6a4"
+        ],
+        "sources": [
+          {
+            "source_id": "material-031860f5f2f39b4730a2b6a4",
+            "relative_path": "cafeteria.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 営業日：月曜日から金曜日。土日と祝日は休み。",
+            "heading": "架空研修棟食堂の利用メモ",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-031860f5f2f39b4730a2b6a4\", \"relative_path\": \"cafeteria.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 営業日：月曜日から金曜日。土日と祝日は休み。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": "no source is relevant to this question",
+            "source_ids": [
+              "material-031860f5f2f39b4730a2b6a4"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Sent forbidden annotated range no source is relevant to this question"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 24,
+        "payload_chars": 257,
+        "payload_utf8_bytes": 325
+      },
+      "semantic": {
+        "source_ids": [
+          "material-031860f5f2f39b4730a2b6a4"
+        ],
+        "sources": [
+          {
+            "source_id": "material-031860f5f2f39b4730a2b6a4",
+            "relative_path": "cafeteria.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 営業日：月曜日から金曜日。土日と祝日は休み。",
+            "heading": "架空研修棟食堂の利用メモ",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-031860f5f2f39b4730a2b6a4\", \"relative_path\": \"cafeteria.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 営業日：月曜日から金曜日。土日と祝日は休み。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": "no source is relevant to this question",
+            "source_ids": [
+              "material-031860f5f2f39b4730a2b6a4"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Sent forbidden annotated range no source is relevant to this question"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 24,
+        "payload_chars": 257,
+        "payload_utf8_bytes": 325
+      },
+      "hybrid": {
+        "source_ids": [
+          "material-031860f5f2f39b4730a2b6a4"
+        ],
+        "sources": [
+          {
+            "source_id": "material-031860f5f2f39b4730a2b6a4",
+            "relative_path": "cafeteria.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 営業日：月曜日から金曜日。土日と祝日は休み。",
+            "heading": "架空研修棟食堂の利用メモ",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-031860f5f2f39b4730a2b6a4\", \"relative_path\": \"cafeteria.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 営業日：月曜日から金曜日。土日と祝日は休み。\", \"heading\": \"架空研修棟食堂の利用メモ\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": "no source is relevant to this question",
+            "source_ids": [
+              "material-031860f5f2f39b4730a2b6a4"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Sent forbidden annotated range no source is relevant to this question"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 24,
+        "payload_chars": 257,
+        "payload_utf8_bytes": 325
+      }
+    },
+    {
+      "annotation": {
+        "id": 17,
+        "query": "这个周末东京会下雨吗？",
+        "topic": "independent public documents",
+        "relevant": [],
+        "forbidden": [],
+        "forbid_all_sources": true
+      },
+      "embedding_ms": 2.5198,
+      "top_similarities": [
+        {
+          "path": "cafeteria.md",
+          "line": 3,
+          "cosine": 0.1598
+        },
+        {
+          "path": "library.md",
+          "line": 4,
+          "cosine": 0.07202
+        },
+        {
+          "path": "project.md",
+          "line": 4,
+          "cosine": 0.06642
+        },
+        {
+          "path": "equipment.md",
+          "line": 3,
+          "cosine": 0.06459
+        },
+        {
+          "path": "equipment.md",
+          "line": 4,
+          "cosine": 0.06122
+        }
+      ],
+      "lexical": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "semantic": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      },
+      "hybrid": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51
+      }
+    }
+  ],
+  "baseline_commit": "9c6c6dd",
+  "phase": "before D-030",
+  "corpus": "tests/fixtures/materials/general-independent",
+  "manifest_sha256": "17d512b597cd292b2b6f1eead520dd34b7c57abe81a94fc69609259f4ea702a3",
+  "api_calls": 0,
+  "private_data_read": false,
+  "long_paragraph_chars": 499
+}

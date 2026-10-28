@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "description": "Public general-document follow-up queries frozen before D-029 changes. Author-written relevance annotations, not a general accuracy benchmark.",
+  "corpus": "tests/fixtures/materials/general",
+  "cases": [
+    {"id": 1, "query": "レポートはどんなファイルで出せばいいですか？", "topic": "Japanese paraphrase: submission format", "relevant": [{"path": "course.md", "start": 6, "end": 6}], "forbidden": []},
+    {"id": 2, "query": "自然言語処理の宿題はいつまでですか？", "topic": "Japanese query of Chinese deadline", "relevant": [{"path": "course.md", "start": 5, "end": 5}], "forbidden": []},
+    {"id": 3, "query": "自然言語処理ではどんな内容を参考にしますか？", "topic": "Japanese query of Chinese references", "relevant": [{"path": "course.md", "start": 7, "end": 7}], "forbidden": []},
+    {"id": 4, "query": "What is the deadline for the natural language processing assignment?", "topic": "English query of Chinese deadline", "relevant": [{"path": "course.md", "start": 5, "end": 5}], "forbidden": []},
+    {"id": 5, "query": "打ち合わせの前に準備する資料を教えてください。", "topic": "Japanese paraphrase: meeting preparation", "relevant": [{"path": "meeting.md", "start": 4, "end": 4}], "forbidden": []},
+    {"id": 6, "query": "製品レビューの開催日はいつですか？", "topic": "Japanese paraphrase: meeting date", "relevant": [{"path": "meeting.md", "start": 3, "end": 3}], "forbidden": []},
+    {"id": 7, "query": "评审会的参会者有哪些？", "topic": "Chinese query of Japanese participants", "relevant": [{"path": "meeting.md", "start": 5, "end": 5}], "forbidden": []},
+    {"id": 8, "query": "レビュー会議のURLが使えません。どこで新しいものを探せますか？", "topic": "Japanese query of Chinese meeting URL", "relevant": [{"path": "meeting.md", "start": 6, "end": 6}], "forbidden": []},
+    {"id": 9, "query": "録音機を起動するには、どのボタンをどれくらい押せばよいですか？", "topic": "Japanese paraphrase: powering a device", "relevant": [{"path": "manual.md", "start": 3, "end": 3}], "forbidden": []},
+    {"id": 10, "query": "青い表示灯は何を意味しますか？", "topic": "Japanese paraphrase: recording indicator", "relevant": [{"path": "manual.md", "start": 4, "end": 4}], "forbidden": []},
+    {"id": 11, "query": "録音機の赤色LEDが点滅しています。対応を教えてください。", "topic": "Japanese paraphrase: battery indicator", "relevant": [{"path": "manual.md", "start": 5, "end": 5}], "forbidden": []},
+    {"id": 12, "query": "録音機の容量がいっぱいです。保存済みの音声はどうしますか？", "topic": "Japanese query of Chinese storage instructions", "relevant": [{"path": "manual.md", "start": 6, "end": 6}], "forbidden": []},
+    {"id": 13, "query": "What should I do when the red light on the recorder blinks?", "topic": "English query of Japanese battery instructions", "relevant": [{"path": "manual.md", "start": 5, "end": 5}], "forbidden": []},
+    {"id": 14, "query": "复习之间留出间隔有什么好处？", "topic": "Chinese query of Japanese learning article", "relevant": [{"path": "article.md", "start": 3, "end": 3}], "forbidden": []},
+    {"id": 15, "query": "まとめ読みはどういう目的なら使えますか？", "topic": "Japanese paraphrase: reading method", "relevant": [{"path": "article.md", "start": 5, "end": 5}], "forbidden": []},
+    {"id": 16, "query": "録音機を水に濡らしても大丈夫ですか？", "topic": "Japanese paraphrase: water precaution", "relevant": [{"path": "manual.md", "start": 7, "end": 7}], "forbidden": []},
+    {"id": 17, "query": "大学近くの駐車場は一時間いくらですか？", "topic": "No parking information", "relevant": [], "forbidden": [], "forbid_all_sources": true},
+    {"id": 18, "query": "明日の東京は雨ですか？", "topic": "No weather information", "relevant": [], "forbidden": [], "forbid_all_sources": true},
+    {"id": 19, "query": "会議の参加費はいくらですか？", "topic": "Meeting exists but no fee information", "relevant": [], "forbidden": [], "forbid_all_sources": true},
+    {"id": 20, "query": "録音機をBluetoothで接続する方法は？", "topic": "Device exists but no Bluetooth information", "relevant": [], "forbidden": [], "forbid_all_sources": true}
+  ]
+}

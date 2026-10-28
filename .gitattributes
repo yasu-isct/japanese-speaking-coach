@@ -1,0 +1,2 @@
+# Evaluation outputs: collapsed in GitHub diffs, excluded from language stats
+tests/live_suggest/** linguist-generated=true

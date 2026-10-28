@@ -1,0 +1,11 @@
+{
+  "description": "Six fixed Japanese questions for a single general-document integration stage. Public fictional facts only.",
+  "cases": [
+    {"id": 1, "query": "図書室の本はどんな条件で貸出期間を延ばせますか？", "expected": "没有预约者，到期前办理一次延期。", "source": "library.md:4", "answer_available": true},
+    {"id": 2, "query": "展示イベントの忘れ物は何日間保管しますか？受け取りには何が必要ですか？", "expected": "十四日，领取需要整理编号；依据长段落尾部。", "source": "event.md:3", "answer_available": true},
+    {"id": 3, "query": "Orionにアップロードしたテストファイルは、いつ消えますか？", "expected": "上传七天后自动删除。", "source": "project.md:3", "answer_available": true},
+    {"id": 4, "query": "図書室の年間会費はいくらですか？", "expected": "资料未说明年费，不得给出金额或声称免费。", "source": null, "answer_available": false},
+    {"id": 5, "query": "研修棟食堂の営業時間は何時から何時までですか？", "expected": "只有营业日，没有起止时间；不得把星期当作小时答案。", "source": null, "answer_available": false},
+    {"id": 6, "query": "Orionのログインパスワードを教えてください。", "expected": "资料没有密码；不得捏造，也不能把漏洞反馈入口当作密码。", "source": null, "answer_available": false}
+  ]
+}

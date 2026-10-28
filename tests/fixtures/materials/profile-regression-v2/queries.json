@@ -1,0 +1,365 @@
+{
+  "version": 1,
+  "description": "公开虚构检索评测；范围标注只衡量检索内容，不衡量回答事实正确性。",
+  "baseline_profile": "test_profile.md",
+  "cases": [
+    {
+      "id": 1,
+      "query": "ご出身はどちらですか？",
+      "topic": "本人出身・日语",
+      "relevant": [
+        {
+          "path": "test_profile.md",
+          "start": 5,
+          "end": 5
+        }
+      ],
+      "forbidden": [
+        {
+          "path": "notes/friends.md",
+          "start": 5,
+          "end": 5,
+          "reason": "田中的出身不能混成本人的出身"
+        },
+        {
+          "path": "notes/friends.md",
+          "start": 10,
+          "end": 10,
+          "reason": "佐藤的出身不是本人"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "query": "我现在做什么工作？",
+      "topic": "本人职业・中文",
+      "relevant": [
+        {
+          "path": "test_profile.md",
+          "start": 7,
+          "end": 7
+        }
+      ],
+      "forbidden": [
+        {
+          "path": "notes/friends.md",
+          "start": 6,
+          "end": 6,
+          "reason": "别人的工作单位"
+        },
+        {
+          "path": "notes/friends.md",
+          "start": 12,
+          "end": 12,
+          "reason": "别人的职业"
+        },
+        {
+          "path": "notes/lesson.md",
+          "start": 4,
+          "end": 4,
+          "reason": "例句不证明本人的职业"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "query": "何を専攻していますか？",
+      "topic": "本人专业・跨语言字段",
+      "relevant": [
+        {
+          "path": "test_profile.md",
+          "start": 6,
+          "end": 6
+        }
+      ],
+      "forbidden": [
+        {
+          "path": "notes/friends.md",
+          "start": 7,
+          "end": 7,
+          "reason": "他人的研究"
+        },
+        {
+          "path": "notes/friends.md",
+          "start": 11,
+          "end": 11,
+          "reason": "他人的研究"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "query": "平时闲下来喜欢做什么？",
+      "topic": "爱好的自然改写，不直接写同义词表中的爱好",
+      "relevant": [
+        {
+          "path": "test_profile.md",
+          "start": 8,
+          "end": 8
+        }
+      ],
+      "forbidden": []
+    },
+    {
+      "id": 5,
+      "query": "普段、どの辺で暮らしているんですか？",
+      "topic": "住址的自然改写",
+      "relevant": [
+        {
+          "path": "test_profile.md",
+          "start": 9,
+          "end": 9
+        }
+      ],
+      "forbidden": [
+        {
+          "path": "notes/lesson.md",
+          "start": 4,
+          "end": 4,
+          "reason": "东京是练习句中的地点"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "query": "田中さんの出身と勤め先を教えてください。",
+      "topic": "两个人的同类字段・对象明确",
+      "relevant": [
+        {
+          "path": "notes/friends.md",
+          "start": 5,
+          "end": 5
+        },
+        {
+          "path": "notes/friends.md",
+          "start": 6,
+          "end": 6
+        }
+      ],
+      "forbidden": [
+        {
+          "path": "test_profile.md",
+          "start": 5,
+          "end": 5,
+          "reason": "本人不是田中"
+        },
+        {
+          "path": "test_profile.md",
+          "start": 7,
+          "end": 7,
+          "reason": "本人的工作不是田中的工作"
+        },
+        {
+          "path": "notes/friends.md",
+          "start": 10,
+          "end": 12,
+          "reason": "佐藤不是田中"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "query": "佐藤同学在研究什么？",
+      "topic": "中文问日本语笔记中的另一个人",
+      "relevant": [
+        {
+          "path": "notes/friends.md",
+          "start": 11,
+          "end": 11
+        }
+      ],
+      "forbidden": [
+        {
+          "path": "test_profile.md",
+          "start": 6,
+          "end": 6,
+          "reason": "本人专业不是佐藤研究"
+        },
+        {
+          "path": "notes/friends.md",
+          "start": 7,
+          "end": 7,
+          "reason": "田中的研究不是佐藤研究"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "query": "我在2026年10月31日有什么安排？",
+      "topic": "明确日期，不能换成别的一天",
+      "relevant": [
+        {
+          "path": "notes/calendar.md",
+          "start": 6,
+          "end": 6
+        }
+      ],
+      "forbidden": [
+        {
+          "path": "notes/calendar.md",
+          "start": 4,
+          "end": 5,
+          "reason": "10月24日和26日不是31日"
+        },
+        {
+          "path": "notes/calendar.md",
+          "start": 7,
+          "end": 7,
+          "reason": "11月7日不是10月31日"
+        },
+        {
+          "path": "notes/interview.md",
+          "start": 8,
+          "end": 8,
+          "reason": "旧面试日期不是本次安排"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "query": "2026年10月24日の午後と、帰りにしたことを思い出したいです。",
+      "topic": "日期与多行段落",
+      "relevant": [
+        {
+          "path": "notes/diary.md",
+          "start": 3,
+          "end": 4
+        }
+      ],
+      "forbidden": [
+        {
+          "path": "notes/diary.md",
+          "start": 6,
+          "end": 6,
+          "reason": "17日不是24日"
+        },
+        {
+          "path": "notes/calendar.md",
+          "start": 5,
+          "end": 7,
+          "reason": "其他日期的活动"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "query": "10月31日の面接の開始時刻と、持っていく物を確認したいです。",
+      "topic": "跨日程和准备笔记",
+      "relevant": [
+        {
+          "path": "notes/calendar.md",
+          "start": 6,
+          "end": 6
+        },
+        {
+          "path": "notes/interview.md",
+          "start": 4,
+          "end": 4
+        }
+      ],
+      "forbidden": [
+        {
+          "path": "notes/interview.md",
+          "start": 8,
+          "end": 8,
+          "reason": "不同公司的旧面试时间"
+        },
+        {
+          "path": "notes/calendar.md",
+          "start": 5,
+          "end": 5,
+          "reason": "语言课时间不是面试时间"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "query": "模拟面试反馈说自我介绍结尾应改什么？对应的练习句是哪句？",
+      "topic": "跨反馈笔记与练习笔记",
+      "relevant": [
+        {
+          "path": "notes/feedback.md",
+          "start": 3,
+          "end": 4
+        },
+        {
+          "path": "notes/practice.md",
+          "start": 4,
+          "end": 4
+        }
+      ],
+      "forbidden": [
+        {
+          "path": "notes/practice.md",
+          "start": 7,
+          "end": 7,
+          "reason": "要求重复的练习不是自我介绍练习"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "query": "東京タワーの営業時間は何時ですか？",
+      "topic": "库中没有营业时间资料",
+      "relevant": [],
+      "forbidden": [],
+      "forbid_all_sources": true
+    },
+    {
+      "id": 13,
+      "query": "这家医院今天还能预约吗？",
+      "topic": "库中没有医院或预约资料",
+      "relevant": [],
+      "forbidden": [],
+      "forbid_all_sources": true
+    },
+    {
+      "id": 14,
+      "query": "日本に来てどれくらいですか？",
+      "topic": "来日日期依据，评测不计算回答时长",
+      "relevant": [
+        {
+          "path": "test_profile.md",
+          "start": 10,
+          "end": 10
+        }
+      ],
+      "forbidden": [
+        {
+          "path": "notes/calendar.md",
+          "start": 4,
+          "end": 7,
+          "reason": "活动日期不是来日日期"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "query": "我有商店的积分卡吗？",
+      "topic": "只有课堂例句，没有本人持卡事实",
+      "relevant": [],
+      "forbidden": [
+        {
+          "path": "notes/lesson.md",
+          "start": 3,
+          "end": 3,
+          "reason": "例句不能作为本人的持卡证据"
+        }
+      ],
+      "forbid_all_sources": true
+    },
+    {
+      "id": 16,
+      "query": "鈴木さんに勧められた本のタイトルは何でしたか？",
+      "topic": "普通笔记中的具体对象，无概念词特判",
+      "relevant": [
+        {
+          "path": "notes/books.md",
+          "start": 3,
+          "end": 3
+        }
+      ],
+      "forbidden": []
+    }
+  ]
+}

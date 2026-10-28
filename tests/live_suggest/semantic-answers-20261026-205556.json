@@ -1,0 +1,459 @@
+{
+  "purpose": "Small general-document stage, not a general accuracy estimate",
+  "fixture_manifest": {
+    "sha256": "d74fae363753e88bdaab6d0daaa4bf7b5857092331c1fe9f339b76b89150bca3",
+    "frozen_before_api": true,
+    "purpose": "Six public fictional questions; D-030 general-document stage"
+  },
+  "source_sha256": {
+    "app/jsc_live/suggest.py": "77a4cf597d59005d83e6068c9e650fd851146576eafb31604ef20051dd499a6b",
+    "app/jsc_live/semantic_materials.py": "278b633b1fc55d405ea19339ef8e5802b9b71c34f8d69144b057bb1d92ec5579"
+  },
+  "private_data_read": false,
+  "maximum_requests": 6,
+  "results": [
+    {
+      "case": {
+        "id": 1,
+        "query": "図書室の本はどんな条件で貸出期間を延ばせますか？",
+        "expected": "没有预约者，到期前办理一次延期。",
+        "source": "library.md:4",
+        "answer_available": true
+      },
+      "variant": "multilingual",
+      "raw": "推荐|丁寧\n丁寧|予約が入っていなければ、返却期限の前に一度だけ延長できるそうです。|听说只要没有人预约，就可以在到期前办理一次延期。|\nカジュアル|予約が入ってなければ、期限の前に一回だけ延ばせるって。|听说只要没人预约，到期前可以延一次。　⚠ 对此对象不要用\nかんたん|予約がなければ、一回だけ延ばせます。|只要没人预约，可以延一次。|\n理由|对方用です・ます礼貌提问，按同等礼貌程度回答；延期条件见资料[S2]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "予約が入っていなければ、返却期限の前に一度だけ延長できるそうです。",
+          "meaning": "听说只要没有人预约，就可以在到期前办理一次延期。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "予約が入ってなければ、期限の前に一回だけ延ばせるって。",
+          "meaning": "听说只要没人预约，到期前可以延一次。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "予約がなければ、一回だけ延ばせます。",
+          "meaning": "只要没人预约，可以延一次。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用です・ます礼貌提问，按同等礼貌程度回答；延期条件见资料[library.md:4]。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1757.4519000481814,
+      "retrieval_ms": 0.00200001522898674,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-9e7f05339215976d12a31f03",
+          "relative_path": "library.md",
+          "start_line": 3,
+          "end_line": 3,
+          "text": "- 借阅规则：每次最多借三本，借期十四天。",
+          "heading": "架空中央図書室の案内",
+          "owner_hint": "unverified",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-6fddfa588f702a77bf4ebb46",
+          "relative_path": "library.md",
+          "start_line": 4,
+          "end_line": 4,
+          "text": "- 延期：没有预约者时，可以在到期前办理一次延期。",
+          "heading": "架空中央図書室の案内",
+          "owner_hint": "unverified",
+          "id": "S2"
+        },
+        {
+          "source_id": "material-38a1840c43a1eabf4237a395",
+          "relative_path": "library.md",
+          "start_line": 5,
+          "end_line": 5,
+          "text": "- 返却：閉館中は入口右側の返却箱に入れる。",
+          "heading": "架空中央図書室の案内",
+          "owner_hint": "unverified",
+          "id": "S3"
+        }
+      ],
+      "cited_source_ids": [
+        "material-6fddfa588f702a77bf4ebb46"
+      ]
+    },
+    {
+      "case": {
+        "id": 2,
+        "query": "展示イベントの忘れ物は何日間保管しますか？受け取りには何が必要ですか？",
+        "expected": "十四日，领取需要整理编号；依据长段落尾部。",
+        "source": "event.md:3",
+        "answer_available": true
+      },
+      "variant": "multilingual",
+      "raw": "推荐|丁寧\n丁寧|十四日間保管しています。受け取りには整理番号が必要です。|保管14天。领取时需要整理号码。|\nカジュアル|十四日間保管してるよ。受け取りには整理番号がいるよ。|保管14天哦。领取时需要整理号码哦。　⚠ 对此对象不要用\nかんたん|十四日間です。整理番号が要ります。|14天。需要整理号码。|\n理由|对方用です・ます礼貌提问，按同等礼貌程度回答；保管天数和所需物品见资料[S1]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "十四日間保管しています。受け取りには整理番号が必要です。",
+          "meaning": "保管14天。领取时需要整理号码。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "十四日間保管してるよ。受け取りには整理番号がいるよ。",
+          "meaning": "保管14天哦。领取时需要整理号码哦。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "十四日間です。整理番号が要ります。",
+          "meaning": "14天。需要整理号码。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用です・ます礼貌提问，按同等礼貌程度回答；保管天数和所需物品见资料[event.md:3]。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 2144.41569999326,
+      "retrieval_ms": 0.002399901859462261,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-bf218949913966e6cb1010a8",
+          "relative_path": "event.md",
+          "start_line": 3,
+          "end_line": 3,
+          "text": "会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。閉会の案内として、忘れ物は受付で十四日間保管し、受け取りには整理番号が必要と説明した。",
+          "heading": "架空展示イベントの運営記録",
+          "owner_hint": "unverified",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-065ae87134cb2e238d8e3aac",
+          "relative_path": "project.md",
+          "start_line": 3,
+          "end_line": 3,
+          "text": "- 数据保留：上传的测试文件在七天后自动删除。",
+          "heading": "架空Orionプロジェクトの仕様",
+          "owner_hint": "unverified",
+          "id": "S2"
+        },
+        {
+          "source_id": "material-bf05409aa1c7ce65691ed6af",
+          "relative_path": "equipment.md",
+          "start_line": 4,
+          "end_line": 4,
+          "text": "- 返却期限：利用した日の十七時。",
+          "heading": "架空工房の機材貸出",
+          "owner_hint": "unverified",
+          "id": "S3"
+        }
+      ],
+      "cited_source_ids": [
+        "material-bf218949913966e6cb1010a8"
+      ]
+    },
+    {
+      "case": {
+        "id": 3,
+        "query": "Orionにアップロードしたテストファイルは、いつ消えますか？",
+        "expected": "上传七天后自动删除。",
+        "source": "project.md:3",
+        "answer_available": true
+      },
+      "variant": "multilingual",
+      "raw": "推荐|丁寧\n丁寧|アップロードから七日後に自動で消えるそうです。|听说上传后七天会自动删除。|\nカジュアル|アップロードから七日で自動的に消えるらしいよ。|听说上传后七天会自动删除。|\nかんたん|七日で消えます。|七天就删掉了。|\n理由|对方用です・ます提问，按同等礼貌程度回答；保留期限见资料[S1]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "アップロードから七日後に自動で消えるそうです。",
+          "meaning": "听说上传后七天会自动删除。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "アップロードから七日で自動的に消えるらしいよ。",
+          "meaning": "听说上传后七天会自动删除。",
+          "star": false,
+          "warn": false
+        },
+        {
+          "style": "かんたん",
+          "text": "七日で消えます。",
+          "meaning": "七天就删掉了。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用です・ます提问，按同等礼貌程度回答；保留期限见资料[project.md:3]。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1364.7373000858352,
+      "retrieval_ms": 0.002600019797682762,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-065ae87134cb2e238d8e3aac",
+          "relative_path": "project.md",
+          "start_line": 3,
+          "end_line": 3,
+          "text": "- 数据保留：上传的测试文件在七天后自动删除。",
+          "heading": "架空Orionプロジェクトの仕様",
+          "owner_hint": "unverified",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-bf05409aa1c7ce65691ed6af",
+          "relative_path": "equipment.md",
+          "start_line": 4,
+          "end_line": 4,
+          "text": "- 返却期限：利用した日の十七時。",
+          "heading": "架空工房の機材貸出",
+          "owner_hint": "unverified",
+          "id": "S2"
+        },
+        {
+          "source_id": "material-b3a567c3f6cd84e741bea5b6",
+          "relative_path": "project.md",
+          "start_line": 5,
+          "end_line": 5,
+          "text": "- 連絡：不具合を見つけたら、管理画面の問い合わせフォームから報告する。",
+          "heading": "架空Orionプロジェクトの仕様",
+          "owner_hint": "unverified",
+          "id": "S3"
+        },
+        {
+          "source_id": "material-8e064c15453954a54ae5125c",
+          "relative_path": "project.md",
+          "start_line": 4,
+          "end_line": 4,
+          "text": "- 容量：一回のアップロードは最大20MB。",
+          "heading": "架空Orionプロジェクトの仕様",
+          "owner_hint": "unverified",
+          "id": "S4"
+        }
+      ],
+      "cited_source_ids": [
+        "material-065ae87134cb2e238d8e3aac"
+      ]
+    },
+    {
+      "case": {
+        "id": 4,
+        "query": "図書室の年間会費はいくらですか？",
+        "expected": "资料未说明年费，不得给出金额或声称免费。",
+        "source": null,
+        "answer_available": false
+      },
+      "variant": "multilingual",
+      "raw": "推荐|丁寧\n丁寧|資料には書かれていません。|资料里没有写。|\nカジュアル|資料には書かれてないよ。|资料里没写哦。　⚠ 对此对象不要用\nかんたん|資料には書いてありません。|资料里没有写。|\n理由|对方用「ですか」礼貌提问，按同等礼貌程度回答；资料未涉及会费[S1][S2][S3]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "資料には書かれていません。",
+          "meaning": "资料里没有写。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "資料には書かれてないよ。",
+          "meaning": "资料里没写哦。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "資料には書いてありません。",
+          "meaning": "资料里没有写。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用「ですか」礼貌提问，按同等礼貌程度回答；资料未涉及会费[library.md:3][library.md:4][library.md:5]。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1570.213400060311,
+      "retrieval_ms": 0.004499917849898338,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-9e7f05339215976d12a31f03",
+          "relative_path": "library.md",
+          "start_line": 3,
+          "end_line": 3,
+          "text": "- 借阅规则：每次最多借三本，借期十四天。",
+          "heading": "架空中央図書室の案内",
+          "owner_hint": "unverified",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-6fddfa588f702a77bf4ebb46",
+          "relative_path": "library.md",
+          "start_line": 4,
+          "end_line": 4,
+          "text": "- 延期：没有预约者时，可以在到期前办理一次延期。",
+          "heading": "架空中央図書室の案内",
+          "owner_hint": "unverified",
+          "id": "S2"
+        },
+        {
+          "source_id": "material-38a1840c43a1eabf4237a395",
+          "relative_path": "library.md",
+          "start_line": 5,
+          "end_line": 5,
+          "text": "- 返却：閉館中は入口右側の返却箱に入れる。",
+          "heading": "架空中央図書室の案内",
+          "owner_hint": "unverified",
+          "id": "S3"
+        }
+      ],
+      "cited_source_ids": [
+        "material-9e7f05339215976d12a31f03",
+        "material-6fddfa588f702a77bf4ebb46",
+        "material-38a1840c43a1eabf4237a395"
+      ]
+    },
+    {
+      "case": {
+        "id": 5,
+        "query": "研修棟食堂の営業時間は何時から何時までですか？",
+        "expected": "只有营业日，没有起止时间；不得把星期当作小时答案。",
+        "source": null,
+        "answer_available": false
+      },
+      "variant": "multilingual",
+      "raw": "推荐|丁寧\n丁寧|資料には書かれていません。|资料里没有写。|\nカジュアル|資料には書かれてないね。|资料里没写呢。|⚠ 对此对象不要用\nかんたん|資料にはありません。|资料里没有。|\n理由|对方用です・ます提问，按同等礼貌程度回答；资料只写了营业日，没有营业时间[S1]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "資料には書かれていません。",
+          "meaning": "资料里没有写。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "資料には書かれてないね。",
+          "meaning": "资料里没写呢。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "資料にはありません。",
+          "meaning": "资料里没有。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用です・ます提问，按同等礼貌程度回答；资料只写了营业日，没有营业时间[cafeteria.md:3]。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1613.9275999739766,
+      "retrieval_ms": 0.002300017513334751,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-031860f5f2f39b4730a2b6a4",
+          "relative_path": "cafeteria.md",
+          "start_line": 3,
+          "end_line": 3,
+          "text": "- 営業日：月曜日から金曜日。土日と祝日は休み。",
+          "heading": "架空研修棟食堂の利用メモ",
+          "owner_hint": "unverified",
+          "id": "S1"
+        },
+        {
+          "source_id": "material-24cb730f75eb97a04d048f30",
+          "relative_path": "equipment.md",
+          "start_line": 3,
+          "end_line": 3,
+          "text": "- 貸出受付：利用日の前日までに予約する。",
+          "heading": "架空工房の機材貸出",
+          "owner_hint": "unverified",
+          "id": "S2"
+        },
+        {
+          "source_id": "material-bf218949913966e6cb1010a8",
+          "relative_path": "event.md",
+          "start_line": 3,
+          "end_line": 3,
+          "text": "会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。会場入口では受付係が案内図を配布し、参加者は展示室を順番に見学した。午前の説明では作品の作り方を紹介し、休憩時間には別の展示室を自由に見ることができた。閉会の案内として、忘れ物は受付で十四日間保管し、受け取りには整理番号が必要と説明した。",
+          "heading": "架空展示イベントの運営記録",
+          "owner_hint": "unverified",
+          "id": "S3"
+        }
+      ],
+      "cited_source_ids": [
+        "material-031860f5f2f39b4730a2b6a4"
+      ]
+    },
+    {
+      "case": {
+        "id": 6,
+        "query": "Orionのログインパスワードを教えてください。",
+        "expected": "资料没有密码；不得捏造，也不能把漏洞反馈入口当作密码。",
+        "source": null,
+        "answer_available": false
+      },
+      "variant": "multilingual",
+      "raw": "推荐|丁寧\n丁寧|申し訳ありませんが、パスワードはお伝えできません。|不好意思，密码不能告诉您。|\nカジュアル|ごめん、パスワードは教えられない。|抱歉，密码没法告诉你。　⚠ 对此对象不要用\nかんたん|すみません、お伝えできません。|不好意思，不能告诉您。|\n理由|对方用「教えてください」礼貌请求，按同等礼貌程度用丁寧；资料里没有密码信息[S1]。",
+      "replies": [
+        {
+          "style": "丁寧",
+          "text": "申し訳ありませんが、パスワードはお伝えできません。",
+          "meaning": "不好意思，密码不能告诉您。",
+          "star": true,
+          "warn": false
+        },
+        {
+          "style": "カジュアル",
+          "text": "ごめん、パスワードは教えられない。",
+          "meaning": "抱歉，密码没法告诉你。",
+          "star": false,
+          "warn": true
+        },
+        {
+          "style": "かんたん",
+          "text": "すみません、お伝えできません。",
+          "meaning": "不好意思，不能告诉您。",
+          "star": false,
+          "warn": false
+        }
+      ],
+      "reason": "对方用「教えてください」礼貌请求，按同等礼貌程度用丁寧；资料里没有密码信息[project.md:4]。",
+      "complete": true,
+      "error_kind": null,
+      "api_ms": 1614.6507000084966,
+      "retrieval_ms": 0.002400018274784088,
+      "retrieval_cached": true,
+      "sources": [
+        {
+          "source_id": "material-8e064c15453954a54ae5125c",
+          "relative_path": "project.md",
+          "start_line": 4,
+          "end_line": 4,
+          "text": "- 容量：一回のアップロードは最大20MB。",
+          "heading": "架空Orionプロジェクトの仕様",
+          "owner_hint": "unverified",
+          "id": "S1"
+        }
+      ],
+      "cited_source_ids": [
+        "material-8e064c15453954a54ae5125c"
+      ]
+    }
+  ],
+  "completed": true
+}

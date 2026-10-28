@@ -1,0 +1,207 @@
+{
+  "version": 1,
+  "baseline_profile": "library.md",
+  "cases": [
+    {
+      "id": 1,
+      "query": "図書室では何冊を何日間借りられますか？",
+      "topic": "independent public documents",
+      "relevant": [
+        {
+          "path": "library.md",
+          "start": 3,
+          "end": 3
+        }
+      ],
+      "forbidden": []
+    },
+    {
+      "id": 2,
+      "query": "図書室の本はどんな条件で貸出期間を延ばせますか？",
+      "topic": "independent public documents",
+      "relevant": [
+        {
+          "path": "library.md",
+          "start": 4,
+          "end": 4
+        }
+      ],
+      "forbidden": []
+    },
+    {
+      "id": 3,
+      "query": "图书室关门后要把书还到哪里？",
+      "topic": "independent public documents",
+      "relevant": [
+        {
+          "path": "library.md",
+          "start": 5,
+          "end": 5
+        }
+      ],
+      "forbidden": []
+    },
+    {
+      "id": 4,
+      "query": "研修楼食堂周末营业吗？",
+      "topic": "independent public documents",
+      "relevant": [
+        {
+          "path": "cafeteria.md",
+          "start": 3,
+          "end": 3
+        }
+      ],
+      "forbidden": []
+    },
+    {
+      "id": 5,
+      "query": "食堂能刷卡或者用电子钱包付款吗？",
+      "topic": "independent public documents",
+      "relevant": [
+        {
+          "path": "cafeteria.md",
+          "start": 4,
+          "end": 4
+        }
+      ],
+      "forbidden": []
+    },
+    {
+      "id": 6,
+      "query": "食堂には肉を使わない食事はありますか？",
+      "topic": "independent public documents",
+      "relevant": [
+        {
+          "path": "cafeteria.md",
+          "start": 5,
+          "end": 5
+        }
+      ],
+      "forbidden": []
+    },
+    {
+      "id": 7,
+      "query": "Orionにアップロードしたテストファイルは、いつ消えますか？",
+      "topic": "independent public documents",
+      "relevant": [
+        {
+          "path": "project.md",
+          "start": 3,
+          "end": 3
+        }
+      ],
+      "forbidden": []
+    },
+    {
+      "id": 8,
+      "query": "Orion单次最多能上传多大的文件？",
+      "topic": "independent public documents",
+      "relevant": [
+        {
+          "path": "project.md",
+          "start": 4,
+          "end": 4
+        }
+      ],
+      "forbidden": []
+    },
+    {
+      "id": 9,
+      "query": "Where should I report a bug in Orion?",
+      "topic": "independent public documents",
+      "relevant": [
+        {
+          "path": "project.md",
+          "start": 5,
+          "end": 5
+        }
+      ],
+      "forbidden": []
+    },
+    {
+      "id": 10,
+      "query": "工房的设备最晚要提前多久预约？",
+      "topic": "independent public documents",
+      "relevant": [
+        {
+          "path": "equipment.md",
+          "start": 3,
+          "end": 3
+        }
+      ],
+      "forbidden": []
+    },
+    {
+      "id": 11,
+      "query": "工房借的设备最晚几点还？",
+      "topic": "independent public documents",
+      "relevant": [
+        {
+          "path": "equipment.md",
+          "start": 4,
+          "end": 4
+        }
+      ],
+      "forbidden": []
+    },
+    {
+      "id": 12,
+      "query": "What items belong in the equipment return box?",
+      "topic": "independent public documents",
+      "relevant": [
+        {
+          "path": "equipment.md",
+          "start": 5,
+          "end": 5
+        }
+      ],
+      "forbidden": []
+    },
+    {
+      "id": 13,
+      "query": "展示活动的失物会保管多久，领取时要提供什么？",
+      "topic": "independent public documents",
+      "relevant": [
+        {
+          "path": "event.md",
+          "start": 3,
+          "end": 3
+        }
+      ],
+      "forbidden": []
+    },
+    {
+      "id": 14,
+      "query": "図書室の年間会費はいくらですか？",
+      "topic": "independent public documents",
+      "relevant": [],
+      "forbidden": [],
+      "forbid_all_sources": true
+    },
+    {
+      "id": 15,
+      "query": "Orionのログインパスワードを教えてください。",
+      "topic": "independent public documents",
+      "relevant": [],
+      "forbidden": [],
+      "forbid_all_sources": true
+    },
+    {
+      "id": 16,
+      "query": "研修棟食堂の営業時間は何時から何時までですか？",
+      "topic": "independent public documents",
+      "relevant": [],
+      "forbidden": [],
+      "forbid_all_sources": true
+    },
+    {
+      "id": 17,
+      "query": "这个周末东京会下雨吗？",
+      "topic": "independent public documents",
+      "relevant": [],
+      "forbidden": [],
+      "forbid_all_sources": true
+    }
+  ]
+}

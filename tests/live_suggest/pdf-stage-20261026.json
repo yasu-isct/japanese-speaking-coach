@@ -1,0 +1,95 @@
+{
+  "decision": "D-033",
+  "api_calls": 0,
+  "private_data_read": false,
+  "real_user_settings_changed": false,
+  "tests": {
+    "run": 277,
+    "pass": 276,
+    "skip": 1
+  },
+  "baseline": "pdf-materials-before-20261026-215128.json",
+  "keywords": "pdf-materials-keywords-20261026-215310.json",
+  "semantic": "pdf-materials-semantic-20261026-215455.json",
+  "regression": "pdf-regression-20261026-215743.json",
+  "captures": {
+    "pdf-before-20261026-215153": {
+      "method": "PrintWindow owned HWND",
+      "width": 820,
+      "height": 600,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "sha256": "a4b6ca5ec469bb95bb1715e3bba9dbff3ac07496dc0392136a178c54ab416562"
+    },
+    "pdf-after-20261026-215610": {
+      "method": "PrintWindow owned HWND",
+      "width": 820,
+      "height": 600,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "sha256": "eb51bb543f9f454eeae36c7154b67dbc992a69ff310623305f1693718ebf36eb"
+    },
+    "pdf-narrow-after-20261026-215612": {
+      "method": "PrintWindow owned HWND",
+      "width": 520,
+      "height": 540,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "sha256": "36da3af51a00e4e47bfbf9686dafe77e93573f76939b278068e47201100db199"
+    },
+    "pdf-final-20261026-215747": {
+      "method": "PrintWindow owned HWND",
+      "width": 820,
+      "height": 600,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "sha256": "8e23a80f184dd5df4b1c7262fdb4331c2d4a9d2e6ef23e65babdb66147b9fbfa"
+    },
+    "pdf-narrow-final-20261026-215749": {
+      "method": "PrintWindow owned HWND",
+      "width": 520,
+      "height": 540,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "mode": "passive",
+      "sha256": "ae2be3130cba6f295e08fa5ba43206f5f4eec6f18011ecee91084cfa62de8e6f"
+    }
+  },
+  "coverage": {
+    "before": 0,
+    "keyword": 8,
+    "semantic": 9,
+    "total": 10
+  },
+  "unresolved_query": "lunch",
+  "dependency": {
+    "name": "pypdf",
+    "version": "6.21.2",
+    "license": "BSD-3-Clause",
+    "official_source": "https://pypi.org/project/pypdf/6.21.2/",
+    "wheel_sha256_from_official_pypi": "1d44d1a3a200f25062adff0085b02040e4646431ac2ccac22e42679e91466084"
+  },
+  "fixture_rendering": {
+    "pages": 5,
+    "tool": "bundled pdftoppm",
+    "dpi": 85,
+    "inspected": true,
+    "font_substitution_warnings": true,
+    "text_visually_legible": true
+  },
+  "limitations": [
+    "Retrieval coverage, not generated answer accuracy.",
+    "No OCR or complex-layout guarantee.",
+    "No new visible latency or real-speaker measurement.",
+    "Screenshot uses synthetic citation-state input."
+  ]
+}

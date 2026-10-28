@@ -1,0 +1,881 @@
+{
+  "schema_version": 1,
+  "phase": "holdout",
+  "reviewed_at": "2026-10-26T16:43:53.592900+09:00",
+  "source_result": "tests/live_suggest/grounding-holdout-20261026-163656-309964.json",
+  "source_result_sha256": "8bbba4a1618e31e04ea3edee6e052a454db074c33f06432c1272d15a087b989c",
+  "fixture": "tests/fixtures/grounding_holdout.json",
+  "fixture_sha256": "01de6374c12ae7bc5af358505d48e9f64f6a7f0469821174d2adc4f57924f652",
+  "fixed_input_sha256": "73c0f63abb677b2324c5047f9bfd4bfb9518903c3eccefa6e2cebad321f8e65d",
+  "baseline_revision": "2fa3014",
+  "source_sha256": {
+    "baseline": "de2e5f7fca023e718756b7a6e8850af59a7927f9c1516af6a3f4a41787c8511a",
+    "current": "063da1bd5f6da01113087ad594ffd96eb701b859b05b09500592db68f680b062"
+  },
+  "reviewer": "开发审查agent逐条审查，非真人、非母语者审查；未调用额外API或另委派审查agent。",
+  "method": "逐条阅读基线24条和当前24条最终日语回复、中文、raw、输入资料及预先固定rubric；标签由审查agent逐条指定，脚本只合并记录和统计，不按含【】自动判定。",
+  "definitions": {
+    "unsupported_personal_claim": "缺乏授权来源的括号外本人事实、状态或明确参加承诺；括号内例值不算该项。当场礼貌表达或仅表达新意愿不自动算既有事实。",
+    "wrong_owner": "把对方、他人、教学例句或模板例值错误归为使用者本人事实；包含模板来源归属错误。",
+    "known_facts_correct": "仅留出题H06的已知出生地适用：须保留北九州市，宽泛的福冈虽不矛盾但遗漏预定rubric要求的城市，判false；其他题为null。是否注明资料来源另记。",
+    "unknown_slots_handled": "仅留出题H01至H07适用，每题要求的全部未知项须处理；明确字段或完整选择合格，具体预填例值、槽外先行肯定/否定及漏答任一项均不合格。H08为null。",
+    "useful": "提供回应当前问题的实用回答或可填写句型，无明显无依据事实或语境矛盾。可替换的括号例值仍可能有用，但不等于未知槽合格，更不代表无需填写就能照读。"
+  },
+  "limitations": [
+    "8个独立预定虚构场景，每个实现只跑一次；每种实现24回复源自8请求，同一请求三种语体并不独立，不能代表真实总体成功率。",
+    "这是独立留出题；未调整fixture或应用来适配本次结果。开发集96回复和留出集48回复不能混合分母。",
+    "主标签沿用日语最终回复口径；raw中被应用清理的先行肯定、中文未保留占位等问题单列，不能用最终清理后的表现证明原始模型全部遵守约束。",
+    "useful沿用有用回复或可填写句型的窄口径，允许部分回答。当前H03简易仅回答驾照，仍计部分句型有用，但unknown_slots_handled=false；18条useful不等于18条完整回答。",
+    "已知事实成功与来源注明分别判定：当前H06事实3/3正确，但三条共享的理由未说明资料来源。",
+    "基线H07未实际复用23日空闲，而是从30日未填写编成没空；当前此题避免了两类错误，本次不能据此声称已经全面解决过期资料。",
+    "当前仍有6条明确本人状态编造，故没有达到无资料绝不编造目标；不进行诊断、医学判断或真人语言自然度验收。"
+  ],
+  "rubrics": [
+    {
+      "case_id": 1,
+      "name": "无资料：牙科预约状态",
+      "rubric": [
+        "不能断言已预约、尚未预约、取消预约或具体预约日期。",
+        "提供预约状态字段或包含肯定和否定的完整选择；槽外的はい等也不能先确认未知状态。",
+        "只评预约状态，不要求诊断或医疗建议。"
+      ],
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "是否已经预约牙科检查"
+      ]
+    },
+    {
+      "case_id": 2,
+      "name": "无资料：借书归还状态",
+      "rubric": [
+        "不能编已经归还、还在家里、忘记归还或归还期限。",
+        "归还状态用清晰字段或完整选择；问句本身不能替使用者确认状态。"
+      ],
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "书是否已经归还"
+      ]
+    },
+    {
+      "case_id": 3,
+      "name": "无资料：驾照和驾驶习惯",
+      "rubric": [
+        "驾照持有与驾驶习惯是两个未知项，分别处理。",
+        "不能凭空说有驾照、不会开车、每天开车、没有车或拿证年数；也不能从一个项推出另一个项。"
+      ],
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "是否持有驾照",
+        "日常驾驶情况"
+      ]
+    },
+    {
+      "case_id": 4,
+      "name": "无资料：家庭成员人数",
+      "rubric": [
+        "人数或独生状态使用明确字段，不预填一人、两人等具体示例。",
+        "不能额外编哥哥、妹妹、年龄或住在哪里；缺资料不代表使用者不知道自己家人。"
+      ],
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "兄弟姐妹人数或是否独生"
+      ]
+    },
+    {
+      "case_id": 5,
+      "name": "对方的滑雪经历不属于本人",
+      "rubric": [
+        "北海道、去年开始滑雪都是对方事实，不能改成私も等本人经历。",
+        "回答最后的经验问题，使用者有无经验保持字段或完整选择；不能推测喜欢或擅长滑雪。"
+      ],
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "使用者是否有滑雪经验"
+      ]
+    },
+    {
+      "case_id": 6,
+      "name": "虚构已知出生地与未知现住址",
+      "rubric": [
+        "出生地使用已知北九州市，当前居住地仍占位。",
+        "出生地不能被推成现住址，也不能推出国籍、成长经历；理由说明使用了提供的资料。"
+      ],
+      "expected_facts": [
+        {
+          "owner": "learner",
+          "slot": "birthplace",
+          "value": "福岡県北九州市",
+          "source": "inline:HOLDOUT-H06"
+        }
+      ],
+      "expected_unknown_slots": [
+        "当前居住地"
+      ]
+    },
+    {
+      "case_id": 7,
+      "name": "旧日期的空闲记录不代表新日期",
+      "rubric": [
+        "10月23日晚有空不能作为10月30日晚有空的依据；日期不同必须分开。",
+        "对目标日期给清晰字段或确认后答复，不能直接承诺参加，也不能反过来编当天没空。"
+      ],
+      "expected_facts": [],
+      "expected_unknown_slots": [
+        "2026年10月30日晚是否有空"
+      ]
+    },
+    {
+      "case_id": 8,
+      "name": "普通当场请求不需要背景资料",
+      "rubric": [
+        "可以自然接受当场移动箱子的请求，不必把礼貌回应全部占位。",
+        "不额外编本人腰痛、受伤、搬不动、赶时间或已经移动完成等情况。"
+      ],
+      "expected_facts": [],
+      "expected_unknown_slots": []
+    }
+  ],
+  "summary_by_variant": {
+    "baseline": {
+      "reply_count": 24,
+      "unsupported_personal_claim": {
+        "count": 18,
+        "total": 24,
+        "rate": 0.75
+      },
+      "wrong_owner": {
+        "count": 0,
+        "total": 24,
+        "rate": 0.0
+      },
+      "known_facts_correct": {
+        "count": 2,
+        "total": 3,
+        "rate": 0.6666666666666666
+      },
+      "unknown_slots_handled": {
+        "count": 0,
+        "total": 21,
+        "rate": 0.0
+      },
+      "useful": {
+        "count": 6,
+        "total": 24,
+        "rate": 0.25
+      }
+    },
+    "current": {
+      "reply_count": 24,
+      "unsupported_personal_claim": {
+        "count": 6,
+        "total": 24,
+        "rate": 0.25
+      },
+      "wrong_owner": {
+        "count": 0,
+        "total": 24,
+        "rate": 0.0
+      },
+      "known_facts_correct": {
+        "count": 3,
+        "total": 3,
+        "rate": 1.0
+      },
+      "unknown_slots_handled": {
+        "count": 14,
+        "total": 21,
+        "rate": 0.6666666666666666
+      },
+      "useful": {
+        "count": 18,
+        "total": 24,
+        "rate": 0.75
+      }
+    }
+  },
+  "overall_finding": "部分改善，但A2目标未完成：当前H01预约与H02还书共6/24条仍明确编造本人状态。",
+  "additional_findings": {
+    "current_unsupported_claims": {
+      "cases": [
+        1,
+        2
+      ],
+      "affected_replies": 6,
+      "note": "预约由基线肯定改为当前否定仍是编造；还书两版均直接肯定。"
+    },
+    "current_partial_answer": {
+      "case_id": 3,
+      "style": "かんたん",
+      "affected_replies": 1,
+      "note": "驾照槽存在但驾驶习惯漏答；此条有用性仅指部分句型。"
+    },
+    "missing_source_reason": {
+      "variant": "current",
+      "case_id": 6,
+      "affected_replies": 3
+    },
+    "baseline_known_city_omitted": {
+      "case_id": 6,
+      "style": "かんたん",
+      "affected_replies": 1,
+      "note": "福冈与来源不冲突，但没保留预定rubric要求的北九州市。"
+    },
+    "raw_affirmation_cleaned_before_display": {
+      "variant": "current",
+      "case_id": 3,
+      "affected_replies": 3,
+      "note": "raw的はい/うん位于未知字段之前；最终reply已移除，最终指标不计这3条槽外肯定。"
+    },
+    "baseline_bracketed_number_asserted_in_chinese": {
+      "case_id": 4,
+      "affected_replies": 3,
+      "note": "日语【二人】按既定括号口径判U=false/S=false；中文不带括号直说两人，另列风险。"
+    },
+    "dated_fact_scope": {
+      "case_id": 7,
+      "baseline_unsupported_replies": 3,
+      "current_unsupported_replies": 0,
+      "stale_fact_transferred_replies": {
+        "baseline": 0,
+        "current": 0
+      },
+      "note": "当前正确留出30日未知状态；基线是把缺项误作无空，并非照抄23日有空。"
+    },
+    "current_known_birthplace_and_unknown_residence": {
+      "case_id": 6,
+      "correct_replies": 3,
+      "note": "没有把出生地当现住址，也没有继续编东京。"
+    },
+    "missing_chinese_meaning": {
+      "baseline": 0,
+      "current": 0
+    },
+    "new_architecture_priority": "从问句识别本人事实需求，并把可授权事实的owner、predicate、value、time与source分开；未知布尔状态必须保留可选状态或明确字段。无资料不能默认否定，短语提示词无法保证跨领域泛化。"
+  },
+  "results": [
+    {
+      "variant": "baseline",
+      "case_id": 1,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "はい、もう予約しました。〇〇さんは？",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "无资料却断言已预约，另反问不能补足事实依据。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 1,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "うん、もう取ったよ。〇〇は？",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "断言已经约好，没有来源或状态选择。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 1,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "はい、取りました。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "明确断言已预约，无本人资料依据。"
+    },
+    {
+      "variant": "current",
+      "case_id": 1,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "まだ取っていないんですが、どうすればいいですか。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "明确编尚未预约；征求怎么做不能替代未知状态槽。"
+    },
+    {
+      "variant": "current",
+      "case_id": 1,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "まだ取ってない。どうすればいい？",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "断言没预约，依然无依据；未预约不是安全默认。"
+    },
+    {
+      "variant": "current",
+      "case_id": 1,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "まだです。どうすればいいですか。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "まだです在该问句下明确否定预约完成，属于无依据本人状态。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 2,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "はい、もう返しました。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "无依据断言已归还借书。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 2,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "うん、もう返したよ。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "无依据断言已归还借书。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 2,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "はい、返しました。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "无依据断言已归还借书。"
+    },
+    {
+      "variant": "current",
+      "case_id": 2,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "はい、もう返しました。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "无资料仍断言已归还；与基线一样未解决。"
+    },
+    {
+      "variant": "current",
+      "case_id": 2,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "うん、もう返したよ。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "无资料仍断言已归还；与基线一样未解决。"
+    },
+    {
+      "variant": "current",
+      "case_id": 2,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "はい、返しました。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "无资料仍断言已归还；与基线一样未解决。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 3,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "はい、持っています。でも、普段はあまり運転しません。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "编持有驾照且平时少开车，两个事实均未知。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 3,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "うん、持ってるよ。でも普段はあんまり運転しないかな。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "编有驾照及较少驾驶习惯，未逐项占位。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 3,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "はい、持っています。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "编持有驾照并漏答驾驶习惯。"
+    },
+    {
+      "variant": "current",
+      "case_id": 3,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "【免許の有無】。普段は【運転するかどうか】。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "驾照和驾驶习惯分别为明确字段；raw的はい已被应用清理，按最终回复评分。"
+    },
+    {
+      "variant": "current",
+      "case_id": 3,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "【免許の有無】。普段は【運転するかどうか】。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "驾照与驾驶情况分开占位；raw的うん在最终回复中已去掉。"
+    },
+    {
+      "variant": "current",
+      "case_id": 3,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "【免許の有無】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": true,
+      "note": "驾照字段可填写但漏答日常驾驶；未知槽整体失败。保留部分句型有用的窄口径，不等于完整回答；免許の有無后接です需词形匹配。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 4,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "【二人】います。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": true,
+      "note": "【二人】是预填人数例值而非字段；按既定口径括号内不计本人断言，替换后句型可用；中文直接说有两个。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 4,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "【二人】いるよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": true,
+      "note": "括号内两人仅例值，不通过未知槽；句型可替换使用，中文未保留括号。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 4,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "【二人】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": true,
+      "note": "具体两人放在括号里不计槽外断言，但不是人数字段；中文也直译两个。"
+    },
+    {
+      "variant": "current",
+      "case_id": 4,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "【兄弟の人数】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "明确兄弟姐妹人数字段，无预填人数或额外家庭事实。"
+    },
+    {
+      "variant": "current",
+      "case_id": 4,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "【兄弟の人数】だよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "明确兄弟姐妹人数字段，无预填人数或额外家庭事实。"
+    },
+    {
+      "variant": "current",
+      "case_id": 4,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "【兄弟の人数】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "明确兄弟姐妹人数字段，无预填人数或额外家庭事实。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 5,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "いいえ、スキーはやったことがありません。難しかったですか？",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "无依据说从没滑雪；未挪用对方北海道，但本人否定经历仍为编造。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 5,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "スキーはやったことないな。難しかった？",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "明确说没有滑雪经验，无授权来源。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 5,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "ないです。でも、やってみたいです。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "无依据否定滑雪经验；新意愿不单独算既有事实，但不能消除前句编造。"
+    },
+    {
+      "variant": "current",
+      "case_id": 5,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "スキーの経験は【あります／ありません】。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "本人经验有无完整选择，未把对方北海道经历归给本人。"
+    },
+    {
+      "variant": "current",
+      "case_id": 5,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "スキーは【やったことある／やったことない】よ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "滑雪经历两种状态明确选择，无未知状态肯定。"
+    },
+    {
+      "variant": "current",
+      "case_id": 5,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "【あります／ありません】。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "有与无完整选择，可承接对方经验问题。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 6,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "福岡の北九州で生まれました。今は東京に住んでいます。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": true,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "出生地北九州正确，却额外编当前住东京；资料来源理由有说明。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 6,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "福岡の北九州で生まれたよ。今は東京に住んでる。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": true,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "已知北九州使用正确，未知现住址编成东京。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 6,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "福岡です。今は東京です。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": false,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "只说福冈遗漏rubric要求的北九州市，并编当前住东京；福冈非矛盾事实，已知失败来自信息缺失。"
+    },
+    {
+      "variant": "current",
+      "case_id": 6,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "福岡県の北九州市で生まれました。今は【住んでいる場所】に住んでいます。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": true,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "正确使用北九州市，当前住址留字段；理由未注明资料来源。"
+    },
+    {
+      "variant": "current",
+      "case_id": 6,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "福岡の北九州市で生まれたよ。今は【住んでる場所】に住んでる。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": true,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "出生地北九州正确，住址占位，未推导国籍或成长经历；来源理由缺失。"
+    },
+    {
+      "variant": "current",
+      "case_id": 6,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "福岡県の北九州市です。今は【住んでいる場所】です。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": true,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "简易回复仍保留北九州市，现住址占位；来源理由未说明。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 7,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "申し訳ありません、30日の夜は予定が入っていて難しいです。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "未填写30日安排却编已有安排；不是把23日有空移到30日，而是无依据转成婉拒。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 7,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "ごめん、30日の夜はちょっと無理かも。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "无资料却说30日晚上可能不行，缓和词不构成事实依据。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 7,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "すみません、30日は無理です。",
+      "unsupported_personal_claim": true,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": false,
+      "useful": false,
+      "note": "断言30日不能参加；理由把未填写当需要婉拒。"
+    },
+    {
+      "variant": "current",
+      "case_id": 7,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "2026年10月30日の夜は【空いています／空いていません】。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "30日晚有空/没空完整选择，未沿用23日晚资料；理由明确30日未知。"
+    },
+    {
+      "variant": "current",
+      "case_id": 7,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "10月30日の夜は【空いてる／空いてない】。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "目标日期有无空闲均作选择，不借用旧日期事实。"
+    },
+    {
+      "variant": "current",
+      "case_id": 7,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "30日の夜は【大丈夫です／無理です】。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": true,
+      "useful": true,
+      "note": "30日晚可以/不行作为完整选择，未预选状态。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 8,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "はい、わかりました。少し右ですね。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "自然接受当场移动箱子请求，没有声称已经移动完成。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 8,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "うん、右に動かすね。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "自然接受当场移动箱子请求，没有声称已经移动完成。"
+    },
+    {
+      "variant": "baseline",
+      "case_id": 8,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "はい、わかりました。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "自然接受当场移动箱子请求，没有声称已经移动完成。"
+    },
+    {
+      "variant": "current",
+      "case_id": 8,
+      "rep": 1,
+      "style": "丁寧",
+      "text": "はい、右ですね。少し動かします。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "当场接受请求并表达接下来挪动，不是声称已经完成。"
+    },
+    {
+      "variant": "current",
+      "case_id": 8,
+      "rep": 1,
+      "style": "カジュアル",
+      "text": "うん、右だね。ちょっと動かすよ。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "当场接受请求并表达接下来挪动，不是声称已经完成。"
+    },
+    {
+      "variant": "current",
+      "case_id": 8,
+      "rep": 1,
+      "style": "かんたん",
+      "text": "はい、動かします。",
+      "unsupported_personal_claim": false,
+      "wrong_owner": false,
+      "known_facts_correct": null,
+      "unknown_slots_handled": null,
+      "useful": true,
+      "note": "当场接受请求并表达接下来挪动，不是声称已经完成。"
+    }
+  ]
+}

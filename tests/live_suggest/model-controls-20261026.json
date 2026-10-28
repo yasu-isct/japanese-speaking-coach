@@ -1,0 +1,132 @@
+{
+  "kind": "Public fictional materials; actual local model; offscreen UI; temporary preferences",
+  "api_calls": 0,
+  "network_requests": 0,
+  "private_data_read": false,
+  "real_user_settings_changed": false,
+  "enable_until_poll_ms": 1285.79,
+  "enabled_then_disabled_then_cached_prepare": true,
+  "saved_preference_restored": true,
+  "relevant_renewal_source_found": true,
+  "captures": [
+    {
+      "method": "PrintWindow owned HWND",
+      "width": 640,
+      "height": 520,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "state": "keywords",
+      "bounds": [
+        4640,
+        2600,
+        5302,
+        3176
+      ],
+      "virtual_right": 3640,
+      "virtual_bottom": 1600,
+      "foreground_unchanged": true,
+      "status_fits": true
+    },
+    {
+      "method": "PrintWindow owned HWND",
+      "width": 640,
+      "height": 520,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "state": "preparing",
+      "bounds": [
+        4640,
+        2600,
+        5302,
+        3176
+      ],
+      "virtual_right": 3640,
+      "virtual_bottom": 1600,
+      "foreground_unchanged": true,
+      "status_fits": true
+    },
+    {
+      "method": "PrintWindow owned HWND",
+      "width": 640,
+      "height": 520,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "state": "enabled",
+      "bounds": [
+        4640,
+        2600,
+        5302,
+        3176
+      ],
+      "virtual_right": 3640,
+      "virtual_bottom": 1600,
+      "foreground_unchanged": true,
+      "status_fits": true
+    },
+    {
+      "method": "PrintWindow owned HWND",
+      "width": 560,
+      "height": 500,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "state": "narrow-enabled",
+      "bounds": [
+        4640,
+        2600,
+        5222,
+        3156
+      ],
+      "virtual_right": 3640,
+      "virtual_bottom": 1600,
+      "foreground_unchanged": true,
+      "status_fits": true
+    },
+    {
+      "method": "PrintWindow owned HWND",
+      "width": 560,
+      "height": 500,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "state": "disabled",
+      "bounds": [
+        4640,
+        2600,
+        5222,
+        3156
+      ],
+      "virtual_right": 3640,
+      "virtual_bottom": 1600,
+      "foreground_unchanged": true,
+      "status_fits": true
+    }
+  ],
+  "download_transport": {
+    "kind": "Anonymous official file-transfer smoke check; no materials or API requests",
+    "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+    "onnx_cancelled_after_first_chunk": true,
+    "cancel_ms": 1220.77,
+    "cancelled_files_not_published": true,
+    "part_files_cleaned": true,
+    "tokenizer_bytes": 9081518,
+    "tokenizer_sha256": "2c3387be76557bd40970cec13153b3bbf80407865484b209e655e5e4729076b8",
+    "tokenizer_download_ms": 3252.09,
+    "user_settings_changed": false,
+    "limitation": "Only tokenizer downloaded fully; full ONNX file already cached and verified separately."
+  },
+  "images": {
+    "docs/images/live-model-settings.png": "2b5e625ba156bdd44d51a279849bb6cdca4d6287f8b199cb4413b03feafd2447",
+    "docs/images/live-materials-controls.png": "c1322a342430024529090c375ddc8469a27bee0d11ca37178c93d55f7d9d1649"
+  },
+  "source_sha256": {
+    "app/jsc_live/model_view.py": "9d77e842058981afd64e7f38fb4a28d2e9edcc9eef39e7ac7f8fda7a5f323ceb",
+    "app/jsc_live/model_setup.py": "635e5941e4d69b3b2aa529d21edc05693d7278c40e6c3d7a44a2da1cc0aedffa",
+    "app/jsc_live/material_control.py": "e9e15cdd2ad651fcad20ca610d9dce51b07d09490ef1c348de8770d5b42d24f1",
+    "app/jsc_live/settings.py": "4b545e8002a35af236e3e8fcf7dcf45b02d93908bbf6d68b268cc6db05b6a067"
+  },
+  "tests": {
+    "total": 245,
+    "passed": 244,
+    "skipped": 1
+  }
+}

@@ -1,0 +1,363 @@
+{
+  "provenance": "Frozen synthetic long-page retrieval. Evidence coverage, not generated-answer accuracy.",
+  "api_calls": 0,
+  "private_data_read": false,
+  "mode": "keywords",
+  "sha256": {
+    "data/handbook.pdf": "98c822822a65e1326402d65f5a6c0b6de1b36740494659f6d4d89d8f70f56a24",
+    "queries.json": "51f8f4fddb5e13b4820cbdc62493efab39b681ea8796db9321ac460c2321a50a",
+    "content.json": "1882e314eaf2f63cc16ca06ac6ea8391ac2c71d0a2a1cc52aceb8eedd0d741bf"
+  },
+  "diagnostics": {
+    "scanned_entries": 1,
+    "files_considered": 1,
+    "indexed_files": 1,
+    "indexed_chars": 7306,
+    "indexed_chunks": 28
+  },
+  "issues": [],
+  "build_ms": 408.8039000052959,
+  "search_p50_ms": 0.09370001498609781,
+  "search_p95_ms": 0.19779999274760485,
+  "atomic_coverage": 4,
+  "combined_coverage": 4,
+  "whole_section_coverage": 4,
+  "mean_selected_characters": 102.875,
+  "total": 16,
+  "rows": [
+    {
+      "id": "recorder",
+      "query": "録音機は何日借りられて、いつまでに返しますか？",
+      "path": "handbook.pdf",
+      "page": 1,
+      "needles": [
+        "three days",
+        "before noon on the fourth day"
+      ],
+      "atomic_covered": false,
+      "combined_covered": false,
+      "whole_section_present": false,
+      "selected_characters": 0,
+      "sources": []
+    },
+    {
+      "id": "consent",
+      "query": "録音には同意していない人と話す場合はどうしますか？",
+      "path": "handbook.pdf",
+      "page": 1,
+      "needles": [
+        "refusing recording",
+        "written notes only"
+      ],
+      "atomic_covered": false,
+      "combined_covered": false,
+      "whole_section_present": false,
+      "selected_characters": 423,
+      "sources": [
+        {
+          "source_id": "material-c8c550b89ca05eca5fc02031",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 5,
+          "text": "資料の共有\n授業で配った資料は、参加者が自分で復習するために使えます。友人に内容を説明することは構いませんが、資\n料そのものを公開サイトへ掲載するときは事前に許可を取ってください。写真の一部に他の参加者が写っている\n場合は、その人の同意も必要です。共有するときは、資料の作成日と講座名を残してください。更新前の説明が\n広まらないよう、古い版を使っていることに気づいたら、担当者に最新版の場所を確認してください。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页・片段4"
+        },
+        {
+          "source_id": "material-eb4ac86aa8b776cc14f95e04",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 6,
+          "text": "音声課題の作り方\n音声課題では、選んだ記事の内容を二分以上四分以内で紹介してください。文章を全部読み上げるのではなく、\n重要だと思った点を自分の言葉で説明します。録音場所に大きな雑音がないか、提出前に一度再生して確認して\nください。ファイルはWAV形式にし、木曜日の午後八時までに提出フォームへ送ります。容量は一つのファイ\nルにつき二十MB以下です。体調不良などで間に合わない場合は、締切前に担当者へ連絡して延長の相談をして\nください。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页・片段3"
+        }
+      ]
+    },
+    {
+      "id": "expenses",
+      "query": "交通費の上限と、領収書を出す期限を教えてください。",
+      "path": "handbook.pdf",
+      "page": 1,
+      "needles": [
+        "2400 yen",
+        "ten calendar days"
+      ],
+      "atomic_covered": false,
+      "combined_covered": false,
+      "whole_section_present": false,
+      "selected_characters": 0,
+      "sources": []
+    },
+    {
+      "id": "report",
+      "query": "調査レポートの締切と語数の条件は何ですか？",
+      "path": "handbook.pdf",
+      "page": 1,
+      "needles": [
+        "Wednesday at 18:00",
+        "1200 and 1600 words",
+        "references do not count"
+      ],
+      "atomic_covered": false,
+      "combined_covered": false,
+      "whole_section_present": false,
+      "selected_characters": 0,
+      "sources": []
+    },
+    {
+      "id": "press",
+      "query": "ヒートプレスを掃除する前に何分待ちますか？何を使いますか？",
+      "path": "handbook.pdf",
+      "page": 2,
+      "needles": [
+        "fifteen minutes",
+        "supplied cloth",
+        "not a wet sponge"
+      ],
+      "atomic_covered": false,
+      "combined_covered": false,
+      "whole_section_present": false,
+      "selected_characters": 0,
+      "sources": []
+    },
+    {
+      "id": "booking",
+      "query": "スタジオの予約はいつまで無料で変更できますか？その後の料金は？",
+      "path": "handbook.pdf",
+      "page": 2,
+      "needles": [
+        "17:00 on the preceding day",
+        "500 yen"
+      ],
+      "atomic_covered": false,
+      "combined_covered": false,
+      "whole_section_present": false,
+      "selected_characters": 0,
+      "sources": []
+    },
+    {
+      "id": "network",
+      "query": "スタジオのWi-Fiコードが使えません。どうすればいいですか？",
+      "path": "handbook.pdf",
+      "page": 2,
+      "needles": [
+        "date and room",
+        "replacement code",
+        "Do not restart"
+      ],
+      "atomic_covered": false,
+      "combined_covered": false,
+      "whole_section_present": false,
+      "selected_characters": 0,
+      "sources": []
+    },
+    {
+      "id": "collection",
+      "query": "スタジオの完成品はいつ、どこで受け取れますか？",
+      "path": "handbook.pdf",
+      "page": 2,
+      "needles": [
+        "seven days",
+        "11:00 to 16:00",
+        "Tuesday through Saturday"
+      ],
+      "atomic_covered": false,
+      "combined_covered": false,
+      "whole_section_present": false,
+      "selected_characters": 0,
+      "sources": []
+    },
+    {
+      "id": "audio",
+      "query": "音声課題の形式、締切、容量を教えてください。",
+      "path": "handbook.pdf",
+      "page": 3,
+      "needles": [
+        "WAV形式",
+        "木曜日の午後八時",
+        "二十MB以下"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": true,
+      "selected_characters": 218,
+      "sources": [
+        {
+          "source_id": "material-eb4ac86aa8b776cc14f95e04",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 6,
+          "text": "音声課題の作り方\n音声課題では、選んだ記事の内容を二分以上四分以内で紹介してください。文章を全部読み上げるのではなく、\n重要だと思った点を自分の言葉で説明します。録音場所に大きな雑音がないか、提出前に一度再生して確認して\nください。ファイルはWAV形式にし、木曜日の午後八時までに提出フォームへ送ります。容量は一つのファイ\nルにつき二十MB以下です。体調不良などで間に合わない場合は、締切前に担当者へ連絡して延長の相談をして\nください。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页・片段3"
+        }
+      ]
+    },
+    {
+      "id": "sharing",
+      "query": "配布資料を公開サイトに載せてもいいですか？",
+      "path": "handbook.pdf",
+      "page": 3,
+      "needles": [
+        "事前に許可",
+        "その人の同意"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": true,
+      "selected_characters": 407,
+      "sources": [
+        {
+          "source_id": "material-c8c550b89ca05eca5fc02031",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 5,
+          "text": "資料の共有\n授業で配った資料は、参加者が自分で復習するために使えます。友人に内容を説明することは構いませんが、資\n料そのものを公開サイトへ掲載するときは事前に許可を取ってください。写真の一部に他の参加者が写っている\n場合は、その人の同意も必要です。共有するときは、資料の作成日と講座名を残してください。更新前の説明が\n広まらないよう、古い版を使っていることに気づいたら、担当者に最新版の場所を確認してください。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页・片段4"
+        },
+        {
+          "source_id": "material-2b22959e00b2507a7bf0f6e2",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 5,
+          "text": "欠席した日の復習\n欠席した場合は、翌日の正午以降に学習ページで当日の要点を確認できます。録画は全員に公開されるものでは\nありません。配布資料を読んでも分からない点は、質問フォームに具体的なページ番号と一緒に書いてください\n。個別の補講は原則として行いませんが、次回の授業前に質問できる時間があります。病気で二回以上続けて休\nむ場合は、提出物の予定を調整するため、できるだけ早く運営窓口へ知らせてください。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页・片段5"
+        }
+      ]
+    },
+    {
+      "id": "absent",
+      "query": "休んだ授業の要点はいつから見られますか？",
+      "path": "handbook.pdf",
+      "page": 3,
+      "needles": [
+        "翌日の正午以降",
+        "学習ページ"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": true,
+      "selected_characters": 202,
+      "sources": [
+        {
+          "source_id": "material-2b22959e00b2507a7bf0f6e2",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 5,
+          "text": "欠席した日の復習\n欠席した場合は、翌日の正午以降に学習ページで当日の要点を確認できます。録画は全員に公開されるものでは\nありません。配布資料を読んでも分からない点は、質問フォームに具体的なページ番号と一緒に書いてください\n。個別の補講は原則として行いませんが、次回の授業前に質問できる時間があります。病気で二回以上続けて休\nむ場合は、提出物の予定を調整するため、できるだけ早く運営窓口へ知らせてください。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页・片段5"
+        }
+      ]
+    },
+    {
+      "id": "slides",
+      "query": "最終発表のスライドは何枚までで、いつ提出しますか？",
+      "path": "handbook.pdf",
+      "page": 3,
+      "needles": [
+        "六枚以内",
+        "前日の午後六時",
+        "PDF"
+      ],
+      "atomic_covered": true,
+      "combined_covered": true,
+      "whole_section_present": true,
+      "selected_characters": 198,
+      "sources": [
+        {
+          "source_id": "material-93b8d11f0838013059568696",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 5,
+          "text": "発表の日\n最終発表では、一人五分の説明のあと、二分間の質問時間を設けます。スライドは六枚以内にまとめ、発表前日\nの午後六時までにPDFで提出してください。音声や動画を使う人は、自分の端末だけで再生できる形も用意して\nください。発表順は当日の受付で案内します。聞き手は、良かった点ともっと聞きたい点を一つずつ記録します\n。発表者は質問にすぐ答えられないとき、後で調べて共有すると伝えても構いません。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页・片段6"
+        }
+      ]
+    },
+    {
+      "id": "frame",
+      "query": "ワークショップの木枠代は参加費に含まれていますか？",
+      "path": "handbook.pdf",
+      "page": 4,
+      "needles": [
+        "不包含额外的木框",
+        "每个八百日元"
+      ],
+      "atomic_covered": false,
+      "combined_covered": false,
+      "whole_section_present": false,
+      "selected_characters": 0,
+      "sources": []
+    },
+    {
+      "id": "meal",
+      "query": "昼ご飯は用意してもらえますか？どこで食べられますか？",
+      "path": "handbook.pdf",
+      "page": 4,
+      "needles": [
+        "不提供午餐",
+        "自备便当",
+        "靠窗的两张桌子"
+      ],
+      "atomic_covered": false,
+      "combined_covered": false,
+      "whole_section_present": false,
+      "selected_characters": 198,
+      "sources": [
+        {
+          "source_id": "material-93b8d11f0838013059568696",
+          "relative_path": "handbook.pdf",
+          "start_line": 1,
+          "end_line": 5,
+          "text": "発表の日\n最終発表では、一人五分の説明のあと、二分間の質問時間を設けます。スライドは六枚以内にまとめ、発表前日\nの午後六時までにPDFで提出してください。音声や動画を使う人は、自分の端末だけで再生できる形も用意して\nください。発表順は当日の受付で案内します。聞き手は、良かった点ともっと聞きたい点を一つずつ記録します\n。発表者は質問にすぐ答えられないとき、後で調べて共有すると伝えても構いません。",
+          "heading": "",
+          "owner_hint": "unverified",
+          "location": "第3页・片段6"
+        }
+      ]
+    },
+    {
+      "id": "storage",
+      "query": "ワークショップの作品は何日預けられて、何時に受け取れますか？",
+      "path": "handbook.pdf",
+      "page": 4,
+      "needles": [
+        "免费保管三天",
+        "下午两点到五点",
+        "一楼前台"
+      ],
+      "atomic_covered": false,
+      "combined_covered": false,
+      "whole_section_present": false,
+      "selected_characters": 0,
+      "sources": []
+    },
+    {
+      "id": "cancel",
+      "query": "ワークショップをキャンセルした場合、いつまで全額返金されますか？",
+      "path": "handbook.pdf",
+      "page": 4,
+      "needles": [
+        "四十八小时以前",
+        "全部报名费"
+      ],
+      "atomic_covered": false,
+      "combined_covered": false,
+      "whole_section_present": false,
+      "selected_characters": 0,
+      "sources": []
+    }
+  ]
+}

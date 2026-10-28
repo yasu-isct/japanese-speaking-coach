@@ -1,0 +1,32 @@
+{
+  "kind": "saved public TTS replay; current UI rendered offscreen",
+  "generated_at": "2026-10-26T20:02:56.078150",
+  "input": "tests/live_suggest/e2e-references-20261026-171615.jsonl",
+  "input_text_sha256": "8e6f27f9eea43500076ce016dddb8a6a4592688a56afa28956475752aefbac0a",
+  "live_latency_measured": false,
+  "api_calls": 0,
+  "private_materials_read": false,
+  "overlay_sha256": "ebd5f58710229b5695435f8a8153aac5ad6d45dedb73694915753883f47d0c01",
+  "completed": true,
+  "app_revision": "ed12b8f",
+  "capture_method": "PrintWindow of own process HWND, offscreen, click-through, non-activating; no desktop pixels",
+  "media": [
+    {
+      "width": 900,
+      "height": 419,
+      "sha256": "107cc964bd7d4bf35503fd150e36e66660c21e51882994259974e180f3b42151",
+      "path": "docs/images/live-reference-answer.png"
+    },
+    {
+      "width": 900,
+      "height": 444,
+      "sha256": "5fc5ae2b636d2f659e9f82b5aa2da21c84ec9e5b152b7a454e7d9612cfb74aba",
+      "path": "docs/images/live-reference-manual.png"
+    }
+  ],
+  "tool_sha256": {
+    "tools/capture_showcase.py": "0c50eba8a73200567c8504724d1a77f6457884067befad65a813904b066adb08",
+    "tools/window_capture.py": "7a2e0d2dcab5e2e785852487e9fefebf4d78db71a1a02b84bdb67d7650c42dd0",
+    "tools/test_window.py": "4b2aae41deeabf389654680c090c269fc7e8dc07eaff9e8bc2da8218ae0b6fa7"
+  }
+}

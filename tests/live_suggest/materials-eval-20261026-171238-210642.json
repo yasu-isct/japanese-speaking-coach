@@ -1,0 +1,4966 @@
+{
+  "created_at": "2026-10-26T17:12:38.210642+09:00",
+  "kind": "public_fictional_local_retrieval_evaluation",
+  "suite": "profile-regression-v2",
+  "phase": "after",
+  "api_requests": 0,
+  "source_hashes": {
+    "manifest_sha256": "394480ba28d6148b402432e7e72bd0d9e31800157e579b35e1f9b4192b0b88b6",
+    "evaluator_sha256": "f253cf1893d6c983513e381d553a1157f24ed09ee1e156f80e4d4637d766b378",
+    "materials_sha256": "a6a984efaa7449ed18d1c85f1c3f31328f98c9adb85a0fc2e463094ce635b330"
+  },
+  "fixture_manifest": {
+    "version": 2,
+    "frozen_at": "2026-10-26T17:12:18.771380+09:00",
+    "description": "Packaging-only derivative: profile.md renamed to test_profile.md; source bytes and question contents unchanged",
+    "derived_from": {
+      "manifest_sha256": "cdcad7ba076dd5508aed7e4a2dae771ce6d8dd1a892444d4181b191df9c71e96",
+      "local_legacy_directory": "tests/fixtures/materials",
+      "required_at_runtime": false,
+      "renames": {
+        "data/profile.md": "data/test_profile.md"
+      },
+      "question_transform": "Replace exact path strings profile.md with test_profile.md; no query, annotation range, reason, or topic changes",
+      "source_bytes_unchanged": true,
+      "original_source_sha256": {
+        "queries.json": "5fa5a99cbc62dbdb14fd1058603a8a0bfbecf234e1d737f626612d1307521eb6",
+        "data/notes/books.md": "f491cfd7880da064a3108165dad874ad46cf74d84b2fb4e9cdb4b93c2f48d7e3",
+        "data/notes/calendar.md": "bc6810c0ceb2321ff4cc5b55ee1c4b3793a2cfd0b7318d34f8f5d8031190d506",
+        "data/notes/diary.md": "9ce76897944db83a75612f309f8784a7fb3b328c3be020ec0144051e0ca34993",
+        "data/notes/feedback.md": "88d4d45d20b1218bd0dcbdced264e4f5b2df13df736fe94914a3c43baa30e171",
+        "data/notes/friends.md": "21cc767478b7a0a5ad91c3eb6ce9ee0748bcb0da3622b7504def2de25309ba96",
+        "data/notes/interview.md": "ddc99d72e6213025573719fd8439f97ad227b4dd45e18577bbed13f9e65b19c9",
+        "data/notes/lesson.md": "64ac0e0b70205c002a6867f79e3f5fe97c2fd03419e92eb4e2ff7108f55383e3",
+        "data/notes/practice.md": "0b8cfea01b371fee702f86503ffc2375d13176369c60cc6ac8a382286fcf3cfe",
+        "data/profile.md": "49ef434301b5939c99f48ebb7fc1298f2ce62f2ef6f2b23cc35d725b01c4d4a8"
+      },
+      "metadata_effect": "Path-derived source IDs change. Default owner_hint for test_profile.md is unverified; indexing/ranking does not use owner_hint. Payload character counts can change because of path and hint metadata."
+    },
+    "sha256": {
+      "queries.json": "9b82db019a8d38d95b6da6d051ecce82c65df2e32988916b3941d9904637e8e9",
+      "data/notes/books.md": "f491cfd7880da064a3108165dad874ad46cf74d84b2fb4e9cdb4b93c2f48d7e3",
+      "data/notes/calendar.md": "bc6810c0ceb2321ff4cc5b55ee1c4b3793a2cfd0b7318d34f8f5d8031190d506",
+      "data/notes/diary.md": "9ce76897944db83a75612f309f8784a7fb3b328c3be020ec0144051e0ca34993",
+      "data/notes/feedback.md": "88d4d45d20b1218bd0dcbdced264e4f5b2df13df736fe94914a3c43baa30e171",
+      "data/notes/friends.md": "21cc767478b7a0a5ad91c3eb6ce9ee0748bcb0da3622b7504def2de25309ba96",
+      "data/notes/interview.md": "ddc99d72e6213025573719fd8439f97ad227b4dd45e18577bbed13f9e65b19c9",
+      "data/notes/lesson.md": "64ac0e0b70205c002a6867f79e3f5fe97c2fd03419e92eb4e2ff7108f55383e3",
+      "data/notes/practice.md": "0b8cfea01b371fee702f86503ffc2375d13176369c60cc6ac8a382286fcf3cfe",
+      "data/test_profile.md": "49ef434301b5939c99f48ebb7fc1298f2ce62f2ef6f2b23cc35d725b01c4d4a8"
+    }
+  },
+  "conditions": {
+    "whole_profile": "Old material-sending strategy: entire fixed profile body on every question, no notes; no historical model answer replay",
+    "bm25": "Current default MaterialsStore.search(query), then prompt_data(hits); one immutable snapshot, no reranking or answer generation",
+    "limits": {
+      "max_files": 64,
+      "max_file_bytes": 65536,
+      "max_total_chars": 100000,
+      "max_chunks": 256,
+      "max_chunk_chars": 700,
+      "max_results": 4,
+      "max_result_chars": 1800,
+      "max_query_chars": 2000,
+      "max_scan_entries": 2048,
+      "max_depth": 4
+    },
+    "index_build_ms": 19.0444,
+    "index_diagnostics": {
+      "scanned_entries": 10,
+      "files_considered": 9,
+      "indexed_files": 9,
+      "indexed_chars": 922,
+      "indexed_chunks": 37
+    },
+    "timing_repetitions_per_case": 20,
+    "timing": "One untimed warm-up per query; fixed serial case order; p50=median, p95=nearest-rank; baseline retrieval=0 by definition; payload preparation excludes disk reads, index construction, scoring, output writing and network"
+  },
+  "metric_definitions": {
+    "relevant_range_recall": "Number of fully covered annotated path/line ranges divided by all relevant ranges; coverage may be the union of multiple sent chunks",
+    "complete_recall_cases": "Questions with every relevant range covered; excludes questions with no relevant data",
+    "forbidden_free_cases": "No overlap with specified forbidden ranges and no sources for forbid_all_sources questions; counts only questions with a prohibition rule",
+    "empty_for_no_data_cases": "No sources sent where the fixture says no source establishes the requested fact",
+    "body_chars": "Python Unicode character count of sent source bodies, including preserved whitespace",
+    "payload_chars": "Exact material payload Unicode characters; BM25 includes JSON provenance and empty-envelope overhead, whole_profile is raw profile body",
+    "local_retrieval": "Current search() duration only; excludes indexing, serialization, model and voice latency"
+  },
+  "summary": {
+    "whole_profile": {
+      "cases": 16,
+      "relevant_range_recall": {
+        "covered": 6,
+        "expected": 16,
+        "rate": 0.375
+      },
+      "complete_recall_cases": {
+        "passed": 6,
+        "applicable": 13
+      },
+      "forbidden_free_cases": {
+        "passed": 9,
+        "applicable": 14
+      },
+      "empty_for_no_data_cases": {
+        "passed": 0,
+        "applicable": 3
+      },
+      "body_chars": {
+        "total": 2688,
+        "mean_per_question": 168.0
+      },
+      "payload_chars": {
+        "total": 2688,
+        "mean_per_question": 168.0
+      },
+      "payload_utf8_bytes_total": 6560,
+      "local_retrieval": {
+        "samples": 320,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0
+      },
+      "local_payload_preparation": {
+        "samples": 320,
+        "p50_ms": 0.0001,
+        "p95_ms": 0.0001
+      }
+    },
+    "bm25": {
+      "cases": 16,
+      "relevant_range_recall": {
+        "covered": 12,
+        "expected": 16,
+        "rate": 0.75
+      },
+      "complete_recall_cases": {
+        "passed": 9,
+        "applicable": 13
+      },
+      "forbidden_free_cases": {
+        "passed": 9,
+        "applicable": 14
+      },
+      "empty_for_no_data_cases": {
+        "passed": 2,
+        "applicable": 3
+      },
+      "body_chars": {
+        "total": 476,
+        "mean_per_question": 29.75
+      },
+      "payload_chars": {
+        "total": 5450,
+        "mean_per_question": 340.625
+      },
+      "payload_utf8_bytes_total": 6650,
+      "local_retrieval": {
+        "samples": 320,
+        "p50_ms": 0.0644,
+        "p95_ms": 0.149
+      },
+      "local_payload_preparation": {
+        "samples": 320,
+        "p50_ms": 0.07715,
+        "p95_ms": 0.1701
+      }
+    }
+  },
+  "safety_diagnostics": {
+    "empty_library": {
+      "passed": true,
+      "diagnostics": {
+        "indexed_chunks": 0
+      }
+    },
+    "path_escape": {
+      "passed": true,
+      "diagnostics": {
+        "unsafe_path": 1
+      },
+      "method": "Direct read guard given a synthetic file outside its allowed root; no links created",
+      "limitation": "This is not an OS-level junction race or sandbox security proof"
+    }
+  },
+  "cases": [
+    {
+      "id": 1,
+      "query": "ご出身はどちらですか？",
+      "topic": "本人出身・日语",
+      "annotation": {
+        "id": 1,
+        "query": "ご出身はどちらですか？",
+        "topic": "本人出身・日语",
+        "relevant": [
+          {
+            "path": "test_profile.md",
+            "start": 5,
+            "end": 5
+          }
+        ],
+        "forbidden": [
+          {
+            "path": "notes/friends.md",
+            "start": 5,
+            "end": 5,
+            "reason": "田中的出身不能混成本人的出身"
+          },
+          {
+            "path": "notes/friends.md",
+            "start": 10,
+            "end": 10,
+            "reason": "佐藤的出身不是本人"
+          }
+        ]
+      },
+      "whole_profile": {
+        "source_ids": [
+          "whole-profile-49ef434301b5939c99f48ebb"
+        ],
+        "sources": [
+          {
+            "source_id": "whole-profile-49ef434301b5939c99f48ebb",
+            "relative_path": "test_profile.md",
+            "start_line": 1,
+            "end_line": 12,
+            "text": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+            "heading": "",
+            "owner_hint": "profile_candidate"
+          }
+        ],
+        "payload": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+        "relevant_ranges": [
+          {
+            "path": "test_profile.md",
+            "start": 5,
+            "end": 5,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 168,
+        "payload_chars": 168,
+        "payload_utf8_bytes": 410,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0006,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0002,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0001
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-b9e690dce224491d203cdaea",
+          "material-e90dc1102f90a01e71d186aa",
+          "material-c56df2ac89af2513a5d9c3e6"
+        ],
+        "sources": [
+          {
+            "source_id": "material-b9e690dce224491d203cdaea",
+            "relative_path": "notes/friends.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 出身：大阪。",
+            "heading": "会話ノート：他人のプロフィール / 田中さん",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-e90dc1102f90a01e71d186aa",
+            "relative_path": "notes/friends.md",
+            "start_line": 10,
+            "end_line": 10,
+            "text": "- 出身：仙台。",
+            "heading": "会話ノート：他人のプロフィール / 佐藤さん",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-c56df2ac89af2513a5d9c3e6",
+            "relative_path": "test_profile.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 出身：中国・架空市。",
+            "heading": "本人填写的虚构资料",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-b9e690dce224491d203cdaea\", \"relative_path\": \"notes/friends.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 出身：大阪。\", \"heading\": \"会話ノート：他人のプロフィール / 田中さん\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-e90dc1102f90a01e71d186aa\", \"relative_path\": \"notes/friends.md\", \"start_line\": 10, \"end_line\": 10, \"text\": \"- 出身：仙台。\", \"heading\": \"会話ノート：他人のプロフィール / 佐藤さん\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-c56df2ac89af2513a5d9c3e6\", \"relative_path\": \"test_profile.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 出身：中国・架空市。\", \"heading\": \"本人填写的虚构资料\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "test_profile.md",
+            "start": 5,
+            "end": 5,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": {
+              "path": "notes/friends.md",
+              "start": 5,
+              "end": 5,
+              "reason": "田中的出身不能混成本人的出身"
+            },
+            "source_ids": [
+              "material-b9e690dce224491d203cdaea"
+            ]
+          },
+          {
+            "rule": {
+              "path": "notes/friends.md",
+              "start": 10,
+              "end": 10,
+              "reason": "佐藤的出身不是本人"
+            },
+            "source_ids": [
+              "material-e90dc1102f90a01e71d186aa"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Sent forbidden annotated range notes/friends.md:5-5",
+          "Sent forbidden annotated range notes/friends.md:10-10"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 28,
+        "payload_chars": 659,
+        "payload_utf8_bytes": 797,
+        "retrieval_ms_samples": [
+          0.0885,
+          0.0785,
+          0.0836,
+          0.072,
+          0.0697,
+          0.068,
+          0.0668,
+          0.0678,
+          0.0681,
+          0.0696,
+          0.065,
+          0.0646,
+          0.0708,
+          0.0665,
+          0.0658,
+          0.0654,
+          0.0655,
+          0.0658,
+          0.0649,
+          0.0691
+        ],
+        "preparation_ms_samples": [
+          0.1205,
+          0.1084,
+          0.1118,
+          0.0986,
+          0.0959,
+          0.0938,
+          0.0924,
+          0.0959,
+          0.0952,
+          0.0946,
+          0.0896,
+          0.1546,
+          0.0963,
+          0.0912,
+          0.0905,
+          0.0921,
+          0.0899,
+          0.0903,
+          0.0894,
+          0.0935
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:ご出",
+            "cjk:出身",
+            "concept:origin"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 4.871853090657651,
+              "matched_terms": [
+                "cjk:出身",
+                "concept:origin"
+              ],
+              "body_matched_terms": [
+                "cjk:出身",
+                "concept:origin"
+              ],
+              "query_coverage": 0.6666666666666666,
+              "source_id": "material-b9e690dce224491d203cdaea",
+              "relative_path": "notes/friends.md",
+              "start_line": 5,
+              "end_line": 5,
+              "reason": "selected"
+            },
+            {
+              "score": 4.871853090657651,
+              "matched_terms": [
+                "cjk:出身",
+                "concept:origin"
+              ],
+              "body_matched_terms": [
+                "cjk:出身",
+                "concept:origin"
+              ],
+              "query_coverage": 0.6666666666666666,
+              "source_id": "material-e90dc1102f90a01e71d186aa",
+              "relative_path": "notes/friends.md",
+              "start_line": 10,
+              "end_line": 10,
+              "reason": "selected"
+            },
+            {
+              "score": 4.871853090657651,
+              "matched_terms": [
+                "cjk:出身",
+                "concept:origin"
+              ],
+              "body_matched_terms": [
+                "cjk:出身",
+                "concept:origin"
+              ],
+              "query_coverage": 0.6666666666666666,
+              "source_id": "material-c56df2ac89af2513a5d9c3e6",
+              "relative_path": "test_profile.md",
+              "start_line": 5,
+              "end_line": 5,
+              "reason": "selected"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 2,
+      "query": "我现在做什么工作？",
+      "topic": "本人职业・中文",
+      "annotation": {
+        "id": 2,
+        "query": "我现在做什么工作？",
+        "topic": "本人职业・中文",
+        "relevant": [
+          {
+            "path": "test_profile.md",
+            "start": 7,
+            "end": 7
+          }
+        ],
+        "forbidden": [
+          {
+            "path": "notes/friends.md",
+            "start": 6,
+            "end": 6,
+            "reason": "别人的工作单位"
+          },
+          {
+            "path": "notes/friends.md",
+            "start": 12,
+            "end": 12,
+            "reason": "别人的职业"
+          },
+          {
+            "path": "notes/lesson.md",
+            "start": 4,
+            "end": 4,
+            "reason": "例句不证明本人的职业"
+          }
+        ]
+      },
+      "whole_profile": {
+        "source_ids": [
+          "whole-profile-49ef434301b5939c99f48ebb"
+        ],
+        "sources": [
+          {
+            "source_id": "whole-profile-49ef434301b5939c99f48ebb",
+            "relative_path": "test_profile.md",
+            "start_line": 1,
+            "end_line": 12,
+            "text": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+            "heading": "",
+            "owner_hint": "profile_candidate"
+          }
+        ],
+        "payload": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+        "relevant_ranges": [
+          {
+            "path": "test_profile.md",
+            "start": 7,
+            "end": 7,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 168,
+        "payload_chars": 168,
+        "payload_utf8_bytes": 410,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-952a992693ba565c618885fb"
+        ],
+        "sources": [
+          {
+            "source_id": "material-952a992693ba565c618885fb",
+            "relative_path": "test_profile.md",
+            "start_line": 7,
+            "end_line": 7,
+            "text": "- 工作：图书馆的资料整理员。",
+            "heading": "本人填写的虚构资料",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-952a992693ba565c618885fb\", \"relative_path\": \"test_profile.md\", \"start_line\": 7, \"end_line\": 7, \"text\": \"- 工作：图书馆的资料整理员。\", \"heading\": \"本人填写的虚构资料\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "test_profile.md",
+            "start": 7,
+            "end": 7,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 15,
+        "payload_chars": 248,
+        "payload_utf8_bytes": 292,
+        "retrieval_ms_samples": [
+          0.0606,
+          0.0591,
+          0.0601,
+          0.0571,
+          0.0569,
+          0.0567,
+          0.0568,
+          0.0562,
+          0.0593,
+          0.0568,
+          0.0577,
+          0.0557,
+          0.0557,
+          0.0559,
+          0.0604,
+          0.0561,
+          0.0573,
+          0.0576,
+          0.0559,
+          0.0564
+        ],
+        "preparation_ms_samples": [
+          0.0724,
+          0.0714,
+          0.0717,
+          0.0679,
+          0.0682,
+          0.068,
+          0.0678,
+          0.0669,
+          0.0704,
+          0.0697,
+          0.0683,
+          0.0661,
+          0.0662,
+          0.0665,
+          0.0711,
+          0.0665,
+          0.0683,
+          0.0681,
+          0.0664,
+          0.0674
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:么工",
+            "cjk:做什",
+            "cjk:在做",
+            "cjk:工作",
+            "cjk:我现",
+            "concept:work"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 5.07799512563383,
+              "matched_terms": [
+                "cjk:工作",
+                "concept:work"
+              ],
+              "body_matched_terms": [
+                "cjk:工作",
+                "concept:work"
+              ],
+              "query_coverage": 0.3333333333333333,
+              "source_id": "material-952a992693ba565c618885fb",
+              "relative_path": "test_profile.md",
+              "start_line": 7,
+              "end_line": 7,
+              "reason": "selected"
+            },
+            {
+              "score": 2.3008427835736502,
+              "matched_terms": [
+                "concept:work"
+              ],
+              "body_matched_terms": [
+                "concept:work"
+              ],
+              "query_coverage": 0.16666666666666666,
+              "source_id": "material-d6449b3e54002b24dc895b6f",
+              "relative_path": "notes/lesson.md",
+              "start_line": 4,
+              "end_line": 4,
+              "reason": "low_query_coverage"
+            },
+            {
+              "score": 2.238384101994615,
+              "matched_terms": [
+                "concept:work"
+              ],
+              "body_matched_terms": [
+                "concept:work"
+              ],
+              "query_coverage": 0.16666666666666666,
+              "source_id": "material-61460b1a78f047a77c8d62fe",
+              "relative_path": "notes/practice.md",
+              "start_line": 4,
+              "end_line": 4,
+              "reason": "low_query_coverage"
+            },
+            {
+              "score": 2.0191380086159234,
+              "matched_terms": [
+                "concept:work"
+              ],
+              "body_matched_terms": [
+                "concept:work"
+              ],
+              "query_coverage": 0.16666666666666666,
+              "source_id": "material-08ce0c3270400234a272289d",
+              "relative_path": "notes/friends.md",
+              "start_line": 12,
+              "end_line": 12,
+              "reason": "low_query_coverage"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 3,
+      "query": "何を専攻していますか？",
+      "topic": "本人专业・跨语言字段",
+      "annotation": {
+        "id": 3,
+        "query": "何を専攻していますか？",
+        "topic": "本人专业・跨语言字段",
+        "relevant": [
+          {
+            "path": "test_profile.md",
+            "start": 6,
+            "end": 6
+          }
+        ],
+        "forbidden": [
+          {
+            "path": "notes/friends.md",
+            "start": 7,
+            "end": 7,
+            "reason": "他人的研究"
+          },
+          {
+            "path": "notes/friends.md",
+            "start": 11,
+            "end": 11,
+            "reason": "他人的研究"
+          }
+        ]
+      },
+      "whole_profile": {
+        "source_ids": [
+          "whole-profile-49ef434301b5939c99f48ebb"
+        ],
+        "sources": [
+          {
+            "source_id": "whole-profile-49ef434301b5939c99f48ebb",
+            "relative_path": "test_profile.md",
+            "start_line": 1,
+            "end_line": 12,
+            "text": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+            "heading": "",
+            "owner_hint": "profile_candidate"
+          }
+        ],
+        "payload": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+        "relevant_ranges": [
+          {
+            "path": "test_profile.md",
+            "start": 6,
+            "end": 6,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 168,
+        "payload_chars": 168,
+        "payload_utf8_bytes": 410,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-6904984c166318b1a39c3d47"
+        ],
+        "sources": [
+          {
+            "source_id": "material-6904984c166318b1a39c3d47",
+            "relative_path": "test_profile.md",
+            "start_line": 6,
+            "end_line": 6,
+            "text": "- 专业：自然语言处理。",
+            "heading": "本人填写的虚构资料",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-6904984c166318b1a39c3d47\", \"relative_path\": \"test_profile.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 专业：自然语言处理。\", \"heading\": \"本人填写的虚构资料\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "test_profile.md",
+            "start": 6,
+            "end": 6,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 12,
+        "payload_chars": 245,
+        "payload_utf8_bytes": 283,
+        "retrieval_ms_samples": [
+          0.0475,
+          0.0467,
+          0.0464,
+          0.0458,
+          0.0455,
+          0.045,
+          0.0452,
+          0.0451,
+          0.0453,
+          0.047,
+          0.045,
+          0.0456,
+          0.045,
+          0.0452,
+          0.0452,
+          0.045,
+          0.0452,
+          0.0452,
+          0.0452,
+          0.0493
+        ],
+        "preparation_ms_samples": [
+          0.0589,
+          0.0578,
+          0.0573,
+          0.0566,
+          0.0564,
+          0.0558,
+          0.0558,
+          0.0556,
+          0.0559,
+          0.0576,
+          0.0556,
+          0.0561,
+          0.0557,
+          0.0559,
+          0.0559,
+          0.0556,
+          0.0558,
+          0.0557,
+          0.0557,
+          0.0598
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:専攻",
+            "cjk:攻し",
+            "concept:major"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 3.3013807884386126,
+              "matched_terms": [
+                "concept:major"
+              ],
+              "body_matched_terms": [
+                "concept:major"
+              ],
+              "query_coverage": 0.3333333333333333,
+              "source_id": "material-6904984c166318b1a39c3d47",
+              "relative_path": "test_profile.md",
+              "start_line": 6,
+              "end_line": 6,
+              "reason": "selected"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 4,
+      "query": "平时闲下来喜欢做什么？",
+      "topic": "爱好的自然改写，不直接写同义词表中的爱好",
+      "annotation": {
+        "id": 4,
+        "query": "平时闲下来喜欢做什么？",
+        "topic": "爱好的自然改写，不直接写同义词表中的爱好",
+        "relevant": [
+          {
+            "path": "test_profile.md",
+            "start": 8,
+            "end": 8
+          }
+        ],
+        "forbidden": []
+      },
+      "whole_profile": {
+        "source_ids": [
+          "whole-profile-49ef434301b5939c99f48ebb"
+        ],
+        "sources": [
+          {
+            "source_id": "whole-profile-49ef434301b5939c99f48ebb",
+            "relative_path": "test_profile.md",
+            "start_line": 1,
+            "end_line": 12,
+            "text": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+            "heading": "",
+            "owner_hint": "profile_candidate"
+          }
+        ],
+        "payload": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+        "relevant_ranges": [
+          {
+            "path": "test_profile.md",
+            "start": 8,
+            "end": 8,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 168,
+        "payload_chars": 168,
+        "payload_utf8_bytes": 410,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001
+        ]
+      },
+      "bm25": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "test_profile.md",
+            "start": 8,
+            "end": 8,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range test_profile.md:8-8"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51,
+        "retrieval_ms_samples": [
+          0.0521,
+          0.0508,
+          0.0847,
+          0.064,
+          0.0569,
+          0.0542,
+          0.0525,
+          0.0514,
+          0.0517,
+          0.0516,
+          0.0515,
+          0.0511,
+          0.0509,
+          0.055,
+          0.0509,
+          0.052,
+          0.0519,
+          0.0534,
+          0.0593,
+          0.0517
+        ],
+        "preparation_ms_samples": [
+          0.0559,
+          0.0558,
+          0.0959,
+          0.0707,
+          0.0623,
+          0.0584,
+          0.0563,
+          0.0551,
+          0.0553,
+          0.055,
+          0.0549,
+          0.0545,
+          0.0544,
+          0.0585,
+          0.0543,
+          0.0554,
+          0.0552,
+          0.0593,
+          0.0628,
+          0.0552
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:下来",
+            "cjk:做什",
+            "cjk:喜欢",
+            "cjk:平时",
+            "cjk:时闲",
+            "cjk:来喜",
+            "cjk:欢做",
+            "cjk:闲下"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": [
+          {
+            "expected": {
+              "path": "test_profile.md",
+              "start": 8,
+              "end": 8,
+              "covered": false
+            },
+            "candidate_reasons": [
+              "no_lexical_overlap"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "query": "普段、どの辺で暮らしているんですか？",
+      "topic": "住址的自然改写",
+      "annotation": {
+        "id": 5,
+        "query": "普段、どの辺で暮らしているんですか？",
+        "topic": "住址的自然改写",
+        "relevant": [
+          {
+            "path": "test_profile.md",
+            "start": 9,
+            "end": 9
+          }
+        ],
+        "forbidden": [
+          {
+            "path": "notes/lesson.md",
+            "start": 4,
+            "end": 4,
+            "reason": "东京是练习句中的地点"
+          }
+        ]
+      },
+      "whole_profile": {
+        "source_ids": [
+          "whole-profile-49ef434301b5939c99f48ebb"
+        ],
+        "sources": [
+          {
+            "source_id": "whole-profile-49ef434301b5939c99f48ebb",
+            "relative_path": "test_profile.md",
+            "start_line": 1,
+            "end_line": 12,
+            "text": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+            "heading": "",
+            "owner_hint": "profile_candidate"
+          }
+        ],
+        "payload": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+        "relevant_ranges": [
+          {
+            "path": "test_profile.md",
+            "start": 9,
+            "end": 9,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 168,
+        "payload_chars": 168,
+        "payload_utf8_bytes": 410,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0
+        ]
+      },
+      "bm25": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [
+          {
+            "path": "test_profile.md",
+            "start": 9,
+            "end": 9,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range test_profile.md:9-9"
+        ],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51,
+        "retrieval_ms_samples": [
+          0.0443,
+          0.0417,
+          0.0412,
+          0.0413,
+          0.0413,
+          0.0409,
+          0.0406,
+          0.0406,
+          0.0406,
+          0.0452,
+          0.0416,
+          0.0411,
+          0.0408,
+          0.0412,
+          0.0408,
+          0.0404,
+          0.0409,
+          0.0407,
+          0.0404,
+          0.0407
+        ],
+        "preparation_ms_samples": [
+          0.0488,
+          0.0455,
+          0.0449,
+          0.0449,
+          0.0449,
+          0.0449,
+          0.0441,
+          0.0441,
+          0.0442,
+          0.0486,
+          0.0454,
+          0.0446,
+          0.0442,
+          0.0447,
+          0.0442,
+          0.0438,
+          0.0443,
+          0.044,
+          0.0437,
+          0.044
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:普段",
+            "cjk:暮ら"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": [
+          {
+            "expected": {
+              "path": "test_profile.md",
+              "start": 9,
+              "end": 9,
+              "covered": false
+            },
+            "candidate_reasons": [
+              "no_lexical_overlap"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "query": "田中さんの出身と勤め先を教えてください。",
+      "topic": "两个人的同类字段・对象明确",
+      "annotation": {
+        "id": 6,
+        "query": "田中さんの出身と勤め先を教えてください。",
+        "topic": "两个人的同类字段・对象明确",
+        "relevant": [
+          {
+            "path": "notes/friends.md",
+            "start": 5,
+            "end": 5
+          },
+          {
+            "path": "notes/friends.md",
+            "start": 6,
+            "end": 6
+          }
+        ],
+        "forbidden": [
+          {
+            "path": "test_profile.md",
+            "start": 5,
+            "end": 5,
+            "reason": "本人不是田中"
+          },
+          {
+            "path": "test_profile.md",
+            "start": 7,
+            "end": 7,
+            "reason": "本人的工作不是田中的工作"
+          },
+          {
+            "path": "notes/friends.md",
+            "start": 10,
+            "end": 12,
+            "reason": "佐藤不是田中"
+          }
+        ]
+      },
+      "whole_profile": {
+        "source_ids": [
+          "whole-profile-49ef434301b5939c99f48ebb"
+        ],
+        "sources": [
+          {
+            "source_id": "whole-profile-49ef434301b5939c99f48ebb",
+            "relative_path": "test_profile.md",
+            "start_line": 1,
+            "end_line": 12,
+            "text": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+            "heading": "",
+            "owner_hint": "profile_candidate"
+          }
+        ],
+        "payload": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+        "relevant_ranges": [
+          {
+            "path": "notes/friends.md",
+            "start": 5,
+            "end": 5,
+            "covered": false
+          },
+          {
+            "path": "notes/friends.md",
+            "start": 6,
+            "end": 6,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 2,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": {
+              "path": "test_profile.md",
+              "start": 5,
+              "end": 5,
+              "reason": "本人不是田中"
+            },
+            "source_ids": [
+              "whole-profile-49ef434301b5939c99f48ebb"
+            ]
+          },
+          {
+            "rule": {
+              "path": "test_profile.md",
+              "start": 7,
+              "end": 7,
+              "reason": "本人的工作不是田中的工作"
+            },
+            "source_ids": [
+              "whole-profile-49ef434301b5939c99f48ebb"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Missing annotated range notes/friends.md:5-5",
+          "Missing annotated range notes/friends.md:6-6",
+          "Sent forbidden annotated range test_profile.md:5-5",
+          "Sent forbidden annotated range test_profile.md:7-7"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 168,
+        "payload_chars": 168,
+        "payload_utf8_bytes": 410,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-6ea1d9589412537d50f607c4",
+          "material-b9e690dce224491d203cdaea"
+        ],
+        "sources": [
+          {
+            "source_id": "material-6ea1d9589412537d50f607c4",
+            "relative_path": "notes/friends.md",
+            "start_line": 6,
+            "end_line": 6,
+            "text": "- 勤め先：青空ホテル。",
+            "heading": "会話ノート：他人のプロフィール / 田中さん",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-b9e690dce224491d203cdaea",
+            "relative_path": "notes/friends.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 出身：大阪。",
+            "heading": "会話ノート：他人のプロフィール / 田中さん",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-6ea1d9589412537d50f607c4\", \"relative_path\": \"notes/friends.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 勤め先：青空ホテル。\", \"heading\": \"会話ノート：他人のプロフィール / 田中さん\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-b9e690dce224491d203cdaea\", \"relative_path\": \"notes/friends.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 出身：大阪。\", \"heading\": \"会話ノート：他人のプロフィール / 田中さん\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "notes/friends.md",
+            "start": 5,
+            "end": 5,
+            "covered": true
+          },
+          {
+            "path": "notes/friends.md",
+            "start": 6,
+            "end": 6,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 2,
+        "relevant_ranges_expected": 2,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 20,
+        "payload_chars": 465,
+        "payload_utf8_bytes": 573,
+        "retrieval_ms_samples": [
+          0.089,
+          0.0846,
+          0.0881,
+          0.0884,
+          0.0829,
+          0.086,
+          0.0826,
+          0.0831,
+          0.0806,
+          0.0803,
+          0.0796,
+          0.0895,
+          0.1293,
+          0.0846,
+          0.0815,
+          0.083,
+          0.0803,
+          0.08,
+          0.0798,
+          0.0795
+        ],
+        "preparation_ms_samples": [
+          0.1099,
+          0.1048,
+          0.1073,
+          0.1076,
+          0.1013,
+          0.1046,
+          0.1008,
+          0.1011,
+          0.0983,
+          0.0981,
+          0.0975,
+          0.1173,
+          0.1545,
+          0.1029,
+          0.1001,
+          0.1013,
+          0.0985,
+          0.0981,
+          0.098,
+          0.0972
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:め先",
+            "cjk:中さ",
+            "cjk:出身",
+            "cjk:勤め",
+            "cjk:教え",
+            "cjk:田中",
+            "concept:origin"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 10.631674741594194,
+              "matched_terms": [
+                "cjk:め先",
+                "cjk:中さ",
+                "cjk:勤め",
+                "cjk:田中"
+              ],
+              "body_matched_terms": [
+                "cjk:め先",
+                "cjk:勤め"
+              ],
+              "query_coverage": 0.5714285714285714,
+              "source_id": "material-6ea1d9589412537d50f607c4",
+              "relative_path": "notes/friends.md",
+              "start_line": 6,
+              "end_line": 6,
+              "reason": "selected"
+            },
+            {
+              "score": 9.743706181315302,
+              "matched_terms": [
+                "cjk:中さ",
+                "cjk:出身",
+                "cjk:田中",
+                "concept:origin"
+              ],
+              "body_matched_terms": [
+                "cjk:出身",
+                "concept:origin"
+              ],
+              "query_coverage": 0.5714285714285714,
+              "source_id": "material-b9e690dce224491d203cdaea",
+              "relative_path": "notes/friends.md",
+              "start_line": 5,
+              "end_line": 5,
+              "reason": "selected"
+            },
+            {
+              "score": 4.871853090657651,
+              "matched_terms": [
+                "cjk:出身",
+                "concept:origin"
+              ],
+              "body_matched_terms": [
+                "cjk:出身",
+                "concept:origin"
+              ],
+              "query_coverage": 0.2857142857142857,
+              "source_id": "material-e90dc1102f90a01e71d186aa",
+              "relative_path": "notes/friends.md",
+              "start_line": 10,
+              "end_line": 10,
+              "reason": "below_relative_score"
+            },
+            {
+              "score": 4.871853090657651,
+              "matched_terms": [
+                "cjk:出身",
+                "concept:origin"
+              ],
+              "body_matched_terms": [
+                "cjk:出身",
+                "concept:origin"
+              ],
+              "query_coverage": 0.2857142857142857,
+              "source_id": "material-c56df2ac89af2513a5d9c3e6",
+              "relative_path": "test_profile.md",
+              "start_line": 5,
+              "end_line": 5,
+              "reason": "below_relative_score"
+            },
+            {
+              "score": 4.627268878507945,
+              "matched_terms": [
+                "cjk:中さ",
+                "cjk:田中"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.2857142857142857,
+              "source_id": "material-d8cee835e1e10ebf84043f0a",
+              "relative_path": "notes/friends.md",
+              "start_line": 7,
+              "end_line": 7,
+              "reason": "no_body_evidence"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 7,
+      "query": "佐藤同学在研究什么？",
+      "topic": "中文问日本语笔记中的另一个人",
+      "annotation": {
+        "id": 7,
+        "query": "佐藤同学在研究什么？",
+        "topic": "中文问日本语笔记中的另一个人",
+        "relevant": [
+          {
+            "path": "notes/friends.md",
+            "start": 11,
+            "end": 11
+          }
+        ],
+        "forbidden": [
+          {
+            "path": "test_profile.md",
+            "start": 6,
+            "end": 6,
+            "reason": "本人专业不是佐藤研究"
+          },
+          {
+            "path": "notes/friends.md",
+            "start": 7,
+            "end": 7,
+            "reason": "田中的研究不是佐藤研究"
+          }
+        ]
+      },
+      "whole_profile": {
+        "source_ids": [
+          "whole-profile-49ef434301b5939c99f48ebb"
+        ],
+        "sources": [
+          {
+            "source_id": "whole-profile-49ef434301b5939c99f48ebb",
+            "relative_path": "test_profile.md",
+            "start_line": 1,
+            "end_line": 12,
+            "text": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+            "heading": "",
+            "owner_hint": "profile_candidate"
+          }
+        ],
+        "payload": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+        "relevant_ranges": [
+          {
+            "path": "notes/friends.md",
+            "start": 11,
+            "end": 11,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": {
+              "path": "test_profile.md",
+              "start": 6,
+              "end": 6,
+              "reason": "本人专业不是佐藤研究"
+            },
+            "source_ids": [
+              "whole-profile-49ef434301b5939c99f48ebb"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Missing annotated range notes/friends.md:11-11",
+          "Sent forbidden annotated range test_profile.md:6-6"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 168,
+        "payload_chars": 168,
+        "payload_utf8_bytes": 410,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-7d27b4c84c2268e2c8d620e8"
+        ],
+        "sources": [
+          {
+            "source_id": "material-7d27b4c84c2268e2c8d620e8",
+            "relative_path": "notes/friends.md",
+            "start_line": 11,
+            "end_line": 11,
+            "text": "- 研究：海洋生物の画像分類。",
+            "heading": "会話ノート：他人のプロフィール / 佐藤さん",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-7d27b4c84c2268e2c8d620e8\", \"relative_path\": \"notes/friends.md\", \"start_line\": 11, \"end_line\": 11, \"text\": \"- 研究：海洋生物の画像分類。\", \"heading\": \"会話ノート：他人のプロフィール / 佐藤さん\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "notes/friends.md",
+            "start": 11,
+            "end": 11,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 15,
+        "payload_chars": 264,
+        "payload_utf8_bytes": 328,
+        "retrieval_ms_samples": [
+          0.0666,
+          0.0646,
+          0.0664,
+          0.0637,
+          0.0631,
+          0.0616,
+          0.063,
+          0.0633,
+          0.0643,
+          0.0634,
+          0.063,
+          0.0628,
+          0.0629,
+          0.0629,
+          0.0628,
+          0.0628,
+          0.0644,
+          0.0629,
+          0.0627,
+          0.0618
+        ],
+        "preparation_ms_samples": [
+          0.0783,
+          0.076,
+          0.0775,
+          0.0746,
+          0.0739,
+          0.0728,
+          0.0737,
+          0.0744,
+          0.0752,
+          0.0742,
+          0.0738,
+          0.0737,
+          0.0738,
+          0.0736,
+          0.0735,
+          0.0736,
+          0.0751,
+          0.0735,
+          0.0734,
+          0.0723
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:佐藤",
+            "cjk:同学",
+            "cjk:在研",
+            "cjk:学在",
+            "cjk:研究",
+            "cjk:究什",
+            "cjk:藤同"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 4.716892522796542,
+              "matched_terms": [
+                "cjk:佐藤",
+                "cjk:研究"
+              ],
+              "body_matched_terms": [
+                "cjk:研究"
+              ],
+              "query_coverage": 0.2857142857142857,
+              "source_id": "material-7d27b4c84c2268e2c8d620e8",
+              "relative_path": "notes/friends.md",
+              "start_line": 11,
+              "end_line": 11,
+              "reason": "selected"
+            },
+            {
+              "score": 2.640062728513359,
+              "matched_terms": [
+                "cjk:研究"
+              ],
+              "body_matched_terms": [
+                "cjk:研究"
+              ],
+              "query_coverage": 0.14285714285714285,
+              "source_id": "material-d8cee835e1e10ebf84043f0a",
+              "relative_path": "notes/friends.md",
+              "start_line": 7,
+              "end_line": 7,
+              "reason": "low_query_coverage"
+            },
+            {
+              "score": 2.4359265453288255,
+              "matched_terms": [
+                "cjk:佐藤"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.14285714285714285,
+              "source_id": "material-e90dc1102f90a01e71d186aa",
+              "relative_path": "notes/friends.md",
+              "start_line": 10,
+              "end_line": 10,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 2.2569802537791896,
+              "matched_terms": [
+                "cjk:佐藤"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.14285714285714285,
+              "source_id": "material-08ce0c3270400234a272289d",
+              "relative_path": "notes/friends.md",
+              "start_line": 12,
+              "end_line": 12,
+              "reason": "no_body_evidence"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 8,
+      "query": "我在2026年10月31日有什么安排？",
+      "topic": "明确日期，不能换成别的一天",
+      "annotation": {
+        "id": 8,
+        "query": "我在2026年10月31日有什么安排？",
+        "topic": "明确日期，不能换成别的一天",
+        "relevant": [
+          {
+            "path": "notes/calendar.md",
+            "start": 6,
+            "end": 6
+          }
+        ],
+        "forbidden": [
+          {
+            "path": "notes/calendar.md",
+            "start": 4,
+            "end": 5,
+            "reason": "10月24日和26日不是31日"
+          },
+          {
+            "path": "notes/calendar.md",
+            "start": 7,
+            "end": 7,
+            "reason": "11月7日不是10月31日"
+          },
+          {
+            "path": "notes/interview.md",
+            "start": 8,
+            "end": 8,
+            "reason": "旧面试日期不是本次安排"
+          }
+        ]
+      },
+      "whole_profile": {
+        "source_ids": [
+          "whole-profile-49ef434301b5939c99f48ebb"
+        ],
+        "sources": [
+          {
+            "source_id": "whole-profile-49ef434301b5939c99f48ebb",
+            "relative_path": "test_profile.md",
+            "start_line": 1,
+            "end_line": 12,
+            "text": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+            "heading": "",
+            "owner_hint": "profile_candidate"
+          }
+        ],
+        "payload": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+        "relevant_ranges": [
+          {
+            "path": "notes/calendar.md",
+            "start": 6,
+            "end": 6,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range notes/calendar.md:6-6"
+        ],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 168,
+        "payload_chars": 168,
+        "payload_utf8_bytes": 410,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-a31e29d3ccd5c11aef19309b",
+          "material-6e5e24b875f3f734f5878d22",
+          "material-d7b9659dcfa3278c40901f35",
+          "material-243f2ab89221e7f029875210"
+        ],
+        "sources": [
+          {
+            "source_id": "material-a31e29d3ccd5c11aef19309b",
+            "relative_path": "notes/calendar.md",
+            "start_line": 6,
+            "end_line": 6,
+            "text": "- 2026年10月31日：青空書店の面接、10時開始。",
+            "heading": "本人の予定メモ",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-6e5e24b875f3f734f5878d22",
+            "relative_path": "notes/calendar.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 2026年10月24日：午後は星浜公園で写真を撮った。",
+            "heading": "本人の予定メモ",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-d7b9659dcfa3278c40901f35",
+            "relative_path": "notes/calendar.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 2026年10月26日：19時から日本語の授業。",
+            "heading": "本人の予定メモ",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-243f2ab89221e7f029875210",
+            "relative_path": "notes/interview.md",
+            "start_line": 8,
+            "end_line": 8,
+            "text": "- 2026年10月10日：別の会社の面接は14時開始だった。",
+            "heading": "青空書店：10月31日の面接準備 / 過去のメモ（今回の案内ではない）",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-a31e29d3ccd5c11aef19309b\", \"relative_path\": \"notes/calendar.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 2026年10月31日：青空書店の面接、10時開始。\", \"heading\": \"本人の予定メモ\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-6e5e24b875f3f734f5878d22\", \"relative_path\": \"notes/calendar.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 2026年10月24日：午後は星浜公園で写真を撮った。\", \"heading\": \"本人の予定メモ\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-d7b9659dcfa3278c40901f35\", \"relative_path\": \"notes/calendar.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 2026年10月26日：19時から日本語の授業。\", \"heading\": \"本人の予定メモ\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-243f2ab89221e7f029875210\", \"relative_path\": \"notes/interview.md\", \"start_line\": 8, \"end_line\": 8, \"text\": \"- 2026年10月10日：別の会社の面接は14時開始だった。\", \"heading\": \"青空書店：10月31日の面接準備 / 過去のメモ（今回の案内ではない）\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "notes/calendar.md",
+            "start": 6,
+            "end": 6,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": {
+              "path": "notes/calendar.md",
+              "start": 4,
+              "end": 5,
+              "reason": "10月24日和26日不是31日"
+            },
+            "source_ids": [
+              "material-6e5e24b875f3f734f5878d22",
+              "material-d7b9659dcfa3278c40901f35"
+            ]
+          },
+          {
+            "rule": {
+              "path": "notes/interview.md",
+              "start": 8,
+              "end": 8,
+              "reason": "旧面试日期不是本次安排"
+            },
+            "source_ids": [
+              "material-243f2ab89221e7f029875210"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Sent forbidden annotated range notes/calendar.md:4-5",
+          "Sent forbidden annotated range notes/interview.md:8-8"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 114,
+        "payload_chars": 928,
+        "payload_utf8_bytes": 1162,
+        "retrieval_ms_samples": [
+          0.1419,
+          0.1332,
+          0.1481,
+          0.1307,
+          0.1294,
+          0.1281,
+          0.1295,
+          0.1282,
+          0.1298,
+          0.1296,
+          0.1283,
+          0.1393,
+          0.1304,
+          0.1269,
+          0.468,
+          0.234,
+          0.2246,
+          0.223,
+          0.221,
+          0.2143
+        ],
+        "preparation_ms_samples": [
+          0.1782,
+          0.167,
+          0.1818,
+          0.1639,
+          0.1619,
+          0.1602,
+          0.162,
+          0.1607,
+          0.1621,
+          0.1623,
+          0.1612,
+          0.1721,
+          0.1631,
+          0.1589,
+          0.5387,
+          0.2896,
+          0.2866,
+          0.2801,
+          0.2795,
+          0.2702
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:么安",
+            "cjk:安排",
+            "cjk:年",
+            "cjk:我在",
+            "cjk:日有",
+            "cjk:月",
+            "cjk:有什",
+            "concept:schedule",
+            "word:10",
+            "word:2026",
+            "word:31"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 8.990337886791472,
+              "matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "concept:schedule",
+                "word:10",
+                "word:2026",
+                "word:31"
+              ],
+              "body_matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026",
+                "word:31"
+              ],
+              "query_coverage": 0.5454545454545454,
+              "source_id": "material-a31e29d3ccd5c11aef19309b",
+              "relative_path": "notes/calendar.md",
+              "start_line": 6,
+              "end_line": 6,
+              "reason": "selected"
+            },
+            {
+              "score": 6.911099838803927,
+              "matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "concept:schedule",
+                "word:10",
+                "word:2026"
+              ],
+              "body_matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "query_coverage": 0.45454545454545453,
+              "source_id": "material-6e5e24b875f3f734f5878d22",
+              "relative_path": "notes/calendar.md",
+              "start_line": 4,
+              "end_line": 4,
+              "reason": "selected"
+            },
+            {
+              "score": 6.911099838803927,
+              "matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "concept:schedule",
+                "word:10",
+                "word:2026"
+              ],
+              "body_matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "query_coverage": 0.45454545454545453,
+              "source_id": "material-d7b9659dcfa3278c40901f35",
+              "relative_path": "notes/calendar.md",
+              "start_line": 5,
+              "end_line": 5,
+              "reason": "selected"
+            },
+            {
+              "score": 6.857678257456815,
+              "matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026",
+                "word:31"
+              ],
+              "body_matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "query_coverage": 0.45454545454545453,
+              "source_id": "material-243f2ab89221e7f029875210",
+              "relative_path": "notes/interview.md",
+              "start_line": 8,
+              "end_line": 8,
+              "reason": "selected"
+            },
+            {
+              "score": 6.741867082989403,
+              "matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "concept:schedule",
+                "word:10",
+                "word:2026"
+              ],
+              "body_matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "query_coverage": 0.45454545454545453,
+              "source_id": "material-5ee2e97d7f017a7949ef8d53",
+              "relative_path": "notes/calendar.md",
+              "start_line": 7,
+              "end_line": 7,
+              "reason": "result_budget"
+            },
+            {
+              "score": 5.928915915246968,
+              "matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "body_matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "query_coverage": 0.36363636363636365,
+              "source_id": "material-cd5bee8812872dc56665b476",
+              "relative_path": "notes/diary.md",
+              "start_line": 6,
+              "end_line": 6,
+              "reason": "result_budget"
+            },
+            {
+              "score": 5.215074584326875,
+              "matched_terms": [
+                "concept:schedule",
+                "word:10",
+                "word:2026"
+              ],
+              "body_matched_terms": [
+                "word:10",
+                "word:2026"
+              ],
+              "query_coverage": 0.2727272727272727,
+              "source_id": "material-2f8616e05b9885f3654a80bc",
+              "relative_path": "notes/calendar.md",
+              "start_line": 2,
+              "end_line": 2,
+              "reason": "result_budget"
+            },
+            {
+              "score": 4.683282476901706,
+              "matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "body_matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "query_coverage": 0.36363636363636365,
+              "source_id": "material-4f6a2dfc32ba4e14925817d7",
+              "relative_path": "notes/diary.md",
+              "start_line": 3,
+              "end_line": 4,
+              "reason": "result_budget"
+            },
+            {
+              "score": 4.448354094927717,
+              "matched_terms": [
+                "cjk:月",
+                "word:10",
+                "word:31"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.2727272727272727,
+              "source_id": "material-6034106856737d22431360a2",
+              "relative_path": "notes/interview.md",
+              "start_line": 3,
+              "end_line": 3,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 4.219280884750509,
+              "matched_terms": [
+                "cjk:月",
+                "word:10",
+                "word:31"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.2727272727272727,
+              "source_id": "material-e943fff73f595738ece95822",
+              "relative_path": "notes/interview.md",
+              "start_line": 4,
+              "end_line": 4,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 4.012645024081058,
+              "matched_terms": [
+                "cjk:月",
+                "word:10",
+                "word:31"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.2727272727272727,
+              "source_id": "material-7d559a896dbda9e627ed18ed",
+              "relative_path": "notes/interview.md",
+              "start_line": 5,
+              "end_line": 5,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 2.903955914358849,
+              "matched_terms": [
+                "cjk:年",
+                "cjk:月"
+              ],
+              "body_matched_terms": [
+                "cjk:年",
+                "cjk:月"
+              ],
+              "query_coverage": 0.18181818181818182,
+              "source_id": "material-8020bb3e71bcd25db672ad04",
+              "relative_path": "test_profile.md",
+              "start_line": 10,
+              "end_line": 10,
+              "reason": "low_query_coverage"
+            },
+            {
+              "score": 2.4859827303057553,
+              "matched_terms": [
+                "word:10",
+                "word:2026"
+              ],
+              "body_matched_terms": [
+                "word:10",
+                "word:2026"
+              ],
+              "query_coverage": 0.18181818181818182,
+              "source_id": "material-980d8951dff4919ec9b73db3",
+              "relative_path": "test_profile.md",
+              "start_line": 12,
+              "end_line": 12,
+              "reason": "low_query_coverage"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 9,
+      "query": "2026年10月24日の午後と、帰りにしたことを思い出したいです。",
+      "topic": "日期与多行段落",
+      "annotation": {
+        "id": 9,
+        "query": "2026年10月24日の午後と、帰りにしたことを思い出したいです。",
+        "topic": "日期与多行段落",
+        "relevant": [
+          {
+            "path": "notes/diary.md",
+            "start": 3,
+            "end": 4
+          }
+        ],
+        "forbidden": [
+          {
+            "path": "notes/diary.md",
+            "start": 6,
+            "end": 6,
+            "reason": "17日不是24日"
+          },
+          {
+            "path": "notes/calendar.md",
+            "start": 5,
+            "end": 7,
+            "reason": "其他日期的活动"
+          }
+        ]
+      },
+      "whole_profile": {
+        "source_ids": [
+          "whole-profile-49ef434301b5939c99f48ebb"
+        ],
+        "sources": [
+          {
+            "source_id": "whole-profile-49ef434301b5939c99f48ebb",
+            "relative_path": "test_profile.md",
+            "start_line": 1,
+            "end_line": 12,
+            "text": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+            "heading": "",
+            "owner_hint": "profile_candidate"
+          }
+        ],
+        "payload": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+        "relevant_ranges": [
+          {
+            "path": "notes/diary.md",
+            "start": 3,
+            "end": 4,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range notes/diary.md:3-4"
+        ],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 168,
+        "payload_chars": 168,
+        "payload_utf8_bytes": 410,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-4f6a2dfc32ba4e14925817d7",
+          "material-6e5e24b875f3f734f5878d22"
+        ],
+        "sources": [
+          {
+            "source_id": "material-4f6a2dfc32ba4e14925817d7",
+            "relative_path": "notes/diary.md",
+            "start_line": 3,
+            "end_line": 4,
+            "text": "2026年10月24日の午後は星浜公園で写真を撮った。\n帰りに赤い橋の近くでお茶を飲んだ。",
+            "heading": "週末の日記",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-6e5e24b875f3f734f5878d22",
+            "relative_path": "notes/calendar.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 2026年10月24日：午後は星浜公園で写真を撮った。",
+            "heading": "本人の予定メモ",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-4f6a2dfc32ba4e14925817d7\", \"relative_path\": \"notes/diary.md\", \"start_line\": 3, \"end_line\": 4, \"text\": \"2026年10月24日の午後は星浜公園で写真を撮った。\\n帰りに赤い橋の近くでお茶を飲んだ。\", \"heading\": \"週末の日記\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-6e5e24b875f3f734f5878d22\", \"relative_path\": \"notes/calendar.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 2026年10月24日：午後は星浜公園で写真を撮った。\", \"heading\": \"本人の予定メモ\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "notes/diary.md",
+            "start": 3,
+            "end": 4,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 74,
+        "payload_chars": 487,
+        "payload_utf8_bytes": 621,
+        "retrieval_ms_samples": [
+          0.1264,
+          0.1223,
+          0.1203,
+          0.1203,
+          0.1198,
+          0.1205,
+          0.1196,
+          0.1247,
+          0.1318,
+          0.1337,
+          0.1276,
+          0.12,
+          0.1192,
+          0.1191,
+          0.1244,
+          0.1195,
+          0.1238,
+          0.1229,
+          0.1207,
+          0.1205
+        ],
+        "preparation_ms_samples": [
+          0.1465,
+          0.1413,
+          0.1393,
+          0.1391,
+          0.1405,
+          0.139,
+          0.1379,
+          0.1493,
+          0.1511,
+          0.1528,
+          0.1465,
+          0.1386,
+          0.1377,
+          0.1373,
+          0.1439,
+          0.1377,
+          0.1423,
+          0.1415,
+          0.1391,
+          0.1389
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:い出",
+            "cjk:出し",
+            "cjk:午後",
+            "cjk:帰り",
+            "cjk:年",
+            "cjk:思い",
+            "cjk:月",
+            "word:10",
+            "word:2026",
+            "word:24"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 12.509678708744882,
+              "matched_terms": [
+                "cjk:午後",
+                "cjk:帰り",
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026",
+                "word:24"
+              ],
+              "body_matched_terms": [
+                "cjk:午後",
+                "cjk:帰り",
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026",
+                "word:24"
+              ],
+              "query_coverage": 0.7,
+              "source_id": "material-4f6a2dfc32ba4e14925817d7",
+              "relative_path": "notes/diary.md",
+              "start_line": 3,
+              "end_line": 4,
+              "reason": "selected"
+            },
+            {
+              "score": 10.316083887073667,
+              "matched_terms": [
+                "cjk:午後",
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026",
+                "word:24"
+              ],
+              "body_matched_terms": [
+                "cjk:午後",
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026",
+                "word:24"
+              ],
+              "query_coverage": 0.6,
+              "source_id": "material-6e5e24b875f3f734f5878d22",
+              "relative_path": "notes/calendar.md",
+              "start_line": 4,
+              "end_line": 4,
+              "reason": "selected"
+            },
+            {
+              "score": 5.928915915246968,
+              "matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "body_matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "query_coverage": 0.4,
+              "source_id": "material-cd5bee8812872dc56665b476",
+              "relative_path": "notes/diary.md",
+              "start_line": 6,
+              "end_line": 6,
+              "reason": "below_relative_score"
+            },
+            {
+              "score": 5.331888599554167,
+              "matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "body_matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "query_coverage": 0.4,
+              "source_id": "material-a31e29d3ccd5c11aef19309b",
+              "relative_path": "notes/calendar.md",
+              "start_line": 6,
+              "end_line": 6,
+              "reason": "below_relative_score"
+            },
+            {
+              "score": 5.296119818751853,
+              "matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "body_matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "query_coverage": 0.4,
+              "source_id": "material-243f2ab89221e7f029875210",
+              "relative_path": "notes/interview.md",
+              "start_line": 8,
+              "end_line": 8,
+              "reason": "below_relative_score"
+            },
+            {
+              "score": 5.03595843004695,
+              "matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "body_matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "query_coverage": 0.4,
+              "source_id": "material-d7b9659dcfa3278c40901f35",
+              "relative_path": "notes/calendar.md",
+              "start_line": 5,
+              "end_line": 5,
+              "reason": "below_relative_score"
+            },
+            {
+              "score": 4.91264243937075,
+              "matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "body_matched_terms": [
+                "cjk:年",
+                "cjk:月",
+                "word:10",
+                "word:2026"
+              ],
+              "query_coverage": 0.4,
+              "source_id": "material-5ee2e97d7f017a7949ef8d53",
+              "relative_path": "notes/calendar.md",
+              "start_line": 7,
+              "end_line": 7,
+              "reason": "below_relative_score"
+            },
+            {
+              "score": 2.9402116736208805,
+              "matched_terms": [
+                "word:10",
+                "word:2026"
+              ],
+              "body_matched_terms": [
+                "word:10",
+                "word:2026"
+              ],
+              "query_coverage": 0.2,
+              "source_id": "material-2f8616e05b9885f3654a80bc",
+              "relative_path": "notes/calendar.md",
+              "start_line": 2,
+              "end_line": 2,
+              "reason": "below_relative_score"
+            },
+            {
+              "score": 2.903955914358849,
+              "matched_terms": [
+                "cjk:年",
+                "cjk:月"
+              ],
+              "body_matched_terms": [
+                "cjk:年",
+                "cjk:月"
+              ],
+              "query_coverage": 0.2,
+              "source_id": "material-8020bb3e71bcd25db672ad04",
+              "relative_path": "test_profile.md",
+              "start_line": 10,
+              "end_line": 10,
+              "reason": "below_relative_score"
+            },
+            {
+              "score": 2.4859827303057553,
+              "matched_terms": [
+                "word:10",
+                "word:2026"
+              ],
+              "body_matched_terms": [
+                "word:10",
+                "word:2026"
+              ],
+              "query_coverage": 0.2,
+              "source_id": "material-980d8951dff4919ec9b73db3",
+              "relative_path": "test_profile.md",
+              "start_line": 12,
+              "end_line": 12,
+              "reason": "below_relative_score"
+            },
+            {
+              "score": 2.420504911869916,
+              "matched_terms": [
+                "cjk:月",
+                "word:10"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.2,
+              "source_id": "material-6034106856737d22431360a2",
+              "relative_path": "notes/interview.md",
+              "start_line": 3,
+              "end_line": 3,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 2.2958581731932473,
+              "matched_terms": [
+                "cjk:月",
+                "word:10"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.2,
+              "source_id": "material-e943fff73f595738ece95822",
+              "relative_path": "notes/interview.md",
+              "start_line": 4,
+              "end_line": 4,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 2.1834203804624064,
+              "matched_terms": [
+                "cjk:月",
+                "word:10"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.2,
+              "source_id": "material-7d559a896dbda9e627ed18ed",
+              "relative_path": "notes/interview.md",
+              "start_line": 5,
+              "end_line": 5,
+              "reason": "no_body_evidence"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 10,
+      "query": "10月31日の面接の開始時刻と、持っていく物を確認したいです。",
+      "topic": "跨日程和准备笔记",
+      "annotation": {
+        "id": 10,
+        "query": "10月31日の面接の開始時刻と、持っていく物を確認したいです。",
+        "topic": "跨日程和准备笔记",
+        "relevant": [
+          {
+            "path": "notes/calendar.md",
+            "start": 6,
+            "end": 6
+          },
+          {
+            "path": "notes/interview.md",
+            "start": 4,
+            "end": 4
+          }
+        ],
+        "forbidden": [
+          {
+            "path": "notes/interview.md",
+            "start": 8,
+            "end": 8,
+            "reason": "不同公司的旧面试时间"
+          },
+          {
+            "path": "notes/calendar.md",
+            "start": 5,
+            "end": 5,
+            "reason": "语言课时间不是面试时间"
+          }
+        ]
+      },
+      "whole_profile": {
+        "source_ids": [
+          "whole-profile-49ef434301b5939c99f48ebb"
+        ],
+        "sources": [
+          {
+            "source_id": "whole-profile-49ef434301b5939c99f48ebb",
+            "relative_path": "test_profile.md",
+            "start_line": 1,
+            "end_line": 12,
+            "text": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+            "heading": "",
+            "owner_hint": "profile_candidate"
+          }
+        ],
+        "payload": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+        "relevant_ranges": [
+          {
+            "path": "notes/calendar.md",
+            "start": 6,
+            "end": 6,
+            "covered": false
+          },
+          {
+            "path": "notes/interview.md",
+            "start": 4,
+            "end": 4,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 2,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range notes/calendar.md:6-6",
+          "Missing annotated range notes/interview.md:4-4"
+        ],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 168,
+        "payload_chars": 168,
+        "payload_utf8_bytes": 410,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-243f2ab89221e7f029875210",
+          "material-a31e29d3ccd5c11aef19309b"
+        ],
+        "sources": [
+          {
+            "source_id": "material-243f2ab89221e7f029875210",
+            "relative_path": "notes/interview.md",
+            "start_line": 8,
+            "end_line": 8,
+            "text": "- 2026年10月10日：別の会社の面接は14時開始だった。",
+            "heading": "青空書店：10月31日の面接準備 / 過去のメモ（今回の案内ではない）",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-a31e29d3ccd5c11aef19309b",
+            "relative_path": "notes/calendar.md",
+            "start_line": 6,
+            "end_line": 6,
+            "text": "- 2026年10月31日：青空書店の面接、10時開始。",
+            "heading": "本人の予定メモ",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-243f2ab89221e7f029875210\", \"relative_path\": \"notes/interview.md\", \"start_line\": 8, \"end_line\": 8, \"text\": \"- 2026年10月10日：別の会社の面接は14時開始だった。\", \"heading\": \"青空書店：10月31日の面接準備 / 過去のメモ（今回の案内ではない）\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-a31e29d3ccd5c11aef19309b\", \"relative_path\": \"notes/calendar.md\", \"start_line\": 6, \"end_line\": 6, \"text\": \"- 2026年10月31日：青空書店の面接、10時開始。\", \"heading\": \"本人の予定メモ\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "notes/calendar.md",
+            "start": 6,
+            "end": 6,
+            "covered": true
+          },
+          {
+            "path": "notes/interview.md",
+            "start": 4,
+            "end": 4,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 2,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": {
+              "path": "notes/interview.md",
+              "start": 8,
+              "end": 8,
+              "reason": "不同公司的旧面试时间"
+            },
+            "source_ids": [
+              "material-243f2ab89221e7f029875210"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Missing annotated range notes/interview.md:4-4",
+          "Sent forbidden annotated range notes/interview.md:8-8"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 59,
+        "payload_chars": 505,
+        "payload_utf8_bytes": 645,
+        "retrieval_ms_samples": [
+          0.3318,
+          0.1364,
+          0.392,
+          0.1454,
+          0.1335,
+          0.1312,
+          0.1287,
+          0.1307,
+          0.1297,
+          0.1286,
+          0.1365,
+          0.1255,
+          0.1252,
+          0.1246,
+          0.1249,
+          0.1245,
+          0.1229,
+          0.1241,
+          0.1235,
+          0.1287
+        ],
+        "preparation_ms_samples": [
+          0.3554,
+          0.1564,
+          0.4171,
+          0.1662,
+          0.1533,
+          0.1514,
+          0.1483,
+          0.1499,
+          0.1489,
+          0.1476,
+          0.1555,
+          0.1439,
+          0.1436,
+          0.1426,
+          0.1432,
+          0.1426,
+          0.1407,
+          0.1418,
+          0.1411,
+          0.1466
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:く物",
+            "cjk:始時",
+            "cjk:持っ",
+            "cjk:時刻",
+            "cjk:月",
+            "cjk:確認",
+            "cjk:認し",
+            "cjk:開始",
+            "cjk:面接",
+            "word:10",
+            "word:31"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 9.010640824066881,
+              "matched_terms": [
+                "cjk:月",
+                "cjk:開始",
+                "cjk:面接",
+                "word:10",
+                "word:31"
+              ],
+              "body_matched_terms": [
+                "cjk:月",
+                "cjk:開始",
+                "cjk:面接",
+                "word:10"
+              ],
+              "query_coverage": 0.45454545454545453,
+              "source_id": "material-243f2ab89221e7f029875210",
+              "relative_path": "notes/interview.md",
+              "start_line": 8,
+              "end_line": 8,
+              "reason": "selected"
+            },
+            {
+              "score": 8.83653109050966,
+              "matched_terms": [
+                "cjk:月",
+                "cjk:開始",
+                "cjk:面接",
+                "word:10",
+                "word:31"
+              ],
+              "body_matched_terms": [
+                "cjk:月",
+                "cjk:開始",
+                "cjk:面接",
+                "word:10",
+                "word:31"
+              ],
+              "query_coverage": 0.45454545454545453,
+              "source_id": "material-a31e29d3ccd5c11aef19309b",
+              "relative_path": "notes/calendar.md",
+              "start_line": 6,
+              "end_line": 6,
+              "reason": "selected"
+            },
+            {
+              "score": 6.476203277985519,
+              "matched_terms": [
+                "cjk:月",
+                "cjk:面接",
+                "word:10",
+                "word:31"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.36363636363636365,
+              "source_id": "material-6034106856737d22431360a2",
+              "relative_path": "notes/interview.md",
+              "start_line": 3,
+              "end_line": 3,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 6.142703596307769,
+              "matched_terms": [
+                "cjk:月",
+                "cjk:面接",
+                "word:10",
+                "word:31"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.36363636363636365,
+              "source_id": "material-e943fff73f595738ece95822",
+              "relative_path": "notes/interview.md",
+              "start_line": 4,
+              "end_line": 4,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 5.841869667699711,
+              "matched_terms": [
+                "cjk:月",
+                "cjk:面接",
+                "word:10",
+                "word:31"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.36363636363636365,
+              "source_id": "material-7d559a896dbda9e627ed18ed",
+              "relative_path": "notes/interview.md",
+              "start_line": 5,
+              "end_line": 5,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 2.8495271910074336,
+              "matched_terms": [
+                "cjk:持っ"
+              ],
+              "body_matched_terms": [
+                "cjk:持っ"
+              ],
+              "query_coverage": 0.09090909090909091,
+              "source_id": "material-94100558f86bf31111b44f2a",
+              "relative_path": "notes/lesson.md",
+              "start_line": 3,
+              "end_line": 3,
+              "reason": "low_query_coverage"
+            },
+            {
+              "score": 2.635102392075636,
+              "matched_terms": [
+                "cjk:月",
+                "word:10"
+              ],
+              "body_matched_terms": [
+                "cjk:月",
+                "word:10"
+              ],
+              "query_coverage": 0.18181818181818182,
+              "source_id": "material-cd5bee8812872dc56665b476",
+              "relative_path": "notes/diary.md",
+              "start_line": 6,
+              "end_line": 6,
+              "reason": "low_query_coverage"
+            },
+            {
+              "score": 2.238228083364109,
+              "matched_terms": [
+                "cjk:月",
+                "word:10"
+              ],
+              "body_matched_terms": [
+                "cjk:月",
+                "word:10"
+              ],
+              "query_coverage": 0.18181818181818182,
+              "source_id": "material-6e5e24b875f3f734f5878d22",
+              "relative_path": "notes/calendar.md",
+              "start_line": 4,
+              "end_line": 4,
+              "reason": "low_query_coverage"
+            },
+            {
+              "score": 2.238228083364109,
+              "matched_terms": [
+                "cjk:月",
+                "word:10"
+              ],
+              "body_matched_terms": [
+                "cjk:月",
+                "word:10"
+              ],
+              "query_coverage": 0.18181818181818182,
+              "source_id": "material-d7b9659dcfa3278c40901f35",
+              "relative_path": "notes/calendar.md",
+              "start_line": 5,
+              "end_line": 5,
+              "reason": "low_query_coverage"
+            },
+            {
+              "score": 2.1834203804624064,
+              "matched_terms": [
+                "cjk:月",
+                "word:10"
+              ],
+              "body_matched_terms": [
+                "cjk:月",
+                "word:10"
+              ],
+              "query_coverage": 0.18181818181818182,
+              "source_id": "material-5ee2e97d7f017a7949ef8d53",
+              "relative_path": "notes/calendar.md",
+              "start_line": 7,
+              "end_line": 7,
+              "reason": "low_query_coverage"
+            },
+            {
+              "score": 2.0814815109644766,
+              "matched_terms": [
+                "cjk:月",
+                "word:10"
+              ],
+              "body_matched_terms": [
+                "cjk:月",
+                "word:10"
+              ],
+              "query_coverage": 0.18181818181818182,
+              "source_id": "material-4f6a2dfc32ba4e14925817d7",
+              "relative_path": "notes/diary.md",
+              "start_line": 3,
+              "end_line": 4,
+              "reason": "low_query_coverage"
+            },
+            {
+              "score": 1.308605964648499,
+              "matched_terms": [
+                "word:10"
+              ],
+              "body_matched_terms": [
+                "word:10"
+              ],
+              "query_coverage": 0.09090909090909091,
+              "source_id": "material-2f8616e05b9885f3654a80bc",
+              "relative_path": "notes/calendar.md",
+              "start_line": 2,
+              "end_line": 2,
+              "reason": "low_query_coverage"
+            },
+            {
+              "score": 1.2889833694048034,
+              "matched_terms": [
+                "cjk:月"
+              ],
+              "body_matched_terms": [
+                "cjk:月"
+              ],
+              "query_coverage": 0.09090909090909091,
+              "source_id": "material-8020bb3e71bcd25db672ad04",
+              "relative_path": "test_profile.md",
+              "start_line": 10,
+              "end_line": 10,
+              "reason": "low_query_coverage"
+            },
+            {
+              "score": 1.1064413688572907,
+              "matched_terms": [
+                "word:10"
+              ],
+              "body_matched_terms": [
+                "word:10"
+              ],
+              "query_coverage": 0.09090909090909091,
+              "source_id": "material-980d8951dff4919ec9b73db3",
+              "relative_path": "test_profile.md",
+              "start_line": 12,
+              "end_line": 12,
+              "reason": "low_query_coverage"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": [
+          {
+            "expected": {
+              "path": "notes/interview.md",
+              "start": 4,
+              "end": 4,
+              "covered": false
+            },
+            "candidate_reasons": [
+              "no_body_evidence"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "query": "模拟面试反馈说自我介绍结尾应改什么？对应的练习句是哪句？",
+      "topic": "跨反馈笔记与练习笔记",
+      "annotation": {
+        "id": 11,
+        "query": "模拟面试反馈说自我介绍结尾应改什么？对应的练习句是哪句？",
+        "topic": "跨反馈笔记与练习笔记",
+        "relevant": [
+          {
+            "path": "notes/feedback.md",
+            "start": 3,
+            "end": 4
+          },
+          {
+            "path": "notes/practice.md",
+            "start": 4,
+            "end": 4
+          }
+        ],
+        "forbidden": [
+          {
+            "path": "notes/practice.md",
+            "start": 7,
+            "end": 7,
+            "reason": "要求重复的练习不是自我介绍练习"
+          }
+        ]
+      },
+      "whole_profile": {
+        "source_ids": [
+          "whole-profile-49ef434301b5939c99f48ebb"
+        ],
+        "sources": [
+          {
+            "source_id": "whole-profile-49ef434301b5939c99f48ebb",
+            "relative_path": "test_profile.md",
+            "start_line": 1,
+            "end_line": 12,
+            "text": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+            "heading": "",
+            "owner_hint": "profile_candidate"
+          }
+        ],
+        "payload": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+        "relevant_ranges": [
+          {
+            "path": "notes/feedback.md",
+            "start": 3,
+            "end": 4,
+            "covered": false
+          },
+          {
+            "path": "notes/practice.md",
+            "start": 4,
+            "end": 4,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 2,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range notes/feedback.md:3-4",
+          "Missing annotated range notes/practice.md:4-4"
+        ],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 168,
+        "payload_chars": 168,
+        "payload_utf8_bytes": 410,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-996214c22eaac3d01864d184",
+          "material-78195d6407841b4b0c437b11"
+        ],
+        "sources": [
+          {
+            "source_id": "material-996214c22eaac3d01864d184",
+            "relative_path": "notes/feedback.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 反馈：自我介绍的结尾太长，应先说结论。",
+            "heading": "模拟面试反馈",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-78195d6407841b4b0c437b11",
+            "relative_path": "notes/feedback.md",
+            "start_line": 4,
+            "end_line": 4,
+            "text": "- 对应练习：参见 practice.md 中的练习 A。",
+            "heading": "模拟面试反馈",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-996214c22eaac3d01864d184\", \"relative_path\": \"notes/feedback.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 反馈：自我介绍的结尾太长，应先说结论。\", \"heading\": \"模拟面试反馈\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-78195d6407841b4b0c437b11\", \"relative_path\": \"notes/feedback.md\", \"start_line\": 4, \"end_line\": 4, \"text\": \"- 对应练习：参见 practice.md 中的练习 A。\", \"heading\": \"模拟面试反馈\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "notes/feedback.md",
+            "start": 3,
+            "end": 4,
+            "covered": true
+          },
+          {
+            "path": "notes/practice.md",
+            "start": 4,
+            "end": 4,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 2,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range notes/practice.md:4-4"
+        ],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 50,
+        "payload_chars": 465,
+        "payload_utf8_bytes": 551,
+        "retrieval_ms_samples": [
+          0.1565,
+          0.1496,
+          0.1485,
+          0.1476,
+          0.1471,
+          0.146,
+          0.1513,
+          0.1474,
+          0.1476,
+          0.1488,
+          0.34,
+          0.1587,
+          0.149,
+          0.1475,
+          0.1473,
+          0.1478,
+          0.1472,
+          0.1508,
+          0.1466,
+          0.1484
+        ],
+        "preparation_ms_samples": [
+          0.1768,
+          0.1688,
+          0.1673,
+          0.1661,
+          0.1655,
+          0.1645,
+          0.1701,
+          0.1657,
+          0.1658,
+          0.1669,
+          0.3606,
+          0.1776,
+          0.1675,
+          0.1658,
+          0.1657,
+          0.1659,
+          0.1652,
+          0.1687,
+          0.1649,
+          0.1665
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:习句",
+            "cjk:介绍",
+            "cjk:反馈",
+            "cjk:句是",
+            "cjk:哪句",
+            "cjk:对应",
+            "cjk:尾应",
+            "cjk:应改",
+            "cjk:应的",
+            "cjk:我介",
+            "cjk:拟面",
+            "cjk:改什",
+            "cjk:是哪",
+            "cjk:模拟",
+            "cjk:的练",
+            "cjk:练习",
+            "cjk:绍结",
+            "cjk:结尾",
+            "cjk:自我",
+            "cjk:试反",
+            "cjk:说自",
+            "cjk:面试",
+            "cjk:馈说"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 24.204851450228997,
+              "matched_terms": [
+                "cjk:介绍",
+                "cjk:反馈",
+                "cjk:我介",
+                "cjk:拟面",
+                "cjk:模拟",
+                "cjk:结尾",
+                "cjk:自我",
+                "cjk:试反",
+                "cjk:面试"
+              ],
+              "body_matched_terms": [
+                "cjk:介绍",
+                "cjk:反馈",
+                "cjk:我介",
+                "cjk:结尾",
+                "cjk:自我"
+              ],
+              "query_coverage": 0.391304347826087,
+              "source_id": "material-996214c22eaac3d01864d184",
+              "relative_path": "notes/feedback.md",
+              "start_line": 3,
+              "end_line": 3,
+              "reason": "selected"
+            },
+            {
+              "score": 24.08853563131575,
+              "matched_terms": [
+                "cjk:反馈",
+                "cjk:对应",
+                "cjk:拟面",
+                "cjk:模拟",
+                "cjk:的练",
+                "cjk:练习",
+                "cjk:试反",
+                "cjk:面试"
+              ],
+              "body_matched_terms": [
+                "cjk:对应",
+                "cjk:的练",
+                "cjk:练习"
+              ],
+              "query_coverage": 0.34782608695652173,
+              "source_id": "material-78195d6407841b4b0c437b11",
+              "relative_path": "notes/feedback.md",
+              "start_line": 4,
+              "end_line": 4,
+              "reason": "selected"
+            },
+            {
+              "score": 17.84247138653017,
+              "matched_terms": [
+                "cjk:介绍",
+                "cjk:我介",
+                "cjk:练习",
+                "cjk:绍结",
+                "cjk:结尾",
+                "cjk:自我"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.2608695652173913,
+              "source_id": "material-61460b1a78f047a77c8d62fe",
+              "relative_path": "notes/practice.md",
+              "start_line": 4,
+              "end_line": 4,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 3.087973209533057,
+              "matched_terms": [
+                "cjk:练习"
+              ],
+              "body_matched_terms": [],
+              "query_coverage": 0.043478260869565216,
+              "source_id": "material-3bb2efd9a1d93a9587a5be1e",
+              "relative_path": "notes/practice.md",
+              "start_line": 7,
+              "end_line": 7,
+              "reason": "no_body_evidence"
+            },
+            {
+              "score": 1.88096025340238,
+              "matched_terms": [
+                "cjk:练习"
+              ],
+              "body_matched_terms": [
+                "cjk:练习"
+              ],
+              "query_coverage": 0.043478260869565216,
+              "source_id": "material-94100558f86bf31111b44f2a",
+              "relative_path": "notes/lesson.md",
+              "start_line": 3,
+              "end_line": 3,
+              "reason": "low_query_coverage"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": [
+          {
+            "expected": {
+              "path": "notes/practice.md",
+              "start": 4,
+              "end": 4,
+              "covered": false
+            },
+            "candidate_reasons": [
+              "no_body_evidence"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "query": "東京タワーの営業時間は何時ですか？",
+      "topic": "库中没有营业时间资料",
+      "annotation": {
+        "id": 12,
+        "query": "東京タワーの営業時間は何時ですか？",
+        "topic": "库中没有营业时间资料",
+        "relevant": [],
+        "forbidden": [],
+        "forbid_all_sources": true
+      },
+      "whole_profile": {
+        "source_ids": [
+          "whole-profile-49ef434301b5939c99f48ebb"
+        ],
+        "sources": [
+          {
+            "source_id": "whole-profile-49ef434301b5939c99f48ebb",
+            "relative_path": "test_profile.md",
+            "start_line": 1,
+            "end_line": 12,
+            "text": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+            "heading": "",
+            "owner_hint": "profile_candidate"
+          }
+        ],
+        "payload": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": "no source is relevant to this question",
+            "source_ids": [
+              "whole-profile-49ef434301b5939c99f48ebb"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Sent forbidden annotated range no source is relevant to this question"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 168,
+        "payload_chars": 168,
+        "payload_utf8_bytes": 410,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001
+        ]
+      },
+      "bm25": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51,
+        "retrieval_ms_samples": [
+          0.0661,
+          0.0672,
+          0.0692,
+          0.0647,
+          0.0644,
+          0.0644,
+          0.0641,
+          0.0635,
+          0.0644,
+          0.0643,
+          0.0636,
+          0.0635,
+          0.0642,
+          0.0636,
+          0.0638,
+          0.0639,
+          0.0637,
+          0.0677,
+          0.0637,
+          0.0641
+        ],
+        "preparation_ms_samples": [
+          0.0701,
+          0.0709,
+          0.0732,
+          0.0683,
+          0.0682,
+          0.0681,
+          0.0678,
+          0.067,
+          0.0679,
+          0.0678,
+          0.0671,
+          0.067,
+          0.0678,
+          0.0672,
+          0.0673,
+          0.0674,
+          0.0673,
+          0.0713,
+          0.0672,
+          0.0676
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:タワ",
+            "cjk:ワー",
+            "cjk:京タ",
+            "cjk:何時",
+            "cjk:営業",
+            "cjk:時間",
+            "cjk:東京",
+            "cjk:業時"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 3.4856207419412195,
+              "matched_terms": [
+                "cjk:東京"
+              ],
+              "body_matched_terms": [
+                "cjk:東京"
+              ],
+              "query_coverage": 0.125,
+              "source_id": "material-d6449b3e54002b24dc895b6f",
+              "relative_path": "notes/lesson.md",
+              "start_line": 4,
+              "end_line": 4,
+              "reason": "low_query_coverage"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 13,
+      "query": "这家医院今天还能预约吗？",
+      "topic": "库中没有医院或预约资料",
+      "annotation": {
+        "id": 13,
+        "query": "这家医院今天还能预约吗？",
+        "topic": "库中没有医院或预约资料",
+        "relevant": [],
+        "forbidden": [],
+        "forbid_all_sources": true
+      },
+      "whole_profile": {
+        "source_ids": [
+          "whole-profile-49ef434301b5939c99f48ebb"
+        ],
+        "sources": [
+          {
+            "source_id": "whole-profile-49ef434301b5939c99f48ebb",
+            "relative_path": "test_profile.md",
+            "start_line": 1,
+            "end_line": 12,
+            "text": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+            "heading": "",
+            "owner_hint": "profile_candidate"
+          }
+        ],
+        "payload": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": "no source is relevant to this question",
+            "source_ids": [
+              "whole-profile-49ef434301b5939c99f48ebb"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Sent forbidden annotated range no source is relevant to this question"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 168,
+        "payload_chars": 168,
+        "payload_utf8_bytes": 410,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0003,
+          0.0002,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001
+        ]
+      },
+      "bm25": {
+        "source_ids": [],
+        "sources": [],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": []}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": true,
+        "body_chars": 0,
+        "payload_chars": 51,
+        "payload_utf8_bytes": 51,
+        "retrieval_ms_samples": [
+          0.0614,
+          0.0611,
+          0.1527,
+          0.2643,
+          0.1023,
+          0.0911,
+          0.082,
+          0.057,
+          0.0598,
+          0.0584,
+          0.0576,
+          0.0569,
+          0.0564,
+          0.0576,
+          0.0563,
+          0.0557,
+          0.0556,
+          0.0554,
+          0.0554,
+          0.0586
+        ],
+        "preparation_ms_samples": [
+          0.0652,
+          0.0648,
+          0.1813,
+          0.2887,
+          0.1105,
+          0.0976,
+          0.086,
+          0.0606,
+          0.0639,
+          0.0621,
+          0.0611,
+          0.0604,
+          0.0602,
+          0.0616,
+          0.0599,
+          0.0593,
+          0.0591,
+          0.0589,
+          0.0589,
+          0.0621
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:今天",
+            "cjk:医院",
+            "cjk:天还",
+            "cjk:家医",
+            "cjk:约吗",
+            "cjk:能预",
+            "cjk:还能",
+            "cjk:这家",
+            "cjk:院今",
+            "cjk:预约"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 14,
+      "query": "日本に来てどれくらいですか？",
+      "topic": "来日日期依据，评测不计算回答时长",
+      "annotation": {
+        "id": 14,
+        "query": "日本に来てどれくらいですか？",
+        "topic": "来日日期依据，评测不计算回答时长",
+        "relevant": [
+          {
+            "path": "test_profile.md",
+            "start": 10,
+            "end": 10
+          }
+        ],
+        "forbidden": [
+          {
+            "path": "notes/calendar.md",
+            "start": 4,
+            "end": 7,
+            "reason": "活动日期不是来日日期"
+          }
+        ]
+      },
+      "whole_profile": {
+        "source_ids": [
+          "whole-profile-49ef434301b5939c99f48ebb"
+        ],
+        "sources": [
+          {
+            "source_id": "whole-profile-49ef434301b5939c99f48ebb",
+            "relative_path": "test_profile.md",
+            "start_line": 1,
+            "end_line": 12,
+            "text": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+            "heading": "",
+            "owner_hint": "profile_candidate"
+          }
+        ],
+        "payload": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+        "relevant_ranges": [
+          {
+            "path": "test_profile.md",
+            "start": 10,
+            "end": 10,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 168,
+        "payload_chars": 168,
+        "payload_utf8_bytes": 410,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-8020bb3e71bcd25db672ad04",
+          "material-d7b9659dcfa3278c40901f35"
+        ],
+        "sources": [
+          {
+            "source_id": "material-8020bb3e71bcd25db672ad04",
+            "relative_path": "test_profile.md",
+            "start_line": 10,
+            "end_line": 10,
+            "text": "- 来日：2025年4月。",
+            "heading": "本人填写的虚构资料",
+            "owner_hint": "unverified"
+          },
+          {
+            "source_id": "material-d7b9659dcfa3278c40901f35",
+            "relative_path": "notes/calendar.md",
+            "start_line": 5,
+            "end_line": 5,
+            "text": "- 2026年10月26日：19時から日本語の授業。",
+            "heading": "本人の予定メモ",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-8020bb3e71bcd25db672ad04\", \"relative_path\": \"test_profile.md\", \"start_line\": 10, \"end_line\": 10, \"text\": \"- 来日：2025年4月。\", \"heading\": \"本人填写的虚构资料\", \"owner_hint\": \"unverified\"}, {\"source_id\": \"material-d7b9659dcfa3278c40901f35\", \"relative_path\": \"notes/calendar.md\", \"start_line\": 5, \"end_line\": 5, \"text\": \"- 2026年10月26日：19時から日本語の授業。\", \"heading\": \"本人の予定メモ\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "test_profile.md",
+            "start": 10,
+            "end": 10,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": {
+              "path": "notes/calendar.md",
+              "start": 4,
+              "end": 7,
+              "reason": "活动日期不是来日日期"
+            },
+            "source_ids": [
+              "material-d7b9659dcfa3278c40901f35"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Sent forbidden annotated range notes/calendar.md:4-7"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 39,
+        "payload_chars": 458,
+        "payload_utf8_bytes": 530,
+        "retrieval_ms_samples": [
+          0.074,
+          0.0729,
+          0.0639,
+          0.0611,
+          0.0597,
+          0.0603,
+          0.0597,
+          0.0583,
+          0.0627,
+          0.06,
+          0.06,
+          0.0641,
+          0.061,
+          0.0598,
+          0.0592,
+          0.0588,
+          0.0584,
+          0.0584,
+          0.0578,
+          0.0581
+        ],
+        "preparation_ms_samples": [
+          0.0949,
+          0.0923,
+          0.0823,
+          0.0792,
+          0.0774,
+          0.0783,
+          0.0769,
+          0.0754,
+          0.0804,
+          0.0778,
+          0.0776,
+          0.0832,
+          0.0789,
+          0.0774,
+          0.0766,
+          0.076,
+          0.0756,
+          0.0756,
+          0.075,
+          0.0755
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:日本",
+            "cjk:来て",
+            "concept:arrival"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 3.4856207419412195,
+              "matched_terms": [
+                "concept:arrival"
+              ],
+              "body_matched_terms": [
+                "concept:arrival"
+              ],
+              "query_coverage": 0.3333333333333333,
+              "source_id": "material-8020bb3e71bcd25db672ad04",
+              "relative_path": "test_profile.md",
+              "start_line": 10,
+              "end_line": 10,
+              "reason": "selected"
+            },
+            {
+              "score": 3.135639826196783,
+              "matched_terms": [
+                "cjk:日本"
+              ],
+              "body_matched_terms": [
+                "cjk:日本"
+              ],
+              "query_coverage": 0.3333333333333333,
+              "source_id": "material-d7b9659dcfa3278c40901f35",
+              "relative_path": "notes/calendar.md",
+              "start_line": 5,
+              "end_line": 5,
+              "reason": "selected"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 15,
+      "query": "我有商店的积分卡吗？",
+      "topic": "只有课堂例句，没有本人持卡事实",
+      "annotation": {
+        "id": 15,
+        "query": "我有商店的积分卡吗？",
+        "topic": "只有课堂例句，没有本人持卡事实",
+        "relevant": [],
+        "forbidden": [
+          {
+            "path": "notes/lesson.md",
+            "start": 3,
+            "end": 3,
+            "reason": "例句不能作为本人的持卡证据"
+          }
+        ],
+        "forbid_all_sources": true
+      },
+      "whole_profile": {
+        "source_ids": [
+          "whole-profile-49ef434301b5939c99f48ebb"
+        ],
+        "sources": [
+          {
+            "source_id": "whole-profile-49ef434301b5939c99f48ebb",
+            "relative_path": "test_profile.md",
+            "start_line": 1,
+            "end_line": 12,
+            "text": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+            "heading": "",
+            "owner_hint": "profile_candidate"
+          }
+        ],
+        "payload": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": "no source is relevant to this question",
+            "source_ids": [
+              "whole-profile-49ef434301b5939c99f48ebb"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Sent forbidden annotated range no source is relevant to this question"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 168,
+        "payload_chars": 168,
+        "payload_utf8_bytes": 410,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-94100558f86bf31111b44f2a"
+        ],
+        "sources": [
+          {
+            "source_id": "material-94100558f86bf31111b44f2a",
+            "relative_path": "notes/lesson.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 积分卡问答练习：私はポイントカードを持っています。",
+            "heading": "日语课堂例句（本人资料ではない）",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-94100558f86bf31111b44f2a\", \"relative_path\": \"notes/lesson.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 积分卡问答练习：私はポイントカードを持っています。\", \"heading\": \"日语课堂例句（本人资料ではない）\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 0,
+        "all_relevant_ranges_covered": null,
+        "forbidden_rule_applicable": true,
+        "forbidden_violations": [
+          {
+            "rule": {
+              "path": "notes/lesson.md",
+              "start": 3,
+              "end": 3,
+              "reason": "例句不能作为本人的持卡证据"
+            },
+            "source_ids": [
+              "material-94100558f86bf31111b44f2a"
+            ]
+          },
+          {
+            "rule": "no source is relevant to this question",
+            "source_ids": [
+              "material-94100558f86bf31111b44f2a"
+            ]
+          }
+        ],
+        "failure_reasons": [
+          "Sent forbidden annotated range notes/lesson.md:3-3",
+          "Sent forbidden annotated range no source is relevant to this question"
+        ],
+        "forbidden_free": false,
+        "empty_sources": false,
+        "body_chars": 27,
+        "payload_chars": 267,
+        "payload_utf8_bytes": 349,
+        "retrieval_ms_samples": [
+          0.0628,
+          0.0615,
+          0.0602,
+          0.0638,
+          0.0593,
+          0.0589,
+          0.0584,
+          0.059,
+          0.0588,
+          0.0583,
+          0.0586,
+          0.0589,
+          0.0626,
+          0.0585,
+          0.0588,
+          0.0588,
+          0.0587,
+          0.0661,
+          0.0589,
+          0.0586
+        ],
+        "preparation_ms_samples": [
+          0.0745,
+          0.0723,
+          0.0708,
+          0.0747,
+          0.0699,
+          0.0694,
+          0.069,
+          0.0694,
+          0.0692,
+          0.0687,
+          0.0691,
+          0.0696,
+          0.0731,
+          0.0689,
+          0.0694,
+          0.0692,
+          0.0693,
+          0.0766,
+          0.0695,
+          0.069
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:分卡",
+            "cjk:卡吗",
+            "cjk:商店",
+            "cjk:店的",
+            "cjk:我有",
+            "cjk:有商",
+            "cjk:的积",
+            "cjk:积分"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 5.699054382014867,
+              "matched_terms": [
+                "cjk:分卡",
+                "cjk:积分"
+              ],
+              "body_matched_terms": [
+                "cjk:分卡",
+                "cjk:积分"
+              ],
+              "query_coverage": 0.25,
+              "source_id": "material-94100558f86bf31111b44f2a",
+              "relative_path": "notes/lesson.md",
+              "start_line": 3,
+              "end_line": 3,
+              "reason": "selected"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    },
+    {
+      "id": 16,
+      "query": "鈴木さんに勧められた本のタイトルは何でしたか？",
+      "topic": "普通笔记中的具体对象，无概念词特判",
+      "annotation": {
+        "id": 16,
+        "query": "鈴木さんに勧められた本のタイトルは何でしたか？",
+        "topic": "普通笔记中的具体对象，无概念词特判",
+        "relevant": [
+          {
+            "path": "notes/books.md",
+            "start": 3,
+            "end": 3
+          }
+        ],
+        "forbidden": []
+      },
+      "whole_profile": {
+        "source_ids": [
+          "whole-profile-49ef434301b5939c99f48ebb"
+        ],
+        "sources": [
+          {
+            "source_id": "whole-profile-49ef434301b5939c99f48ebb",
+            "relative_path": "test_profile.md",
+            "start_line": 1,
+            "end_line": 12,
+            "text": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+            "heading": "",
+            "owner_hint": "profile_candidate"
+          }
+        ],
+        "payload": "# 本人填写的虚构资料\n这是公开检索评测的虚构人物，不代表任何真实使用者。\n\n- 姓名：青空テスト。\n- 出身：中国・架空市。\n- 专业：自然语言处理。\n- 工作：图书馆的资料整理员。\n- 爱好：摄影、做饭。\n- 现在住在：雲見町。\n- 来日：2025年4月。\n- 常用联系语言：日语、中文。\n- 最近更新时间：2026-10-26。\n",
+        "relevant_ranges": [
+          {
+            "path": "notes/books.md",
+            "start": 3,
+            "end": 3,
+            "covered": false
+          }
+        ],
+        "relevant_ranges_covered": 0,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": false,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [
+          "Missing annotated range notes/books.md:3-3"
+        ],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 168,
+        "payload_chars": 168,
+        "payload_utf8_bytes": 410,
+        "retrieval_ms_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "preparation_ms_samples": [
+          0.0,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0001,
+          0.0,
+          0.0001
+        ]
+      },
+      "bm25": {
+        "source_ids": [
+          "material-a425ddc1d78389ceb4302b9b"
+        ],
+        "sources": [
+          {
+            "source_id": "material-a425ddc1d78389ceb4302b9b",
+            "relative_path": "notes/books.md",
+            "start_line": 3,
+            "end_line": 3,
+            "text": "- 鈴木さんに勧められた本：『夜空の図書館』。",
+            "heading": "友人からのおすすめ",
+            "owner_hint": "unverified"
+          }
+        ],
+        "payload": "{\"kind\": \"untrusted_reference_data\", \"sources\": [{\"source_id\": \"material-a425ddc1d78389ceb4302b9b\", \"relative_path\": \"notes/books.md\", \"start_line\": 3, \"end_line\": 3, \"text\": \"- 鈴木さんに勧められた本：『夜空の図書館』。\", \"heading\": \"友人からのおすすめ\", \"owner_hint\": \"unverified\"}]}",
+        "relevant_ranges": [
+          {
+            "path": "notes/books.md",
+            "start": 3,
+            "end": 3,
+            "covered": true
+          }
+        ],
+        "relevant_ranges_covered": 1,
+        "relevant_ranges_expected": 1,
+        "all_relevant_ranges_covered": true,
+        "forbidden_rule_applicable": false,
+        "forbidden_violations": [],
+        "failure_reasons": [],
+        "forbidden_free": true,
+        "empty_sources": false,
+        "body_chars": 23,
+        "payload_chars": 255,
+        "payload_utf8_bytes": 315,
+        "retrieval_ms_samples": [
+          0.0715,
+          0.0718,
+          0.0698,
+          0.0692,
+          0.0697,
+          0.0686,
+          0.0685,
+          0.0735,
+          0.069,
+          0.0682,
+          0.0697,
+          0.0687,
+          0.0694,
+          0.0688,
+          0.0685,
+          0.0723,
+          0.0679,
+          0.0686,
+          0.0685,
+          0.0682
+        ],
+        "preparation_ms_samples": [
+          0.083,
+          0.083,
+          0.081,
+          0.08,
+          0.0802,
+          0.0794,
+          0.0794,
+          0.0844,
+          0.0796,
+          0.0788,
+          0.0802,
+          0.0859,
+          0.08,
+          0.0793,
+          0.079,
+          0.0827,
+          0.0785,
+          0.0789,
+          0.079,
+          0.0789
+        ],
+        "retrieval_diagnostics": {
+          "query_terms": [
+            "cjk:た本",
+            "cjk:イト",
+            "cjk:タイ",
+            "cjk:トル",
+            "cjk:勧め",
+            "cjk:木さ",
+            "cjk:鈴木"
+          ],
+          "minimum_query_coverage": 0.2,
+          "minimum_relative_score": 0.5,
+          "requires_body_evidence": true,
+          "candidates": [
+            {
+              "score": 15.694170131796461,
+              "matched_terms": [
+                "cjk:た本",
+                "cjk:勧め",
+                "cjk:木さ",
+                "cjk:鈴木"
+              ],
+              "body_matched_terms": [
+                "cjk:た本",
+                "cjk:勧め",
+                "cjk:木さ",
+                "cjk:鈴木"
+              ],
+              "query_coverage": 0.5714285714285714,
+              "source_id": "material-a425ddc1d78389ceb4302b9b",
+              "relative_path": "notes/books.md",
+              "start_line": 3,
+              "end_line": 3,
+              "reason": "selected"
+            }
+          ],
+          "limitation": "Lexical relevance only; no answerability, truth or ownership verification"
+        },
+        "retrieval_failure_details": []
+      }
+    }
+  ],
+  "limitations": [
+    "Retrieval coverage is not fact correctness, source ownership verification, or generated answer quality",
+    "Forbidden-range checks are strict sending-purity checks; a candidate being sent does not prove it will be misused",
+    "The annotations are finite and do not measure exhaustive semantic precision",
+    "All data is fictional; sixteen questions do not establish performance on a user's real corpus",
+    "Timing is for this small warm local snapshot and cannot establish end-to-end latency",
+    "Whole-profile and JSON payload sizes include their real differing metadata overhead; token counts are not estimated"
+  ]
+}

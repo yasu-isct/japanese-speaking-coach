@@ -1,0 +1,12 @@
+{
+  "completed": true,
+  "expected_turns": 4,
+  "recorded_turns": 4,
+  "input_kind": "public synthetic TTS",
+  "show_window": false,
+  "retrieval": "local_multilingual_hybrid",
+  "source_sha256": {
+    "app/jsc_live/suggest.py": "77a4cf597d59005d83e6068c9e650fd851146576eafb31604ef20051dd499a6b",
+    "app/jsc_live/semantic_materials.py": "278b633b1fc55d405ea19339ef8e5802b9b71c34f8d69144b057bb1d92ec5579"
+  }
+}

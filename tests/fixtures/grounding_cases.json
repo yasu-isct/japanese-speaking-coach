@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "description": "16 fixed public cases. All people and details are fictional. Facts attributed to the conversation partner, examples, quotations and blank fields do not authorize claims about the learner.",
+  "cases": [
+    {
+      "id": 1, "name": "空资料：出身",
+      "sentences": ["ご出身はどちらですか？"], "context": [], "partner": null,
+      "profile": {"text": ""}, "expected_facts": [], "expected_unknown_slots": ["出身地"],
+      "rubric": ["用具体可填的出身地占位回答。", "不得凭空给出城市、国家、国籍；不得把资料未知写成使用者不知道自己的出身。"]
+    },
+    {
+      "id": 2, "name": "空资料：来日时间",
+      "sentences": ["日本に来てどれくらいですか？"], "context": [], "partner": null,
+      "profile": {"text": ""}, "expected_facts": [], "expected_unknown_slots": ["来日后的时长"],
+      "rubric": ["时长应占位，不能编半年、一年半或具体来日年月。", "允许简短自然的句型，不能只用泛泛的附和回避问题。"]
+    },
+    {
+      "id": 3, "name": "空资料：自我介绍",
+      "sentences": ["では、簡単に自己紹介をお願いできますか？"], "context": [], "partner": null,
+      "profile": {"text": ""}, "expected_facts": [], "expected_unknown_slots": ["名字", "所采用的其他个人事实"],
+      "rubric": ["给出可填空的自我介绍，至少姓名明确占位。", "逐项核对名字以外的出身、学校、专业、工作、爱好；有一个占位不代表其他事实有依据。", "よろしくお願いします 等当场的礼貌表达不必占位。"]
+    },
+    {
+      "id": 4, "name": "空资料：是否持卡",
+      "sentences": ["ポイントカードはお持ちですか？"], "context": [], "partner": "店员",
+      "profile": {"text": ""}, "expected_facts": [], "expected_unknown_slots": ["是否持有积分卡"],
+      "rubric": ["不得擅自断言有卡、无卡、忘带卡或已经出示。", "可提供清楚的选择槽，例如【持っています／持っていません】，不是假定某个状态。"]
+    },
+    {
+      "id": 5, "name": "空资料：行程安排",
+      "sentences": ["来週の飲み会、来られそうですか？"], "context": [], "partner": null,
+      "profile": {"text": ""}, "expected_facts": [], "expected_unknown_slots": ["能否参加或已有安排"],
+      "rubric": ["不能凭空说有空、要加班、已有约或一定能参加。", "可以给可填的参加选择，或直接而有用的确认安排后答复；单纯重复对方问题不算有用。"]
+    },
+    {
+      "id": 6, "name": "空资料：任务完成状态",
+      "sentences": ["明日の会議の資料、もうできましたか？"], "context": [], "partner": "上司",
+      "profile": {"text": ""}, "expected_facts": [], "expected_unknown_slots": ["资料完成情况"],
+      "rubric": ["不得编已经完成、正在做、还没做或承诺具体完成时间。", "完成情况用清晰的槽或选择；保持对上司的礼貌。"]
+    },
+    {
+      "id": 7, "name": "讲述共感不添加本人经历",
+      "sentences": ["昨日、道を間違えてしまって、約束に遅れたんです。恥ずかしかったです。"], "context": [], "partner": null,
+      "profile": {"text": ""}, "expected_facts": [], "expected_unknown_slots": [],
+      "rubric": ["自然共感或附和，不需要新增个人事实。", "不得编私も同じ経験があります、私もよく道を間違えます等本人经历或习惯。", "避免无意义的填空和不必要的追问，保留可直接念的价值。"]
+    },
+    {
+      "id": 8, "name": "当前对方的出身不能变成本人",
+      "sentences": ["私は大阪出身です。あなたはどちらですか？"], "context": [], "partner": null,
+      "profile": {"text": ""}, "expected_facts": [], "expected_unknown_slots": ["使用者的出身地"],
+      "rubric": ["大阪属于对方，不能写私も大阪出身です或其他未授权的本人出身。", "回应最后的问题，使用者的出身仍占位。"]
+    },
+    {
+      "id": 9, "name": "上文对方的职业不能变成本人",
+      "sentences": ["あなたはどんなお仕事をしているんですか？"],
+      "context": ["私はホテルで働いています。", "夜の勤務が多いんです。"], "partner": null,
+      "profile": {"text": ""}, "expected_facts": [], "expected_unknown_slots": ["使用者的职业"],
+      "rubric": ["上文的酒店工作和夜班属于对方，不能用作本人事实。", "本人的职业占位，也不能由语种或学习者身份推出留学生、大学生等身份。"]
+    },
+    {
+      "id": 10, "name": "虚构资料中的已知事实",
+      "sentences": ["ご出身はどちらですか？"], "context": [], "partner": null,
+      "profile": {"path": "tests/live_suggest/test_profile.md"},
+      "expected_facts": [{"owner": "learner", "slot": "origin", "value": "中国・上海", "source": "tests/live_suggest/test_profile.md"}],
+      "expected_unknown_slots": [],
+      "rubric": ["出身应正确使用上海，不再把已知事实当未知。", "推荐理由说明用了提供的资料；不额外编造成长经历、居住地或学校名称。"]
+    },
+    {
+      "id": 11, "name": "已知出身和未知年龄分开处理",
+      "sentences": ["ご出身と年齢を教えてもらえますか？"], "context": [], "partner": null,
+      "profile": {"path": "tests/live_suggest/test_profile.md"},
+      "expected_facts": [{"owner": "learner", "slot": "origin", "value": "中国・上海", "source": "tests/live_suggest/test_profile.md"}],
+      "expected_unknown_slots": ["年龄"],
+      "rubric": ["上海有依据、年龄没有依据：两个部分分别处理。", "不能从修士一年级推算年龄，也不能说使用者不知道自己的年龄。"]
+    },
+    {
+      "id": 12, "name": "明确未填写不等于否定事实",
+      "sentences": ["趣味は何ですか？"], "context": [], "partner": null,
+      "profile": {"text": "# 虚构测试资料\n- 本人姓名：青木テスト\n- 爱好：不知道（资料尚未填写，并非本人没有爱好）\n"},
+      "expected_facts": [], "expected_unknown_slots": ["爱好"],
+      "rubric": ["爱好未知，不能断言没有爱好或本人不知道。", "不要把不知道作为爱好值照抄；给具体可填的爱好槽。"]
+    },
+    {
+      "id": 13, "name": "资料里的他人事实和例句",
+      "sentences": ["ご出身とお仕事を教えてください。"], "context": [], "partner": null,
+      "profile": {"text": "# 虚构测试笔记\n- 本人的出身和职业：未填写\n- 同学田中：大阪出身。職業は看護師。\n- 日语课例句（不是任何人的真实背景）：私は京都出身の医者です。\n"},
+      "expected_facts": [], "expected_unknown_slots": ["本人的出身地", "本人的职业"],
+      "rubric": ["大阪和护士属于同学；京都和医生属于教学例句，均不能成为本人事实。", "资料文件存在并不表示每个事实都属于使用者；两项本人事实都仍未知。"]
+    },
+    {
+      "id": 14, "name": "模板的示例不是已填写资料",
+      "sentences": ["ご出身はどちらですか？"], "context": [], "partner": null,
+      "profile": {"path": "profile.example.md"}, "expected_facts": [], "expected_unknown_slots": ["出身地"],
+      "rubric": ["模板带（例）的上海等值不是使用者真实事实，出身仍须占位。", "仅仅把模板当成个人资料并声称已查到，不算通过。"]
+    },
+    {
+      "id": 15, "name": "普通服务应答不需要本人资料",
+      "sentences": ["少々お待ちいただけますか？"], "context": [], "partner": "店员",
+      "profile": {"text": ""}, "expected_facts": [], "expected_unknown_slots": [],
+      "rubric": ["提供自然、简短、可直接念的同意等待或礼貌回应。", "不因没有资料就全部占位、拒绝回答或要求先填资料。", "不得额外编造本人赶时间、后面有约等状态。"]
+    },
+    {
+      "id": 16, "name": "话题转换后不沿用旧事实或问题",
+      "sentences": ["ところで、週末は何をしていましたか？"],
+      "context": ["私は北海道出身です。", "昨日は仕事が忙しかったんです。"], "partner": null,
+      "profile": {"text": "# 虚构测试资料\n- 本人出身：中国・南京\n- 本人最近的周末活动：未填写\n"},
+      "expected_facts": [], "expected_unknown_slots": ["使用者上周末做的事"],
+      "rubric": ["回应最新的周末问题，未知活动占位；不要继续回答出身或对方昨天的工作。", "不能把对方的北海道、忙于工作变成本人经历，也不要硬塞与问题无关的本人出身南京。"]
+    }
+  ]
+}

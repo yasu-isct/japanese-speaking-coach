@@ -6,8 +6,10 @@ A Claude Skill that helps Chinese-speaking learners (JLPT N4–N2) living in Jap
 
 [English](#english) ・ [日本語](#日本語) ・ [中文简介](#中文简介)
 
-> 📷 Screenshots / demo GIF: *coming soon* — see `docs/` for sample outputs in the meantime.
-> スクリーンショット・デモGIFは準備中です。
+![Live subtitles with furigana; the recommended reply leads with its conclusion in bold, the other two take one line, and the other answer is ready below](docs/images/showcase-conversation.png)
+
+> **Phase 2 (`app/jsc_live`, Windows):** live Japanese subtitles with furigana on the GPU, and after each turn three replies you can say as they are — the recommended ⭐ one leads with its conclusion; choices come with the other answer ready to say; answers from your own course or work documents cite their source. Last subtitle → suggestions p50 2.21 s / p95 2.50 s (10 TTS sentences, RTX 5060 Laptop). One-page summary: [`docs/showcase-ja.md`](docs/showcase-ja.md) · 25 s [demo video](docs/images/showcase-demo.webm) · [all screens](docs/images/README.md).
+> 画面・動画はすべて TTS 音声または公開の架空資料による実行・個人情報なし。
 
 ---
 
@@ -104,8 +106,8 @@ Known limits: the "users" in tests are simulated; native-speaker review and real
 ### Roadmap
 
 1. **This repo (phase 1)** — the Skill.
-2. **Prototype done** — real-time Japanese subtitles with furigana from the microphone or system audio, running locally on the GPU (faster-whisper + kotoba-whisper, MeCab readings). See [`app/README.md`](app/README.md).
-3. Next — suggestions for what to say next, based on the live transcript.
+2. **Phase 2, working** — real-time Japanese subtitles with furigana (faster-whisper large-v3-turbo on the GPU, MeCab readings); reply suggestions after each turn (DeepSeek, rules read from the Skill) that can be said as they are, with the ⭐ reply's conclusion first; answers from an external folder of the learner's own documents (Markdown, Word, PDF) with citations; a history window with word lookup; an optional recording with a local review page and Anki export. Last subtitle → suggestions p50 2.21 s / p95 2.50 s on 10 TTS sentences. See [`app/README.md`](app/README.md) and [`docs/status.md`](docs/status.md).
+3. Next — try the latest version in real video calls, make suggestions faster, a third-party trial.
 
 ---
 

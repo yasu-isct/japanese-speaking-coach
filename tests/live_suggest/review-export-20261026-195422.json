@@ -1,0 +1,30 @@
+{
+  "baseline": {
+    "commit": "c578811",
+    "review_cli_exit": 2,
+    "review_export_available": false
+  },
+  "current": {
+    "sentences": 2,
+    "suggestions": 2,
+    "cards": 2,
+    "elapsed_ms": 27.51,
+    "diagnostics": {}
+  },
+  "synthetic_fixture_sha256": {
+    "README.md": "6adcc9517e53e328e83c10d56f4b3ca0012665af978cb77ab9af9d15a7ffba85",
+    "suggestions.jsonl": "767c78cc6d30ef42c7438c33b30799367c2cc3b05c9cd0779b60d27b5b4ba9f3",
+    "transcript.txt": "ead6b807a0225ce43e5c5be0584f013e02ab4ad05292292d9b99815e742d269b",
+    "vocabulary.jsonl": "9735ae9670edfd129fdbd8c8e107a8d3b3b3b69e6f46718689cf5211a84b1220",
+    "clips/transcripts.tsv": "c9329a8894688d8ca4633de15c5ca6aff019a1df0d7d301ca2ab88c9ae6cc101"
+  },
+  "input_unchanged": true,
+  "source_sha256": "b1c50eca20ce88a2fd4fffd681b53bba88f476a51bffb2d02f93058f1ba90081",
+  "tts_archive_only": {
+    "sentences": 4,
+    "suggestions": 4,
+    "cards": 0,
+    "diagnostics": {}
+  },
+  "limits": "Offline replay of stored data, no new correction/accuracy judgment; TTS has no historic vocabulary log; UI needs separate rendering check."
+}

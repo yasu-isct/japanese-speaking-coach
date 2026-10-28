@@ -1,0 +1,86 @@
+{
+  "decision": "D-035",
+  "tests": {
+    "run": 302,
+    "pass": 301,
+    "skip": 1
+  },
+  "api_calls": 0,
+  "private_data_read": false,
+  "real_user_settings_changed": false,
+  "baseline": "materials-startup-before-20261026-222643.json",
+  "after": "materials-startup-after-20261026-222821.json",
+  "captures": {
+    "startup-before-20261026-222621/initial.png": {
+      "method": "PrintWindow owned HWND",
+      "width": 900,
+      "height": 118,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "sha256": "b3b62b4e4339784f36298e5ff392188e0b8d59a708cf1406b20a7f95b9bc1ffa"
+    },
+    "startup-before-20261026-222621/ready.png": {
+      "method": "PrintWindow owned HWND",
+      "width": 900,
+      "height": 118,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "sha256": "b3b62b4e4339784f36298e5ff392188e0b8d59a708cf1406b20a7f95b9bc1ffa"
+    },
+    "startup-after-20261026-222756/initial.png": {
+      "method": "PrintWindow owned HWND",
+      "width": 900,
+      "height": 149,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "sha256": "489361815ee69c41ad8eb7a74288b6e5d4a53aa316bffc1e1987ce1b9732a1d5"
+    },
+    "startup-after-20261026-222756/keywords.png": {
+      "method": "PrintWindow owned HWND",
+      "width": 900,
+      "height": 149,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "sha256": "3c9519bf9a040154c3530f68eef3e3f19939ef05e7bce07923ae05cdec0a0304"
+    },
+    "startup-after-20261026-222756/ready.png": {
+      "method": "PrintWindow owned HWND",
+      "width": 900,
+      "height": 118,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "sha256": "b3b62b4e4339784f36298e5ff392188e0b8d59a708cf1406b20a7f95b9bc1ffa"
+    },
+    "startup-materials-narrow-20261026-223147/materials.png": {
+      "method": "PrintWindow owned HWND",
+      "width": 520,
+      "height": 540,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "input": "Public 100-file library, startup held at 16/100 for layout; no API/audio, not timing evidence",
+      "sha256": "8f5311318319624fad9acb93fc3513d769cc1c896e317662ea64fac1e8eeab4e"
+    },
+    "startup-materials-cancelled-20261026-223148/materials.png": {
+      "method": "PrintWindow owned HWND",
+      "width": 820,
+      "height": 600,
+      "visible": true,
+      "desktop_pixels_copied": false,
+      "foreground_unchanged": true,
+      "input": "Public 100-file library, startup held at 16/100 for layout; no API/audio, not timing evidence",
+      "sha256": "4a85634cd30debe01a52a773d0ff36df48839a96cfe8845dd648ed9153345868"
+    }
+  },
+  "limitations": [
+    "Audio/ASR/API worker replaced in main benchmark.",
+    "Offscreen creation, not visible latency or full application readiness.",
+    "Total materials startup still about 25s; maximum synthetic UI pump gap 538ms.",
+    "No new natural-language answer accuracy or real-speaker evidence."
+  ]
+}

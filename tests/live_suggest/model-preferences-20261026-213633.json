@@ -1,0 +1,16 @@
+{
+  "kind": "Actual model restored from temporary saved settings; fixed public inputs only",
+  "saved_mode_restored": true,
+  "disable_persisted": true,
+  "payloads_identical_to_d030": 47,
+  "restore_model_and_index_ms": 1050.61,
+  "search_and_payload_timing": {
+    "samples": 47,
+    "p50_ms": 3.5373,
+    "p95_ms": 4.8231
+  },
+  "api_calls": 0,
+  "network_requests": 0,
+  "real_user_settings_changed": false,
+  "private_data_read": false
+}

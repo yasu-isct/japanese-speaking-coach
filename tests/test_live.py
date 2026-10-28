@@ -132,6 +132,18 @@ class SegmenterTest(unittest.TestCase):
         audio = np.concatenate([silence(0.3), tone(5.0), silence(0.8)])
         self.assertGreaterEqual(len(self.finals(run_segmenter(audio, max_utterance=2.0))), 2)
 
+    def test_long_utterance_is_cut_at_the_quietest_point(self):
+        # 10 s of speech with a short (0.3 s, too short to end the sentence) breath at 9.0 s,
+        # then more speech: the cut must land in the breath, not at the 12 s limit.
+        audio = np.concatenate([silence(0.3), tone(9.0), silence(0.3, amp=0.002), tone(5.0), silence(0.8)])
+        finals = self.finals(run_segmenter(audio, max_utterance=12.0, cut_search=4.0))
+        self.assertEqual(len(finals), 2)
+        first = len(finals[0].audio) / SAMPLE_RATE
+        self.assertTrue(9.0 < first < 9.9, first)               # pre-roll 0.3 + speech 9.0 + part of the breath
+        total = sum(len(e.audio) for e in finals) / SAMPLE_RATE
+        self.assertGreater(total, 14.0)                         # nothing was lost at the cut
+        self.assertEqual([e.utterance_id for e in finals], [1, 2])
+
     def test_background_noise_is_ignored(self):
         audio = np.concatenate([silence(1.0, amp=0.003), tone(1.0), silence(1.0, amp=0.003)])
         self.assertEqual(len(self.finals(run_segmenter(audio))), 1)

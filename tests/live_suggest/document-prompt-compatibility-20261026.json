@@ -1,0 +1,17 @@
+{
+  "purpose": "Offline byte comparison, not a personal API experiment",
+  "baseline": "2e01dd3",
+  "api_calls": 0,
+  "checks": [
+    {
+      "mode": "explicit empty",
+      "identical": true,
+      "sha256": "4f2a1a9157e7d38d81cfb01f61c3ba945c14a7fff37deec33a519afdc84641c1"
+    },
+    {
+      "mode": "explicit fictional profile",
+      "identical": true,
+      "sha256": "12c10ab1233c58661aa48114ac14276206805e704a5a0eca19cd5101861a4059"
+    }
+  ]
+}

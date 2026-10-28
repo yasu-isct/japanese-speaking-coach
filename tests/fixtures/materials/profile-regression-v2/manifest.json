@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "frozen_at": "2026-10-26T17:12:18.771380+09:00",
+  "description": "Packaging-only derivative: profile.md renamed to test_profile.md; source bytes and question contents unchanged",
+  "derived_from": {
+    "manifest_sha256": "cdcad7ba076dd5508aed7e4a2dae771ce6d8dd1a892444d4181b191df9c71e96",
+    "local_legacy_directory": "tests/fixtures/materials",
+    "required_at_runtime": false,
+    "renames": {
+      "data/profile.md": "data/test_profile.md"
+    },
+    "question_transform": "Replace exact path strings profile.md with test_profile.md; no query, annotation range, reason, or topic changes",
+    "source_bytes_unchanged": true,
+    "original_source_sha256": {
+      "queries.json": "5fa5a99cbc62dbdb14fd1058603a8a0bfbecf234e1d737f626612d1307521eb6",
+      "data/notes/books.md": "f491cfd7880da064a3108165dad874ad46cf74d84b2fb4e9cdb4b93c2f48d7e3",
+      "data/notes/calendar.md": "bc6810c0ceb2321ff4cc5b55ee1c4b3793a2cfd0b7318d34f8f5d8031190d506",
+      "data/notes/diary.md": "9ce76897944db83a75612f309f8784a7fb3b328c3be020ec0144051e0ca34993",
+      "data/notes/feedback.md": "88d4d45d20b1218bd0dcbdced264e4f5b2df13df736fe94914a3c43baa30e171",
+      "data/notes/friends.md": "21cc767478b7a0a5ad91c3eb6ce9ee0748bcb0da3622b7504def2de25309ba96",
+      "data/notes/interview.md": "ddc99d72e6213025573719fd8439f97ad227b4dd45e18577bbed13f9e65b19c9",
+      "data/notes/lesson.md": "64ac0e0b70205c002a6867f79e3f5fe97c2fd03419e92eb4e2ff7108f55383e3",
+      "data/notes/practice.md": "0b8cfea01b371fee702f86503ffc2375d13176369c60cc6ac8a382286fcf3cfe",
+      "data/profile.md": "49ef434301b5939c99f48ebb7fc1298f2ce62f2ef6f2b23cc35d725b01c4d4a8"
+    },
+    "metadata_effect": "Path-derived source IDs change. Default owner_hint for test_profile.md is unverified; indexing/ranking does not use owner_hint. Payload character counts can change because of path and hint metadata."
+  },
+  "sha256": {
+    "queries.json": "9b82db019a8d38d95b6da6d051ecce82c65df2e32988916b3941d9904637e8e9",
+    "data/notes/books.md": "f491cfd7880da064a3108165dad874ad46cf74d84b2fb4e9cdb4b93c2f48d7e3",
+    "data/notes/calendar.md": "bc6810c0ceb2321ff4cc5b55ee1c4b3793a2cfd0b7318d34f8f5d8031190d506",
+    "data/notes/diary.md": "9ce76897944db83a75612f309f8784a7fb3b328c3be020ec0144051e0ca34993",
+    "data/notes/feedback.md": "88d4d45d20b1218bd0dcbdced264e4f5b2df13df736fe94914a3c43baa30e171",
+    "data/notes/friends.md": "21cc767478b7a0a5ad91c3eb6ce9ee0748bcb0da3622b7504def2de25309ba96",
+    "data/notes/interview.md": "ddc99d72e6213025573719fd8439f97ad227b4dd45e18577bbed13f9e65b19c9",
+    "data/notes/lesson.md": "64ac0e0b70205c002a6867f79e3f5fe97c2fd03419e92eb4e2ff7108f55383e3",
+    "data/notes/practice.md": "0b8cfea01b371fee702f86503ffc2375d13176369c60cc6ac8a382286fcf3cfe",
+    "data/test_profile.md": "49ef434301b5939c99f48ebb7fc1298f2ce62f2ef6f2b23cc35d725b01c4d4a8"
+  }
+}
