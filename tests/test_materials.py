@@ -247,6 +247,46 @@ class MaterialsTest(unittest.TestCase):
         self.assertIn("low_query_coverage", {item["reason"] for item in store.explain(
             "東京タワーの展望台の営業時間と料金と予約方法")["candidates"]})
 
+    def test_section_answer_puts_the_prepared_answer_before_a_follow_up_hit(self):
+        self.write("faq.md", "# 練習帳\n\n## 基本\n\n### 1. 趣味を教えてください。\n\n"
+                   "趣味は山登りです。\n\n月に一度、友人と近くの山に登ります。\n\n"
+                   "> 【深掘り：一番大変だった山登りは】\n>\n> 雨の日の山登りが一番大変でした。\n\n"
+                   "### 2. 長所を教えてください。\n\n長所は粘り強いところです。\n")
+        store = MaterialsStore(self.root)
+        hits = store.search("一番大変だった山登りは何ですか")
+        self.assertTrue(hits[0].text.startswith(">"))
+        lines = [hit.start_line for hit in store.with_section_answer(hits)]
+        self.assertEqual(lines[:3], [7, 9, hits[0].start_line])  # answer paragraphs, then the follow-up
+        self.assertEqual(len(lines), len(set(lines)))
+
+    def test_prepared_answer_is_the_whole_section_or_the_follow_up(self):
+        paragraphs = "".join(f"第{i}段の回答です。\n\n" for i in range(1, 7))
+        self.write("faq.md", "# 練習帳\n\n## 基本\n\n### 1. 自己紹介をお願いします。\n\n" + paragraphs
+                   + "> **【深掘り：出身は】**\n>\n> 中国の出身です。\n>\n> 大学から日本です。\n\n"
+                   "> **【深掘り：理由は】**\n>\n> → Q7の回答\n\n"
+                   "### 2. 長所と短所\n\n**【長所】**\n\n**粘り強い**ところです。\n\n# メモ\n\n締め切りは金曜日です。\n")
+        store = MaterialsStore(self.root)
+        by_line = {c.start_line: c.source_id for c in store.chunks}
+        whole = "".join(f"第{i}段の回答です。" for i in range(1, 7))
+        self.assertEqual(store.prepared_answer(by_line[7]), whole)  # more paragraphs than the prompt gets
+        self.assertEqual(store.prepared_answer(by_line[17]), whole)
+        quote = next(c for c in store.chunks if "出身は" in c.text)
+        self.assertEqual(store.prepared_answer(quote.source_id), "中国の出身です。大学から日本です。")
+        pointer = next(c for c in store.chunks if "Q7" in c.text)
+        self.assertEqual(store.prepared_answer(pointer.source_id), "")
+        strength = next(c for c in store.chunks if "粘り強い" in c.text)
+        self.assertEqual(store.prepared_answer(strength.source_id), "粘り強いところです。")
+        flat = next(c for c in store.chunks if "金曜日" in c.text)
+        self.assertEqual(store.prepared_answer(flat.source_id), "")
+        self.assertEqual(store.prepared_answer("missing"), "")
+
+    def test_section_answer_leaves_flat_documents_alone(self):
+        self.write("notes.md", "# 授業メモ\n\n締め切りは金曜日です。\n\n提出はオンラインです。\n")
+        store = MaterialsStore(self.root)
+        hits = store.search("提出はオンラインですか")
+        self.assertEqual(store.with_section_answer(hits), hits)
+        self.assertEqual(store.with_section_answer([]), [])
+
 
 if __name__ == "__main__":
     unittest.main()

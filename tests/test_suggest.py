@@ -428,5 +428,58 @@ class EnvTest(unittest.TestCase):
         self.assertEqual(env["LLM_BASE_URL"], "https://x")
 
 
+class PoliteOnlyTest(unittest.TestCase):
+    def suggester(self, chunks):
+        s = Suggester(env=ENV, profile="", polite_only=True)
+
+        def stream(messages, max_tokens=400):
+            s.sent, s.max_tokens = messages, max_tokens
+            yield from chunks
+        s._stream = stream
+        return s
+
+    def test_prompt_asks_for_one_polite_line_after_the_shared_prefix(self):
+        full = Suggester(env=ENV, profile="").system_prompt
+        polite = Suggester(env=ENV, profile="", polite_only=True).system_prompt
+        self.assertTrue(polite.startswith(full))  # provider prompt cache still covers the shared part
+        self.assertIn("不输出推荐行、カジュアル、かんたん", polite)
+
+    def test_single_polite_reply_is_starred_and_complete(self):
+        s = self.suggester(["推荐|カジュアル\n", "カジュアル||うん。|嗯。|\n",
+                            "丁寧||はい、承知しました。|好的。|\n", "理由|对方是上司。"])
+        result = s.suggest("お願いできますか", [])
+        self.assertIsNone(result.error)
+        self.assertTrue(result.complete)
+        self.assertEqual([(r.style, r.star) for r in result.replies], [("丁寧", True)])
+        self.assertEqual(s.max_tokens, 700)
+        self.assertIn("两行", s.sent[1]["content"])
+
+    def test_quoted_prepared_answer_is_pasted_in_full(self):
+        import tempfile
+        from jsc_live.materials import MaterialsStore
+
+        with tempfile.TemporaryDirectory() as d:
+            paragraphs = "".join(f"第{i}段の回答です。\n\n" for i in range(1, 7))
+            Path(d, "faq.md").write_text("# 練習帳\n\n## 基本\n\n### 1. 自己紹介をお願いします。\n\n"
+                                         "自己紹介をさせていただきます。\n\n" + paragraphs,
+                                         encoding="utf-8")
+            s = Suggester(env=ENV, materials=MaterialsStore(d), polite_only=True)
+            s._stream = lambda messages, max_tokens=400: iter(["丁寧||原文［S2］|自我介绍。|\n", "理由|用稿子[S2]。"])
+            result = s.suggest("自己紹介をお願いします", [])
+            self.assertIsNone(result.error)
+            self.assertEqual(result.replies[0].text,
+                             "自己紹介をさせていただきます。" + "".join(f"第{i}段の回答です。" for i in range(1, 7)))
+            self.assertTrue(result.replies[0].star)
+            self.assertNotIn("prepared", str(result.sources))  # logs keep only the snippets that were sent
+
+            s._stream = lambda messages, max_tokens=400: iter(["丁寧||原文[S9]|x|\n", "理由|x"])
+            self.assertEqual(s.suggest("自己紹介をお願いします", []).error, "incomplete or malformed reply")
+
+    def test_missing_polite_line_is_incomplete(self):
+        result = self.suggester(["カジュアル||うん。|嗯。|\n理由|x"]).suggest("x", [])
+        self.assertFalse(result.complete)
+        self.assertEqual(result.error, "incomplete or malformed reply")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -65,11 +65,12 @@ class AsrResult:
 
 class Transcriber:
     def __init__(self, model: str = DEFAULT_MODEL, device: str = "auto", compute_type: str | None = None,
-                 languages: tuple[str, ...] = ("ja",)) -> None:
+                 languages: tuple[str, ...] = ("ja",), hotwords: str | None = None) -> None:
         # Default: Japanese only (the app is for Japanese conversations). With languages=("ja", "zh")
         # (CLI --mixed-chinese, shelved for now: D-019/D-020) each finished sentence is first classified
         # as one of them and transcribed in that language; this costs ~0.2 s per sentence.
         self.languages = languages
+        self.hotwords = hotwords  # glossary terms (D-046); partial and final decodes both use them
         register_cuda_dlls()
         from faster_whisper import WhisperModel
 
@@ -112,6 +113,7 @@ class Transcriber:
             vad_filter=False,                  # segmentation is done upstream
             condition_on_previous_text=False,  # avoids repeating earlier text on short clips
             without_timestamps=True,
+            hotwords=self.hotwords,
         )
         text = "".join(seg.text for seg in segments).strip()
         dropped = "noise phrase" if final and looks_like_noise_phrase(text, audio) else ""

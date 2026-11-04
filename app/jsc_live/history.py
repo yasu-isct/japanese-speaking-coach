@@ -6,29 +6,50 @@ reading at once (MeCab, local) and its meaning a moment later (asked from the
 API with the sentence as context, so the sense fits; cached per word+sentence).
 Only subtitles are kept here, not the reply suggestions: the app cannot know
 which suggestion was actually said, so listing them would only add noise.
+With the 中文翻译 switch on, each Japanese line also gets a Chinese translation
+under it, asked from the API one sentence at a time on a background thread.
 """
 
 from __future__ import annotations
 
 import queue
+import re
 import threading
 import time
 import tkinter as tk
 import tkinter.font as tkfont
 
 from .furigana import Furigana, kata_to_hira
+from .glossary import Glossary
 
 BG = "#16191d"
 FG = "#e8e8e8"
 FG_TIME = "#6f7c89"
 FG_READING = "#ffd479"
 FG_MEANING = "#b9c7d6"
+FG_TRANSLATION = "#8fa98f"
 
 LOOKUP_SYSTEM = (
     "你是日语词典。用户给出一个日语词（可能是活用形或一小段）和它所在的句子。"
     "只输出一行中文：先写辞书形和读音（平假名），再用不超过 30 个字解释它在这句话里的意思。"
     "格式：辞书形（读音）：意思。不要输出其它内容。"
 )
+TRANSLATE_SYSTEM = (
+    "你是日译中翻译。把用户给出的「这句」日语翻成自然的口语中文，只输出译文一行。"
+    "日语来自语音识别，可能有错字，按最可能的意思翻译，不加注释。「上文」只用来理解语境，不要翻译它。"
+    "如果给了「固有名词」，句中读音相近的词多半就是它们，按固有名词翻译；句中没有读音相近的词时不要套用。"
+    "固有名词说明里的「我」指使用者本人（听这句话的人），不是说这句话的人。"
+)
+# Short acknowledgements while the learner is talking; shown, but not translated or used as context.
+# Long vowel marks are stripped first, so おー / あー / へー / ふーん match as お / あ / へ / ふん.
+BACKCHANNEL = re.compile(r"(?:はい|うん|ええ|ん|うっ|う|お|あ|へ|え|ほう|ふん|なるほど|そうですね|そうですか"
+                         r"|そうなんですね|そうなんだ|確かに)+")
+BACKCHANNEL_IGNORED = re.compile(r"[\s、。，,.!！?？…ー〜~]+")
+
+
+def is_backchannel(sentence: str) -> bool:
+    core = BACKCHANNEL_IGNORED.sub("", sentence)
+    return not core or bool(BACKCHANNEL.fullmatch(core))
 
 
 def reading_and_lemma(furigana: Furigana, text: str) -> tuple[str, str]:
@@ -60,15 +81,54 @@ class Lookup:
         return self.cache[key]
 
 
+class Translator:
+    """Chinese translation of finished subtitles, one request at a time, in order."""
+
+    def __init__(self, client, on_done, glossary: Glossary | None = None) -> None:
+        self.client = client          # a suggest.Suggester (only its API settings are used), or None
+        self.on_done = on_done        # called on the worker thread with (key, translation)
+        self.glossary = glossary.for_translation() if glossary else ""
+        self.jobs: queue.Queue = queue.Queue()
+        self.thread: threading.Thread | None = None
+
+    def request(self, key, sentence: str, context: list[str]) -> None:
+        if self.client is None:
+            return
+        self.jobs.put((key, sentence, context))
+        if self.thread is None:
+            self.thread = threading.Thread(target=self._run, daemon=True)
+            self.thread.start()
+
+    def translate(self, sentence: str, context: list[str]) -> str:
+        user = (("固有名词：\n" + self.glossary + "\n" if self.glossary else "")
+                + ("上文：\n" + "\n".join(context) + "\n" if context else "") + f"这句：{sentence}")
+        text = self.client.ask(TRANSLATE_SYSTEM, user, max_tokens=150).strip()
+        return text.splitlines()[0].strip() if text else ""
+
+    def _run(self) -> None:
+        while True:
+            key, sentence, context = self.jobs.get()
+            try:
+                translation = self.translate(sentence, context)
+            except Exception:
+                translation = ""  # a failed translation is simply not shown
+            if translation:
+                self.on_done(key, translation)
+
+
 class HistoryWindow:
     def __init__(self, master: tk.Tk, furigana: Furigana, lookup: Lookup, family: str,
                  font_size: int = 13, x: int | None = None, y: int | None = None,
-                 on_lookup=None) -> None:
+                 on_lookup=None, translate: bool = True, glossary: Glossary | None = None) -> None:
         self.furigana = furigana
         self.lookup = lookup
         self.on_lookup = on_lookup
         self.line_ids: dict[str, int | None] = {}
         self.results: queue.Queue = queue.Queue()
+        self.translations: queue.Queue = queue.Queue()
+        self.translator = Translator(lookup.client, lambda key, text: self.translations.put((key, text)), glossary)
+        self.entries: list[tuple[str, list[str]]] = []  # Japanese lines (sentence, context); index = mark jp<i>
+        self.requested: set[int] = set()
         self.top = tk.Toplevel(master)
         self.top.title("字幕历史（选中词语查读音和意思）")
         self.top.configure(bg=BG)
@@ -84,6 +144,14 @@ class HistoryWindow:
         self.panel = tk.Label(self.top, bg="#1d2228", fg=FG_MEANING, font=small, anchor="w", justify="left",
                               wraplength=w - 20, padx=10, pady=8, text="选中一个词，这里显示读音和意思")
         self.panel.pack(fill="x", side="bottom")
+        bar = tk.Frame(self.top, bg="#1d2228")
+        bar.pack(fill="x", side="top")
+        self.translate_on = tk.BooleanVar(value=translate and lookup.client is not None)
+        tk.Checkbutton(bar, text="中文翻译" if lookup.client is not None else "中文翻译（没有 .env，用不了）",
+                       variable=self.translate_on, command=self._on_translate_toggle,
+                       state="normal" if lookup.client is not None else "disabled",
+                       bg="#1d2228", fg=FG_MEANING, selectcolor="#1d2228", activebackground="#1d2228",
+                       activeforeground=FG, font=small, padx=6).pack(side="left")
         frame = tk.Frame(self.top, bg=BG)
         frame.pack(fill="both", expand=True)
         self.text = tk.Text(frame, bg=BG, fg=FG, font=text_font, wrap="char", relief="flat", padx=10, pady=8,
@@ -95,6 +163,8 @@ class HistoryWindow:
         self.text.pack(side="left", fill="both", expand=True)
         self.text.tag_configure("time", foreground=FG_TIME, font=small)
         self.text.tag_configure("other", foreground="#8b97a3")  # Chinese lines in grey, like the subtitles
+        self.text.tag_configure("translation", foreground=FG_TRANSLATION, font=small,
+                                elide=not self.translate_on.get())
         # Read-only but still selectable: swallow every key that would edit the text.
         self.text.bind("<Key>", lambda e: None if (e.state & 0x4 and e.keysym.lower() in ("c", "a")) else "break")
         self.text.bind("<ButtonRelease-1>", self._on_select)
@@ -109,7 +179,37 @@ class HistoryWindow:
         self.line_ids[self.text.index("end-1c").split(".")[0]] = uid
         self.text.insert("end", time.strftime("%H:%M:%S") + "  ", "time")
         self.text.insert("end", sentence + "\n", "other" if other_language else ())
+        if not other_language and not is_backchannel(sentence):
+            key = len(self.entries)
+            self.text.mark_set(f"jp{key}", "end-2c linestart")
+            self.text.mark_gravity(f"jp{key}", "left")
+            self.entries.append((sentence, [s for s, _ in self.entries[-2:]]))
+            if self.translate_on.get():
+                self._request(key)
         if at_bottom:  # follow new lines unless the user scrolled up to read
+            self.text.see("end")
+
+    # --- translation -------------------------------------------------------
+    def _request(self, key: int) -> None:
+        if key not in self.requested:
+            self.requested.add(key)
+            self.translator.request(key, *self.entries[key])
+
+    def _on_translate_toggle(self) -> None:
+        on = self.translate_on.get()
+        self.text.tag_configure("translation", elide=not on)
+        if on:  # lines that arrived while it was off; only the recent ones, to keep the cost small
+            for key in range(max(0, len(self.entries) - 20), len(self.entries)):
+                self._request(key)
+
+    def _insert_translation(self, key: int, translation: str) -> None:
+        at_bottom = self.text.yview()[1] > 0.98
+        end = self.text.index(f"jp{key} lineend")
+        line = int(end.split(".")[0])
+        self.text.insert(end, "\n" + translation, "translation")
+        # Lines below moved down by one; keep the word lookup's line -> utterance map in step.
+        self.line_ids = {(k if int(k) <= line else str(int(k) + 1)): v for k, v in self.line_ids.items()}
+        if at_bottom:
             self.text.see("end")
 
     # --- lookup ------------------------------------------------------------
@@ -120,8 +220,8 @@ class HistoryWindow:
         except tk.TclError:
             return  # nothing selected
         word = word.replace("\n", "")
-        if not word or len(word) > 30:
-            return
+        if not word or len(word) > 30 or "translation" in self.text.tag_names("sel.first"):
+            return  # the Chinese translation lines are not looked up
         sentence = line.split("  ", 1)[-1]
         reading, lemma = reading_and_lemma(self.furigana, word)
         uid = self.line_ids.get(self.text.index("sel.first").split(".")[0])
@@ -154,6 +254,11 @@ class HistoryWindow:
                 word, sentence, head, meaning = self.results.get_nowait()
                 if self._pending == (word, sentence):  # ignore answers for an older selection
                     self.panel.configure(text=f"{head}\n{meaning}")
+        except queue.Empty:
+            pass
+        try:
+            while True:
+                self._insert_translation(*self.translations.get_nowait())
         except queue.Empty:
             pass
         try:
