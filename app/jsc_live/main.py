@@ -45,8 +45,10 @@ def worker(args, events: queue.Queue, stop: threading.Event, suggester=None, hol
     session = None
     try:
         status("モデル読み込み中…")
+        glossary = getattr(args, "glossary_terms", None)
         transcriber = Transcriber(args.model, device=args.device_type,
-                                  languages=("ja", "zh") if getattr(args, "mixed_chinese", False) else ("ja",))
+                                  languages=("ja", "zh") if getattr(args, "mixed_chinese", False) else ("ja",),
+                                  hotwords=glossary.hotwords() if glossary else None)
         transcriber.warm_up()
         furigana = Furigana(args.furigana)
         source = build_source(args)
@@ -148,7 +150,8 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--no-window", action="store_true", help="print subtitles to the console only")
     p.add_argument("--font-size", type=int, default=16)
     p.add_argument("--list-devices", action="store_true")
-    p.add_argument("--suggest", action="store_true", help="show 3 reply suggestions (API settings in .env)")
+    p.add_argument("--suggest", action="store_true", help="show a polite reply suggestion (API settings in .env)")
+    p.add_argument("--three-styles", action="store_true", help="with --suggest: show 丁寧 / カジュアル / かんたん instead of 丁寧 only")
     p.add_argument("--partner", help="who you are talking to, e.g. 上司 / 老师 / 店员 / 朋友 (helps politeness)")
     p.add_argument("--materials", type=Path, help="external folder of UTF-8 .md/.txt, .docx and text PDF documents")
     retrieval = p.add_mutually_exclusive_group()
@@ -166,6 +169,10 @@ def main(argv: list[str] | None = None) -> None:
                    help="extra quiet seconds after a sentence before the turn is answered (on top of --end-silence)")
     p.add_argument("--history", type=int, default=5, help="finished subtitle lines kept on screen")
     p.add_argument("--no-history", action="store_true", help="do not open the history window")
+    p.add_argument("--no-translate", action="store_true",
+                   help="start with the history window's Chinese translation switched off")
+    p.add_argument("--glossary", type=Path, default=None,
+                   help="proper nouns to expect, one per line (default: glossary.txt in the repository root)")
     p.add_argument("--mixed-chinese", action="store_true",
                    help="(shelved) detect Chinese sentences too and show them in grey without suggestions")
     p.add_argument("--no-record", action="store_true",
@@ -174,6 +181,11 @@ def main(argv: list[str] | None = None) -> None:
 
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
+    from . import glossary
+
+    args.glossary_terms = glossary.load(args.glossary or glossary.DEFAULT_PATH)
+    if args.glossary is not None and not args.glossary_terms.terms:
+        print(f"[词表] 没有读到词：{args.glossary}（继续运行，不用词表）")
     if args.review_output is not None and args.review_session is None:
         p.error("--review-output 请与 --review-session 一起使用。")
     if args.review_window:
@@ -237,7 +249,7 @@ def main(argv: list[str] | None = None) -> None:
                     print(f"[资料] {model_warning} 本次继续使用关键词查找。", flush=True)
             else:
                 store = MaterialsStore.empty(materials_root)
-            suggester = Suggester(partner=args.partner, materials=store)
+            suggester = Suggester(partner=args.partner, materials=store, polite_only=not args.three_styles)
             materials_controller = MaterialsController(suggester, model_directory=model_path)
             if not args.no_window:
                 materials_controller.start_initial(model_path)
@@ -295,7 +307,8 @@ def main(argv: list[str] | None = None) -> None:
             session.add_lookup(record)
 
     def make_history(root, family):
-        return HistoryWindow(root, history_furigana, lookup, family, on_lookup=record_lookup)
+        return HistoryWindow(root, history_furigana, lookup, family, on_lookup=record_lookup,
+                             translate=not args.no_translate, glossary=args.glossary_terms)
 
     try:
         window = SubtitleWindow(events, font_size=args.font_size, history=args.history,

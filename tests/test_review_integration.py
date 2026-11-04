@@ -33,7 +33,12 @@ def fake_history(client=None, on_lookup=None):
     window.results = queue.Queue()
     window._pending = None
     window.panel, window.top, window.text = Mock(), Mock(), Mock()
+    window.text.tag_names.return_value = ()
     window.line_ids = {}
+    window.translations = queue.Queue()
+    window.translator = Mock()
+    window.translate_on = Mock(get=Mock(return_value=False))
+    window.entries, window.requested = [], set()
     window.furigana = object()
     return window
 
@@ -120,6 +125,92 @@ class HistoryLookupIntegrationTest(unittest.TestCase):
         self.assertEqual(supplied["args"][:2], (WORD, SENTENCE))
         self.assertEqual(supplied["args"][3:], ("しらべた", "調べる", 7))
         thread.return_value.start.assert_called_once_with()
+
+
+class HistoryTranslationTest(unittest.TestCase):
+    def test_translator_sends_the_sentence_with_context_and_keeps_one_line(self):
+        client = Mock()
+        client.ask.return_value = " 我查了虚构的资料。\n多余的一行"
+        translator = history.Translator(client, Mock())
+        self.assertEqual(translator.translate(SENTENCE, ["前の文。"]), "我查了虚构的资料。")
+        client.ask.assert_called_once_with(history.TRANSLATE_SYSTEM, f"上文：\n前の文。\n这句：{SENTENCE}",
+                                           max_tokens=150)
+        self.assertEqual(translator.translate(SENTENCE, []), "我查了虚构的资料。")
+        self.assertEqual(client.ask.call_args.args[1], f"这句：{SENTENCE}")
+
+    def test_glossary_terms_and_notes_go_before_the_context(self):
+        from jsc_live.glossary import parse
+
+        client = Mock()
+        client.ask.return_value = "译文"
+        translator = history.Translator(client, Mock(), parse("架空AI = 常被听错\n山田\n"))
+        translator.translate(SENTENCE, ["前の文。"])
+        self.assertEqual(client.ask.call_args.args[1],
+                         f"固有名词：\n- 架空AI（常被听错）\n- 山田\n上文：\n前の文。\n这句：{SENTENCE}")
+
+    def test_backchannels_are_shown_but_not_translated_or_used_as_context(self):
+        for text in ("はい", "うんうんうん", "はいはいはい", "おー、なるほど。", "あ、なるほどなるほど", "ん?",
+                     "うっうっ", "そうですね", "へー", ""):
+            self.assertTrue(history.is_backchannel(text), text)
+        for text in ("はい、大丈夫です", "お願いいたします", "あ、山田さん", "ありがとうございました", "なるほど、面白いですね"):
+            self.assertFalse(history.is_backchannel(text), text)
+        window = fake_history()
+        window.text.yview.return_value = (0.0, 0.5)
+        window.text.index.return_value = "1.0"
+        window.translate_on.get.return_value = True
+        for sentence in ("一つ目。", "うんうん", "二つ目。"):
+            window.add(sentence)
+        self.assertEqual(window.text.insert.call_args_list[3].args[1], "うんうん\n")  # still listed
+        self.assertEqual([c.args for c in window.translator.request.call_args_list],
+                         [(0, "一つ目。", []), (1, "二つ目。", ["一つ目。"])])
+
+    def test_no_client_never_starts_a_thread(self):
+        translator = history.Translator(None, Mock())
+        translator.request(0, SENTENCE, [])
+        self.assertIsNone(translator.thread)
+
+    def test_failed_or_empty_translation_is_not_shown(self):
+        class Stop(BaseException):
+            pass  # not an Exception, so it ends the worker loop instead of being swallowed
+
+        for first in (OSError("synthetic network failure"), ""):
+            with self.subTest(first=first):
+                done = Mock()
+                translator = history.Translator(Mock(), done)
+                translator.jobs.put((0, SENTENCE, []))
+                translator.jobs.put((1, SENTENCE, []))
+                with patch.object(translator, "translate", side_effect=[first, Stop()]), self.assertRaises(Stop):
+                    translator._run()
+                done.assert_not_called()
+
+    def test_japanese_lines_are_queued_only_while_switched_on(self):
+        window = fake_history()
+        window.text.yview.return_value = (0.0, 0.5)
+        window.text.index.return_value = "1.0"
+        window.add("一つ目。", uid=1)
+        window.translate_on.get.return_value = True
+        window.add("二つ目。", uid=2)
+        window.add("中文的一句", other_language=True, uid=3)
+        window.translator.request.assert_called_once_with(1, "二つ目。", ["一つ目。"])
+        window._on_translate_toggle()  # switching on again fills in the earlier line once
+        self.assertEqual([c.args[0] for c in window.translator.request.call_args_list], [1, 0])
+
+    def test_inserted_translation_shifts_the_lines_below(self):
+        window = fake_history()
+        window.text.yview.return_value = (0.0, 0.5)
+        window.text.index.return_value = "2.30"
+        window.line_ids = {"1": 7, "2": 8, "3": 9, "5": 10}
+        window._insert_translation(0, "译文")
+        window.text.insert.assert_called_once_with("2.30", "\n译文", "translation")
+        self.assertEqual(window.line_ids, {"1": 7, "2": 8, "4": 9, "6": 10})
+
+    def test_selecting_inside_a_translation_does_not_look_it_up(self):
+        window = fake_history()
+        window.text.get.side_effect = ["资料", "我查了虚构的资料。"]
+        window.text.tag_names.return_value = ("translation",)
+        with patch.object(history.threading, "Thread") as thread:
+            window._on_select()
+        thread.assert_not_called()
 
 
 class TemporaryWorkspaceTest(unittest.TestCase):
@@ -239,7 +330,8 @@ class ReviewCliIntegrationTest(TemporaryWorkspaceTest):
                         args[-1]["session"] = session
                     return fake_thread
 
-                def construct_history(*args, on_lookup):
+                def construct_history(*args, on_lookup, translate, glossary):
+                    self.assertTrue(translate)  # on unless --no-translate
                     on_lookup(LOOKUP_RECORD)
                     return object()
 

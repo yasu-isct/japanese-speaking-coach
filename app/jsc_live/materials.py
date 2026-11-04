@@ -455,6 +455,60 @@ class MaterialsStore:
                 break
         return hits
 
+    def with_section_answer(self, hits: list[MaterialHit], *, max_lead: int = 3) -> list[MaterialHit]:
+        """Put the opening paragraphs of the best hit's section first.
+
+        A question-and-answer document (an interview script, an FAQ) keeps each question
+        as a heading, the prepared answer right below it and follow-ups as quotes. The best
+        match is often a follow-up that repeats the question's words, which left the prepared
+        answer itself out of the prompt. Only nested headings ("A / B") count as sections;
+        the lead stops at the first quote and at ``max_lead`` chunks. prompt_data keeps the
+        usual result budget, so lower-ranked hits are what gets dropped.
+        """
+        if not hits or " / " not in hits[0].heading:
+            return hits
+        top = hits[0]
+        section = sorted((c for c in self.chunks if c.relative_path == top.relative_path and c.heading == top.heading),
+                         key=lambda c: c.start_line)
+        lead = []
+        for chunk in section[:max_lead]:
+            if chunk.text.lstrip().startswith(">"):
+                break
+            lead.append(chunk)
+        ids = {c.source_id for c in lead}
+        return [MaterialHit(**asdict(c), score=top.score) for c in lead] + [h for h in hits if h.source_id not in ids]
+
+    def prepared_answer(self, source_id: str) -> str:
+        """The whole written answer that this chunk belongs to, cleaned for speaking.
+
+        A body chunk of a nested section ("A / B") gives every body paragraph of that
+        section up to its first quote, however many chunks that is, so a long prepared
+        answer is never cut by the prompt budget. A quoted follow-up gives that quote
+        without its title. Label-only lines (**【長所】**) and bold marks are dropped.
+        Flat documents and pointers to another answer (→ Q7) give "".
+        """
+        chunk = next((c for c in self.chunks if c.source_id == source_id), None)
+        if chunk is None or " / " not in chunk.heading:
+            return ""
+        if chunk.text.lstrip().startswith(">"):
+            lines = [line.lstrip(">").strip() for line in chunk.text.splitlines()]
+            lines = [line for line in lines if line]
+            if lines and re.fullmatch(r"\*\*.*\*\*", lines[0]):
+                lines = lines[1:]  # the follow-up question itself
+        else:
+            section = sorted((c for c in self.chunks
+                              if c.relative_path == chunk.relative_path and c.heading == chunk.heading),
+                             key=lambda c: c.start_line)
+            lines = []
+            for part in section:
+                if part.text.lstrip().startswith(">"):
+                    break
+                lines += [line.strip() for line in part.text.splitlines() if line.strip()]
+        lines = [line.replace("**", "") for line in lines if not re.fullmatch(r"\*\*[^*]*\*\*", line)]
+        if not lines or lines[0].startswith("→"):
+            return ""
+        return "".join(lines)
+
     def explain(self, query: str) -> dict:
         """Return optional local diagnostics; no logging or ownership inference."""
         terms, ranked = self._ranked(query)
