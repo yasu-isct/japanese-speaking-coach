@@ -247,6 +247,19 @@ class MaterialsTest(unittest.TestCase):
         self.assertIn("low_query_coverage", {item["reason"] for item in store.explain(
             "東京タワーの展望台の営業時間と料金と予約方法")["candidates"]})
 
+    def test_misheard_question_still_finds_the_prepared_answer_by_its_heading(self):
+        self.write("faq.md", "# 練習帳\n\n> メモ：Q1 志望動機を差し替え\n\n## 基本\n\n"
+                   "### 1. 志望動機を教えてください。\n\n御社を志望する理由は、課題が同じだからです。\n\n"
+                   "### 2. 趣味を教えてください。\n\n山登りです。\n")
+        store = MaterialsStore(self.root)
+        hits = store.with_section_answer(store.search("脂肪動機を教えてください。"))
+        self.assertIn("志望する理由", hits[0].text)
+        candidates = {item["start_line"]: item for item in store.explain("脂肪動機を教えてください。")["candidates"]}
+        self.assertEqual(candidates[9]["reason"], "selected")
+        self.assertEqual(candidates[9]["question_matched_terms"], ["cjk:動機", "cjk:教え"])
+        # One shared word with a written question is not enough; the body rule still applies.
+        self.assertEqual(store.search("ハイキングを教えてください。"), [])
+
     def test_section_answer_puts_the_prepared_answer_before_a_follow_up_hit(self):
         self.write("faq.md", "# 練習帳\n\n## 基本\n\n### 1. 趣味を教えてください。\n\n"
                    "趣味は山登りです。\n\n月に一度、友人と近くの山に登ります。\n\n"

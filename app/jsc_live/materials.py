@@ -116,6 +116,7 @@ HEADING_LINE = re.compile(r"^\s{0,3}(#{1,6})\s+(.+?)\s*#*\s*$")
 # Lexical evidence thresholds are heuristic, not probabilities or fact checks.
 MIN_QUERY_COVERAGE = 0.20
 MIN_RELATIVE_SCORE = 0.50
+MIN_QUESTION_MATCHES = 2  # words a nested question heading must share when the body shares none
 
 
 def _content_term(term: str) -> bool:
@@ -310,14 +311,18 @@ class MaterialsStore:
         self.chunks = tuple(chunks)
         self.document_issues = tuple(MappingProxyType(issue) for issue in document_issues)
         self.diagnostics: Mapping[str, int] = MappingProxyType(dict(counts, indexed_chunks=len(chunks)))
-        terms, body_terms = [], []
+        terms, body_terms, question_terms = [], [], []
         for index, chunk in enumerate(self.chunks):
             check_cancel(cancel)
             if index % 32 == 0:
                 announce(progress, f"正在准备关键词查找：{index}/{len(self.chunks)} 个片段…", cancel)
             terms.append(Counter(tokenizer(chunk.heading + "\n" + chunk.text)))
             body_terms.append(frozenset(tokenizer(chunk.text)))
+            # Only a nested heading's last part is a written question with its answer below.
+            question = chunk.heading.rsplit(" / ", 1)[1] if " / " in chunk.heading else ""
+            question_terms.append(frozenset(tokenizer(question)) if question else frozenset())
         self._terms, self._body_terms = tuple(terms), tuple(body_terms)
+        self._question_terms = tuple(question_terms)
         self._lengths = tuple(sum(terms.values()) for terms in self._terms)
         self._average_length = sum(self._lengths) / len(self._lengths) if self._lengths else 1.0
         self._document_frequency = Counter(term for terms in self._terms for term in terms)
@@ -407,7 +412,8 @@ class MaterialsStore:
             return terms, []
         count = len(self.chunks)
         ranked = []
-        for chunk, frequency, body_terms, length in zip(self.chunks, self._terms, self._body_terms, self._lengths):
+        for chunk, frequency, body_terms, question_terms, length in zip(
+                self.chunks, self._terms, self._body_terms, self._question_terms, self._lengths):
             score = 0.0
             for term in terms:
                 tf = frequency.get(term, 0)
@@ -420,11 +426,16 @@ class MaterialsStore:
             if score > 0:
                 matched = terms.intersection(frequency)
                 body_matches = terms.intersection(body_terms)
+                question_matches = terms.intersection(question_terms)
                 coverage = len(matched) / len(terms)
-                reason = ("no_body_evidence" if not body_matches else
+                # A misheard word can leave a prepared answer with no shared word in its body
+                # (志望動機 heard as 脂肪動機); two words shared with the written question are enough.
+                heading_evidence = not body_matches and len(question_matches) >= MIN_QUESTION_MATCHES
+                reason = ("no_body_evidence" if not body_matches and not heading_evidence else
                           "low_query_coverage" if coverage < MIN_QUERY_COVERAGE else "eligible")
                 ranked.append({"score": score, "chunk": chunk, "matched_terms": sorted(matched),
                                "body_matched_terms": sorted(body_matches), "query_coverage": coverage,
+                               "question_matched_terms": sorted(question_matches) if heading_evidence else [],
                                "reason": reason})
         ranked.sort(key=lambda item: (-item["score"], item["chunk"].relative_path.casefold(),
                                       item["chunk"].start_line, item["chunk"].source_id))
