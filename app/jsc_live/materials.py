@@ -34,7 +34,7 @@ def default_materials_root() -> Path:
 @dataclass(frozen=True)
 class MaterialsLimits:
     max_files: int = 128
-    max_file_bytes: int = 65536
+    max_file_bytes: int = 400000  # md/txt bytes; 100k characters at up to 4 UTF-8 bytes each
     max_document_bytes: int = 10 * 1024 * 1024
     max_document_chars: int = 100000
     max_total_chars: int = 400000
@@ -374,9 +374,14 @@ class MaterialsStore:
         raw = self._read_bytes(path, root, counts, self.limits.max_file_bytes)
         if raw is not None:
             try:
-                return raw.decode("utf-8-sig")
+                text = raw.decode("utf-8-sig")
             except UnicodeDecodeError:
                 counts["invalid_utf8"] += 1
+                return None
+            if len(text) > self.limits.max_document_chars:  # same per-file cap as Word/PDF
+                counts["file_size_or_type_limit"] += 1
+                return None
+            return text
         return None
 
     def _read_bytes(self, path: Path, root: Path, counts: Counter, byte_limit: int) -> bytes | None:

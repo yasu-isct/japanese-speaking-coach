@@ -247,6 +247,14 @@ class MaterialsTest(unittest.TestCase):
         self.assertIn("low_query_coverage", {item["reason"] for item in store.explain(
             "東京タワーの展望台の営業時間と料金と予約方法")["candidates"]})
 
+    def test_text_files_share_the_word_and_pdf_character_limit(self):
+        self.write("long.md", "練習" * 40000)  # 80k characters, about 240 KB: over the old 64 KB cap
+        self.assertEqual(MaterialsStore(self.root).diagnostics["indexed_files"], 1)
+        self.write("long.md", "練習" * 50001)  # 100,002 characters
+        store = MaterialsStore(self.root)
+        self.assertEqual(store.chunks, ())
+        self.assertEqual(store.diagnostics["file_size_or_type_limit"], 1)
+
     def test_misheard_question_still_finds_the_prepared_answer_by_its_heading(self):
         self.write("faq.md", "# 練習帳\n\n> メモ：Q1 志望動機を差し替え\n\n## 基本\n\n"
                    "### 1. 志望動機を教えてください。\n\n御社を志望する理由は、課題が同じだからです。\n\n"
