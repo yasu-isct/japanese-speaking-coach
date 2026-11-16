@@ -5,7 +5,7 @@ from __future__ import annotations
 import stat
 from pathlib import Path
 
-from .materials import default_materials_root
+from .materials import MaterialsLimits, default_materials_root
 
 
 def prepare_materials(root: Path | None = None, old_profile: Path | None = None) -> Path:
@@ -16,17 +16,18 @@ def prepare_materials(root: Path | None = None, old_profile: Path | None = None)
             getattr(destination.lstat(), "st_file_attributes", 0) & 0x400)):
         raise ValueError("资料文件夹不能是链接，请指定实际文件夹路径。")
     raw = None
+    limit = MaterialsLimits().max_file_bytes
     if old_profile is not None:
         info = old_profile.lstat()
         if not stat.S_ISREG(info.st_mode) or old_profile.is_symlink() or bool(
                 getattr(info, "st_file_attributes", 0) & 0x400):
             raise ValueError("旧资料必须是普通文件，请指定实际文件路径。")
-        if info.st_size > 65536:
-            raise ValueError("旧资料超过64KB，请先拆成较小的 .md/.txt 文档。")
+        if info.st_size > limit:
+            raise ValueError("旧资料太大（超过约10万字），请先拆成较小的 .md/.txt 文档。")
         with old_profile.open("rb") as source:
-            raw = source.read(65537)
-        if len(raw) > 65536:
-            raise ValueError("旧资料超过64KB，请先拆分。")
+            raw = source.read(limit + 1)
+        if len(raw) > limit:
+            raise ValueError("旧资料太大（超过约10万字），请先拆分。")
         raw.decode("utf-8-sig")
     destination.mkdir(parents=True, exist_ok=True)
     if raw is not None:
