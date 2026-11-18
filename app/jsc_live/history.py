@@ -12,12 +12,14 @@ under it, asked from the API one sentence at a time on a background thread.
 
 from __future__ import annotations
 
+import json
 import queue
 import re
 import threading
 import time
 import tkinter as tk
 import tkinter.font as tkfont
+from pathlib import Path
 
 from .furigana import Furigana, kata_to_hira
 from .glossary import Glossary
@@ -84,17 +86,18 @@ class Lookup:
 class Translator:
     """Chinese translation of finished subtitles, one request at a time, in order."""
 
-    def __init__(self, client, on_done, glossary: Glossary | None = None) -> None:
+    def __init__(self, client, on_done, glossary: Glossary | None = None, log_path: Path | None = None) -> None:
         self.client = client          # a suggest.Suggester (only its API settings are used), or None
         self.on_done = on_done        # called on the worker thread with (key, translation)
         self.glossary = glossary.for_translation() if glossary else ""
+        self.log_path = log_path      # one JSON line per translation, written as soon as it is done
         self.jobs: queue.Queue = queue.Queue()
         self.thread: threading.Thread | None = None
 
-    def request(self, key, sentence: str, context: list[str]) -> None:
+    def request(self, key, sentence: str, context: list[str], uid: int | None = None) -> None:
         if self.client is None:
             return
-        self.jobs.put((key, sentence, context))
+        self.jobs.put((key, sentence, context, uid))
         if self.thread is None:
             self.thread = threading.Thread(target=self._run, daemon=True)
             self.thread.start()
@@ -107,27 +110,47 @@ class Translator:
 
     def _run(self) -> None:
         while True:
-            key, sentence, context = self.jobs.get()
+            key, sentence, context, uid = self.jobs.get()
+            start, error = time.perf_counter(), None
             try:
                 translation = self.translate(sentence, context)
-            except Exception:
-                translation = ""  # a failed translation is simply not shown
+            except Exception as exc:
+                translation, error = "", type(exc).__name__  # a failed translation is simply not shown
+            ms = (time.perf_counter() - start) * 1000
             if translation:
-                self.on_done(key, translation)
+                self.on_done(key, translation)  # show first; the log line comes after
+            self._log(uid, sentence, context, translation, ms, error)
+
+    def _log(self, uid, sentence, context, translation, ms, error) -> None:
+        """Keep every translation locally (logs/ is git-ignored) for later ASR / translation work."""
+        if self.log_path is None:
+            return
+        record = {"time": time.strftime("%Y-%m-%d %H:%M:%S"), "utterance_id": uid, "sentence": sentence,
+                  "context": context, "translation": translation, "translate_ms": round(ms, 1),
+                  "glossary": bool(self.glossary), "error": error}
+        try:
+            self.log_path.parent.mkdir(parents=True, exist_ok=True)
+            with self.log_path.open("a", encoding="utf-8") as f:
+                f.write(json.dumps(record, ensure_ascii=False) + "\n")
+        except OSError:
+            pass  # a full disk or locked file must not stop the subtitles
 
 
 class HistoryWindow:
     def __init__(self, master: tk.Tk, furigana: Furigana, lookup: Lookup, family: str,
                  font_size: int = 13, x: int | None = None, y: int | None = None,
-                 on_lookup=None, translate: bool = True, glossary: Glossary | None = None) -> None:
+                 on_lookup=None, translate: bool = True, glossary: Glossary | None = None,
+                 translation_log: Path | None = None) -> None:
         self.furigana = furigana
         self.lookup = lookup
         self.on_lookup = on_lookup
         self.line_ids: dict[str, int | None] = {}
         self.results: queue.Queue = queue.Queue()
         self.translations: queue.Queue = queue.Queue()
-        self.translator = Translator(lookup.client, lambda key, text: self.translations.put((key, text)), glossary)
+        self.translator = Translator(lookup.client, lambda key, text: self.translations.put((key, text)), glossary,
+                                     translation_log)
         self.entries: list[tuple[str, list[str]]] = []  # Japanese lines (sentence, context); index = mark jp<i>
+        self.entry_uids: dict[int, int | None] = {}  # entry index -> utterance id, for the translation log
         self.requested: set[int] = set()
         self.top = tk.Toplevel(master)
         self.top.title("字幕历史（选中词语查读音和意思）")
@@ -184,6 +207,7 @@ class HistoryWindow:
             self.text.mark_set(f"jp{key}", "end-2c linestart")
             self.text.mark_gravity(f"jp{key}", "left")
             self.entries.append((sentence, [s for s, _ in self.entries[-2:]]))
+            self.entry_uids[key] = uid
             if self.translate_on.get():
                 self._request(key)
         if at_bottom:  # follow new lines unless the user scrolled up to read
@@ -193,7 +217,7 @@ class HistoryWindow:
     def _request(self, key: int) -> None:
         if key not in self.requested:
             self.requested.add(key)
-            self.translator.request(key, *self.entries[key])
+            self.translator.request(key, *self.entries[key], uid=self.entry_uids.get(key))
 
     def _on_translate_toggle(self) -> None:
         on = self.translate_on.get()

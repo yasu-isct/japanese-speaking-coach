@@ -313,8 +313,11 @@ def main(argv: list[str] | None = None) -> None:
             session.add_lookup(record)
 
     def make_history(root, family):
+        # Every translation is appended here as it finishes (logs/ is git-ignored), so an abrupt exit loses nothing.
+        translation_log = Path(__file__).resolve().parents[2] / "logs" / time.strftime("translate-%Y%m%d-%H%M%S.jsonl")
         return HistoryWindow(root, history_furigana, lookup, family, on_lookup=record_lookup,
-                             translate=not args.no_translate, glossary=args.glossary_terms)
+                             translate=not args.no_translate, glossary=args.glossary_terms,
+                             translation_log=translation_log)
 
     try:
         window = SubtitleWindow(events, font_size=args.font_size, history=args.history,
