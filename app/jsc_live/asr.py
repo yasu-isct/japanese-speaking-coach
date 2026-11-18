@@ -10,7 +10,9 @@ with --model kotoba-tech/kotoba-whisper-v2.0-faster.
 
 from __future__ import annotations
 
+import re
 import time
+from collections import deque
 from dataclasses import dataclass
 
 import numpy as np
@@ -35,6 +37,12 @@ VIDEO_CREDITS = ("ご視聴ありがとうございました", "ご清聴あり�
 # Phrases people really do say: dropped only on short or quiet clips.
 NOISY_PHRASES = ("おやすみなさい", "感谢观看", "謝謝觀看", "订阅")
 STOCK_PHRASES = VIDEO_CREDITS + NOISY_PHRASES
+# Previous recognized sentences given to Whisper as earlier text (D-052). Without them a short
+# clip has no context: in a 46-minute interview replay 28 of 505 clips came out as 「Oh...」 /
+# 「Uh...」; with the last 2 sentences (at most 80 chars) most became the right Japanese.
+PROMPT_SENTENCES = 2
+PROMPT_MAX_CHARS = 80
+PROMPT_STRIP = re.compile(r"[\s、。，,.!！?？…・ー〜~「」]+")
 NOISE_MAX_SECONDS = 2.5
 NOISE_MAX_DB = -30.0
 
@@ -51,6 +59,13 @@ def looks_like_noise_phrase(text: str, audio: np.ndarray) -> bool:
     seconds = len(audio) / 16000
     level = 20 * np.log10(float(np.sqrt(np.mean(np.square(audio), dtype=np.float64))) + 1e-9) if len(audio) else -100.0
     return seconds < NOISE_MAX_SECONDS or level < NOISE_MAX_DB
+
+
+def copies_prompt(text: str, prompt: str) -> bool:
+    """True if the recognized text is only a repeat of (part of) the earlier text it was given."""
+    core = PROMPT_STRIP.sub("", text)
+    # Very short replies (はい, うん) repeat for real and cost nothing to keep.
+    return len(core) >= 3 and core in PROMPT_STRIP.sub("", prompt)
 
 
 @dataclass
@@ -71,6 +86,7 @@ class Transcriber:
         # as one of them and transcribed in that language; this costs ~0.2 s per sentence.
         self.languages = languages
         self.hotwords = hotwords  # glossary terms (D-046); partial and final decodes both use them
+        self.recent: deque[str] = deque(maxlen=PROMPT_SENTENCES)  # last kept final texts (D-052)
         register_cuda_dlls()
         from faster_whisper import WhisperModel
 
@@ -105,20 +121,34 @@ class Transcriber:
         padded = np.concatenate([np.zeros(int(LEAD_SILENCE * 16000), np.float32), audio])
         # Partial (in-progress) results skip the check to stay fast; the final one decides.
         lang, prob = (self.detect(padded) if final and len(self.languages) > 1 else (self.languages[0], None))
+        prompt = self.prompt() if final and lang == "ja" else None
+        text = self._decode(padded, lang, final, prompt)
+        if prompt and copies_prompt(text, prompt):
+            # A noise clip given earlier text tends to echo it; decide that clip without it.
+            text = self._decode(padded, lang, final, None)
+        dropped = "noise phrase" if final and looks_like_noise_phrase(text, audio) else ""
+        if final and text and not dropped:
+            self.recent.append(text)
+        return AsrResult("" if dropped else text, time.perf_counter() - start, len(audio) / 16000,
+                         language=lang, language_prob=prob, dropped=dropped)
+
+    def prompt(self) -> str | None:
+        """The last few recognized sentences, as earlier text for the next final decode."""
+        return "".join(self.recent)[-PROMPT_MAX_CHARS:] or None
+
+    def _decode(self, padded: np.ndarray, lang: str, final: bool, prompt: str | None) -> str:
         segments, _ = self.model.transcribe(
             padded,
             language=lang,
             task="transcribe",
             beam_size=5 if final else 1,       # partial results favour speed
             vad_filter=False,                  # segmentation is done upstream
-            condition_on_previous_text=False,  # avoids repeating earlier text on short clips
+            condition_on_previous_text=False,  # only within one clip; earlier clips come in as prompt
             without_timestamps=True,
             hotwords=self.hotwords,
+            initial_prompt=prompt,
         )
-        text = "".join(seg.text for seg in segments).strip()
-        dropped = "noise phrase" if final and looks_like_noise_phrase(text, audio) else ""
-        return AsrResult("" if dropped else text, time.perf_counter() - start, len(audio) / 16000,
-                         language=lang, language_prob=prob, dropped=dropped)
+        return "".join(seg.text for seg in segments).strip()
 
     def warm_up(self) -> None:
         """Run once on silence so the first real utterance isn't slowed by CUDA init."""

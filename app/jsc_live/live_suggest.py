@@ -31,6 +31,7 @@ from dataclasses import asdict
 from pathlib import Path
 
 from .furigana import Furigana
+from .history import is_backchannel
 from .suggest import Suggester, Suggestion
 
 LOG_DIR = Path(__file__).resolve().parents[2] / "logs"
@@ -146,7 +147,11 @@ class SuggestionManager:
                 if not self.turns.ready(time.perf_counter()):
                     continue
                 turn, overflow = self.turns.take()
-                self.context.extend(s["text"] for s in overflow)
+                self.context.extend(s["text"] for s in overflow if not is_backchannel(s["text"]))
+                if all(is_backchannel(s["text"]) for s in turn):
+                    # A bare 「うん」/「はい」 is the partner listening, not a new turn:
+                    # keep the previous suggestion on screen instead of replacing it.
+                    continue
                 context = list(self.context)
                 self.context.extend(s["text"] for s in turn)
             self._fire(turn, context)
