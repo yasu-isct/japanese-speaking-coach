@@ -38,7 +38,7 @@ def fake_history(client=None, on_lookup=None):
     window.translations = queue.Queue()
     window.translator = Mock()
     window.translate_on = Mock(get=Mock(return_value=False))
-    window.entries, window.requested = [], set()
+    window.entries, window.requested, window.entry_uids = [], set(), {}
     window.furigana = object()
     return window
 
@@ -163,6 +163,7 @@ class HistoryTranslationTest(unittest.TestCase):
         self.assertEqual(window.text.insert.call_args_list[3].args[1], "うんうん\n")  # still listed
         self.assertEqual([c.args for c in window.translator.request.call_args_list],
                          [(0, "一つ目。", []), (1, "二つ目。", ["一つ目。"])])
+        self.assertEqual([c.kwargs for c in window.translator.request.call_args_list], [{"uid": None}] * 2)
 
     def test_no_client_never_starts_a_thread(self):
         translator = history.Translator(None, Mock())
@@ -177,11 +178,32 @@ class HistoryTranslationTest(unittest.TestCase):
             with self.subTest(first=first):
                 done = Mock()
                 translator = history.Translator(Mock(), done)
-                translator.jobs.put((0, SENTENCE, []))
-                translator.jobs.put((1, SENTENCE, []))
+                translator.jobs.put((0, SENTENCE, [], None))
+                translator.jobs.put((1, SENTENCE, [], None))
                 with patch.object(translator, "translate", side_effect=[first, Stop()]), self.assertRaises(Stop):
                     translator._run()
                 done.assert_not_called()
+
+    def test_every_translation_is_appended_to_the_local_log_at_once(self):
+        class Stop(BaseException):
+            pass
+
+        with tempfile.TemporaryDirectory() as folder:
+            log = Path(folder) / "logs" / "translate-test.jsonl"
+            done = Mock()
+            translator = history.Translator(Mock(), done, log_path=log)
+            translator.jobs.put((0, SENTENCE, ["前の文。"], 7))
+            translator.jobs.put((1, SENTENCE, [], 8))
+            translator.jobs.put((2, SENTENCE, [], 9))
+            with patch.object(translator, "translate", side_effect=["译文", OSError("synthetic"), Stop()]), \
+                    self.assertRaises(Stop):
+                translator._run()
+            rows = [json.loads(line) for line in log.read_text(encoding="utf-8").splitlines()]
+        self.assertEqual([(r["utterance_id"], r["sentence"], r["translation"], r["error"]) for r in rows],
+                         [(7, SENTENCE, "译文", None), (8, SENTENCE, "", "OSError")])  # failures are kept too
+        self.assertEqual(rows[0]["context"], ["前の文。"])
+        self.assertIsInstance(rows[0]["translate_ms"], float)
+        done.assert_called_once_with(0, "译文")
 
     def test_japanese_lines_are_queued_only_while_switched_on(self):
         window = fake_history()
@@ -191,7 +213,7 @@ class HistoryTranslationTest(unittest.TestCase):
         window.translate_on.get.return_value = True
         window.add("二つ目。", uid=2)
         window.add("中文的一句", other_language=True, uid=3)
-        window.translator.request.assert_called_once_with(1, "二つ目。", ["一つ目。"])
+        window.translator.request.assert_called_once_with(1, "二つ目。", ["一つ目。"], uid=2)
         window._on_translate_toggle()  # switching on again fills in the earlier line once
         self.assertEqual([c.args[0] for c in window.translator.request.call_args_list], [1, 0])
 
@@ -330,8 +352,9 @@ class ReviewCliIntegrationTest(TemporaryWorkspaceTest):
                         args[-1]["session"] = session
                     return fake_thread
 
-                def construct_history(*args, on_lookup, translate, glossary):
+                def construct_history(*args, on_lookup, translate, glossary, translation_log):
                     self.assertTrue(translate)  # on unless --no-translate
+                    self.assertEqual(translation_log.parent.name, "logs")  # git-ignored, kept every run
                     on_lookup(LOOKUP_RECORD)
                     return object()
 
