@@ -201,6 +201,19 @@ POLITE_ONLY = """
 """
 
 
+UNCLEAR_QUESTION = """
+## 听不清时先确认（优先于上面的输出要求）
+对方的话可能被语音识别弄错。能按最可能的意思理解时照常回答。只有在识别结果残缺或错得看不出对方在问什么、按任何一种理解回答都可能答非所问时，才不要猜着回答：推荐的那条（只要丁寧时就是丁寧那条）改为一句礼貌的确认，或请对方再说一遍、说慢一点的话；理由写「可能没听清：…」并说明哪里不清楚。
+"""
+
+
+PHRASE_RULES = """
+## 使用者常练的句式
+使用者平时在练下面这些句式。自己组织日语回答时，场合合适就优先套用，让使用者说出口的是练过的说法：例如问为什么选某个技术，用「〜を選んだ理由は、〜だからです」；问遇到的问题，用「最初は〜という問題がありました。原因は〜でした。そこで、〜しました」。句式里的「〜」只用资料或上文里有的内容填；资料里没有的理由、经历、数字不能编，照常用【字段名】留空（例如「〜を選んだ理由は、【理由】だからです」）。不要为了用句式而硬套、加长或编造内容，长度仍按上面的规定。日语那格写「原文[S编号]」时不改写原文。确认问题、没听清的句式用在上一节「听不清时先确认」的情况。
+句式：
+"""
+
+
 def clean_profile(text: str) -> str:
     """Drop explicit template examples and empty fields; never alter the source file."""
     lines = []
@@ -237,7 +250,7 @@ def build_system_prompt(profile: str = "", *, external_materials: bool = False) 
                              _section(skill, "### 推荐（⭐）规则", "### カジュアル 的 ⚠ 提示"),
                              _section(skill, "### カジュアル 的 ⚠ 提示", "- 例：学生说明对方是上司"),
                              "# references/politeness.md\n" + politeness,
-                             DOCUMENT_LIVE_MODE.strip()))
+                             DOCUMENT_LIVE_MODE.strip(), UNCLEAR_QUESTION.strip()))
     # Reuse the semantic rules, not chat examples that contradict the live format
     # or ask the model to invent a sample personal answer / choose an unknown yes/no.
     parts = [
@@ -249,6 +262,7 @@ def build_system_prompt(profile: str = "", *, external_materials: bool = False) 
         _section(skill, "### カジュアル 的 ⚠ 提示", "- 例：学生说明对方是上司"),
         "# references/politeness.md\n" + POLITENESS.read_text(encoding="utf-8"),
         LIVE_MODE.strip(),
+        UNCLEAR_QUESTION.strip(),
     ]
     # The profile goes last and never changes during a run, so the provider's prompt cache
     # still covers the whole system prompt: it costs almost no extra latency (D-018).
@@ -352,7 +366,8 @@ def parse_line(line: str) -> Reply | Recommendation | str | None:
 
 class Suggester:
     def __init__(self, partner: str | None = None, timeout: float = 10.0, env: dict[str, str] | None = None,
-                 profile: str | None = None, materials=None, polite_only: bool = False) -> None:
+                 profile: str | None = None, materials=None, polite_only: bool = False,
+                 phrases: str = "") -> None:
         if profile is not None and materials is not None:
             raise ValueError("Pass either an explicit profile or a materials store, not both")
         env = env if env is not None else load_env()
@@ -386,6 +401,9 @@ class Suggester:
         self.styles = ("丁寧",) if polite_only else STYLES
         if polite_only:
             self.system_prompt += "\n\n" + POLITE_ONLY.strip()
+        # Fixed for the whole run, so the prompt cache still covers it (D-049).
+        if phrases.strip():
+            self.system_prompt += "\n\n" + PHRASE_RULES.strip() + "\n" + phrases.strip()
 
     def replace_materials(self, store) -> None:
         """Atomically select a fully built snapshot; in-flight requests keep theirs."""

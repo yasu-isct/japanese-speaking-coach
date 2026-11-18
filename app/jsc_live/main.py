@@ -173,6 +173,8 @@ def main(argv: list[str] | None = None) -> None:
                    help="start with the history window's Chinese translation switched off")
     p.add_argument("--glossary", type=Path, default=None,
                    help="proper nouns to expect, one per line (default: glossary.txt in the repository root)")
+    p.add_argument("--phrases", type=Path, default=None,
+                   help="practice phrases for answers to reuse (default: phrases.txt in the repository root)")
     p.add_argument("--mixed-chinese", action="store_true",
                    help="(shelved) detect Chinese sentences too and show them in grey without suggestions")
     p.add_argument("--no-record", action="store_true",
@@ -181,11 +183,14 @@ def main(argv: list[str] | None = None) -> None:
 
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
-    from . import glossary
+    from . import glossary, phrases
 
     args.glossary_terms = glossary.load(args.glossary or glossary.DEFAULT_PATH)
     if args.glossary is not None and not args.glossary_terms.terms:
         print(f"[词表] 没有读到词：{args.glossary}（继续运行，不用词表）")
+    args.phrase_text = phrases.load(args.phrases or phrases.DEFAULT_PATH)
+    if args.phrases is not None and not args.phrase_text:
+        print(f"[句式] 没有读到句式：{args.phrases}（继续运行，不用句式）")
     if args.review_output is not None and args.review_session is None:
         p.error("--review-output 请与 --review-session 一起使用。")
     if args.review_window:
@@ -249,7 +254,8 @@ def main(argv: list[str] | None = None) -> None:
                     print(f"[资料] {model_warning} 本次继续使用关键词查找。", flush=True)
             else:
                 store = MaterialsStore.empty(materials_root)
-            suggester = Suggester(partner=args.partner, materials=store, polite_only=not args.three_styles)
+            suggester = Suggester(partner=args.partner, materials=store, polite_only=not args.three_styles,
+                                  phrases=getattr(args, "phrase_text", ""))
             materials_controller = MaterialsController(suggester, model_directory=model_path)
             if not args.no_window:
                 materials_controller.start_initial(model_path)
