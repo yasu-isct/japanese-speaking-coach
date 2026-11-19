@@ -3,6 +3,7 @@
 import sys
 import tempfile
 import unittest
+from collections import deque
 from pathlib import Path
 from unittest.mock import Mock
 
@@ -48,7 +49,7 @@ class GlossaryTest(unittest.TestCase):
 
     def test_transcriber_passes_hotwords_to_partial_and_final_decodes(self):
         t = Transcriber.__new__(Transcriber)
-        t.languages, t.hotwords = ("ja",), "架空AI、山田"
+        t.languages, t.hotwords, t.recent = ("ja",), "架空AI、山田", deque(maxlen=2)
         t.model = Mock()
         t.model.transcribe.return_value = ([], None)
         for final in (False, True):

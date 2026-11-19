@@ -148,9 +148,9 @@ class HistoryTranslationTest(unittest.TestCase):
         self.assertEqual(client.ask.call_args.args[1],
                          f"固有名词：\n- 架空AI（常被听错）\n- 山田\n上文：\n前の文。\n这句：{SENTENCE}")
 
-    def test_backchannels_are_shown_but_not_translated_or_used_as_context(self):
+    def test_backchannels_are_not_listed_translated_or_used_as_context(self):
         for text in ("はい", "うんうんうん", "はいはいはい", "おー、なるほど。", "あ、なるほどなるほど", "ん?",
-                     "うっうっ", "そうですね", "へー", ""):
+                     "うっうっ", "そうですね", "へー", "おーほー。", ""):
             self.assertTrue(history.is_backchannel(text), text)
         for text in ("はい、大丈夫です", "お願いいたします", "あ、山田さん", "ありがとうございました", "なるほど、面白いですね"):
             self.assertFalse(history.is_backchannel(text), text)
@@ -160,7 +160,8 @@ class HistoryTranslationTest(unittest.TestCase):
         window.translate_on.get.return_value = True
         for sentence in ("一つ目。", "うんうん", "二つ目。"):
             window.add(sentence)
-        self.assertEqual(window.text.insert.call_args_list[3].args[1], "うんうん\n")  # still listed
+        listed = [c.args[1] for c in window.text.insert.call_args_list]
+        self.assertEqual([x for x in listed if not x.endswith("  ")], ["一つ目。\n", "二つ目。\n"])  # no うんうん line
         self.assertEqual([c.args for c in window.translator.request.call_args_list],
                          [(0, "一つ目。", []), (1, "二つ目。", ["一つ目。"])])
         self.assertEqual([c.kwargs for c in window.translator.request.call_args_list], [{"uid": None}] * 2)

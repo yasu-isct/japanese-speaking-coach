@@ -380,6 +380,36 @@ class TurnTest(unittest.TestCase):
         self.assertEqual([s["text"] for s in turn], ["s2", "s3", "s4"])
         self.assertEqual([s["text"] for s in overflow], ["s0", "s1"])
 
+    def test_backchannel_only_turn_keeps_the_previous_suggestion(self):
+        import queue
+        import time
+        from unittest.mock import Mock
+
+        from jsc_live.live_suggest import SuggestionManager
+
+        manager = SuggestionManager(queue.Queue(), Mock(), Mock(), turn_gap=0.05)
+        manager._fire = Mock()
+
+        def settle():
+            deadline = time.time() + 2
+            while manager.turns.pending and time.time() < deadline:
+                time.sleep(0.02)
+            time.sleep(0.1)
+
+        manager.submit(1, "趣味は何ですか?", 300)
+        settle()
+        self.assertEqual(manager._fire.call_count, 1)
+        manager.submit(2, "うん。", 250)
+        manager.submit(3, "はい。はい。", 250)
+        settle()
+        self.assertEqual(manager._fire.call_count, 1)  # nothing new asked: no new suggestion
+        manager.submit(4, "うん。週末は何をしていますか?", 300)
+        settle()
+        self.assertEqual(manager._fire.call_count, 2)
+        turn, context = manager._fire.call_args.args
+        self.assertEqual([s["uid"] for s in turn], [4])
+        self.assertEqual(context, ["趣味は何ですか?"])  # the うん/はい never became context
+
     def test_user_message_for_a_turn(self):
         msg = build_user_message(["今日はその中で", "海外旅行の時の思い出を紹介したいと思います"], ["恥ずかしい思い出"], None)
         self.assertIn("对方刚说（连续的一段话）：\n- 今日はその中で\n- 海外旅行の時の思い出を紹介したいと思います", msg)
