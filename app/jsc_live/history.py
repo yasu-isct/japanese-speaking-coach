@@ -42,9 +42,10 @@ TRANSLATE_SYSTEM = (
     "如果给了「固有名词」，句中读音相近的词多半就是它们，按固有名词翻译；句中没有读音相近的词时不要套用。"
     "固有名词说明里的「我」指使用者本人（听这句话的人），不是说这句话的人。"
 )
-# Short acknowledgements while the learner is talking; shown, but not translated or used as context.
-# Long vowel marks are stripped first, so おー / あー / へー / ふーん match as お / あ / へ / ふん.
-BACKCHANNEL = re.compile(r"(?:はい|うん|ええ|ん|うっ|う|お|あ|へ|え|ほう|ふん|なるほど|そうですね|そうですか"
+# Short acknowledgements while the learner is talking: not listed in the history (D-053), not
+# translated, not used as context. Long vowel marks are stripped first, so おー / あー / へー /
+# ふーん / おーほー match as お / あ / へ / ふん / おほ.
+BACKCHANNEL = re.compile(r"(?:はい|うん|ええ|ん|うっ|う|お|あ|へ|え|ほう|ほ|ふん|なるほど|そうですね|そうですか"
                          r"|そうなんですね|そうなんだ|確かに)+")
 BACKCHANNEL_IGNORED = re.compile(r"[\s、。，,.!！?？…ー〜~]+")
 
@@ -198,11 +199,13 @@ class HistoryWindow:
 
     # --- content -----------------------------------------------------------
     def add(self, sentence: str, other_language: bool = False, uid: int | None = None) -> None:
+        if not other_language and is_backchannel(sentence):
+            return  # a bare うん / はい only buries the sentences around it (D-053)
         at_bottom = self.text.yview()[1] > 0.98
         self.line_ids[self.text.index("end-1c").split(".")[0]] = uid
         self.text.insert("end", time.strftime("%H:%M:%S") + "  ", "time")
         self.text.insert("end", sentence + "\n", "other" if other_language else ())
-        if not other_language and not is_backchannel(sentence):
+        if not other_language:
             key = len(self.entries)
             self.text.mark_set(f"jp{key}", "end-2c linestart")
             self.text.mark_gravity(f"jp{key}", "left")
