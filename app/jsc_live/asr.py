@@ -33,7 +33,7 @@ LEAD_SILENCE = 0.3
 VIDEO_CREDITS = ("ご視聴ありがとうございました", "ご清聴ありがとうございました", "チャンネル登録",
                  "最後までご視聴", "字幕視聴ありがとうございました",
                  # The same noise transcribed as Chinese gives Chinese video-site credits instead.
-                 "字幕志愿者", "字幕志願者", "中文字幕", "优优独播剧场", "YoYo Television", "请不吝点赞", "明镜")
+                 "字幕志愿者", "字幕志願者", "字幕提供", "中文字幕", "优优独播剧场", "YoYo Television", "请不吝点赞", "明镜")
 # Phrases people really do say: dropped only on short or quiet clips.
 NOISY_PHRASES = ("おやすみなさい", "感谢观看", "謝謝觀看", "订阅")
 STOCK_PHRASES = VIDEO_CREDITS + NOISY_PHRASES

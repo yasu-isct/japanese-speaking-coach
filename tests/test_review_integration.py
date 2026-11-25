@@ -150,9 +150,12 @@ class HistoryTranslationTest(unittest.TestCase):
 
     def test_backchannels_are_not_listed_translated_or_used_as_context(self):
         for text in ("はい", "うんうんうん", "はいはいはい", "おー、なるほど。", "あ、なるほどなるほど", "ん?",
-                     "うっうっ", "そうですね", "へー", "おーほー。", ""):
+                     "うっうっ", "そうですね", "へー", "おーほー。", "",
+                     # fillers and Chinese interjections (D-054)
+                     "えーと…", "ああ、なんか…", "うわああ", "いいいい。", "あの、その", "嗯。", "啊啊啊", "呜…"):
             self.assertTrue(history.is_backchannel(text), text)
-        for text in ("はい、大丈夫です", "お願いいたします", "あ、山田さん", "ありがとうございました", "なるほど、面白いですね"):
+        for text in ("はい、大丈夫です", "お願いいたします", "あ、山田さん", "ありがとうございました", "なるほど、面白いですね",
+                     "えっと、これは", "いいえ。", "いい。", "その日", "あれは何", "嗯，我觉得可以"):
             self.assertFalse(history.is_backchannel(text), text)
         window = fake_history()
         window.text.yview.return_value = (0.0, 0.5)
